@@ -56,7 +56,7 @@ class employeemaster extends Controller
         return view('employee.employeemaster',compact('employees','pagetitle'));
     	
     }
-
+//function for adding employees
     function addemployee()
     {
     	$pagetitle="Add Employee";
