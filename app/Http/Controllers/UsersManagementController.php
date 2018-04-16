@@ -38,8 +38,9 @@ class UsersManagementController extends Controller
     {
         $users = User::all();
         $roles = Role::all();
+        $pagetitle="Users";
 
-        return View('usersmanagement.show-users', compact('users', 'roles'));
+        return View('usersmanagement.show-users', compact('users', 'roles','pagetitle'));
 
     }
 
@@ -52,9 +53,11 @@ class UsersManagementController extends Controller
     {
 
         $roles = Role::all();
+         $pagetitle="Create Users";
 
         $data = [
-            'roles' => $roles
+            'roles' => $roles,
+             'pagetitle'=>$pagetitle
         ];
 
         return view('usersmanagement.create-user')->with($data);
@@ -103,6 +106,7 @@ class UsersManagementController extends Controller
 
             $ipAddress  = new CaptureIpTrait;
             $profile    = new Profile;
+            $pagetitle="User List";
 
             $user =  User::create([
                 'name'              => $request->input('name'),
@@ -119,7 +123,7 @@ class UsersManagementController extends Controller
             $user->attachRole($request->input('role'));
             $user->save();
 
-            return redirect('users')->with('success', trans('usersmanagement.createSuccess'));
+            return redirect('users')->with('pagetitle','success', trans('usersmanagement.createSuccess'));
 
         }
     }
@@ -134,8 +138,9 @@ class UsersManagementController extends Controller
     {
 
         $user = User::find($id);
+        $pagetitle="User Information";
 
-        return view('usersmanagement.show-user')->withUser($user);
+        return view('usersmanagement.show-user',compact('user','pagetitle'));
     }
 
     /**
@@ -149,6 +154,7 @@ class UsersManagementController extends Controller
 
         $user = User::findOrFail($id);
         $roles = Role::all();
+        $pagetitle="Edit";
 
         foreach ($user->roles as $user_role) {
             $currentRole = $user_role;
@@ -157,7 +163,8 @@ class UsersManagementController extends Controller
         $data = [
             'user'          => $user,
             'roles'         => $roles,
-            'currentRole'   => $currentRole
+            'currentRole'   => $currentRole,
+            'pagetitle'     =>$pagetitle
         ];
 
         return view('usersmanagement.edit-user')->with($data);

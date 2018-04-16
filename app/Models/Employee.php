@@ -157,4 +157,14 @@ class Employee extends Model
         return $this->profiles()->detach($profile);
     }
 
+    public function job()
+{
+    return $this->belongsTo(job::class);
+} 
+
+    public function Bank()
+{
+    return $this->belongsTo(Bank::class);
+} 
+
 }

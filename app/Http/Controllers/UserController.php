@@ -34,11 +34,13 @@ class UserController extends Controller
          $newretailers = DB::table('prlemployeemaster')->count('employeeid');
          $voucherredemption=DB::table('voucherredemption')->count('id');
          $voucherissuance=DB::table('voucherissuance')->count('id');
+             $pagetitle="Home";
+       
 
         if ($user->isAdmin()) {
         //  $users = DB::table('users')->where('id',4)->get();
          
-            return view('pages.admin.newadminhome',compact('users','voucherredemption','voucherissuance','totalretailers','activeretailers','inactiveretailers','newretailers'));
+            return view('pages.admin.newadminhome',compact('pagetitle','users','voucherredemption','voucherissuance','totalretailers','activeretailers','inactiveretailers','newretailers'));
 
         }
 

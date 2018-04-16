@@ -20,22 +20,22 @@
                                     <div>                                    
                                         <div class="widget-title">Total Employees</div>                                                                        
                                         <div class="widget-subtitle">Employee</div>
-                                        <div class="widget-int">{{$totalretailers}}</div>
+                                        <div class="widget-int"></div>
                                     </div>
                                     <div>                                    
                                         <div class="widget-title">Active Employees</div>
                                         <div class="widget-subtitle">Employees</div>
-                                        <div class="widget-int">{{$activeretailers}}</div>
+                                        <div class="widget-int"></div>
                                     </div>
                                      <div>                                    
                                         <div class="widget-title">In-Active Employees</div>
                                         <div class="widget-subtitle">Employees</div>
-                                        <div class="widget-int">{{$inactiveretailers}}</div>
+                                        <div class="widget-int"></div>
                                     </div>
                                     <div>                                    
                                         <div class="widget-title">Newly Employees</div>
                                         <div class="widget-subtitle">Employees</div>
-                                        <div class="widget-int">{{$newretailers}}</div>
+                                        <div class="widget-int"></div>
                                     </div>
                                 </div>                            
                                 <div class="widget-controls">                                
@@ -53,7 +53,7 @@
                                     <span class="fa fa-envelope"></span>
                                 </div>                             
                                 <div class="widget-data">
-                                    <div class="widget-int num-count">{{$voucherredemption}}</div>
+                                    <div class="widget-int num-count"></div>
                                     <div class="widget-title">Birthdays </div>
                                     <div class="widget-subtitle">This Month birthdays</div>
                                 </div>      
@@ -72,7 +72,7 @@
                                     <span class="fa fa-user"></span>
                                 </div>
                                 <div class="widget-data">
-                                    <div class="widget-int num-count">{{$voucherissuance}}</div>
+                                    <div class="widget-int num-count"></div>
                                     
                                     <div class="widget-title">Hired</div>
                                     <div class="widget-subtitle">Employees Joined this month</div>

@@ -12,7 +12,39 @@
         
         <!-- CSS INCLUDE -->        
         <link rel="stylesheet" type="text/css" id="theme" href="{{asset('css/theme-default.css') }}"/>
-        <!-- EOF CSS INCLUDE -->                                      
+   {{-- Fonts --}}
+        @yield('template_linked_fonts')
+
+        {{-- Styles --}}
+        <link href="{{ mix('/css/app.css') }}" rel="stylesheet">
+        <link href="{{ asset('/css/app.css') }}" rel="stylesheet">
+
+        @yield('template_linked_css')
+
+        <style type="text/css">
+            @yield('template_fastload_css')
+
+            @if (Auth::User() && (Auth::User()->profile) && (Auth::User()->profile->avatar_status == 0))
+                .user-avatar-nav {
+                    background: url({{ Gravatar::get(Auth::user()->email) }}) 50% 50% no-repeat;
+                    background-size: auto 100%;
+                }
+            @endif
+
+        </style>
+
+        {{-- Scripts --}}
+        <script>
+            window.Laravel = {!! json_encode([
+                'csrfToken' => csrf_token(),
+            ]) !!};
+        </script>
+
+        @if (Auth::User() && (Auth::User()->profile) && $theme->link != null && $theme->link != 'null')
+            <link rel="stylesheet" type="text/css" href="{{ $theme->link }}">
+        @endif
+
+        @yield('head')
     </head>
     <body>
         <!-- START PAGE CONTAINER -->
@@ -83,8 +115,10 @@
                             <li><a href="pages-calendar.html"><span class="fa fa-calendar"></span>Company Preferences</a></li>
                             <li><a href="pages-tasks.html"><span class="fa fa-edit"></span>Database Backup</a></li>
                             <li><a href="pages-content-table.html"><span class="fa fa-columns"></span>Time Sheet Expense Approvers</a></li>
-                            <li><a href="pages-faq.html"><span class="fa fa-question-circle"></span>User Accounts</a></li>
-                            <li><a href="pages-search.html"><span class="fa fa-search"></span>User Access</a></li>
+                            <li><a href="{{url('users')}}"><span class="fa fa-question-circle"></span>User Accounts</a></li>
+                             <li><a href="{{url(' users/create')}}"><span class="fa fa-question-circle"></span>Create User</a></li>
+                        
+                            <li><a href=""><span class="fa fa-search"></span>User Access</a></li>
                                                        
                         </ul>
                     </li>
@@ -298,7 +332,12 @@
                     </li> 
                     <!-- END LANG BAR -->
                 </ul>
-                <!-- END X-NAVIGATION VERTICAL -->   
+                <!-- END X-NAVIGATION VERTICAL --> 
+                  <ul class="breadcrumb">
+                    <li><a href="{{'../home'}}">Home</a></li>
+                    <li>{{$pagetitle}}</li>
+                    
+                </ul> 
                                  
                @yield('content')
 
@@ -456,7 +495,14 @@
                 $('#dp-4').datepicker({startView: 1});                
                 //End Datepicker
             });
-        </script>           
+        </script>   
+
+           {{-- Scripts --}}
+        <script src="{{ mix('/js/app.js') }}"></script>
+     
+     
+
+           
     </body>
 </html>
 

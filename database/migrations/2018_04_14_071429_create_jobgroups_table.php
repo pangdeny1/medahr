@@ -4,25 +4,25 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateEmployeePaytypeTable extends Migration
+class CreateJobgroupsTable extends Migration
 {
     /**
      * Run the migrations.
      *
      * @return void
      */
-  public function up()
+    public function up()
     {
-       Schema::create('paytypes', function (Blueprint $table) {
-
-            $table->string('id');
-            $table->string('name');
-            $table->string('desc');
+        Schema::create('jobgroups', function (Blueprint $table) {
+             $table->increments('id');
+            $table->string('jobgroupname');
+            $table->string('jobgroupdesc');
+            $table->string('level');
             $table->timestamps();
             $table->softDeletes();
-
         });
-}
+    }
+
     /**
      * Reverse the migrations.
      *
@@ -30,7 +30,6 @@ class CreateEmployeePaytypeTable extends Migration
      */
     public function down()
     {
-      Schema::dropIfExists('paytypes');
+        Schema::dropIfExists('jobgroups');
     }
-
 }

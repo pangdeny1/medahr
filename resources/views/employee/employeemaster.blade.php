@@ -1,18 +1,9 @@
 @extends('layouts.pagelayout')
 @section('content')
  <!-- START BREADCRUMB -->
-                <ul class="breadcrumb">
-                    <li><a href="#">Home</a></li>
-                    <li><a href="#">Tables</a></li>
-                    <li class="active">Export</li>
-                </ul>
-                <!-- END BREADCRUMB -->
+            
                 
-                <!-- PAGE TITLE -->
-                <div class="page-title">                    
-                    <h2><span class="fa fa-arrow-circle-o-left"></span> {{$pagetitle}}</h2>
-                </div>
-                <!-- END PAGE TITLE -->                
+                       
                 
                 <!-- PAGE CONTENT WRAPPER -->
                 <div class="page-content-wrap">

@@ -140,5 +140,12 @@ Route::group(['middleware'=> ['auth', 'activated', 'role:admin']], function () {
     Route::post('employeeupdate/{id}','employee\employeemaster@update');
     Route::get('employeedelete/{id}','employee\employeemaster@destroy');
     Route::get('prlpayroll','employee\employeemaster@prlpayroll');
+    Route::get('jobs','job\JobsController@index');
+    Route::get('addjob','job\JobsController@create');
+    Route::post('new_job','job\JobsController@store');
+    Route::get('showjob/{id}','job\JobsController@show');
+    Route::get('editjob/{id}','job\JobsController@edit');
+    Route::post('update_job/{id}','job\JobsController@update');
+    Route::get('deletejob/{id}','job\JobsController@destroy');
 
 });

@@ -1,4 +1,4 @@
-@extends('layouts.app')
+ @extends('layouts.pagelayout')
 
 @section('template_title')
   Create New User

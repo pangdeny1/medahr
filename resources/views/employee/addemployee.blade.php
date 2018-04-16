@@ -1,10 +1,6 @@
  @extends('layouts.pagelayout')
 @section('content')<!-- START BREADCRUMB -->
-                <ul class="breadcrumb">
-                    <li><a href="#">Home</a></li>
-                    <li><a href="#">{{$pagetitle}}</a></li>
-                    
-                </ul>
+              
                 <!-- END BREADCRUMB -->
                 
                 <!-- PAGE CONTENT WRAPPER -->
@@ -23,6 +19,7 @@
   
 @endif
                    <form class="form-horizontal" action="employeestore" method='post' role='form'>
+
  
 {!! csrf_field() !!}
 
@@ -85,9 +82,11 @@
                                                 <label class="col-md-3 col-xs-12 control-label">Job Title  </label>
                                                 <div class="col-md-5">
                                                     <select class="form-control select" name="jobid">
-                                                        <option value=1>Accountant</option>
-                                                        <option  value=2>IT Manager</option>
+                                                        
                                                         <option  value='' selected="selected">Select </option>
+                                                               @foreach ($jobs as $job)
+                                                          <option value="{{ $job->id }}">{{ $job->jobname }}</option>
+                                                               @endforeach
                                                                                                              
                                                     </select>
                                                 </div>                                          
@@ -97,12 +96,8 @@
                                                 <label class="col-md-3 col-xs-12 control-label">Employee Status</label>
                                                 <div class="col-md-2">
                                                     <select class="form-control select" name="active">
-                                                        <option value=1 selected="selected">Active</option>
-                                                        <option value=2>In-Active</option>
-
-                      
-                                                        
-                                                                                                             
+                                                        <option value=0 selected="selected">Active</option>
+                                                        <option value=1>In-Active</option>                                                                                                             
                                                     </select>
                                                 </div>                                            
                                             </div>
@@ -111,7 +106,7 @@
                                             <div class="form-group">
                                                 <label class="col-md-3 col-xs-12 control-label">About Me</label>
                                                 <div class="col-md-6 col-xs-12">                                            
-                                                    <textarea class="form-control" rows="5" name="aboutme"></textarea>
+                                                    <textarea class="form-control" rows="5" name="aboutme">Say Somethink about your life</textarea>
                                                     <span class="help-block">Somethink about your life</span>
                                                 </div>
                                             </div>                                           
@@ -132,9 +127,13 @@
                                                 <label class="col-md-3 col-xs-12 control-label">Pay type</label>
                                                 <div class="col-md-5">
                                                     <select class="form-control select" name="paytype">
-                                                        <option value=1>Hourly</option>
-                                                        <option  value=2>Salary</option>
                                                         <option  value='' selected="selected">Select </option>
+
+                                                        @foreach($paytypes as $paytype)
+
+                                                        
+                                                         <option value="{{ $paytype->id }}">{{ $paytype->name }}</option>
+                                                          @endforeach
                                                                                                              
                                                     </select>
                                                 </div>                                          

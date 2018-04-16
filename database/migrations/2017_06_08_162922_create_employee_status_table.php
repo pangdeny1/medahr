@@ -15,7 +15,7 @@ class CreateEmployeeStatusTable extends Migration
     {
        Schema::create('employeestatutes', function (Blueprint $table) {
 
-            $table->increments('id');
+            $table->string('id');
             $table->string('name');
             $table->string('desc');
             $table->timestamps();

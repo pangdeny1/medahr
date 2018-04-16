@@ -12,7 +12,9 @@ use App\Models\Region;
 use App\Models\District;
 use App\Models\Employee;
 use App\Models\job;
+use App\Models\Jobgroup;
 use App\Models\gender;
+use App\Models\bank;
 use App\Models\maritalstatus;
 use App\Models\employementstatus;
 use App\Models\employeestatus;
@@ -60,7 +62,10 @@ class employeemaster extends Controller
     function addemployee()
     {
     	$pagetitle="Add Employee";
-    	return view('employee.addemployee',compact('pagetitle'));
+        $jobgroups = Jobgroup::all();
+        $jobs = job::all();
+        $paytypes = paytype::all();
+    	return view('employee.addemployee',compact('pagetitle','jobs','jobgroups','paytypes'));
     }
 
 
@@ -94,22 +99,22 @@ if ($validator->fails()) {
            // $ipAddress  = new CaptureIpTrait;
            // $profile    = new Profile;
 
-            $employee =  Employee::create([
-                'employeeid'       =>null,
-                'tittle'           =>'MR',
-                'employeecode'     =>"w",
-                'firstname'        => $request->input('firstname'),
-             'lastname'         => $request->input('lastname'),
+            $employee = new Employee([
+            'employeeid'       =>null,
+            'tittle'           =>'MR',
+            'employeecode'     =>"w",
+            'firstname'        => $request->input('firstname'),
+            'lastname'         => $request->input('lastname'),
             'middlename'        => $request->input('othername'),
-            'address1'=>'',
+            'address1'=>$request->input('address'),
             'address2'=>'',
-            'city'=>'',
-            'state'=>'',
-            'zip'=>'',
-            'country'=>'',
-            'gender'=>'',
-            'phone1'=>'',
-            'phone1comment'=>$request->input('aboutme'),
+            'city'=>$request->input('city'),
+            'state'=>$request->input('state'),
+            'zip'=>$request->input('zip'),
+            'country'=>$request->input('country'),
+            'gender'=>$request->input('gender'),
+            'phone1'=>$request->input('phone'),
+            'phone1comment'=>$request->input('comment'),
             'phone2'=>'',
             'phone2comment'=>'',
             'email1'=>'',
@@ -128,8 +133,8 @@ if ($validator->fails()) {
             'isHeslb'=>0,
             'phnumber'=>'',
             'taxactnumber'=>'',
-            'birthdate'=>$request->input('dob'),
-            'hiredate'=>'2017-01-01',
+            'birthdate'=>$request->input('birthdate'),
+            'hiredate'=>$request->input('hiredate'),
             'terminatedate'=>'2030-01-01',
             'probdate'=>'2017-01-01',
             'retireddate'=>'2030-01-01',
@@ -162,6 +167,7 @@ if ($validator->fails()) {
            // $user->attachRole($request->input('role'));
             $employee->save();
 
+
             return redirect('employeemaster')->with('success', trans('usersmanagement.createSuccess'));
 
         }
@@ -189,22 +195,23 @@ if ($validator->fails()) {
         $employeestatuses    =employeestatus::All();
         $employementstatuses =employementstatus::All();
         $paytypes            =paytype::All();
-        $selectedCountry=Country::first()->country;
+        $banks               =Bank::All();
+        //$selectedCountry=Country::first()->country;
 
         $data = [
-            'employee'             => $employee,
+            'employee'             =>$employee,
             'employeeid'           =>$employeeid,
             'pagetitle'            =>'Edit Employee' ,
             'countries'            => $countries,
             'regions'              =>$regions,
             'districts'            =>$districts,
-            'selectedCountry'      =>$selectedCountry,
             'jobs'                 =>$jobs,
             'genders'              =>$genders,
             'endofcontractreasons' =>$endofcontractreasons,
             'employeestatuses'     =>$employeestatuses,
             'employementstatuses'  =>$employementstatuses,
-            'paytypes'             =>$paytypes
+            'paytypes'             =>$paytypes,
+            'banks'                =>$banks
 
 
 
@@ -245,6 +252,7 @@ if ($validator->fails()) {
             $employee->gender =$request->input('gender');
             $employee->jobid =$request->input('jobid');
             $employee->active =$request->input('active');
+            $employee->phone1comment =$request->input('aboutme');
 
 
             //Salary
@@ -261,6 +269,13 @@ if ($validator->fails()) {
             $employee->city =$request->input('region');
             $employee->state =$request->input('district');
             $employee->zip =$request->input('zip');
+
+            //bank
+
+            //$employee->bankid =$request->input('bank');
+            $employee->bankid =$request->input('bank');
+            $employee->atmnumber =$request->input('accountnumber');
+
 
             //Dates
 

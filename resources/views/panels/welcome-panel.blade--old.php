@@ -1,123 +1,114 @@
-@php
-
-    $levelAmount = 'level';
-
-    if (Auth::User()->level() >= 2) {
-        $levelAmount = 'levels';
-
-    }
-
-@endphp
-
-
-<div class="panel panel-primary @role('admin', true) panel-info  @endrole">
-    <div class="panel-heading">
-
-        Welcome {{ Auth::user()->name }}
-
-        @role('admin', true)
-            <span class="pull-right label label-primary" style="margin-top:4px">
-            Admin Access
-            </span>
-        @else
-            <span class="pull-right label label-warning" style="margin-top:4px">
-            User Access
-            </span>
-        @endrole
-
-    </div>
-    <div class="panel-body">
-        <h2 class="lead">
-            {{ trans('auth.loggedIn') }}
-        </h2>
-        <p>
-            <em>Thank you</em> for checking this project out. <strong>Please remember to star it!</strong>
-        </p>
-
-        <p>
-            <iframe src="https://ghbtns.com/github-btn.html?user=jeremykenedy&repo=laravel-auth&type=star&count=true" frameborder="0" scrolling="0" width="170px" height="20px" style="margin: 0px 0 -3px .5em;"></iframe>
-        </p>
-
-        <p>
-            This page route is protected by <code>activated</code> middleware. Only accounts with activated emails are able pass this middleware.
-        </p>
-        <p>
-            <small>
-                Users registered via Social providers are by default activated.
-            </small>
-        </p>
-
-        <hr>
-
-        <h4>
-            You have
-                @role('admin')
-                   Admin
-                @endrole
-                @role('user')
-                   User
-                @endrole
-            Access
-        </h4>
-
-        <hr>
-
-        <h4>
-            You have access to {{ $levelAmount }}:
-            @level(5)
-                <span class="label label-primary margin-half">5</span>
-            @endlevel
-
-            @level(4)
-                <span class="label label-info margin-half">4</span>
-            @endlevel
-
-            @level(3)
-                <span class="label label-success margin-half">3</span>
-            @endlevel
-
-            @level(2)
-                <span class="label label-warning margin-half">2</span>
-            @endlevel
-
-            @level(1)
-                <span class="label label-default margin-half">1</span>
-            @endlevel
-        </h4>
-
-        @role('admin')
-
-            <hr>
-
-            <h4>
-                You have permissions:
-                @permission('view.users')
-                    <span class="label label-primary margin-half margin-left-0"">
-                        {{ trans('permsandroles.permissionView') }}
-                    </span>
-                @endpermission
-
-                @permission('create.users')
-                    <span class="label label-info margin-half margin-left-0"">
-                        {{ trans('permsandroles.permissionCreate') }}
-                    </span>
-                @endpermission
-
-                @permission('edit.users')
-                    <span class="label label-warning margin-half margin-left-0"">
-                        {{ trans('permsandroles.permissionEdit') }}
-                    </span>
-                @endpermission
-
-                @permission('delete.users')
-                    <span class="label label-danger margin-half margin-left-0"">
-                        {{ trans('permsandroles.permissionDelete') }}
-                    </span>
-                @endpermission
-
-            </h4>
-
-        @endrole
-
-    </div>
-</div>
+@extends('layouts.app')
+  <!-- START BREADCRUMB -->
+  @section('content')
+                <ul class="breadcrumb">
+                    <li><a href="#">Home</a></li>                    
+                    <li class="active">Dashboard</li>
+                </ul>
+                <!-- END BREADCRUMB -->                       
+                
+                <!-- PAGE CONTENT WRAPPER -->
+                <div class="page-content-wrap">
+                    
+                    <!-- START WIDGETS -->                    
+                    <div class="row">
+                        <div class="col-md-3">
+                            
+                            <!-- START WIDGET SLIDER -->
+                            <div class="widget widget-default widget-carousel">
+                                <div class="owl-carousel" id="owl-example">
+                                    <div>                                    
+                                        <div class="widget-title">Total Employees</div>                                                                        
+                                        <div class="widget-subtitle">Employee</div>
+                                        <div class="widget-int">{{$totalretailers}}</div>
+                                    </div>
+                                    <div>                                    
+                                        <div class="widget-title">Active Employees</div>
+                                        <div class="widget-subtitle">Employees</div>
+                                        <div class="widget-int">{{$activeretailers}}</div>
+                                    </div>
+                                     <div>                                    
+                                        <div class="widget-title">In-Active Employees</div>
+                                        <div class="widget-subtitle">Employees</div>
+                                        <div class="widget-int">{{$inactiveretailers}}</div>
+                                    </div>
+                                    <div>                                    
+                                        <div class="widget-title">Newly Employees</div>
+                                        <div class="widget-subtitle">Employees</div>
+                                        <div class="widget-int">{{$newretailers}}</div>
+                                    </div>
+                                </div>                            
+                                <div class="widget-controls">                                
+                                    <a href="#" class="widget-control-right widget-remove" data-toggle="tooltip" data-placement="top" title="Remove Widget"><span class="fa fa-times"></span></a>
+                                </div>                             
+                            </div>         
+                            <!-- END WIDGET SLIDER -->
+                            
+                        </div>
+                        <div class="col-md-3">
+                            
+                            <!-- START WIDGET MESSAGES -->
+                            <div class="widget widget-default widget-item-icon" onclick="location.href='pages-messages.html';">
+                                <div class="widget-item-left">
+                                    <span class="fa fa-envelope"></span>
+                                </div>                             
+                                <div class="widget-data">
+                                    <div class="widget-int num-count">{{$voucherredemption}}</div>
+                                    <div class="widget-title">Birthdays </div>
+                                    <div class="widget-subtitle">This Month birthdays</div>
+                                </div>      
+                                <div class="widget-controls">                                
+                                    <a href="#" class="widget-control-right widget-remove" data-toggle="tooltip" data-placement="top" title="Remove Widget"><span class="fa fa-times"></span></a>
+                                </div>
+                            </div>                            
+                            <!-- END WIDGET MESSAGES -->
+                            
+                        </div>
+                        <div class="col-md-3">
+                            
+                            <!-- START WIDGET REGISTRED -->
+                            <div class="widget widget-default widget-item-icon" onclick="location.href='pages-address-book.html';">
+                                <div class="widget-item-left">
+                                    <span class="fa fa-user"></span>
+                                </div>
+                                <div class="widget-data">
+                                    <div class="widget-int num-count">{{$voucherissuance}}</div>
+                                    
+                                    <div class="widget-title">Hired</div>
+                                    <div class="widget-subtitle">Employees Joined this month</div>
+                                </div>
+                                <div class="widget-controls">                                
+                                    <a href="#" class="widget-control-right widget-remove" data-toggle="tooltip" data-placement="top" title="Remove Widget"><span class="fa fa-times"></span></a>
+                                </div>                            
+                            </div>                            
+                            <!-- END WIDGET REGISTRED -->
+                            
+                        </div>
+                        <div class="col-md-3">
+                            
+                            <!-- START WIDGET CLOCK -->
+                            <div class="widget widget-danger widget-padding-sm">
+                                <div class="widget-big-int plugin-clock">00:00</div>                            
+                                <div class="widget-subtitle plugin-date">Loading...</div>
+                                <div class="widget-controls">                                
+                                    <a href="#" class="widget-control-right widget-remove" data-toggle="tooltip" data-placement="left" title="Remove Widget"><span class="fa fa-times"></span></a>
+                                </div>                            
+                                <div class="widget-buttons widget-c3">
+                                    <div class="col">
+                                        <a href="#"><span class="fa fa-clock-o"></span></a>
+                                    </div>
+                                    <div class="col">
+                                        <a href="#"><span class="fa fa-bell"></span></a>
+                                    </div>
+                                    <div class="col">
+                                        <a href="#"><span class="fa fa-calendar"></span></a>
+                                    </div>
+                                </div>                            
+                            </div>                        
+                            <!-- END WIDGET CLOCK -->
+                            
+                        </div>
+                    </div>
+                    <!-- END WIDGETS -->                    
+                    
+        @endsection

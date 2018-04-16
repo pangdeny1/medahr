@@ -1,10 +1,6 @@
  @extends('layouts.pagelayout')
 @section('content')<!-- START BREADCRUMB -->
-                <ul class="breadcrumb">
-                    <li><a href="#">Home</a></li>
-                    <li><a href="#">{{$pagetitle}}</a></li>
-                    
-                </ul>
+             
                 <!-- END BREADCRUMB -->
                 
                 <!-- PAGE CONTENT WRAPPER -->
@@ -29,6 +25,7 @@
                                     <ul class="nav nav-tabs" role="tablist">
                                         <li class="active"><a href="#tab-first" role="tab" data-toggle="tab">Personal</a></li>
                                         <li><a href="#tab-second" role="tab" data-toggle="tab">Salary</a></li>
+                                        <li><a href="#tab-eleventh" role="tab" data-toggle="tab">Bank Info</a></li>
                                         <li><a href="#tab-tenth" role="tab" data-toggle="tab">Dates</a></li>
                                         <li><a href="#tab-third" role="tab" data-toggle="tab">Contacts</a></li>
                                         <li><a href="#tab-fourth" role="tab" data-toggle="tab">Education</a></li>
@@ -73,7 +70,9 @@
                                                 <div class="col-md-6 col-xs-12">  
                                                     <select class="form-control select" name="gender">
                                                         
-                                                             @foreach($genders as $gender)
+                                                      
+
+                                                            @foreach($genders as $gender)
 
                                                          @if($gender->id==$employee->gender)
                                                         
@@ -81,6 +80,8 @@
                                                             @endif  
                                                          <option value="{{ $gender->id }}">{{ $gender->name }}</option>
                                                           @endforeach
+
+
 
 
                                                         </option>
@@ -159,8 +160,9 @@
                                                          @if($paytype->id==$employee->paytype)
                                                         
                                                         <option  value='{{$employee->paytype}}' selected="selected">{{$paytype->name}}</option>
-                                                            @endif  
+                                                            @else
                                                          <option value="{{ $paytype->id }}">{{ $paytype->name }}</option>
+                                                           @endif 
                                                           @endforeach
                                                                                                              
                                                     </select>
@@ -226,8 +228,9 @@
                                                          @if($country->id==$employee->country)
                                                         
                                                         <option  value='{{$employee->country}}' selected="selected">{{$country->countryname}}</option>
-                                                            @endif  
+                                                          @else
                                                    <option value="{{ $country->id }}">{{ $country->countryname }}</option>
+                                                     @endif  
                                                           @endforeach
 
                                                
@@ -245,8 +248,9 @@
                                                        @foreach($regions as $region)
                                                        @if($region->id==$employee->city)
                                                         <option  value='{{$employee->city}}' selected="selected">{{$region->regionname}}</option>
-                                                        @endif
+                                                       @else
                                                         <option value="{{$region->id}}">{{$region->regionname}}</option>
+                                                          @endif  
                                                         @endforeach
                                                         
                                                        
@@ -261,8 +265,9 @@
                                                         @foreach($districts as $district)
                                                         @if($district->id==$employee->state)
                                                         <option  value="{{$employee->state}}" selected="selected">{{$district->districtname}}</option>
-                                                        @endif
+                                                        @else
                                                         <option value="{{$district->id}}">{{$district->districtname}}</option>
+                                                          @endif  
                                                         @endforeach
                                                                                                                                                                    
                                                     </select>
@@ -303,6 +308,38 @@
                                          <div class="tab-pane active" id="tab-eight">
                                         
                                         Eight
+
+                                        </div>
+
+
+                                         <div class="tab-pane active" id="tab-eleventh">
+                                        
+                                        Bank Info 
+
+                                          <div class="form-group">                                        
+                                                <label class="col-md-3 col-xs-12 control-label">Bank</label>
+                                                <div class="col-md-5">
+                                                    <select class="form-control select" name="bank">
+                                                        @foreach($banks as $bank)
+                                                        @if($bank->id==$employee->bankid)
+                                                        <option  value="{{$employee->bankid}}" selected="selected">{{$bank->bankname}}</option>
+                                                        @else
+                                                        <option value="{{$bank->id}}">{{$bank->bankname}}</option>
+                                                          @endif  
+                                                        @endforeach
+                                                                                                                                                                   
+                                                    </select>
+                                                </div>                                            
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label class="col-md-3 col-xs-12 control-label">Bank Account Number</label>
+                                                <div class="col-md-6 col-xs-12">                                                                                                                                                        
+                                                    <input type="text" name="accountnumber" class="form-control" value="{{$employee->atmnumber}}"/>
+                                                </div>
+                                            </div>
+
+
 
                                         </div>
 

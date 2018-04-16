@@ -1,4 +1,5 @@
-@extends('layouts.app')
+ @extends('layouts.pagelayout')
+
 
 @section('template_title')
   Showing User {{ $user->name }}
@@ -35,6 +36,7 @@
                 </div>
 
                 <div class="col-sm-6">
+                 
                   <h4 class="text-muted margin-top-sm-1 text-center text-left-tablet">
                     {{ $user->name }}
                   </h4>
@@ -385,6 +387,8 @@
       </div>
     </div>
   </div>
+
+ 
 
   @include('modals.modal-delete')
 
