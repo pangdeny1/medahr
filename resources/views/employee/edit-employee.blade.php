@@ -90,6 +90,44 @@
                                                 </div>                                            
                                             </div>
 
+                                            <div class="form-group">                                        
+                                                <label class="col-md-3 col-xs-12 control-label">Branch</label>
+                                                <div class="col-md-5">
+                                                    <select class="form-control select" name="jobid">
+                                                       
+                                                          @foreach($branches as $branch)
+
+                                                         @if($branch->id==$employee->branchid)
+                                                        
+                                                        <option  value='{{$employee->branchid}}' selected="selected">{{$branch->branchname}}</option>
+                                                            @endif  
+                                                         <option value="{{ $job->id }}">{{ $branch->branchname }}</option>
+                                                          @endforeach
+                                                                                                             
+                                                    </select>
+                                                </div>                                          
+                                            </div>
+
+
+                                            <div class="form-group">                                        
+                                                <label class="col-md-3 col-xs-12 control-label">Departments</label>
+                                                <div class="col-md-5">
+                                                    <select class="form-control select" name="jobid">
+                                                       
+                                                          @foreach($departments as $department)
+
+                                                         @if($department->id==$employee->departmentid)
+                                                        
+                                                        <option  value='{{$employee->departmentid}}' selected="selected">{{$department->departmentname}}</option>
+                                                            @endif  
+                                                         <option value="{{ $department->id }}">{{ $department->departmentname }}</option>
+                                                          @endforeach
+                                                                                                             
+                                                    </select>
+                                                </div>                                          
+                                            </div>
+
+
                                                <div class="form-group">                                        
                                                 <label class="col-md-3 col-xs-12 control-label">Job Title</label>
                                                 <div class="col-md-5">
@@ -287,6 +325,95 @@
                                         <div class="tab-pane active" id="tab-fourth">
                                          Fourth
 
+
+
+                                          <div class="col-md-12 col-xs-12">
+                                            <a href="#"  data-toggle="modal" data-backdrop="static" data-keyboard="false" data-target="#modal_change_password">Change password</a>
+                                        </div>
+
+
+                                         <div class="modal animated fadeIn" id="modal_change_password" tabindex="-1" role="dialog" aria-labelledby="smallModalHead" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                        <h4 class="modal-title" id="smallModalHead">Change password</h4>
+                    </div>
+                    <div class="row">
+        <div class="col-md-10 col-md-offset-1">
+            <div class="panel panel-default">
+                <div class="panel-heading">Add New Job</div>
+
+                <div class="panel-body">
+                    @include('includes.flash');
+
+                    <form class="form-horizontal" role="form" method="POST" action="{{ url('/new_job') }}">
+                        {!! csrf_field() !!}
+
+                        <div class="form-group{{ $errors->has('title') ? ' has-error' : '' }}">
+                            <label for="title" class="col-md-4 control-label">Job Title</label>
+
+                            <div class="col-md-6">
+                                <input id="title" type="text" class="form-control" name="title" value="{{ old('title') }}">
+
+                                @if ($errors->has('title'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('title') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+
+                        <div class="form-group{{ $errors->has('jobGroup') ? ' has-error' : '' }}">
+                            <label for="jobGroup" class="col-md-4 control-label">Job Group</label>
+
+                            <div class="col-md-6">
+                                <select id="category" type="jobGroup" class="form-control" name="jobGroup">
+                                    <option value="">Select Job Group</option>
+                                   
+                               @foreach ($jobgroups as $jobgroup)
+                        <option value="{{ $jobgroup->id }}">{{ $jobgroup->jobgroupname }}</option>
+                                    @endforeach
+                                </select>
+
+                                @if ($errors->has('jopGroup'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('jobGroup') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+
+                      
+
+                        <div class="form-group{{ $errors->has('message') ? ' has-error' : '' }}">
+                            <label for="message" class="col-md-4 control-label">Job Description</label>
+
+                            <div class="col-md-6">
+                                <textarea rows="10" id="message" class="form-control" name="message"></textarea>
+
+                                @if ($errors->has('message'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('message') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-md-6 col-md-offset-4">
+                                <button type="submit" class="btn btn-primary">
+                                    <i class="fa fa-btn fa-ticket"></i> Save
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+                </div>
+            </div>
+        </div>   
+
                                         </div>
 
                                          <div class="tab-pane active" id="tab-fifth">
@@ -307,7 +434,117 @@
 
                                          <div class="tab-pane active" id="tab-eight">
                                         
-                                        Eight
+                                       Membership
+
+                                          <div class="form-group">                                        
+                                                <label class="col-md-3 col-xs-12 control-label">Social Security Scheme</label>
+                                                <div class="col-md-5">
+                                                    <select class="form-control select" name="sss">
+                                                        @foreach($sss as $ss)
+                                                        @if($ss->id==$employee->pencode)
+                                                        <option  value="{{$employee->pencode}}" selected="selected">{{$ss->penname}}</option>
+                                                        @else
+                                                        <option value="{{$ss->id}}">{{$ss->penname}}</option>
+                                                          @endif  
+                                                        @endforeach
+                                                                                                                                                                   
+                                                    </select>
+                                                </div>                                            
+                                            </div>
+
+                                       
+
+
+                                            <div class="form-group">
+                                                <label class="col-md-3 col-xs-12 control-label">Social Security Number</label>
+                                                <div class="col-md-6 col-xs-12">                                                                                                                                                        
+                                                    <input type="text" name="ssnumber" class="form-control" value="{{$employee->ssnumber}}"/>
+                                                </div>
+                                            </div>
+
+                                             <div class="form-group">                                        
+                                                <label class="col-md-3 col-xs-12 control-label">Health Insuarance</label>
+                                                <div class="col-md-5">
+                                                    <select class="form-control select" name="health">
+                                                        @foreach($healths as $health)
+                                                        @if($health->id==$employee->state)
+                                                        <option  value="{{$employee->hdmfcode}}" selected="selected">{{$health->name}}</option>
+                                                        @else
+                                                        <option value="{{$health->id}}">{{$health->name}}</option>
+                                                          @endif  
+                                                        @endforeach
+                                                                                                                                                                   
+                                                    </select>
+                                                </div>                                            
+                                            </div>
+
+                                      
+
+
+                                              <div class="form-group">
+                                                <label class="col-md-3 col-xs-12 control-label">Health Insuarance Number</label>
+                                                <div class="col-md-6 col-xs-12">                                                                                                                                                        
+                                                    <input type="text" name="phnumber" class="form-control" value="{{$employee->phnumber}}"/>
+                                                </div>
+                                            </div>
+
+
+                                             <div class="form-group">
+                                                <label class="col-md-3 col-xs-12 control-label">Servings Number</label>
+                                                <div class="col-md-6 col-xs-12">                                                                                                                                                        
+                                                    <input type="text" name="hdmfnumber" class="form-control" value="{{$employee->hdmfnumber}}"/>
+                                                </div>
+                                            </div>
+
+
+
+                                            <div class="form-group">                                        
+                                                <label class="col-md-3 col-xs-12 control-label">Deduct Social Security Scheme?</label>
+                                                <div class="col-md-5">
+                                                    <select class="form-control select" name="isPension">
+                                                        @foreach($yeornos as $ss)
+                                                        @if($ss->id==$employee->isPension)
+                                                        <option  value="{{$employee->isPension}}" selected="selected">{{$ss->name}}</option>
+                                                        @else
+                                                        <option value="{{$ss->id}}">{{$ss->name}}</option>
+                                                          @endif  
+                                                        @endforeach
+                                                                                                                                                                   
+                                                    </select>
+                                                </div>                                            
+                                            </div>
+
+                                            <div class="form-group">                                        
+                                                <label class="col-md-3 col-xs-12 control-label">Deduct Tax?</label>
+                                                <div class="col-md-5">
+                                                    <select class="form-control select" name="isTaxed">
+                                                        @foreach($yeornos as $ss)
+                                                        @if($ss->id==$employee->isTaxed)
+                                                        <option  value="{{$employee->isTaxed}}" selected="selected">{{$ss->name}}</option>
+                                                        @else
+                                                        <option value="{{$ss->id}}">{{$ss->name}}</option>
+                                                          @endif  
+                                                        @endforeach
+                                                                                                                                                                   
+                                                    </select>
+                                                </div>                                            
+                                            </div>
+
+                                            <div class="form-group">                                        
+                                                <label class="col-md-3 col-xs-12 control-label">Deduct Workers Union?</label>
+                                                <div class="col-md-5">
+                                                    <select class="form-control select" name="isHdmf">
+                                                        @foreach($yeornos as $ss)
+                                                        @if($ss->id==$employee->isHdmf)
+                                                        <option  value="{{$employee->isHdmf}}" selected="selected">{{$ss->name}}</option>
+                                                        @else
+                                                        <option value="{{$ss->id}}">{{$ss->name}}</option>
+                                                          @endif  
+                                                        @endforeach
+                                                                                                                                                                   
+                                                    </select>
+                                                </div>                                            
+                                            </div>
 
                                         </div>
 

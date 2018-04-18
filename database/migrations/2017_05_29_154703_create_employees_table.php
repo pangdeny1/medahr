@@ -37,17 +37,17 @@ class CreateEmployeesTable extends Migration
             $table->string('email2')->nullable();
             $table->string('email2comment')->nullable();
             $table->string('atmnumber')->nullable();
-            $table->string('bankid');
-            $table->string('ssnumber');
-            $table->string('hdmfnumber');
-            $table->integer('isPension');
-            $table->string('pencode');
-            $table->integer('isHdmf');
-            $table->integer('isTaxed');
-            $table->integer('isGratuity');
-            $table->integer('isHeslb');
-            $table->string('phnumber');
-            $table->string('taxactnumber');
+            $table->string('bankid')->nullable();
+            $table->string('ssnumber')->nullable();
+            $table->string('hdmfnumber')->nullable();
+            $table->integer('isPension')->nullable();
+            $table->string('pencode')->nullable();
+            $table->integer('isHdmf')->nullable();
+            $table->integer('isTaxed')->nullable();
+            $table->integer('isGratuity')->nullable();
+            $table->integer('isHeslb')->nullable();
+            $table->string('phnumber')->nullable();
+            $table->string('taxactnumber')->nullable();
             $table->date('birthdate');
             $table->date('hiredate');
             $table->date('terminatedate');
@@ -70,9 +70,9 @@ class CreateEmployeesTable extends Migration
             $table->string('deptid');
             $table->string('jobgroupid');
             $table->string('jobid');
-            $table->string('costcenterid');
-            $table->string('position');
-            $table->string('employeepicture');
+            $table->string('costcenterid')->nullable();
+            $table->string('position')->nullable();
+            $table->string('employeepicture')->nullable();
 
 
 

@@ -15,6 +15,15 @@ use App\Models\job;
 use App\Models\Jobgroup;
 use App\Models\gender;
 use App\Models\bank;
+use App\Models\Branch;
+use App\Models\Company;
+use App\Models\CostCenter;
+use App\Models\HDMF;
+use App\Models\HealthInsuarance;
+use App\Models\SocialSecurityScheme;
+use App\Models\TaxTable;
+use App\Models\Department;
+use App\Models\YesOrNo;
 use App\Models\maritalstatus;
 use App\Models\employementstatus;
 use App\Models\employeestatus;
@@ -188,6 +197,7 @@ if ($validator->fails()) {
         $countries=Country::All();
         $regions=Region::All();
         $districts=District::All();
+        $jobgroups = Jobgroup::all();;
         $jobs     =job::All();
         $maritalstatus=maritalstatus::All();
         $genders      =gender::All();
@@ -196,6 +206,14 @@ if ($validator->fails()) {
         $employementstatuses =employementstatus::All();
         $paytypes            =paytype::All();
         $banks               =Bank::All();
+        $sss                  =SocialSecurityScheme::All();
+        $branch               =Branch::All();
+        $department           =Department::All();
+        $health                =HealthInsuarance::All();
+        $hdmf                  =HDMF::All();
+        $company                =Company::All();
+        $yesornos                =YesOrNo::All();
+
         //$selectedCountry=Country::first()->country;
 
         $data = [
@@ -211,9 +229,15 @@ if ($validator->fails()) {
             'employeestatuses'     =>$employeestatuses,
             'employementstatuses'  =>$employementstatuses,
             'paytypes'             =>$paytypes,
-            'banks'                =>$banks
-
-
+            'banks'                =>$banks,
+            'sss'                  =>$sss,
+            'branches'               =>$branch,
+            'departments'           =>$department,
+            'healths'               =>$health,
+            'hdmfs'                 =>$hdmf,
+            'companies'             =>$company,
+            'yeornos'              =>$yesornos,
+            'jobgroups'            =>$jobgroups
 
         ];
 
@@ -251,6 +275,11 @@ if ($validator->fails()) {
             $employee->middlename =$request->input('othername');
             $employee->gender =$request->input('gender');
             $employee->jobid =$request->input('jobid');
+            $employee->deptid =$request->input('deptid');
+            $employee->branchid =$request->input('branchid');
+            $employee->companyid =$request->input('companyid');
+            $employee->jobid =$request->input('jobid');
+            $employee->costcenterid =$request->input('costcenterid');
             $employee->active =$request->input('active');
             $employee->phone1comment =$request->input('aboutme');
 
@@ -275,6 +304,18 @@ if ($validator->fails()) {
             //$employee->bankid =$request->input('bank');
             $employee->bankid =$request->input('bank');
             $employee->atmnumber =$request->input('accountnumber');
+
+
+             //membership
+            $employee->hdmfcode =$request->input('hdmfcode');
+            $employee->hdmfnumber =$request->input('hdmfnumber');
+            $employee->pencode =$request->input('sss');
+            $employee->ssnumber =$request->input('ssnumber');
+            $employee->healthcode =$request->input('healthcode');
+            $employee->phnumber =$request->input('phnumber');
+            $employee->isPension =$request->input('isPension');
+            $employee->isHdmf =$request->input('isHdmf');
+            $employee->isTaxed =$request->input('isTaxed');
 
 
             //Dates

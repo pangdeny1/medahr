@@ -54,9 +54,10 @@
             <div class="page-sidebar">
                 <!-- START X-NAVIGATION -->
                 <ul class="x-navigation">
-                    <li class="xn-log">
-                        <a href="#"><img src="{{asset('assets/images/logo/my-logo.png')}}" alt="softcare"/></a>
-                         </li>
+                    <li class="xn-logo">
+                        <a href="">Ardoa</a>
+                        
+                    </li>
                     <li class="xn-profile">
                         <a href="#" class="profile-mini">
                             <img src="{{asset('assets/images/users/avatar.jpg')}}" alt="John Doe"/>

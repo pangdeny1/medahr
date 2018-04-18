@@ -52,8 +52,10 @@
                                                     <th>Gender</th>
                                                     <th>Start date</th>
                                                     <th>Salary</th>
+                                                    <th>View </th>
                                                     <th >Edit</th>
                                                      <th>Delete</th>
+
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -74,16 +76,31 @@
                                                     
                                                     @endif
                                                 </td>
+                                                    <th ><a href="#"  data-toggle="modal" data-backdrop="static" data-keyboard="false" data-target="#modal_change_password">View </a></th>
                                                     <th ><a href="{{ URL::to('editemployee/' . $employee->employeeid . '/edit') }}">Edit</a></th>
                                                     <th><a href="{{ URL::to('employeedelete/' . $employee->employeeid) }} " onclick="return confirm('Are you sure you want to delete this Employee?')"; >Delete</a></th>
                                                    <!--  <th><a class="btn btn-sm btn-info btn-block" href="{{ URL::to('editemployee/' . $employee->employeeid . '/edit') }}"
                                                       data-toggle="tooltip" title="Edit">Edit</a> </th> -->
                                                 </tr>
+                                                 
                                                
                                                @endforeach
                                                
                                             </tbody>
-                                        </table>                                    
+                                        </table>  
+
+                                         <div class="modal animated fadeIn" id="modal_change_password" tabindex="-1" role="dialog" aria-labelledby="smallModalHead" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                        <h4 class="modal-title" id="smallModalHead">Employee Details</h4>
+                    </div>
+                    <div class="row">
+        <div class="col-md-10 col-md-offset-1">
+            <div class="panel panel-default">
+                Employees
+                </div>                                  
                                     </div>
                                 </div>
                             </div>
