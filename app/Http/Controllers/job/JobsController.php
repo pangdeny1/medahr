@@ -14,6 +14,7 @@ class JobsController extends Controller
 {
     public function index()
     {
+        //main function
     	$pagetitle="Jobs";
         $jobs = job::paginate(10);
         $jobgroups = Jobgroup::all();;
