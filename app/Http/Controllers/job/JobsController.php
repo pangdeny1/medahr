@@ -15,6 +15,7 @@ class JobsController extends Controller
     public function index()
     {
         //main function
+
     	$pagetitle="Jobs";
         $jobs = job::paginate(10);
         $jobgroups = Jobgroup::all();;
@@ -32,6 +33,8 @@ class JobsController extends Controller
 
     public function store(Request $request, AppMailer $mailer)
     {
+        //store addes files
+        
         $this->validate($request, [
             'title'     => 'required',
             'jobGroup'  => 'required',

@@ -74,8 +74,8 @@
                                 <div class="profile-data-title">Officer</div>
                             </div>
                             <div class="profile-controls">
-                                <a href="pages-profile.html" class="profile-control-left"><span class="fa fa-info"></span></a>
-                                <a href="pages-messages.html" class="profile-control-right"><span class="fa fa-envelope"></span></a>
+                                <a href="" class="profile-control-left"><span class="fa fa-info"></span></a>
+                                <a href="" class="profile-control-right"><span class="fa fa-envelope"></span></a>
                             </div>
                         </div>                                                                        
                     </li>
@@ -83,7 +83,7 @@
                   <li class="xn-openable active">
                         <a href="#"><span class="fa fa-dashboard"></span> <span class="xn-text">Dashboards</span></a>
                         <ul>
-                            <li class="active"><a href="index.html"><span class="xn-text">Dashboard</span></a></li>
+                            <li class="active"><a href="{{url('home')}}"><span class="xn-text">Dashboard</span></a></li>
                             <li><a href="prlUserProfile.php"><span class="xn-text">User profile</span></a><div class="informer informer-danger">New!</div></li>
                             <li><a href="prlRegTimeEntry.php"><span class="xn-text">Time Sheet</span></a><div class="informer informer-danger">New!</div></li>
                             <li><a href="prlRegTimeEntry.php"><span class="xn-text">Invoice</span></a><div class="informer informer-danger">New!</div></li>

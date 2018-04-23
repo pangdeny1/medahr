@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateYesNoTable extends Migration
+class CreatePrlemployementstatusesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,11 @@ class CreateYesNoTable extends Migration
      */
     public function up()
     {
-        Schema::create('cost_centers', function (Blueprint $table) {
+        Schema::create('prlemploymentstatus', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('costcentername');
-            $table->string('costcenterdesc');
+            $table->string('employementdesc');
             $table->timestamps();
         });
-    }
     }
 
     /**
@@ -29,6 +27,6 @@ class CreateYesNoTable extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('prlemploymentstatus');
     }
 }

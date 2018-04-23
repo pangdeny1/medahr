@@ -14,6 +14,8 @@ use App\Models\Employee;
 use App\Models\job;
 use App\Models\Jobgroup;
 use App\Models\gender;
+use App\Models\Payperiod;
+use App\Models\prlemployementstatuses;
 use App\Models\bank;
 use App\Models\Branch;
 use App\Models\Company;
@@ -71,10 +73,29 @@ class employeemaster extends Controller
     function addemployee()
     {
     	$pagetitle="Add Employee";
+        $countries=Country::All();
+        $regions=Region::All();
+        $districts=District::All();
         $jobgroups = Jobgroup::all();
-        $jobs = job::all();
-        $paytypes = paytype::all();
-    	return view('employee.addemployee',compact('pagetitle','jobs','jobgroups','paytypes'));
+        $jobs     =job::All();
+        $payperiods     =Payperiod::All();
+        //$prlemployementstatuses    =prlemployementstatuses::All();
+        $maritalstatutes =maritalstatus::All();
+        $genders      =gender::All();
+        $endofcontractreasons=endofcontractreason::All();
+        $employeestatuses    =employeestatus::All();
+        $prlemployeestatuses =prlemployementstatuses::All();
+        $paytypes            =paytype::All();
+        $banks               =Bank::All();
+        $sss                  =SocialSecurityScheme::All();
+        $branches               =Branch::All();
+        $departments           =Department::All();
+        $healths               =HealthInsuarance::All();
+        $hdmf                  =HDMF::All();
+        $companies                =Company::All();
+        $yesornos                =YesOrNo::All();
+    	return view('employee.addemployee2',compact('pagetitle','jobs','jobgroups','paytypes','maritalstatutes','genders','countries','branches','departments','endofcontractreasons'
+            ,'prlemployeestatuses','employeestatuses','banks','healths','hdmf','companies','yesornos','regions','districts','sss','prlemployementstatuses','payperiods'));
     }
 
 
@@ -83,15 +104,19 @@ class employeemaster extends Controller
 
         $validator = Validator::make($request->all(),
             [
-                'othername'            => 'required',
+                'lastname'            => 'required',
                 'firstname'            => 'required',
+                'birthdate'             => 'required',
+                'jobid'             => 'required',
                 'hiredate'             => 'required',
                 'gender'               =>'required',
                 'jobid'                =>'required',
                 'paytype'              =>'required',
-                'email'                =>'required',
+                'gender'                =>'required',
                 'active'               =>'required',
-                'email'                =>'email|required'
+                'email'                =>'email|required',
+                'employementstatus'    =>'required',
+                'company'              =>'required'
             ]);
 
       /*  if ($validator->fails()) {
@@ -123,51 +148,51 @@ if ($validator->fails()) {
             'country'=>$request->input('country'),
             'gender'=>$request->input('gender'),
             'phone1'=>$request->input('phone'),
-            'phone1comment'=>$request->input('comment'),
+            'phone1comment'=>$request->input('aboutme'),
             'phone2'=>'',
             'phone2comment'=>'',
-            'email1'=>'',
+            'email1'=>$request->input('email'),
             'email1comment'=>'',
             'email2'=>'',
             'email2comment'=>'',
-            'atmnumber'=>'',
-            'bankid'=>'',
-            'ssnumber'=>'',
-            'hdmfnumber'=>'',
-            'isPension'=>1,
-            'pencode'=>0,
-            'isHdmf'=>0,
-            'isTaxed'=>0,
+            'atmnumber'=>$request->input('atmnumber'),
+            'bankid'=>$request->input('bank'),
+            'ssnumber'=>$request->input('aboutme'),
+            'hdmfnumber'=>$request->input('hdmfnumber'),
+            'isPension'=>$request->input('isPension'),
+            'pencode'=>$request->input('sss'),
+            'isHdmf'=>$request->input('isHdmf'),
+            'isTaxed'=>$request->input('isTaxed'),
             'isGratuity'=>0,
             'isHeslb'=>0,
-            'phnumber'=>'',
+            'phnumber'=>$request->input('phnumber'),
             'taxactnumber'=>'',
             'birthdate'=>$request->input('birthdate'),
             'hiredate'=>$request->input('hiredate'),
-            'terminatedate'=>'2030-01-01',
-            'probdate'=>'2017-01-01',
-            'retireddate'=>'2030-01-01',
-            'paytype'=>'10',
+            'terminatedate'=>$request->input('terminatedate'),
+            'probdate'=>$request->input('probdate'),
+            'retireddate'=>$request->input('retireddate'),
+            'paytype'=>$request->input('paytype'),
             'payperiodid'=>'10',
-            'periodrate'=>'0.00',
-            'hourlyrate'=>'0.00',
+            'periodrate'=>$request->input('periodrate'),
+            'hourlyrate'=>$request->input('hourlyrate'),
             'glactcode'=>'0',
-            'marital'=>'',
+            'marital'=>$request->input('marital'),
             'taxstatusid'=>'',
-            'employmentid'=>'1',
-            'active'=>'1',
-            'terminatereason'=>'',
-            'suspfrom'=>'2000-01-01',
-            'suspto'=>'1970-01-01',
-            'companyid'=>'',
-            'branchid'=>'',
-            'deptid'=>'',
-            'jobgroupid'=>'',
-            'jobid'=>'',
+            'employmentid'=>$request->input('employementstatus'),
+            'active'=>$request->input('active'),
+            'terminatereason'=>$request->input('terminatereason'),
+            'suspfrom'=>'1900-01-01',
+            'suspto'=>'1900-01-01',
+            'companyid'=>$request->input('company'),
+            'branchid'=>$request->input('branch'),
+            'deptid'=>$request->input('department'),
+            'jobgroupid'=>$request->input('jobgroup'),
+            'jobid'=>$request->input('jobid'),
             
-            'costcenterid'=>'',
+            'costcenterid'=>$request->input('CostCenter'),
             'position'=>'',
-            'employeepicture'=>''
+            'employeepicture'=>$request->input('temployeepicture'),
 
                 
             ]);
@@ -199,7 +224,9 @@ if ($validator->fails()) {
         $districts=District::All();
         $jobgroups = Jobgroup::all();;
         $jobs     =job::All();
-        $maritalstatus=maritalstatus::All();
+        $payperiods     =Payperiod::All();
+        $prlemployementstatuses    =prlemployementstatuses::All();
+        $maritalstatutes =maritalstatus::All();
         $genders      =gender::All();
         $endofcontractreasons=endofcontractreason::All();
         $employeestatuses    =employeestatus::All();
@@ -219,7 +246,7 @@ if ($validator->fails()) {
         $data = [
             'employee'             =>$employee,
             'employeeid'           =>$employeeid,
-            'pagetitle'            =>'Edit Employee' ,
+            'pagetitle'            =>'Edit Employee',
             'countries'            => $countries,
             'regions'              =>$regions,
             'districts'            =>$districts,
@@ -231,13 +258,17 @@ if ($validator->fails()) {
             'paytypes'             =>$paytypes,
             'banks'                =>$banks,
             'sss'                  =>$sss,
-            'branches'               =>$branch,
-            'departments'           =>$department,
-            'healths'               =>$health,
-            'hdmfs'                 =>$hdmf,
-            'companies'             =>$company,
+            'branches'             =>$branch,
+            'departments'          =>$department,
+            'healths'              =>$health,
+            'hdmfs'                =>$hdmf,
+            'companies'            =>$company,
             'yeornos'              =>$yesornos,
-            'jobgroups'            =>$jobgroups
+            'jobgroups'            =>$jobgroups,
+            'maritalstatutes '     =>$maritalstatutes,
+            'companies'            =>$company,
+            'payperiods'           =>$payperiods,
+            'prlemployementstatuses'=>$prlemployementstatuses
 
         ];
 
