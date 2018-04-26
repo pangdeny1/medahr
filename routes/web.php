@@ -148,4 +148,22 @@ Route::group(['middleware'=> ['auth', 'activated', 'role:admin']], function () {
     Route::post('update_job/{id}','job\JobsController@update');
     Route::get('deletejob/{id}','job\JobsController@destroy');
 
+    Route::post('addbranch','branch\branchcontroller@store');
+    Route::get('createbranch','branch\branchcontroller@create');
+
+    Route::post('adddepartment','department\DepartmentsController@store');
+    Route::get('createdepartment','department\DepartmentsController@create');
+
+    Route::post('addcompany','company\companiesController@store');
+    Route::get('createcompany','company\companiesController@create');
+
+    Route::post('addsss','sss\SssController@store');
+    Route::get('createsss','sss\SssController@create');
+
+    Route::post('addsalary','salary\SalariesController@store');
+    Route::get('createsalary','salary\SalariesController@create');
+
+    Route::post('addpayrollperiod','payroll\payrollsController@store');
+    Route::get('createpayrollperiod','payroll\PayrollsController@create');
+
 });

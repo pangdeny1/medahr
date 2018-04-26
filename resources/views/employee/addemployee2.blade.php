@@ -133,7 +133,13 @@
                                                           @endforeach
                                                                                                              
                                                     </select>
-                                                </div>                                          
+
+                                                    <a href="{{url('createbranch')}}"  >Add Branch</a>
+                                                     
+                        </div>
+
+                        
+                                        
                                             </div>
 
 
