@@ -9,10 +9,18 @@ use App\Models\Salary;
 use App\Mailers\AppMailer;
 use App\Models\YesOrNo;
 use App\Models\Year;
+use App\Models\Month;
 use App\Http\Controllers\Controller;
 
 class payrollsController extends Controller
 {
+	public function index()
+	{
+         $payrolls=Payroll::All();
+         $pagetitle="Payrolls ";
+        return view('payrolls.index',compact('payrolls','pagetitle'));
+
+	}
  public function create()
     {
         
@@ -20,8 +28,9 @@ class payrollsController extends Controller
         $yesornos =YesOrNo::All();
         $employees=Employee::All();
         $years=Year::All();
+        $months=Month::All();
 
-        return view('payrolls.create', compact('pagetitle','employees','years','yesornos'));
+        return view('payrolls.create', compact('pagetitle','employees','years','yesornos','months'));
     }
 
     public function store(Request $request, AppMailer $mailer)
@@ -29,7 +38,7 @@ class payrollsController extends Controller
         //store addes files
         
         $this->validate($request, [
-            'PayrollID'     => 'required',
+            'PayrollID'     => 'required|unique:prlpayrollperiod',
             'PayrollDesc'     => 'required',
             'StartDate'     => 'required',
             'EndDate'     => 'required',
@@ -59,4 +68,85 @@ class payrollsController extends Controller
 
         return redirect()->back()->with("status", $request->input('PayrollDesc')." Payroll  Added Successfully.");
     }
+
+
+     public function show($payroll_id)
+    {   
+    	$pagetitle="payroll View";
+        $payroll= payroll::where('id', $payroll_id)->firstOrFail();
+
+        //$comments = $ticket->comments;
+
+        //$category = $ticket->category;
+
+        return view('payrolls.show', compact('payroll','pagetitle'));
+    }
+
+
+
+     public function edit($payroll_id)
+    {   
+    	$pagetitle="payroll Edit";
+        $payroll= payroll::where('id', $payroll_id)->firstOrFail();
+        $yesornos =YesOrNo::All();
+        $employees=Employee::All();
+        $years=Year::All();
+        $months=Month::All();
+
+        
+
+        //$comments = $ticket->comments;
+
+        //$category = $ticket->category;
+
+        return view('payrolls.edit', compact('payroll','pagetitle','years','employees','yesornos','months'));
+    }
+
+
+
+       public function update(Request $request, AppMailer $mailer,$payroll_id)
+    {
+        $this->validate($request, [
+            'PayrollID'     => 'required',
+            'PayrollDesc'     => 'required',
+            'StartDate'     => 'required',
+            'EndDate'     => 'required',
+            'FSMonth'     => 'required',
+            'FSYear'     => 'required',
+            'DeductSSS'     => 'required',
+            'DeductHdmf'     => 'required',
+            'DeductHealth'     => 'required'
+        ]);
+       
+
+            $payroll = payroll::where('id', $payroll_id)->firstOrFail();
+
+             $payroll->payrollid     =$request->input('PayrollID');
+             $payroll->payrolldesc    =$request->input('PayrollDesc');
+             $payroll->startdate    = $request->input('StartDate');
+             $payroll->enddate   =$request->input('EndDate');
+             $payroll->fsmonth    = $request->input('FSMonth');
+             $payroll->fsyear   = $request->input('FSYear');
+             $payroll->deductsss    = $request->input('DeductSSS');
+             $payroll->deducthdmf    = $request->input('DeductHdmf');
+             $payroll->deductphilhealth     = $request->input('DeductHealth');
+             $payroll->payperiodid    =22;
+
+         $payroll->save();
+
+       // $mailer->sendTicketInformation(Auth::user(), $ticket);
+
+        return redirect()->back()->with("status", "A payroll Title has been Updated.");
+    }
+
+
+     public function destroy($payroll_id)
+        {
+    $payrolls = payroll::findOrFail($payroll_id);
+
+    $payrolls->delete();
+
+      // return redirect()->route('tasks.index');
+     return redirect()->back()->with("status", "payroll successfully deleted!");
+           }
 }

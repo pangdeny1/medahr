@@ -164,6 +164,13 @@ Route::group(['middleware'=> ['auth', 'activated', 'role:admin']], function () {
     Route::get('createsalary','salary\SalariesController@create');
 
     Route::post('addpayrollperiod','payroll\payrollsController@store');
+    
+    Route::get('showpayroll/{id}','payroll\payrollsController@show');
+    Route::get('editpayroll/{id}','payroll\payrollsController@edit');
+    Route::post('updatepayroll/{id}','payroll\payrollsController@update');
+    Route::get('deletepayroll/{id}','payroll\payrollsController@destroy');
+    
     Route::get('createpayrollperiod','payroll\PayrollsController@create');
+     Route::get('viewpayrollperiods','payroll\PayrollsController@index');
 
 });
