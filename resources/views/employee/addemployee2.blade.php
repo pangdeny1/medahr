@@ -17,7 +17,7 @@
         </ul>
     </div>
 @endif
-                    <form class="form-horizontal" action="employeestore" method='post' role='form'>
+                    <form class="form-horizontal" action="employeestore" method='post' role='form' enctype="multipart/form-data">
  
 {!! csrf_field() !!}
 
@@ -530,7 +530,12 @@
 
                                          <div class="tab-pane active" id="tab-ninth">
                                         
-                                       Ninith
+                                       <div class="form-group">
+                                                <label class="col-md-3 col-xs-12 control-label">Picture</label>
+                                                <div class="col-md-6 col-xs-12">                                                                                                                                                        
+                                                    <input type="file" class="form-control" name="picture" value="{{ old('firstname') }}"/>                                                    
+                                                </div>
+                                            </div>
                                         </div>
 
 

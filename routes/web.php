@@ -164,13 +164,49 @@ Route::group(['middleware'=> ['auth', 'activated', 'role:admin']], function () {
     Route::get('createsalary','salary\SalariesController@create');
 
     Route::post('addpayrollperiod','payroll\payrollsController@store');
-    
     Route::get('showpayroll/{id}','payroll\payrollsController@show');
     Route::get('editpayroll/{id}','payroll\payrollsController@edit');
     Route::post('updatepayroll/{id}','payroll\payrollsController@update');
     Route::get('deletepayroll/{id}','payroll\payrollsController@destroy');
-    
     Route::get('createpayrollperiod','payroll\PayrollsController@create');
-     Route::get('viewpayrollperiods','payroll\PayrollsController@index');
+    Route::get('viewpayrollperiods','payroll\PayrollsController@index');
 
+    //qualifications
+
+    Route::post('addqualification','qualification\qualificationscontroller@store');
+    Route::get('showqualification/{id}','qualification\qualificationscontroller@show');
+    Route::get('editqualification/{id}','qualification\qualificationscontroller@edit');
+    Route::post('updatequalification/{id}','qualification\qualificationscontroller@update');
+    Route::get('deletequalification/{id}','qualification\qualificationscontroller@destroy');
+    Route::get('createqualification','qualification\qualificationscontroller@create');
+    Route::get('viewqualifications','qualification\qualificationscontroller@index');
+
+    //employee qualifications
+
+    Route::post('addemployeequalification','qualification\employeequalificationscontroller@store');
+    Route::get('showemployeequalification{id}','qualification\employeequalificationscontroller@show');
+    Route::get('editemployeequalification{id}','qualification\employeequalificationscontroller@edit');
+    Route::post('updateemployeequalification{id}','qualification\employeequalificationscontroller@update');
+    Route::get('deleteemployeequalification{id}','qualification\employeequalificationscontroller@destroy');
+    Route::get('createemployeequalification','qualification\employeequalificationscontroller@create');
+    Route::get('viewemployeequalifications','qualification\employeequalificationscontroller@index');
+
+    //qualification level
+
+    Route::post('addqualificationlevel','qualification\qualificationlevelscontroller@store');
+    Route::get('showqualificationlevel{id}','qualification\qualificationlevelscontroller@show');
+    Route::get('editqualificationlevel{id}','qualification\qualificationlevelscontroller@edit');
+    Route::post('updatequalificationlevel{id}','qualification\qualificationlevelscontroller@update');
+    Route::get('deletequalificationlevel{id}','qualification\qualificationlevelscontroller@destroy');
+    Route::get('createqualificationlevel','qualification\qualificationlevelscontroller@create');
+    Route::get('viewqualificationlevels','qualification\qualificationlevelscontroller@index');
+
+    //institution
+    Route::post('addinstitution','institution\institutionscontroller@store');
+    Route::get('showinstitution/{id}','institution\institutionscontroller@show');
+    Route::get('editinstitution/{id}','institution\institutionscontroller@edit');
+    Route::post('updateinstitution/{id}','institution\institutionscontroller@update');
+    Route::get('deleteinstitution/{id}','institution\institutionscontroller@destroy');
+    Route::get('createinstitution','institution\institutionscontroller@create');
+    Route::get('viewinstitutions','institution\institutionscontroller@index');
 });
