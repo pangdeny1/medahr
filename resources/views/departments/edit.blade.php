@@ -16,32 +16,33 @@
                 <div class="panel-body">
                     @include('includes.flash');
 
-                    <form class="form-horizontal" role="form" method="POST" action="{{ url('/addbranch') }}">
+                    <form class="form-horizontal" role="form" method="POST" action="{{ url('/updatedepartment/'.$department->id) }}">
                         {!! csrf_field() !!}
 
-                        <div class="form-group{{ $errors->has('branchname') ? ' has-error' : '' }}">
-                            <label for="title" class="col-md-4 control-label">Branch</label>
+                        <div class="form-group{{ $errors->has('departmentname') ? ' has-error' : '' }}">
+                            <label for="title" class="col-md-4 control-label">department</label>
 
                             <div class="col-md-6">
-                                <input id="title" type="text" class="form-control" name="branchname" value="{{ old('branchname') }}">
+                                <input id="title" type="text" class="form-control" name="departmentname" value="{{ $department->departmentname }}">
 
-                                @if ($errors->has('branchname'))
+                                @if ($errors->has('departmentname'))
                                     <span class="help-block">
-                                        <strong>{{ $errors->first('branchname') }}</strong>
+                                        <strong>{{ $errors->first('departmentname') }}</strong>
                                     </span>
                                 @endif
                             </div>
                         </div>
 
-                        <div class="form-group{{ $errors->has('branclocation') ? ' has-error' : '' }}">
-                            <label for="title" class="col-md-4 control-label">Branch Location</label>
+
+                        <div class="form-group{{ $errors->has('departmentlocation') ? ' has-error' : '' }}">
+                            <label for="title" class="col-md-4 control-label">department Location</label>
 
                             <div class="col-md-6">
-                                <input id="title" type="text" class="form-control" name="branclocation" value="{{ old('branclocation')}}">
+                                <input id="title" type="text" class="form-control" name="departmentlocation" value="{{ $department->departmentlocation}}">
 
-                                @if ($errors->has('branclocation'))
+                                @if ($errors->has('departmentlocation'))
                                     <span class="help-block">
-                                        <strong>{{ $errors->first('branclocation') }}</strong>
+                                        <strong>{{ $errors->first('departmentlocation') }}</strong>
                                     </span>
                                 @endif
                             </div>

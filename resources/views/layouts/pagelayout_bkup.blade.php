@@ -84,29 +84,117 @@
                         <a href="#"><span class="fa fa-dashboard"></span> <span class="xn-text">Dashboards</span></a>
                         <ul>
                             <li class="active"><a href="{{url('home')}}"><span class="xn-text">Dashboard</span></a></li>
-                           <!-- <li><a href="prlUserProfile.php"><span class="xn-text">User profile</span></a><div class="informer informer-danger">New!</div></li>
+                            <li><a href="prlUserProfile.php"><span class="xn-text">User profile</span></a><div class="informer informer-danger">New!</div></li>
                             <li><a href="prlRegTimeEntry.php"><span class="xn-text">Time Sheet</span></a><div class="informer informer-danger">New!</div></li>
-                            <li><a href="prlRegTimeEntry.php"><span class="xn-text">Invoice</span></a><div class="informer informer-danger">New!</div></li> -->
+                            <li><a href="prlRegTimeEntry.php"><span class="xn-text">Invoice</span></a><div class="informer informer-danger">New!</div></li>
                         </ul>
                     </li>                    
                     <li class="xn-openable">
-
-                     
-                        <a href="#"><span class="fa fa-dashboard"></span> <span class="xn-text">HR</span></a>
-                         <ul>
-                            <li class="active"><a href="{{url('employeemaster')}}"><span class="xn-text">Employee Master</span></a></li>
-                            <li><a href="{{url('addemployee')}}"><span class="fa fa-pencil-square-o"></span>Add New Employee</a></li>                         
-                            <li><a href="{{url('viewbranches')}}"><span class="fa fa-pencil-square-o"></span>Branches</a></li> 
-                            <li><a href="{{url('viewdepartments')}}"><span class="fa fa-pencil-square-o"></span>Departments</a></li>
-                            <li><a href="{{url('viewjobgroups')}}"><span class="fa fa-pencil-square-o"></span>Job Groups</a></li>
-                            <li><a href="{{url('jobs')}}"><span class="fa fa-pencil-square-o"></span>Jobs</a></li>
-                            <li><a href="{{url('viewemployeequalifications')}}"><span class="fa fa-pencil-square-o"></span>Employee Qualifications</a></li>
-                            
+                        <a href="#"><span class="fa fa-files-o"></span> <span class="xn-text">Maintanance</span></a>
+                        <ul>
+                            <li><a href="{{url('employeemaster')}}"><span class="fa fa-image"></span>Add/UpdateEmployees Record</a></li>
+                            <li><a href="pages-invoice.html"><span class="fa fa-dollar"></span>Add/Update Tax Table </a></li>
+                            <li><a href="pages-edit-profile.html"><span class="fa fa-wrench"></span> Add/Update tax Status Table</a></li>
+                            <li><a href="pages-profile.html"><span class="fa fa-user"></span>Add/Update Social Security Table</a></li>
+                            <li><a href="pages-address-book.html"><span class="fa fa-users"></span> Add/Update NHIF Table</a></li>
+                            <li class="xn-openable">
+                                <a href="#"><span class="fa fa-clock-o"></span>Add/Update Workers Union Table</a>
+                                <ul>
+                                    <li><a href="pages-timeline.html"><span class="fa fa-align-center"></span>Add/update Employement Status</a></li>
+                                    <li><a href="pages-timeline-simple.html"><span class="fa fa-align-justify"></span> Add/update Pay Period Table</a></li>
+                                </ul>
+                            </li>
+                            <li class="xn-openable">
+                                <a href="#"><span class="fa fa-envelope"></span>Add/Update Overtime Table</a>
+                                <ul>
+                                    <li><a href="pages-mailbox-inbox.html"><span class="fa fa-inbox"></span>Add/Update Holidays</a></li>
+                                    <li><a href="pages-mailbox-message.html"><span class="fa fa-file-text"></span>Add/Update Loan Table</a></li>
+                                    <li><a href="pages-mailbox-compose.html"><span class="fa fa-pencil"></span>Add/Update Other Income Table</a></li>
+                                </ul>
+                            </li>
+                            <li><a href="pages-messages.html"><span class="fa fa-comments"></span>Add/Update Cost Center</a></li>
+                            <li><a href="pages-calendar.html"><span class="fa fa-calendar"></span>Company Preferences</a></li>
+                            <li><a href="pages-tasks.html"><span class="fa fa-edit"></span>Database Backup</a></li>
+                            <li><a href="pages-content-table.html"><span class="fa fa-columns"></span>Time Sheet Expense Approvers</a></li>
+                            <li><a href="{{url('users')}}"><span class="fa fa-question-circle"></span>User Accounts</a></li>
+                             <li><a href="{{url(' users/create')}}"><span class="fa fa-question-circle"></span>Create User</a></li>
+                        
+                            <li><a href=""><span class="fa fa-search"></span>User Access</a></li>
+                                                       
+                        </ul>
+                    </li>
+                    <li class="xn-openable">
+                        <a href="#"><span class="fa fa-file-text-o"></span> <span class="xn-text">Payroll Transactions</span></a>
+                        <ul>
+                            <li><a href="{{url('prlpayroll')}}">Create/Modify/Edit Payroll</a></li>
+                            <li><a href="layout-nav-toggled.html">Employee loan Deduction Entry</a></li>
+                            <li><a href="layout-nav-toggled-hover.html">HESLB</a></li>
+                            <li><a href="layout-nav-toggled-item-hover.html">Salary Areas/Bonus</a></li>
+                            <li><a href="layout-nav-top.html">Time Sheet Data Entry</a></li>
+                            <li><a href="layout-nav-right.html">Overtime Data Entry</a></li>
+                            <li><a href="layout-nav-top-fixed.html">Absents Data Entry</a></li>
+                            <li><a href="layout-nav-custom.html">Other Income Data Entry</a></li>
+                            <li><a href="layout-nav-top-custom.html">View Time Sheet</a></li>
+                            <li><a href="layout-frame-left.html">View Overtime</a></li>
+                            <li><a href="layout-frame-right.html">View Payroll Transaction</a></li>
+                            <li><a href="layout-search-left.html">View payroll Loan Deduction</a></li>
+                            <li><a href="layout-page-sidebar.html">View HESLB Loan Deduction</a></li>
+                            <li><a href="layout-page-loading.html">View Other Income Data</a></li>
                           
                         </ul>
                     </li>
+                   
+                    <li class="xn-openable">
+                        <a href="#"><span class="fa fa-cogs"></span> <span class="xn-text">Invoice Transactions</span></a>                        
+                        <ul>
+                         <li> <a href="#"><span class="fa fa-cogs"></span> <span class="xn-text">Create Invoice</span></a></li>
+                            <li><a href="ui-widgets.html"><span class="fa fa-heart"></span>Create Overheads Expenses</a></li>                            
+                            <li><a href="ui-elements.html"><span class="fa fa-cogs"></span>Create Vendors Payment</a></li>
+                            <li><a href="ui-buttons.html"><span class="fa fa-square-o"></span>View Overheads Data</a></li>                            
+                            <li><a href="ui-panels.html"><span class="fa fa-pencil-square-o"></span>View Invoice</a></li>
+                            <li><a href="ui-icons.html"><span class="fa fa-magic"></span>View Vendor Payment</a></li>
+                            <li><a href="ui-icons.html"><span class="fa fa-magic"></span>Approve/Reject Timesheet</a></li>
+                            <li><a href="ui-typography.html"><span class="fa fa-pencil"></span>Approve/Reject Invoice</a></li>
+                                           
+                        </ul>
+                    </li>                    
+                    <li class="xn-openable">
+                        <a href="#"><span class="fa fa-pencil"></span> <span class="xn-text"> Inquiries and Reports
+</span></a>
+                        <ul>
+                            <li class="xn-openable">
+                                <a href="form-layouts-two-column.html"><span class="fa fa-tasks"></span>Payroll Register</a>                                
+                                <ul>
+                                    <li><a href="form-layouts-one-column.html"><span class="fa fa-align-justify"></span>Bank Transmittal</a></li>
+                                    <li><a href="form-layouts-two-column.html"><span class="fa fa-th-large"></span>Cash Payment Listing</a></li>
+                                    <li><a href="form-layouts-tabbed.html"><span class="fa fa-table"></span>Pay Slip</a></li>
+                                    <li><a href="form-layouts-separated.html"><span class="fa fa-th-list"></span>Combined Bank Deposit Payslip</a></li>
+                                </ul> 
+                            </li>
+                            <li><a href="form-elements.html"><span class="fa fa-file-text-o"></span> Pension Monthly Remittance</a><div class="informer informer-danger">New!</div></li>
+                            <li><a href="form-validation.html"><span class="fa fa-list-alt"></span>Tax Monthly Return</a></li>
+                            <li><a href="form-wizards.html"><span class="fa fa-arrow-right"></span>NHIF Monthly Remitance</a></li>
+                            <li><a href="form-editors.html"><span class="fa fa-text-width"></span>Workers Compesation Fund(WCF)</a></li>
+                            <li><a href="form-file-handling.html"><span class="fa fa-floppy-o"></span> Skills Development Levy(SDL)</a></li>
+                             <li><a href="form-file-handling.html"><span class="fa fa-floppy-o"></span> Other Refundables</a></li>
 
-                    
+                             <li><a href="form-file-handling.html"><span class="fa fa-floppy-o"></span>Year To Date(YTD) Payroll Register</a></li>
+                             <li><a href="form-file-handling.html"><span class="fa fa-floppy-o"></span> YTD tax</a></li>
+                        </ul>
+                    </li>
+                    <li class="xn-openable">
+                        <a href="tables.html"><span class="fa fa-table"></span> <span class="xn-text">Invoice Reports</span></a>
+                        <ul>                            
+                            <li><a href="table-basic.html"><span class="fa fa-align-justify"></span> Basic</a></li>
+                            <li><a href="table-datatables.html"><span class="fa fa-sort-alpha-desc"></span>Actual Cost Report</a></li>
+                            <li><a href="table-export.html"><span class="fa fa-download"></span> Invoice to Donor</a></li>   
+                             <li><a href="table-export.html"><span class="fa fa-download"></span>Labour & Clin Details</a></li>
+
+                              <li><a href="table-export.html"><span class="fa fa-download"></span>Daily Timesheet</a></li>  
+                               <li><a href="table-export.html"><span class="fa fa-download"></span>Employee Invoice</a></li>  
+                            
+                               </ul>
+                                    </li>
                                 </ul>
                             </li>     
                                 </ul>

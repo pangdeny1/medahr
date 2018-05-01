@@ -140,6 +140,7 @@ Route::group(['middleware'=> ['auth', 'activated', 'role:admin']], function () {
     Route::post('employeeupdate/{id}','employee\employeemaster@update');
     Route::get('employeedelete/{id}','employee\employeemaster@destroy');
     Route::get('prlpayroll','employee\employeemaster@prlpayroll');
+
     Route::get('jobs','job\JobsController@index');
     Route::get('addjob','job\JobsController@create');
     Route::post('new_job','job\JobsController@store');
@@ -148,11 +149,29 @@ Route::group(['middleware'=> ['auth', 'activated', 'role:admin']], function () {
     Route::post('update_job/{id}','job\JobsController@update');
     Route::get('deletejob/{id}','job\JobsController@destroy');
 
+    Route::get('viewjobgroups','job\jobgroupsController@index');
+    Route::get('createjobgroup','job\jobgroupsController@create');
+    Route::post('addjobgroup','job\jobgroupsController@store');
+    Route::get('showjobgroup/{id}','job\jobgroupsController@show');
+    Route::get('editjobgroup/{id}','job\jobgroupsController@edit');
+    Route::post('updatejobgroup/{id}','job\jobgroupsController@update');
+    Route::get('deletejobgroup/{id}','job\jobgroupsController@destroy');
+
     Route::post('addbranch','branch\branchcontroller@store');
     Route::get('createbranch','branch\branchcontroller@create');
+    Route::get('viewbranches','branch\branchcontroller@index');
+    Route::get('editbranch/{id}','branch\branchcontroller@edit');
+    Route::post('updatebranch/{id}','branch\branchcontroller@update');
+    Route::get('deletebranch/{id}','branch\branchcontroller@destroy');
+    Route::get('showbranch/{id}','branch\branchcontroller@show');
 
     Route::post('adddepartment','department\DepartmentsController@store');
     Route::get('createdepartment','department\DepartmentsController@create');
+    Route::get('viewdepartments','department\DepartmentsController@index');
+    Route::get('editdepartment/{id}','department\DepartmentsController@edit');
+    Route::post('updatedepartment/{id}','department\DepartmentsController@update');
+    Route::get('deletedepartment/{id}','department\DepartmentsController@destroy');
+    Route::get('showdepartment/{id}','department\DepartmentsController@show');
 
     Route::post('addcompany','company\companiesController@store');
     Route::get('createcompany','company\companiesController@create');

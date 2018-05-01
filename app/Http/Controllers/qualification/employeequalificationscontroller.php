@@ -4,26 +4,34 @@ namespace App\Http\Controllers\qualification;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Http\Requests;
+use App\Models\employeequalification;
+use App\Models\Employee;
+use App\Models\qualification;
+use App\Models\institute;
+use App\Models\qualificationlevel;
+use App\Mailers\AppMailer;
+use App\Http\Controllers\job\JobgroupsController;
 
 class employeequalificationscontroller extends Controller
 {
 	public function index()
 	{
-         $payrolls=Payroll::All();
-         $pagetitle="Payrolls ";
-        return view('payrolls.index',compact('payrolls','pagetitle'));
+         $employeequalifications=employeequalification::All();
+         $pagetitle="employeequalifications ";
+        return view('employeequalifications.index',compact('employeequalifications','pagetitle'));
 
 	}
  public function create()
     {
-        
-        $pagetitle="Add New Payroll Period";
-        $yesornos =YesOrNo::All();
         $employees=Employee::All();
-        $years=Year::All();
-        $months=Month::All();
+        $qualifications=qualification::All();
+        $institutions=institute::All();
+        $levels=qualificationlevel::All();
+        $pagetitle="Add New employeequalification Period";
+        
 
-        return view('payrolls.create', compact('pagetitle','employees','years','yesornos','months'));
+        return view('employeequalifications.create', compact('pagetitle','employees','levels','institutions','qualifications'));
     }
 
     public function store(Request $request, AppMailer $mailer)
@@ -31,8 +39,8 @@ class employeequalificationscontroller extends Controller
         //store addes files
         
         $this->validate($request, [
-            'PayrollID'     => 'required|unique:prlpayrollperiod',
-            'PayrollDesc'     => 'required',
+            'employeequalificationID'     => 'required|unique:prlemployeequalificationperiod',
+            'employeequalificationDesc'     => 'required',
             'StartDate'     => 'required',
             'EndDate'     => 'required',
             'FSMonth'     => 'required',
@@ -42,9 +50,9 @@ class employeequalificationscontroller extends Controller
             'DeductHealth'     => 'required'
         ]);
 
-        $payroll= new Payroll([
-            'payrollid'     => $request->input('PayrollID'),
-            'payrolldesc'     => $request->input('PayrollDesc'),
+        $employeequalification= new employeequalification([
+            'employeequalificationid'     => $request->input('employeequalificationID'),
+            'employeequalificationdesc'     => $request->input('employeequalificationDesc'),
             'startdate'     => $request->input('StartDate'),
             'enddate'     => $request->input('EndDate'),
             'fsmonth'     => $request->input('FSMonth'),
@@ -55,32 +63,32 @@ class employeequalificationscontroller extends Controller
             'payperiodid'     => 22
         ]);
 
-        $payroll->save();
+        $employeequalification->save();
 
        // $mailer->sendTicketInformation(Auth::user(), $ticket);
 
-        return redirect()->back()->with("status", $request->input('PayrollDesc')." Payroll  Added Successfully.");
+        return redirect()->back()->with("status", $request->input('employeequalificationDesc')." employeequalification  Added Successfully.");
     }
 
 
-     public function show($payroll_id)
+     public function show($employeequalification_id)
     {   
-    	$pagetitle="payroll View";
-        $payroll= payroll::where('id', $payroll_id)->firstOrFail();
+    	$pagetitle="employeequalification View";
+        $employeequalification= employeequalification::where('id', $employeequalification_id)->firstOrFail();
 
         //$comments = $ticket->comments;
 
         //$category = $ticket->category;
 
-        return view('payrolls.show', compact('payroll','pagetitle'));
+        return view('employeequalifications.show', compact('employeequalification','pagetitle'));
     }
 
 
 
-     public function edit($payroll_id)
+     public function edit($employeequalification_id)
     {   
-    	$pagetitle="payroll Edit";
-        $payroll= payroll::where('id', $payroll_id)->firstOrFail();
+    	$pagetitle="employeequalification Edit";
+        $employeequalification= employeequalification::where('id', $employeequalification_id)->firstOrFail();
         $yesornos =YesOrNo::All();
         $employees=Employee::All();
         $years=Year::All();
@@ -92,16 +100,16 @@ class employeequalificationscontroller extends Controller
 
         //$category = $ticket->category;
 
-        return view('payrolls.edit', compact('payroll','pagetitle','years','employees','yesornos','months'));
+        return view('employeequalifications.edit', compact('employeequalification','pagetitle','years','employees','yesornos','months'));
     }
 
 
 
-       public function update(Request $request, AppMailer $mailer,$payroll_id)
+       public function update(Request $request, AppMailer $mailer,$employeequalification_id)
     {
         $this->validate($request, [
-            'PayrollID'     => 'required',
-            'PayrollDesc'     => 'required',
+            'employeequalificationID'     => 'required',
+            'employeequalificationDesc'     => 'required',
             'StartDate'     => 'required',
             'EndDate'     => 'required',
             'FSMonth'     => 'required',
@@ -112,34 +120,34 @@ class employeequalificationscontroller extends Controller
         ]);
        
 
-            $payroll = payroll::where('id', $payroll_id)->firstOrFail();
+            $employeequalification = employeequalification::where('id', $employeequalification_id)->firstOrFail();
 
-             $payroll->payrollid     =$request->input('PayrollID');
-             $payroll->payrolldesc    =$request->input('PayrollDesc');
-             $payroll->startdate    = $request->input('StartDate');
-             $payroll->enddate   =$request->input('EndDate');
-             $payroll->fsmonth    = $request->input('FSMonth');
-             $payroll->fsyear   = $request->input('FSYear');
-             $payroll->deductsss    = $request->input('DeductSSS');
-             $payroll->deducthdmf    = $request->input('DeductHdmf');
-             $payroll->deductphilhealth     = $request->input('DeductHealth');
-             $payroll->payperiodid    =22;
+             $employeequalification->employeequalificationid     =$request->input('employeequalificationID');
+             $employeequalification->employeequalificationdesc    =$request->input('employeequalificationDesc');
+             $employeequalification->startdate    = $request->input('StartDate');
+             $employeequalification->enddate   =$request->input('EndDate');
+             $employeequalification->fsmonth    = $request->input('FSMonth');
+             $employeequalification->fsyear   = $request->input('FSYear');
+             $employeequalification->deductsss    = $request->input('DeductSSS');
+             $employeequalification->deducthdmf    = $request->input('DeductHdmf');
+             $employeequalification->deductphilhealth     = $request->input('DeductHealth');
+             $employeequalification->payperiodid    =22;
 
-         $payroll->save();
+         $employeequalification->save();
 
        // $mailer->sendTicketInformation(Auth::user(), $ticket);
 
-        return redirect()->back()->with("status", "A payroll Title has been Updated.");
+        return redirect()->back()->with("status", "A employeequalification Title has been Updated.");
     }
 
 
-     public function destroy($payroll_id)
+     public function destroy($employeequalification_id)
         {
-    $payrolls = payroll::findOrFail($payroll_id);
+    $employeequalifications = employeequalification::findOrFail($employeequalification_id);
 
-    $payrolls->delete();
+    $employeequalifications->delete();
 
       // return redirect()->route('tasks.index');
-     return redirect()->back()->with("status", "payroll successfully deleted!");
+     return redirect()->back()->with("status", "employeequalification successfully deleted!");
            }
 }

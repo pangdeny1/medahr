@@ -16,14 +16,14 @@
                 <div class="panel-body">
                     @include('includes.flash');
 
-                    <form class="form-horizontal" role="form" method="POST" action="{{ url('/addbranch') }}">
+                    <form class="form-horizontal" role="form" method="POST" action="{{ url('/updatebranch/'.$branch->id) }}">
                         {!! csrf_field() !!}
 
                         <div class="form-group{{ $errors->has('branchname') ? ' has-error' : '' }}">
                             <label for="title" class="col-md-4 control-label">Branch</label>
 
                             <div class="col-md-6">
-                                <input id="title" type="text" class="form-control" name="branchname" value="{{ old('branchname') }}">
+                                <input id="title" type="text" class="form-control" name="branchname" value="{{ $branch->branchname }}">
 
                                 @if ($errors->has('branchname'))
                                     <span class="help-block">
@@ -33,11 +33,12 @@
                             </div>
                         </div>
 
+
                         <div class="form-group{{ $errors->has('branclocation') ? ' has-error' : '' }}">
                             <label for="title" class="col-md-4 control-label">Branch Location</label>
 
                             <div class="col-md-6">
-                                <input id="title" type="text" class="form-control" name="branclocation" value="{{ old('branclocation')}}">
+                                <input id="title" type="text" class="form-control" name="branclocation" value="{{ $branch->branclocation}}">
 
                                 @if ($errors->has('branclocation'))
                                     <span class="help-block">

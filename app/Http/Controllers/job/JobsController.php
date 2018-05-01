@@ -29,6 +29,7 @@ class JobsController extends Controller
         $pagetitle="Add Job";
 
         return view('job.create', compact('pagetitle','jobgroups'));
+
     }
 
     public function store(Request $request, AppMailer $mailer)
@@ -50,8 +51,13 @@ class JobsController extends Controller
         $job->save();
 
        // $mailer->sendTicketInformation(Auth::user(), $ticket);
+        $pagetitle="Jobs";
+         $jobs = job::paginate(10);
+        $jobgroups = Jobgroup::all();;
 
-        return redirect()->back()->with("status", "A Job with Title has been created.");
+        return view('job.index', compact('jobs', 'pagetitle','jobgroups'))->with("status", "A Job Title has been Updated.");
+
+        //return redirect()->back()->with("status", "A Job with Title has been created.");
     }
 
          
@@ -102,8 +108,13 @@ class JobsController extends Controller
          $job->save();
 
        // $mailer->sendTicketInformation(Auth::user(), $ticket);
+          $pagetitle="Jobs";
+           $jobs = job::paginate(10);
+        $jobgroups = Jobgroup::all();;
 
-        return redirect()->back()->with("status", "A Job Title has been Updated.");
+        return view('job.index', compact('jobs', 'pagetitle','jobgroups'))->with("status", "A Job Title has been Updated.");
+
+       // return redirect()->back()->with("status", "A Job Title has been Updated.");
     }
 
 
@@ -116,5 +127,7 @@ class JobsController extends Controller
       // return redirect()->route('tasks.index');
      return redirect()->back()->with("status", "Job successfully deleted!");
            }
+
+           
 
 }

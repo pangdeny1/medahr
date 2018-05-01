@@ -13,7 +13,8 @@ class Jobgroup extends Model
     protected $fillable = [
           
            'jobgroupname',
-           'jobgroupdesc'
+           'jobgroupdesc',
+           'level'
            ];
 
 

@@ -7,6 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 class Branch extends Model
 {
     protected $table = 'branches';
-    protected $fillable = ['branchname'];
+    protected $fillable = ['branchname','branclocation'];
       protected $primaryKey='id';
 }
