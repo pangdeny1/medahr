@@ -23,10 +23,12 @@
                         <table class="table">
                             <thead>
                                 <tr>
-                                    <th>employeequalification Group</th>
-                                    <th>employeequalification Name</th>
-                                    <th>Status</th>
-                                    <th>Last Updated</th>
+                                    <th>Employee</th>
+                                    <th>Qualification</th>
+                                    <th>Level</th>
+                                    <th>Institute</th>
+                                    <th>Start Date</th>
+                                    <th>End Date</th>
                                     <th style="text-align:center" colspan="2">Actions</th>
                                 </tr>
                             </thead>
@@ -35,15 +37,34 @@
                                 <tr>
                                    
                                     <td>
-                                        <a href="{{ url('employeequalification/'. $employeequalification->id) }}">
-                                            {{ $employeequalification->id }} - {{ $employeequalification->employeequalificationid }}
-                                        </a>
+                                      @foreach ($employees as $employee)
+                                        @if ($employee->employeeid == $employeequalification->employeeid)
+                                            {{ $employee->firstname }} {{$employee->lastname}}
+                                        @endif
+                                    @endforeach
                                     </td>
                                     <td>
-                                 {{ $employeequalification->employeequalificationdesc }}
+                                       @foreach ($qualifications as $qualification)
+                                        @if ($qualification->id == $employeequalification->qualificationid)
+                                            {{ $qualification->qualificationname }}
+                                        @endif
+                                    @endforeach
+                                    </td>
+                                    <td>
+                                  @foreach ($levels as $level)
+                                        @if ($level->id == $employeequalification->levelid)
+                                            {{ $level->qlevelname }}
+                                        @endif
+                                    @endforeach
                                   
                                     </td>
-                                    <td>{{ $employeequalification->updated_at }}</td>
+                                    <td>@foreach ($institutions as $institution)
+                                        @if ($institution->id == $employeequalification->institutionid)
+                                            {{ $institution->institutename }}
+                                        @endif
+                                    @endforeach</td>
+                                    <td>{{ $employeequalification->datefrom }}</td>
+                                    <td>{{ $employeequalification->dateto }}</td>
                                      <td>
                                         <a href="{{ url('showemployeequalification/'.$employeequalification->id) }}" class="btn btn-primary">View</a>
                                     </td>

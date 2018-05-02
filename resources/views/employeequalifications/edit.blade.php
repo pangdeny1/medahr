@@ -16,174 +16,133 @@
                 <div class="panel-body">
                     @include('includes.flash');
 
-                    <form class="form-horizontal" role="form" method="POST" action="{{ url('/updatepayroll/'.$payroll->id) }}">
+                    <form class="form-horizontal" role="form" method="POST" action="{{ url('/updateemployeequalification/'.$employeequalification->id) }}">
                         {!! csrf_field() !!}
 
-                        
-                        <div class="form-group{{ $errors->has('PayrollID') ? ' has-error' : '' }}">
-                            <label for="title" class="col-md-4 control-label">Payroll id</label>
 
-                            <div class="col-md-6">
-                                <input id="title" type="text" class="form-control" name="PayrollID" value="{{ $payroll->payrollid }}">
+                        <div class="form-group{{ $errors->has('employee') ? ' has-error' : '' }}">                                      
+                                                <label for="title" class="col-md-4 control-label">employees</label>
+                                                <div class="col-md-6">
+                                                    <select class="form-control select" name="employee">
 
-                                @if ($errors->has('PayrollID'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('PayrollID') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
+                                                       <option value=""> Select employee </option>
+                                                          @foreach($employees as $employee)
 
-                         <div class="form-group{{ $errors->has('PayrollDesc') ? ' has-error' : '' }}">
-                            <label for="title" class="col-md-4 control-label">Payroll Desc</label>
-
-                            <div class="col-md-6">
-                                <input id="title" type="text" class="form-control" name="PayrollDesc" value="{{ $payroll->payrolldesc }}">
-
-                                @if ($errors->has('PayrollDesc'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('PayrollDesc') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
-
-                        <div class="form-group{{ $errors->has('StartDate') ? ' has-error' : '' }}">
-                            <label for="title" class="col-md-4 control-label">Start Date </label>
-
-                            <div class="col-md-6">
-                                <input type="text" name="StartDate" class="form-control datepicker" value="{{$payroll->startdate}}">
-
-                                @if ($errors->has('StartDate'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('StartDate') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
-
-                        <div class="form-group{{ $errors->has('EndDate') ? ' has-error' : '' }}">
-                            <label for="title" class="col-md-4 control-label">End Date </label>
-
-                            <div class="col-md-6">
-                                <input type="text" name="EndDate" class="form-control datepicker" value="{{$payroll->enddate}}">
-
-                                @if ($errors->has('EndDate'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('EndDate') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
-                         
-                           <div class="form-group{{ $errors->has('FSMonth') ? ' has-error' : '' }}">
-                            <label for="title" class="col-md-4 control-label">Month</label>
-
-                            <div class="col-md-6">
-                                                    <select class="form-control select" name="FSMonth">
-
-                                                        @foreach($months as $month)
-                                                        @if($month->id==$payroll->fsmonth)
-                                                        <option  value="{{$payroll->fsmonth}}" selected="selected">{{$month->month}}</option>
-                                                        @else
-                                                        <option value="{{$month->id}}">{{$month->month}}</option>
-                                                          @endif  
-                                                        @endforeach                                                                                                               
-                                                    </select>
-                                             @if ($errors->has('FSMonth'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('FSMonth') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
-  <div class="form-group{{ $errors->has('FSYear') ? ' has-error' : '' }}">
-                            <label for="title" class="col-md-4 control-label">FSYear</label>
-
-                            <div class="col-md-6">
-                                                    <select class="form-control select" name="FSYear">
-                                                        @foreach($years  as $FSYear)
-                                                       
-                                                        @if($FSYear->id==$payroll->fsyear)
-                                                        <option  value="{{$payroll->fsyear}}" selected="selected">{{$FSYear->year}}</option>
-                                                        @else
-                                                        <option value="{{$FSYear->id}}">{{$FSYear->year}}</option>
-                                                          @endif  
+                                                           @if($employee->employeeid==$employeequalification->employeeid)
                                                         
-                                                        @endforeach
-                                                                                                                                                                   
+                                                         <option selected value="{{ $employeequalification->employeeid }}">{{ $employee->firstname }} {{ $employee->lastname }}</option>
+                                                        @else
+                                                         <option value="{{ $employee->employeeid }}">{{ $employee->firstname }} {{ $employee->lastname }}</option>
+                                                          @endif  
+                                                       
+                                                          @endforeach
+                                                                                                             
                                                     </select>
-                                             @if ($errors->has('FSYear'))
+                                                </div> 
+                                                @if ($errors->has('employee'))
                                     <span class="help-block">
-                                        <strong>{{ $errors->first('FSYear') }}</strong>
+                                        <strong>{{ $errors->first('employee') }}</strong>
+                                    </span>
+                                @endif
+                            </div>  
+
+                            <div class="form-group{{ $errors->has('qualification') ? ' has-error' : '' }}">                                      
+                                                <label for="title" class="col-md-4 control-label">Qualification</label>
+                                                <div class="col-md-6">
+                                                    <select class="form-control select" name="qualification">
+
+                                                       <option value=""> Select qualification </option>
+                                                          @foreach($qualifications as $qualification)
+                                                          @if($qualification->id==$employeequalification->qualificationid)
+                                                        
+                                                         <option selected value="{{ $employeequalification->qualificationid }}">{{ $qualification->qualificationname}}</option>
+                                                           @else
+                                                         <option value="{{ $qualification->id }}">{{ $qualification->qualificationname }}</option>
+                                                          @endif  
+                                                          @endforeach                                      
+                                                    </select>
+                                                </div> 
+                                                @if ($errors->has('qualification'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('qualification') }}</strong>
+                                    </span>
+                                @endif
+                            </div> 
+                             
+                             <div class="form-group{{ $errors->has('institution') ? ' has-error' : '' }}">                                      
+                                                <label for="title" class="col-md-4 control-label">Institution </label>
+                                                <div class="col-md-6">
+                                                    <select class="form-control select" name="institution">
+
+                                                       <option value=""> Select institution </option>
+                                                          @foreach($institutions as $institution)
+                                                         @if($institution->id==$employeequalification->institutionid)
+                                                        
+                                                         <option selected value="{{ $employeequalification->institutionid}}">{{ $institution->institutename}}</option>
+                                                           @else
+                                                         <option value="{{ $institution->id }}">{{ $institution->institutename}}</option>
+                                                          @endif 
+                                                         
+                                                         
+                                                          @endforeach
+                                                                                                             
+                                                    </select>
+                                                </div> 
+                                                @if ($errors->has('institution'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('institution') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                             
+                             <div class="form-group{{ $errors->has('level') ? ' has-error' : '' }}">                                      
+                                                <label for="title" class="col-md-4 control-label">Level  </label>
+                                                <div class="col-md-6">
+                                                    <select class="form-control select" name="level">
+
+                                                       <option value=""> Select level </option>
+                                                          @foreach($levels as $level)
+
+                                                          @if($level->id==$employeequalification->levelid)
+                                                        
+                                                         <option selected value="{{ $employeequalification->levelid}}">{{ $level->qlevelname }}</option>
+                                                           @else
+                                                         <option value="{{ $level->id }}">{{ $level->qlevelname }}</option>
+                                                          @endif 
+                                                         
+                                                          @endforeach
+                                                                                                             
+                                                    </select>
+                                                </div> 
+                                                @if ($errors->has('level'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('level') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                            <div class="form-group{{ $errors->has('DateFrom') ? ' has-error' : '' }}">
+                            <label for="title" class="col-md-4 control-label">From Date</label>
+
+                            <div class="col-md-6">
+                                <input type="text" name="DateFrom" class="form-control datepicker" value="{{ $employeequalification->datefrom }}">
+
+                                @if ($errors->has('DateFrom'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('DateFrom') }}</strong>
                                     </span>
                                 @endif
                             </div>
                         </div>
-                        
-                        
-                       
-                        <div class="form-group{{ $errors->has('DeductSSS') ? ' has-error' : '' }}">
-                            <label for="title" class="col-md-4 control-label">Deduct Pension</label>
+ 
+                            <div class="form-group{{ $errors->has('DateTo') ? ' has-error' : '' }}">
+                            <label for="title" class="col-md-4 control-label">To Date</label>
 
                             <div class="col-md-6">
-                                                    <select class="form-control select" name="DeductSSS">
-                                                       @foreach($yesornos as $ss)
-                                                        @if($ss->id==$payroll->deductsss)
-                                                        <option  value="{{$payroll->deductsss}}" selected="selected">{{$ss->name}}</option>
-                                                        @else
-                                                        <option value="{{$ss->id}}">{{$ss->name}}</option>
-                                                          @endif  
-                                                        @endforeach                                                                                               
-                                                    </select>
-                                             @if ($errors->has('DeductSSS'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('DeductSSS') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
-                        
+                                <input type="text" name="DateTo" class="form-control datepicker" value="{{ $employeequalification->dateto }}">
 
-                        
-                        <div class="form-group{{ $errors->has('DeductHealth') ? ' has-error' : '' }}">
-                            <label for="title" class="col-md-4 control-label">Deduct Health</label>
-
-                            <div class="col-md-6">
-                                                    <select class="form-control select" name="DeductHealth">
-                                                       @foreach($yesornos as $ss)
-                                                        @if($ss->id==$payroll->deductphilhealth)
-                                                        <option  value="{{$payroll->deductphilhealth}}" selected="selected">{{$ss->name}}</option>
-                                                        @else
-                                                        <option value="{{$ss->id}}">{{$ss->name}}</option>
-                                                          @endif  
-                                                        @endforeach
-                                                                                                                                                                   
-                                                    </select>
-                                             @if ($errors->has('DeductHealth'))
+                                @if ($errors->has('DateTo'))
                                     <span class="help-block">
-                                        <strong>{{ $errors->first('DeductHealth') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
-      
-                        <div class="form-group{{ $errors->has('DeductHdmf') ? ' has-error' : '' }}">
-                            <label for="title" class="col-md-4 control-label">Deduct HDMF</label>
-
-                            <div class="col-md-6">
-                                                    <select class="form-control select" name="DeductHdmf">
-                                                        @foreach($yesornos as $ss)
-                                                        @if($ss->id==$payroll->deducthdmf)
-                                                        <option  value="{{$payroll->deducthdmf}}" selected="selected">{{$ss->name}}</option>
-                                                        @else
-                                                        <option value="{{$ss->id}}">{{$ss->name}}</option>
-                                                          @endif  
-                                                        @endforeach                                                                                              
-                                                    </select>
-                                             @if ($errors->has('DeductHdmf'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('DeductHdmf') }}</strong>
+                                        <strong>{{ $errors->first('DateTo') }}</strong>
                                     </span>
                                 @endif
                             </div>

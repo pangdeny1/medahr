@@ -203,10 +203,10 @@ Route::group(['middleware'=> ['auth', 'activated', 'role:admin']], function () {
     //employee qualifications
 
     Route::post('addemployeequalification','qualification\employeequalificationscontroller@store');
-    Route::get('showemployeequalification{id}','qualification\employeequalificationscontroller@show');
-    Route::get('editemployeequalification{id}','qualification\employeequalificationscontroller@edit');
-    Route::post('updateemployeequalification{id}','qualification\employeequalificationscontroller@update');
-    Route::get('deleteemployeequalification{id}','qualification\employeequalificationscontroller@destroy');
+    Route::get('showemployeequalification/{id}','qualification\employeequalificationscontroller@show');
+    Route::get('editemployeequalification/{id}','qualification\employeequalificationscontroller@edit');
+    Route::post('updateemployeequalification/{id}','qualification\employeequalificationscontroller@update');
+    Route::get('deleteemployeequalification/{id}','qualification\employeequalificationscontroller@destroy');
     Route::get('createemployeequalification','qualification\employeequalificationscontroller@create');
     Route::get('viewemployeequalifications','qualification\employeequalificationscontroller@index');
 

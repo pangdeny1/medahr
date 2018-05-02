@@ -16,7 +16,7 @@
                 <div class="panel-body">
                     @include('includes.flash');
 
-                    <form class="form-horizontal" role="form" method="POST" action="{{ url('/addsalary') }}">
+                    <form class="form-horizontal" role="form" method="POST" action="{{ url('/addemployeequalification') }}">
                         {!! csrf_field() !!}
 
 
@@ -50,7 +50,7 @@
                                                           @foreach($qualifications as $qualification)
 
                                                          
-                                                         <option value="{{ $qualification->qualificationid }}">{{ $qualification->firstname }} {{ $qualification->lastname }}</option>
+                                                         <option value="{{ $qualification->id }}">{{ $qualification->qualificationname }}</option>
                                                           @endforeach
                                                                                                              
                                                     </select>
@@ -71,7 +71,7 @@
                                                           @foreach($institutions as $institution)
 
                                                          
-                                                         <option value="{{ $institution->institutionid }}">{{ $institution->firstname }} {{ $institution->lastname }}</option>
+                                                         <option value="{{ $institution->id }}">{{ $institution->institutename}}</option>
                                                           @endforeach
                                                                                                              
                                                     </select>
@@ -92,7 +92,7 @@
                                                           @foreach($levels as $level)
 
                                                          
-                                                         <option value="{{ $level->levelid }}">{{ $level->firstname }} {{ $level->lastname }}</option>
+                                                         <option value="{{ $level->id }}">{{ $level->qlevelname }}</option>
                                                           @endforeach
                                                                                                              
                                                     </select>
@@ -103,15 +103,15 @@
                                     </span>
                                 @endif
                             </div>
-                            <div class="form-group{{ $errors->has('Datefrom') ? ' has-error' : '' }}">
+                            <div class="form-group{{ $errors->has('DateFrom') ? ' has-error' : '' }}">
                             <label for="title" class="col-md-4 control-label">From Date</label>
 
                             <div class="col-md-6">
-                                <input type="text" name="Datefrom" class="form-control datepicker" value="{{old('Datefrom')}}">
+                                <input type="text" name="DateFrom" class="form-control datepicker" value="{{old('DateFrom')}}">
 
-                                @if ($errors->has('Datefrom'))
+                                @if ($errors->has('DateFrom'))
                                     <span class="help-block">
-                                        <strong>{{ $errors->first('Datefrom') }}</strong>
+                                        <strong>{{ $errors->first('DateFrom') }}</strong>
                                     </span>
                                 @endif
                             </div>
