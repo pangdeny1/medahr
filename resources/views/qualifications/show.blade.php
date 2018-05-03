@@ -12,23 +12,23 @@
         <div class="col-md-10 col-md-offset-1">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    #{{ $institute->id }} - {{ $institute->institutename }}
+                    #{{ $qualification->id }} - {{ $qualification->qualificationname }}
                 </div>
 
                 <div class="panel-body">
                     @include('includes.flash')
 
-                    <div class="institute-info">
-                        <p><b>institute Description :: </b>{{ $institute->institutedesc }}</p>
+                    <div class="qualification-info">
+                        <p><b>qualification Description :: </b>{{ $qualification->qualificationdesc }}</p>
                       
                         <p>
-                        @if ($institute->status === 'Open')
-                            Status: <span class="label label-success">{{ $institute->status }}</span>
+                        @if ($qualification->status === 'Open')
+                            Status: <span class="label label-success">{{ $qualification->status }}</span>
                         @else
-                            Status: <span class="label label-danger">{{ $institute->status }}</span>
+                            Status: <span class="label label-danger">{{ $qualification->status }}</span>
                         @endif
                         </p>
-                        <p>Created on: {{ $institute->created_at->diffForHumans() }}</p>
+                        <p>Created on: {{ $qualification->created_at->diffForHumans() }}</p>
                     </div>
 
                     <hr>

@@ -16,174 +16,49 @@
                 <div class="panel-body">
                     @include('includes.flash');
 
-                    <form class="form-horizontal" role="form" method="POST" action="{{ url('/addpayrollperiod') }}">
+                    <form class="form-horizontal" role="form" method="POST" action="{{ url('/addinstitution') }}">
                         {!! csrf_field() !!}
 
 
                                  
 
-                        <div class="form-group{{ $errors->has('PayrollID') ? ' has-error' : '' }}">
-                            <label for="title" class="col-md-4 control-label">Payroll id</label>
+                        <div class="form-group{{ $errors->has('InstituteName') ? ' has-error' : '' }}">
+                            <label for="title" class="col-md-4 control-label">Institute Name</label>
 
                             <div class="col-md-6">
-                                <input id="title" type="text" class="form-control" name="PayrollID" value="{{ old('PayrollID') }}">
+                                <input id="title" type="text" class="form-control" name="InstituteName" value="{{ old('InstituteName') }}">
 
-                                @if ($errors->has('PayrollID'))
+                                @if ($errors->has('InstituteName'))
                                     <span class="help-block">
-                                        <strong>{{ $errors->first('PayrollID') }}</strong>
+                                        <strong>{{ $errors->first('InstituteName') }}</strong>
                                     </span>
                                 @endif
                             </div>
                         </div>
 
-                         <div class="form-group{{ $errors->has('PayrollDesc') ? ' has-error' : '' }}">
-                            <label for="title" class="col-md-4 control-label">Payroll Desc</label>
+                         <div class="form-group{{ $errors->has('country') ? ' has-error' : '' }}">
+                            <label for="title" class="col-md-4 control-label">Country</label>
 
                             <div class="col-md-6">
-                                <input id="title" type="text" class="form-control" name="PayrollDesc" value="{{ old('PayrollDesc') }}">
+                               <select class="form-control select" name="country">
 
-                                @if ($errors->has('PayrollDesc'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('PayrollDesc') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
-
-                        <div class="form-group{{ $errors->has('StartDate') ? ' has-error' : '' }}">
-                            <label for="title" class="col-md-4 control-label">Start Date </label>
-
-                            <div class="col-md-6">
-                                <input type="text" name="StartDate" class="form-control datepicker" value="{{old('StartDate')}}">
-
-                                @if ($errors->has('StartDate'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('StartDate') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
-
-                        <div class="form-group{{ $errors->has('EndDate') ? ' has-error' : '' }}">
-                            <label for="title" class="col-md-4 control-label">End Date </label>
-
-                            <div class="col-md-6">
-                                <input type="text" name="EndDate" class="form-control datepicker" value="{{old('EndDate')}}">
-
-                                @if ($errors->has('EndDate'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('EndDate') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
-                         
-                           <div class="form-group{{ $errors->has('FSMonth') ? ' has-error' : '' }}">
-                            <label for="title" class="col-md-4 control-label">Month</label>
-
-                            <div class="col-md-6">
-                                                    <select class="form-control select" name="FSMonth">
-                                                        <option value="">Select </option>
-                                                        @foreach($months  as $month)
-                                                        <option value="{{$month->id}}">{{$month->month}}</option> 
-                                                        @endforeach                                                                                                             
-                                                    </select>
-                                             @if ($errors->has('FSMonth'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('FSMonth') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
-  <div class="form-group{{ $errors->has('FSYear') ? ' has-error' : '' }}">
-                            <label for="title" class="col-md-4 control-label">FSYear</label>
-
-                            <div class="col-md-6">
-                                                    <select class="form-control select" name="FSYear">
-                                                         <option value="">Select </option>
-                                                        @foreach($years  as $FSYear)
+                                           <option value="">Select Country </option>
                                                        
-                                                        <option value="{{$FSYear->id}}">{{$FSYear->year}}</option>
+                                                         @foreach($countries as $country)
                                                         
-                                                        @endforeach
-                                                                                                                                                                   
-                                                    </select>
-                                             @if ($errors->has('FSYear'))
+                                                   <option value="{{ $country->id }}">{{ $country->countryname }}</option>
+                                                    
+                                                          @endforeach
+                                                      </select>
+                                @if ($errors->has('country'))
                                     <span class="help-block">
-                                        <strong>{{ $errors->first('FSYear') }}</strong>
+                                        <strong>{{ $errors->first('country') }}</strong>
                                     </span>
                                 @endif
                             </div>
                         </div>
-                        
-                        
+
                        
-                        <div class="form-group{{ $errors->has('DeductSSS') ? ' has-error' : '' }}">
-                            <label for="title" class="col-md-4 control-label">Deduct Pension</label>
-
-                            <div class="col-md-6">
-                                                    <select class="form-control select" name="DeductSSS">
-                                                        @foreach($yesornos  as $ss)
-                                                       
-                                                        <option value="{{$ss->id}}">{{$ss->name}}</option>
-                                                        
-                                                        @endforeach
-                                                                                                                                                                   
-                                                    </select>
-                                             @if ($errors->has('DeductSSS'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('DeductSSS') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
-                        
-
-                        
-                        <div class="form-group{{ $errors->has('DeductHealth') ? ' has-error' : '' }}">
-                            <label for="title" class="col-md-4 control-label">Deduct Health</label>
-
-                            <div class="col-md-6">
-                                                    <select class="form-control select" name="DeductHealth">
-                                                        @foreach($yesornos  as $ss)
-                                                       
-                                                        <option value="{{$ss->id}}">{{$ss->name}}</option>
-                                                        
-                                                        @endforeach
-                                                                                                                                                                   
-                                                    </select>
-                                             @if ($errors->has('DeductHealth'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('DeductHealth') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
-      
-                        <div class="form-group{{ $errors->has('DeductHdmf') ? ' has-error' : '' }}">
-                            <label for="title" class="col-md-4 control-label">Deduct HDMF</label>
-
-                            <div class="col-md-6">
-                                                    <select class="form-control select" name="DeductHdmf">
-                                                        @foreach($yesornos  as $ss)
-                                                       
-                                                        <option value="{{$ss->id}}">{{$ss->name}}</option>
-                                                        
-                                                        @endforeach
-                                                                                                                                                                   
-                                                    </select>
-                                             @if ($errors->has('DeductHdmf'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('DeductHdmf') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
-
-
-
- 
- 
 
                         <div class="form-group">
                             <div class="col-md-6 col-md-offset-4">

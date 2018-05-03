@@ -12,51 +12,44 @@
         <div class="col-md-10 col-md-offset-1">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <i class="fa fa-institution"> <a href="{{url('createinstitution')}}">Add New institution </a></i>
+                    <i class="fa fa-qualificationlevel"> <a href="{{url('createqualificationlevel')}}">Add New qualificationlevel </a></i>
                 </div>
 
                 <div class="panel-body">
                      @include('includes.flash');
-                    @if ($institutions->isEmpty())
-                        <p>There are currently no institutions.</p>
+                    @if ($qualificationlevels->isEmpty())
+                        <p>There are currently no qualificationlevels.</p>
                     @else
                         <table class="table">
                             <thead>
                                 <tr>
                                     <th>id</th>
-                                    <th>institution</th>
-                                    <th>Country </th>
+                                    <th>qualificationlevel</th>
+                                    <th>Description </th>
                                     <th style="text-align:center" colspan="2">Actions</th>
                                 </tr>
                             </thead>
                             <tbody>
-                            @foreach ($institutions as $institution)
+                            @foreach ($qualificationlevels as $qualificationlevel)
                                 <tr>
                                    
                                    
                                     <td>
-                                  {{ $institution->id}}
+                                  {{ $qualificationlevel->id}}
                                    
                                     </td>
                                    
-                                    <td>{{ $institution->institutename }}</td>
+                                    <td>{{ $qualificationlevel->qlevelname }}</td>
 
-                                    <td>
-
-                                    @foreach ($countries as $country)
-                                        @if ($country->id == $institution->country)
-                                            {{ $country->countryname }}
-                                        @endif
-                                    @endforeach
-                                </td>
+                                    <td>{{ $qualificationlevel->qleveldesc }}</td>
                                      <td>
-                                        <a href="{{ url('showinstitution/'.$institution->id) }}" class="btn btn-primary">View</a>
+                                        <a href="{{ url('showqualificationlevel/'.$qualificationlevel->id) }}" class="btn btn-primary">View</a>
                                     </td>
                                     <td>
-                                        <a href="{{ url('editinstitution/'.$institution->id) }}" class="btn btn-primary">Edit</a>
+                                        <a href="{{ url('editqualificationlevel/'.$qualificationlevel->id) }}" class="btn btn-primary">Edit</a>
                                     </td>
                                     <td>
-                                        <a href="{{ url('deleteinstitution/'.$institution->id) }}" class="btn btn-danger" onclick="return confirm('Are you sure you want to Delete this record')" >Delete</a>
+                                        <a href="{{ url('deletequalificationlevel/'.$qualificationlevel->id) }}" class="btn btn-danger" onclick="return confirm('Are you sure you want to Delete this record')" >Delete</a>
                                     </td>
                                 </tr>
                             @endforeach

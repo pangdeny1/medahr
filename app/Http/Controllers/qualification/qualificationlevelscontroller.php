@@ -4,26 +4,35 @@ namespace App\Http\Controllers\qualification;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Http\Requests;
+use App\Models\employeequalification;
+use App\Models\Employee;
+use App\Models\qualificationlevel;
+use App\Models\institute;
+use App\Mailers\AppMailer;
+use App\Http\Controllers\job\JobgroupsController;
 
 class qualificationlevelscontroller extends Controller
 {
-	public function index()
-	{
-         $payrolls=Payroll::All();
-         $pagetitle="Payrolls ";
-        return view('payrolls.index',compact('payrolls','pagetitle'));
-
-	}
- public function create()
+	 public function index()
     {
         
-        $pagetitle="Add New Payroll Period";
-        $yesornos =YesOrNo::All();
         $employees=Employee::All();
-        $years=Year::All();
-        $months=Month::All();
+        $qualificationlevels=qualificationlevel::All();
+        $institutions=institute::All();
+        $pagetitle="qualificationlevels ";
+        return view('qualificationlevels.index',compact('pagetitle','qualificationlevels','employees','levels','institutions','qualificationlevels','levels'));
 
-        return view('payrolls.create', compact('pagetitle','employees','years','yesornos','months'));
+    }
+ public function create()
+    {
+        $employees=Employee::All();
+        $qualificationlevels=qualificationlevel::All();
+        $institutions=institute::All();
+        $pagetitle="Add New qualificationlevel ";
+        
+
+        return view('qualificationlevels.create', compact('pagetitle','employees','levels','institutions','qualificationlevels','levels'));
     }
 
     public function store(Request $request, AppMailer $mailer)
@@ -31,115 +40,91 @@ class qualificationlevelscontroller extends Controller
         //store addes files
         
         $this->validate($request, [
-            'PayrollID'     => 'required|unique:prlpayrollperiod',
-            'PayrollDesc'     => 'required',
-            'StartDate'     => 'required',
-            'EndDate'     => 'required',
-            'FSMonth'     => 'required',
-            'FSYear'     => 'required',
-            'DeductSSS'     => 'required',
-            'DeductHdmf'     => 'required',
-            'DeductHealth'     => 'required'
+           
+            'QlevelName'     => 'required|unique:qualificationlevels',
+            'QlevelDesc'     => 'required'
         ]);
 
-        $payroll= new Payroll([
-            'payrollid'     => $request->input('PayrollID'),
-            'payrolldesc'     => $request->input('PayrollDesc'),
-            'startdate'     => $request->input('StartDate'),
-            'enddate'     => $request->input('EndDate'),
-            'fsmonth'     => $request->input('FSMonth'),
-            'fsyear'     => $request->input('FSYear'),
-            'deductsss'     => $request->input('DeductSSS'),
-            'deducthdmf'     => $request->input('DeductHdmf'),
-            'deductphilhealth'     => $request->input('DeductHealth'),
-            'payperiodid'     => 22
+        $qualificationlevel= new qualificationlevel([
+            'qlevelname'     => $request->input('QlevelName'),
+            'qleveldesc'     => $request->input('QlevelDesc')
+            
         ]);
 
-        $payroll->save();
+        $qualificationlevel->save();
 
        // $mailer->sendTicketInformation(Auth::user(), $ticket);
-
-        return redirect()->back()->with("status", $request->input('PayrollDesc')." Payroll  Added Successfully.");
+         $qualificationlevels=qualificationlevel::All();
+         $pagetitle="qualificationlevels ";
+         return view('qualificationlevels.index',compact('qualificationlevels','pagetitle'))->with("status", $request->input('qualificationlevelDesc')." qualificationlevel  Added Successfully.");
+        //return redirect()->back()->with("status", $request->input('qualificationlevelDesc')." qualificationlevel  Added Successfully.");
     }
 
 
-     public function show($payroll_id)
+     public function show($qualificationlevel_id)
     {   
-    	$pagetitle="payroll View";
-        $payroll= payroll::where('id', $payroll_id)->firstOrFail();
+        $pagetitle="qualificationlevel View";
+        $qualificationlevel= qualificationlevel::where('id', $qualificationlevel_id)->firstOrFail();
 
         //$comments = $ticket->comments;
 
         //$category = $ticket->category;
 
-        return view('payrolls.show', compact('payroll','pagetitle'));
+        return view('qualificationlevels.show', compact('qualificationlevel','pagetitle'));
     }
 
 
 
-     public function edit($payroll_id)
+     public function edit($qualificationlevel_id)
     {   
-    	$pagetitle="payroll Edit";
-        $payroll= payroll::where('id', $payroll_id)->firstOrFail();
-        $yesornos =YesOrNo::All();
-        $employees=Employee::All();
-        $years=Year::All();
-        $months=Month::All();
-
+        $pagetitle="qualificationlevel Edit";
+        $qualificationlevels= qualificationlevel::where('id', $qualificationlevel_id)->firstOrFail();
+        //$qualificationlevels=qualificationlevel::All();
+        $institutions=institute::All();
         
-
         //$comments = $ticket->comments;
 
         //$category = $ticket->category;
 
-        return view('payrolls.edit', compact('payroll','pagetitle','years','employees','yesornos','months'));
-    }
+        return view('qualificationlevels.edit', compact('pagetitle','employees','levels','institutions','qualificationlevels','qualificationlevel'));
+   }
 
 
 
-       public function update(Request $request, AppMailer $mailer,$payroll_id)
+       public function update(Request $request, AppMailer $mailer,$qualificationlevel_id)
     {
         $this->validate($request, [
-            'PayrollID'     => 'required',
-            'PayrollDesc'     => 'required',
-            'StartDate'     => 'required',
-            'EndDate'     => 'required',
-            'FSMonth'     => 'required',
-            'FSYear'     => 'required',
-            'DeductSSS'     => 'required',
-            'DeductHdmf'     => 'required',
-            'DeductHealth'     => 'required'
+            'QlevelName'     => 'required',
+            'QlevelDesc'     =>'required'
         ]);
        
 
-            $payroll = payroll::where('id', $payroll_id)->firstOrFail();
+            $qualificationlevel = qualificationlevel::where('id', $qualificationlevel_id)->firstOrFail();
 
-             $payroll->payrollid     =$request->input('PayrollID');
-             $payroll->payrolldesc    =$request->input('PayrollDesc');
-             $payroll->startdate    = $request->input('StartDate');
-             $payroll->enddate   =$request->input('EndDate');
-             $payroll->fsmonth    = $request->input('FSMonth');
-             $payroll->fsyear   = $request->input('FSYear');
-             $payroll->deductsss    = $request->input('DeductSSS');
-             $payroll->deducthdmf    = $request->input('DeductHdmf');
-             $payroll->deductphilhealth     = $request->input('DeductHealth');
-             $payroll->payperiodid    =22;
-
-         $payroll->save();
+             $qualificationlevel->qlevelname    = $request->input('QlevelName');
+             $qualificationlevel->qleveldesc    = $request->input('QlevelDesc');
+                     
+             $qualificationlevel->save();
 
        // $mailer->sendTicketInformation(Auth::user(), $ticket);
 
-        return redirect()->back()->with("status", "A payroll Title has been Updated.");
+         $qualificationlevels=qualificationlevel::All();
+         $pagetitle="Qualification Levels ";
+         
+          return view('qualificationlevels.index', compact('qualificationlevels','pagetitle'))->with("status", "qualificationlevel  Updated Successfully");
+
+       // return redirect()->back()->with("status", "A qualificationlevel Title has been Updated.");
     }
 
 
-     public function destroy($payroll_id)
+     public function destroy($qualificationlevel_id)
         {
-    $payrolls = payroll::findOrFail($payroll_id);
+    $qualificationlevels = qualificationlevel::findOrFail($qualificationlevel_id);
 
-    $payrolls->delete();
+    $qualificationlevels->delete();
 
       // return redirect()->route('tasks.index');
-     return redirect()->back()->with("status", "payroll successfully deleted!");
+     return redirect()->back()->with("status", "qualificationlevel successfully deleted!");
            }
 }
+

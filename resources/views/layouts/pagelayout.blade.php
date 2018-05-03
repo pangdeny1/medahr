@@ -100,6 +100,9 @@
                             <li><a href="{{url('viewdepartments')}}"><span class="fa fa-pencil-square-o"></span>Departments</a></li>
                             <li><a href="{{url('viewjobgroups')}}"><span class="fa fa-pencil-square-o"></span>Job Groups</a></li>
                             <li><a href="{{url('jobs')}}"><span class="fa fa-pencil-square-o"></span>Jobs</a></li>
+                            <li><a href="{{url('viewqualifications')}}"><span class="fa fa-pencil-square-o"></span>Qualifications</a></li>
+                            <li><a href="{{url('viewqualificationlevels')}}"><span class="fa fa-pencil-square-o"></span>Qualifications  Levels</a></li>
+                            <li><a href="{{url('viewinstitutions')}}"><span class="fa fa-pencil-square-o"></span>Institutions</a></li>
                             <li><a href="{{url('viewemployeequalifications')}}"><span class="fa fa-pencil-square-o"></span>Employee Qualifications</a></li>
                             
                           

@@ -213,19 +213,23 @@ Route::group(['middleware'=> ['auth', 'activated', 'role:admin']], function () {
     //qualification level
 
     Route::post('addqualificationlevel','qualification\qualificationlevelscontroller@store');
-    Route::get('showqualificationlevel{id}','qualification\qualificationlevelscontroller@show');
-    Route::get('editqualificationlevel{id}','qualification\qualificationlevelscontroller@edit');
-    Route::post('updatequalificationlevel{id}','qualification\qualificationlevelscontroller@update');
-    Route::get('deletequalificationlevel{id}','qualification\qualificationlevelscontroller@destroy');
+    Route::get('showqualificationlevel/{id}','qualification\qualificationlevelscontroller@show');
+    Route::get('editqualificationlevel/{id}','qualification\qualificationlevelscontroller@edit');
+    Route::post('updatequalificationlevel/{id}','qualification\qualificationlevelscontroller@update');
+    Route::get('deletequalificationlevel/{id}','qualification\qualificationlevelscontroller@destroy');
     Route::get('createqualificationlevel','qualification\qualificationlevelscontroller@create');
     Route::get('viewqualificationlevels','qualification\qualificationlevelscontroller@index');
 
     //institution
-    Route::post('addinstitution','institution\institutionscontroller@store');
-    Route::get('showinstitution/{id}','institution\institutionscontroller@show');
-    Route::get('editinstitution/{id}','institution\institutionscontroller@edit');
-    Route::post('updateinstitution/{id}','institution\institutionscontroller@update');
-    Route::get('deleteinstitution/{id}','institution\institutionscontroller@destroy');
-    Route::get('createinstitution','institution\institutionscontroller@create');
-    Route::get('viewinstitutions','institution\institutionscontroller@index');
+    Route::post('addinstitution','institution\institutescontroller@store');
+    Route::get('showinstitution/{id}','institution\institutescontroller@show');
+    Route::get('editinstitution/{id}','institution\institutescontroller@edit');
+    Route::post('updateinstitution/{id}','institution\institutescontroller@update');
+    Route::get('deleteinstitution/{id}','institution\institutescontroller@destroy');
+    Route::get('createinstitution','institution\institutescontroller@create');
+    Route::get('viewinstitutions','institution\institutescontroller@index');
+
+
+
+    Route::get('testreport','report\reportcontroller@test');
 });
