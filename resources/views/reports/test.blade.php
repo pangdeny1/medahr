@@ -334,7 +334,7 @@ ul
   v:shapes="Picture_x0020_1"><![endif]></span></p>
   </td>
   <td width=319 valign=top style='width:239.4pt;padding:0in 0in 0in 0in'>
-  <p class=CompanyName>Company Name</p>
+  <p class=CompanyName>{{$company->coyname}}</p>
   </td>
  </tr>
 </table>
@@ -427,7 +427,7 @@ ul
  <tr style='mso-yfti-irow:0;mso-yfti-firstrow:yes;height:.2in'>
   <td width=102 valign=bottom style='width:76.5pt;padding:0in 0in 0in 0in;
   height:.2in'>
-  <p class=MsoNormal><o:p>Dar</o:p></p>
+  <p class=MsoNormal><o:p>--</o:p></p>
   </td>
   <td width=344 valign=bottom style='width:258.1pt;border:none;border-bottom:
   solid windowtext 1.0pt;mso-border-bottom-alt:solid windowtext .5pt;
@@ -442,12 +442,12 @@ ul
   <td width=100 valign=bottom style='width:74.75pt;border:none;border-bottom:
   solid windowtext 1.0pt;mso-border-bottom-alt:solid windowtext .5pt;
   padding:0in 0in 0in 0in;height:.2in'>
-  <p class=FieldText><o:p>&nbsp;</o:p></p>
+  <p class=FieldText><o:p>One</o:p></p>
   </td>
  </tr>
  <tr style='mso-yfti-irow:1;mso-yfti-lastrow:yes'>
   <td width=102 valign=bottom style='width:76.5pt;padding:0in 0in 0in 0in'>
-  <p class=MsoNormal><o:p>&nbsp;</o:p></p>
+  <p class=MsoNormal><o:p>two</o:p></p>
   </td>
   <td width=344 valign=bottom style='width:258.1pt;border:none;mso-border-top-alt:
   solid windowtext .5pt;padding:0in 0in 0in 0in'>
@@ -464,7 +464,7 @@ ul
  </tr>
 </table>
 
-<p class=MsoNormal><o:p>&nbsp;</o:p></p>
+<p class=MsoNormal><o:p>space1</o:p></p>
 
 <table class=MsoNormalTable border=0 cellspacing=0 cellpadding=0 width="100%"
  style='width:100.0%;border-collapse:collapse;mso-padding-alt:0in 0in 0in 0in'>
@@ -477,7 +477,7 @@ ul
   <td width=190 valign=bottom style='width:142.35pt;border:none;border-bottom:
   solid windowtext 1.0pt;mso-border-bottom-alt:solid windowtext .5pt;
   padding:0in 0in 0in 0in;height:.2in'>
-  <p class=FieldText><o:p>&nbsp;</o:p></p>
+  <p class=FieldText><o:p>space2</o:p></p>
   </td>
   <td width=105 valign=bottom style='width:78.7pt;padding:0in 0in 0in 0in;
   height:.2in'>
@@ -486,12 +486,12 @@ ul
   <td width=227 valign=bottom style='width:170.45pt;border:none;border-bottom:
   solid windowtext 1.0pt;mso-border-bottom-alt:solid windowtext .5pt;
   padding:0in 0in 0in 0in;height:.2in'>
-  <p class=FieldText><o:p>&nbsp;</o:p></p>
+  <p class=FieldText><o:p>space3</o:p></p>
   </td>
  </tr>
 </table>
 
-<p class=MsoNormal><o:p>&nbsp;</o:p></p>
+<p class=MsoNormal><o:p>space4</o:p></p>
 
 <table class=MsoNormalTable border=0 cellspacing=0 cellpadding=0 width="100%"
  style='width:100.0%;border-collapse:collapse;mso-padding-alt:0in 0in 0in 0in'>
@@ -503,7 +503,7 @@ ul
   <td width=522 valign=bottom style='width:391.5pt;border:none;border-bottom:
   solid windowtext 1.0pt;mso-border-bottom-alt:solid windowtext .5pt;
   padding:0in 0in 0in 0in;height:.3in'>
-  <p class=FieldText><o:p>&nbsp;</o:p></p>
+  <p class=FieldText><o:p>{{$employee->email1}}</o:p></p>
   </td>
  </tr>
  <tr style='mso-yfti-irow:1;mso-yfti-lastrow:yes;height:.35in'>
@@ -514,12 +514,12 @@ ul
   <td width=522 valign=bottom style='width:391.5pt;border:none;border-bottom:
   solid windowtext 1.0pt;mso-border-bottom-alt:solid windowtext .5pt;
   padding:0in 0in 0in 0in;height:.35in'>
-  <p class=FieldText><o:p>&nbsp;</o:p></p>
+  <p class=FieldText><o:p>space6</o:p></p>
   </td>
  </tr>
 </table>
 
-<p class=MsoNormal><o:p>&nbsp;</o:p></p>
+<p class=MsoNormal><o:p>space7</o:p></p>
 
 <table class=MsoNormalTable border=0 cellspacing=0 cellpadding=0 width="100%"
  style='width:100.0%;border-collapse:collapse;mso-padding-alt:0in 0in 0in 0in'>
@@ -532,7 +532,7 @@ ul
   <td width=114 valign=bottom style='width:85.5pt;border:none;border-bottom:
   solid windowtext 1.0pt;mso-border-bottom-alt:solid windowtext .5pt;
   padding:0in 0in 0in 0in;height:.3in'>
-  <p class=FieldText><o:p>&nbsp;</o:p></p>
+  <p class=FieldText><o:p>{{$employee->birthdate}}</o:p></p>
   </td>
   <td width=96 valign=bottom style='width:1.0in;padding:0in 0in 0in 0in;
   height:.3in'>
@@ -541,12 +541,12 @@ ul
   <td width=312 valign=bottom style='width:3.25in;border:none;border-bottom:
   solid windowtext 1.0pt;mso-border-bottom-alt:solid windowtext .5pt;
   padding:0in 0in 0in 0in;height:.3in'>
-  <p class=FieldText><o:p>&nbsp;</o:p></p>
+  <p class=FieldText><o:p>{{$employee->marital}}</o:p></p>
   </td>
  </tr>
 </table>
 
-<p class=MsoNormal><o:p>&nbsp;</o:p></p>
+<p class=MsoNormal><o:p>space10</o:p></p>
 
 <table class=MsoNormalTable border=0 cellspacing=0 cellpadding=0 width="100%"
  style='width:100.0%;border-collapse:collapse;mso-padding-alt:0in 0in 0in 0in'>
@@ -559,12 +559,12 @@ ul
   <td width=522 valign=bottom style='width:391.5pt;border:none;border-bottom:
   solid windowtext 1.0pt;mso-border-bottom-alt:solid windowtext .5pt;
   padding:0in 0in 0in 0in;height:.3in'>
-  <p class=FieldText><o:p>&nbsp;</o:p></p>
+  <p class=FieldText><o:p>space10</o:p></p>
   </td>
  </tr>
 </table>
 
-<p class=MsoNormal><o:p>&nbsp;</o:p></p>
+<p class=MsoNormal><o:p>space11</o:p></p>
 
 <table class=MsoNormalTable border=0 cellspacing=0 cellpadding=0 width="100%"
  style='width:100.0%;border-collapse:collapse;mso-padding-alt:0in 0in 0in 0in'>
@@ -577,7 +577,7 @@ ul
   <td width=208 valign=bottom style='width:155.65pt;border:none;border-bottom:
   solid windowtext 1.0pt;mso-border-bottom-alt:solid windowtext .5pt;
   padding:0in 0in 0in 0in;height:.3in'>
-  <p class=FieldText><o:p>&nbsp;</o:p></p>
+  <p class=FieldText><o:p>space12</o:p></p>
   </td>
   <td width=132 valign=bottom style='width:99.15pt;padding:0in 0in 0in 0in;
   height:.3in'>
@@ -586,7 +586,7 @@ ul
   <td width=182 valign=bottom style='width:136.7pt;border:none;border-bottom:
   solid windowtext 1.0pt;mso-border-bottom-alt:solid windowtext .5pt;
   padding:0in 0in 0in 0in;height:.3in'>
-  <p class=FieldText><o:p>&nbsp;</o:p></p>
+  <p class=FieldText><o:p>space13</o:p></p>
   </td>
  </tr>
 </table>
@@ -603,7 +603,7 @@ ul
   <td width=190 valign=bottom style='width:142.35pt;border:none;border-bottom:
   solid windowtext 1.0pt;mso-border-bottom-alt:solid windowtext .5pt;
   padding:0in 0in 0in 0in;height:.3in'>
-  <p class=FieldText><o:p>&nbsp;</o:p></p>
+  <p class=FieldText><o:p>space14</o:p></p>
   </td>
   <td width=88 colspan=2 valign=bottom style='width:66.15pt;padding:0in 0in 0in 0in;
   height:.3in'>
@@ -612,7 +612,7 @@ ul
   <td width=244 valign=bottom style='width:183.0pt;border:none;border-bottom:
   solid windowtext 1.0pt;mso-border-bottom-alt:solid windowtext .5pt;
   padding:0in 0in 0in 0in;height:.3in'>
-  <p class=FieldText><o:p>&nbsp;</o:p></p>
+  <p class=FieldText><o:p>space15</o:p></p>
   </td>
  </tr>
  <tr style='mso-yfti-irow:1;height:.3in'>
@@ -623,7 +623,7 @@ ul
   <td width=192 colspan=2 valign=bottom style='width:2.0in;border:none;
   border-bottom:solid windowtext 1.0pt;mso-border-bottom-alt:solid windowtext .5pt;
   padding:0in 0in 0in 0in;height:.3in'>
-  <p class=FieldText><o:p>&nbsp;</o:p></p>
+  <p class=FieldText><o:p>space16</o:p></p>
   </td>
   <td width=86 valign=bottom style='width:64.5pt;padding:0in 0in 0in 0in;
   height:.3in'>
@@ -632,7 +632,7 @@ ul
   <td width=244 valign=bottom style='width:183.0pt;border:none;border-bottom:
   solid windowtext 1.0pt;mso-border-bottom-alt:solid windowtext .5pt;
   padding:0in 0in 0in 0in;height:.3in'>
-  <p class=FieldText><o:p>&nbsp;</o:p></p>
+  <p class=FieldText><o:p>space17</o:p></p>
   </td>
  </tr>
  <tr style='mso-yfti-irow:2;height:.3in'>
@@ -643,7 +643,7 @@ ul
   <td width=192 colspan=2 valign=bottom style='width:2.0in;border:none;
   border-bottom:solid windowtext 1.0pt;mso-border-bottom-alt:solid windowtext .5pt;
   padding:0in 0in 0in 0in;height:.3in'>
-  <p class=FieldText><o:p>&nbsp;</o:p></p>
+  <p class=FieldText><o:p>space18</o:p></p>
   </td>
   <td width=86 valign=bottom style='width:64.5pt;padding:0in 0in 0in 0in;
   height:.3in'>
@@ -652,7 +652,7 @@ ul
   <td width=244 valign=bottom style='width:183.0pt;border:none;border-bottom:
   solid windowtext 1.0pt;mso-border-bottom-alt:solid windowtext .5pt;
   padding:0in 0in 0in 0in;height:.3in'>
-  <p class=FieldText><o:p>&nbsp;</o:p></p>
+  <p class=FieldText><o:p>space19</o:p></p>
   </td>
  </tr>
  <tr style='mso-yfti-irow:3;height:.3in'>
@@ -663,7 +663,7 @@ ul
   <td width=192 colspan=2 valign=bottom style='width:2.0in;border:none;
   border-bottom:solid windowtext 1.0pt;mso-border-bottom-alt:solid windowtext .5pt;
   padding:0in 0in 0in 0in;height:.3in'>
-  <p class=FieldText><o:p>&nbsp;</o:p></p>
+  <p class=FieldText><o:p>space20</o:p></p>
   </td>
   <td width=86 valign=bottom style='width:64.5pt;padding:0in 0in 0in 0in;
   height:.3in'>
@@ -672,7 +672,7 @@ ul
   <td width=244 valign=bottom style='width:183.0pt;border:none;border-bottom:
   solid windowtext 1.0pt;mso-border-bottom-alt:solid windowtext .5pt;
   padding:0in 0in 0in 0in;height:.3in'>
-  <p class=FieldText><o:p>&nbsp;</o:p></p>
+  <p class=FieldText><o:p>space21</o:p></p>
   </td>
  </tr>
  <tr style='mso-yfti-irow:4;mso-yfti-lastrow:yes;height:.3in'>
@@ -683,7 +683,7 @@ ul
   <td width=192 colspan=2 valign=bottom style='width:2.0in;border:none;
   border-bottom:solid windowtext 1.0pt;mso-border-bottom-alt:solid windowtext .5pt;
   padding:0in 0in 0in 0in;height:.3in'>
-  <p class=FieldText><o:p>&nbsp;</o:p></p>
+  <p class=FieldText><o:p>space22</o:p></p>
   </td>
   <td width=86 valign=bottom style='width:64.5pt;padding:0in 0in 0in 0in;
   height:.3in'>
@@ -692,7 +692,7 @@ ul
   <td width=244 valign=bottom style='width:183.0pt;border:none;border-bottom:
   solid windowtext 1.0pt;mso-border-bottom-alt:solid windowtext .5pt;
   padding:0in 0in 0in 0in;height:.3in'>
-  <p class=FieldText>$</p>
+  <p class=FieldText>Tsh</p>
   </td>
  </tr>
  <![if !supportMisalignedColumns]>
@@ -718,23 +718,23 @@ ul
   <td width=290 valign=bottom style='width:217.35pt;border:none;border-bottom:
   solid windowtext 1.0pt;mso-border-bottom-alt:solid windowtext .5pt;
   padding:0in 0in 0in 0in;height:.3in'>
-  <p class=FieldText><o:p>&nbsp;</o:p></p>
+  <p class=FieldText><o:p>space23</o:p></p>
   </td>
   <td width=132 valign=bottom style='width:98.7pt;border:none;border-bottom:
   solid windowtext 1.0pt;mso-border-bottom-alt:solid windowtext .5pt;
   padding:0in 0in 0in 0in;height:.3in'>
-  <p class=FieldText><o:p>&nbsp;</o:p></p>
+  <p class=FieldText><o:p>space24</o:p></p>
   </td>
   <td width=101 valign=bottom style='width:75.45pt;border:none;border-bottom:
   solid windowtext 1.0pt;mso-border-bottom-alt:solid windowtext .5pt;
   padding:0in 0in 0in 0in;height:.3in'>
-  <p class=FieldText><o:p>&nbsp;</o:p></p>
+  <p class=FieldText><o:p>space25</o:p></p>
   </td>
  </tr>
  <tr style='mso-yfti-irow:1;mso-yfti-lastrow:yes;height:.1in'>
   <td width=102 valign=bottom style='width:76.5pt;padding:0in 0in 0in 0in;
   height:.1in'>
-  <p class=MsoNormal><o:p>&nbsp;</o:p></p>
+  <p class=MsoNormal><o:p>space26</o:p></p>
   </td>
   <td width=290 valign=bottom style='width:217.35pt;padding:0in 0in 0in 0in;
   height:.1in'>
@@ -751,7 +751,7 @@ ul
  </tr>
 </table>
 
-<p class=MsoNormal><o:p>&nbsp;</o:p></p>
+<p class=MsoNormal><o:p>space27</o:p></p>
 
 <table class=MsoNormalTable border=0 cellspacing=0 cellpadding=0 width="100%"
  style='width:100.0%;border-collapse:collapse;mso-padding-alt:0in 0in 0in 0in'>
@@ -763,18 +763,18 @@ ul
   <td width=421 valign=bottom style='width:316.05pt;border:none;border-bottom:
   solid windowtext 1.0pt;mso-border-bottom-alt:solid windowtext .5pt;
   padding:0in 0in 0in 0in;height:.2in'>
-  <p class=FieldText><o:p>&nbsp;</o:p></p>
+  <p class=FieldText><o:p>space28</o:p></p>
   </td>
   <td width=101 valign=bottom style='width:75.45pt;border:none;border-bottom:
   solid windowtext 1.0pt;mso-border-bottom-alt:solid windowtext .5pt;
   padding:0in 0in 0in 0in;height:.2in'>
-  <p class=FieldText><o:p>&nbsp;</o:p></p>
+  <p class=FieldText><o:p>space29</o:p></p>
   </td>
  </tr>
  <tr style='mso-yfti-irow:1;mso-yfti-lastrow:yes;height:.1in'>
   <td width=102 valign=bottom style='width:76.5pt;padding:0in 0in 0in 0in;
   height:.1in'>
-  <p class=MsoNormal><o:p>&nbsp;</o:p></p>
+  <p class=MsoNormal><o:p>space30</o:p></p>
   </td>
   <td width=421 valign=bottom style='width:316.05pt;border:none;mso-border-top-alt:
   solid windowtext .5pt;padding:0in 0in 0in 0in;height:.1in'>
@@ -787,35 +787,35 @@ ul
  </tr>
 </table>
 
-<p class=MsoNormal><o:p>&nbsp;</o:p></p>
+<p class=MsoNormal><o:p>&space31</o:p></p>
 
 <table class=MsoNormalTable border=0 cellspacing=0 cellpadding=0 width="100%"
  style='width:100.0%;border-collapse:collapse;mso-padding-alt:0in 0in 0in 0in'>
  <tr style='mso-yfti-irow:0;mso-yfti-firstrow:yes;height:.2in'>
   <td width=102 valign=bottom style='width:76.5pt;padding:0in 0in 0in 0in;
   height:.2in'>
-  <p class=FieldText><o:p>&nbsp;</o:p></p>
+  <p class=FieldText><o:p>space32</o:p></p>
   </td>
   <td width=343 valign=bottom style='width:257.3pt;border:none;border-bottom:
   solid windowtext 1.0pt;mso-border-bottom-alt:solid windowtext .5pt;
   padding:0in 0in 0in 0in;height:.2in'>
-  <p class=FieldText><o:p>&nbsp;</o:p></p>
+  <p class=FieldText><o:p>space33</o:p></p>
   </td>
   <td width=78 valign=bottom style='width:58.75pt;border:none;border-bottom:
   solid windowtext 1.0pt;mso-border-bottom-alt:solid windowtext .5pt;
   padding:0in 0in 0in 0in;height:.2in'>
-  <p class=FieldText><o:p>&nbsp;</o:p></p>
+  <p class=FieldText><o:p>space34</o:p></p>
   </td>
   <td width=101 valign=bottom style='width:75.45pt;border:none;border-bottom:
   solid windowtext 1.0pt;mso-border-bottom-alt:solid windowtext .5pt;
   padding:0in 0in 0in 0in;height:.2in'>
-  <p class=FieldText><o:p>&nbsp;</o:p></p>
+  <p class=FieldText><o:p>&space35</o:p></p>
   </td>
  </tr>
  <tr style='mso-yfti-irow:1;mso-yfti-lastrow:yes;height:.1in'>
   <td width=102 valign=bottom style='width:76.5pt;padding:0in 0in 0in 0in;
   height:.1in'>
-  <p class=MsoNormal><o:p>&nbsp;</o:p></p>
+  <p class=MsoNormal><o:p>space36</o:p></p>
   </td>
   <td width=343 valign=bottom style='width:257.3pt;border:none;mso-border-top-alt:
   solid windowtext .5pt;padding:0in 0in 0in 0in;height:.1in'>
@@ -832,7 +832,7 @@ ul
  </tr>
 </table>
 
-<p class=MsoNormal><o:p>&nbsp;</o:p></p>
+<p class=MsoNormal><o:p>space37</o:p></p>
 
 <table class=MsoNormalTable border=0 cellspacing=0 cellpadding=0 width="100%"
  style='width:100.0%;border-collapse:collapse;mso-padding-alt:0in 0in 0in 0in'>
@@ -844,7 +844,7 @@ ul
   <td width=192 valign=bottom style='width:2.0in;border:none;border-bottom:
   solid windowtext 1.0pt;mso-border-bottom-alt:solid windowtext .5pt;
   padding:0in 0in 0in 0in;height:.3in'>
-  <p class=FieldText><o:p>&nbsp;</o:p></p>
+  <p class=FieldText><o:p>space38</o:p></p>
   </td>
   <td width=102 valign=bottom style='width:76.5pt;padding:0in 0in 0in 0in;
   height:.3in'>
@@ -853,7 +853,7 @@ ul
   <td width=228 valign=bottom style='width:171.0pt;border:none;border-bottom:
   solid windowtext 1.0pt;mso-border-bottom-alt:solid windowtext .5pt;
   padding:0in 0in 0in 0in;height:.3in'>
-  <p class=FieldText><o:p>&nbsp;</o:p></p>
+  <p class=FieldText><o:p>space39</o:p></p>
   </td>
  </tr>
  <tr style='mso-yfti-irow:1;mso-yfti-lastrow:yes;height:.3in'>
@@ -864,12 +864,12 @@ ul
   <td width=522 colspan=3 valign=bottom style='width:391.5pt;border:none;
   border-bottom:solid windowtext 1.0pt;mso-border-bottom-alt:solid windowtext .5pt;
   padding:0in 0in 0in 0in;height:.3in'>
-  <p class=FieldText><o:p>&nbsp;</o:p></p>
+  <p class=FieldText><o:p>space40</o:p></p>
   </td>
  </tr>
 </table>
 
-<p class=MsoNormal><span style='font-size:4.0pt'><o:p>&nbsp;</o:p></span></p>
+<p class=MsoNormal><span style='font-size:4.0pt'><o:p>space41</o:p></span></p>
 
 </div>
 
