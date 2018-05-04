@@ -109,6 +109,19 @@
                         </ul>
                     </li>
 
+                     <li class="xn-openable">
+
+                     
+                        <a href="#"><span class="fa fa-dashboard"></span> <span class="xn-text">HR Reports</span></a>
+                         <ul>
+                            
+                            <li><a href="{{url('employeebio')}}"><span class="fa fa-pencil-square-o"></span>Employee Bio</a></li>                         
+                            
+                            
+                          
+                        </ul>
+                    </li>
+
                     
                                 </ul>
                             </li>     

@@ -2,8 +2,8 @@
 /*header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
 header('Content-Disposition: attachment;filename="' . $fileName . '"'); */
 $fileName="dennis.doc";
-//header('Content-Type: application/vnd.openxmlformats-officedocument.wordprocessingml.document');
-//header('Content-Disposition: attachment;filename="' . $fileName . '"');
+header('Content-Type: application/vnd.openxmlformats-officedocument.wordprocessingml.document');
+header('Content-Disposition: attachment;filename="' . $fileName . '"');
 
 ?><html xmlns:v="urn:schemas-microsoft-com:vml"
 xmlns:o="urn:schemas-microsoft-com:office:office"
@@ -870,6 +870,332 @@ ul
 </table>
 
 <p class=MsoNormal><span style='font-size:4.0pt'><o:p>space41</o:p></span></p>
+
+<h2>Experience</h2>
+
+<table class=MsoNormalTable border=0 cellspacing=0 cellpadding=0 width="100%"
+ style='width:100.0%;border-collapse:collapse;mso-padding-alt:0in 0in 0in 0in'>
+ <tr style='mso-yfti-irow:0;mso-yfti-firstrow:yes;height:.3in'>
+  <td width=102 valign=bottom style='width:76.5pt;padding:0in 0in 0in 0in;
+  height:.3in'>
+  <p class=MsoNormal>Full Name:</p>
+  </td>
+  <td width=290 valign=bottom style='width:217.35pt;border:none;border-bottom:
+  solid windowtext 1.0pt;mso-border-bottom-alt:solid windowtext .5pt;
+  padding:0in 0in 0in 0in;height:.3in'>
+  <p class=FieldText><o:p>newspace23</o:p></p>
+  </td>
+  <td width=132 valign=bottom style='width:98.7pt;border:none;border-bottom:
+  solid windowtext 1.0pt;mso-border-bottom-alt:solid windowtext .5pt;
+  padding:0in 0in 0in 0in;height:.3in'>
+  <p class=FieldText><o:p>newspace24</o:p></p>
+  </td>
+  <td width=101 valign=bottom style='width:75.45pt;border:none;border-bottom:
+  solid windowtext 1.0pt;mso-border-bottom-alt:solid windowtext .5pt;
+  padding:0in 0in 0in 0in;height:.3in'>
+  <p class=FieldText><o:p>newspace25</o:p></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:1;mso-yfti-lastrow:yes;height:.1in'>
+  <td width=102 valign=bottom style='width:76.5pt;padding:0in 0in 0in 0in;
+  height:.1in'>
+  <p class=MsoNormal><o:p>newspace26</o:p></p>
+  </td>
+  <td width=290 valign=bottom style='width:217.35pt;padding:0in 0in 0in 0in;
+  height:.1in'>
+  <h3>Last</h3>
+  </td>
+  <td width=132 valign=bottom style='width:98.7pt;padding:0in 0in 0in 0in;
+  height:.1in'>
+  <h3>First</h3>
+  </td>
+  <td width=101 valign=bottom style='width:75.45pt;padding:0in 0in 0in 0in;
+  height:.1in'>
+  <h3>M.I.</h3>
+  </td>
+ </tr>
+</table>
+
+<p class=MsoNormal><o:p>newspace27</o:p></p>
+
+<table class=MsoNormalTable border=0 cellspacing=0 cellpadding=0 width="100%"
+ style='width:100.0%;border-collapse:collapse;mso-padding-alt:0in 0in 0in 0in'>
+ <tr style='mso-yfti-irow:0;mso-yfti-firstrow:yes;height:.2in'>
+  <td width=102 valign=bottom style='width:76.5pt;padding:0in 0in 0in 0in;
+  height:.2in'>
+  <p class=MsoNormal>Address:</p>
+  </td>
+  <td width=421 valign=bottom style='width:316.05pt;border:none;border-bottom:
+  solid windowtext 1.0pt;mso-border-bottom-alt:solid windowtext .5pt;
+  padding:0in 0in 0in 0in;height:.2in'>
+  <p class=FieldText><o:p>newspace28</o:p></p>
+  </td>
+  <td width=101 valign=bottom style='width:75.45pt;border:none;border-bottom:
+  solid windowtext 1.0pt;mso-border-bottom-alt:solid windowtext .5pt;
+  padding:0in 0in 0in 0in;height:.2in'>
+  <p class=FieldText><o:p>newspace29</o:p></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:1;mso-yfti-lastrow:yes;height:.1in'>
+  <td width=102 valign=bottom style='width:76.5pt;padding:0in 0in 0in 0in;
+  height:.1in'>
+  <p class=MsoNormal><o:p>newspace30</o:p></p>
+  </td>
+  <td width=421 valign=bottom style='width:316.05pt;border:none;mso-border-top-alt:
+  solid windowtext .5pt;padding:0in 0in 0in 0in;height:.1in'>
+  <h3>Street Address</h3>
+  </td>
+  <td width=101 valign=bottom style='width:75.45pt;padding:0in 0in 0in 0in;
+  height:.1in'>
+  <h3>Apartment/Unit #</h3>
+  </td>
+ </tr>
+</table>
+
+<p class=MsoNormal><o:p>&newspace31</o:p></p>
+
+<table class=MsoNormalTable border=0 cellspacing=0 cellpadding=0 width="100%"
+ style='width:100.0%;border-collapse:collapse;mso-padding-alt:0in 0in 0in 0in'>
+ <tr style='mso-yfti-irow:0;mso-yfti-firstrow:yes;height:.2in'>
+  <td width=102 valign=bottom style='width:76.5pt;padding:0in 0in 0in 0in;
+  height:.2in'>
+  <p class=FieldText><o:p>newspace32</o:p></p>
+  </td>
+  <td width=343 valign=bottom style='width:257.3pt;border:none;border-bottom:
+  solid windowtext 1.0pt;mso-border-bottom-alt:solid windowtext .5pt;
+  padding:0in 0in 0in 0in;height:.2in'>
+  <p class=FieldText><o:p>newspace33</o:p></p>
+  </td>
+  <td width=78 valign=bottom style='width:58.75pt;border:none;border-bottom:
+  solid windowtext 1.0pt;mso-border-bottom-alt:solid windowtext .5pt;
+  padding:0in 0in 0in 0in;height:.2in'>
+  <p class=FieldText><o:p>newspace34</o:p></p>
+  </td>
+  <td width=101 valign=bottom style='width:75.45pt;border:none;border-bottom:
+  solid windowtext 1.0pt;mso-border-bottom-alt:solid windowtext .5pt;
+  padding:0in 0in 0in 0in;height:.2in'>
+  <p class=FieldText><o:p>&newspace35</o:p></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:1;mso-yfti-lastrow:yes;height:.1in'>
+  <td width=102 valign=bottom style='width:76.5pt;padding:0in 0in 0in 0in;
+  height:.1in'>
+  <p class=MsoNormal><o:p>newspace36</o:p></p>
+  </td>
+  <td width=343 valign=bottom style='width:257.3pt;border:none;mso-border-top-alt:
+  solid windowtext .5pt;padding:0in 0in 0in 0in;height:.1in'>
+  <h3>City</h3>
+  </td>
+  <td width=78 valign=bottom style='width:58.75pt;border:none;mso-border-top-alt:
+  solid windowtext .5pt;padding:0in 0in 0in 0in;height:.1in'>
+  <h3>State</h3>
+  </td>
+  <td width=101 valign=bottom style='width:75.45pt;border:none;mso-border-top-alt:
+  solid windowtext .5pt;padding:0in 0in 0in 0in;height:.1in'>
+  <h3>ZIP Code</h3>
+  </td>
+ </tr>
+</table>
+
+<p class=MsoNormal><o:p>newspace37</o:p></p>
+
+<table class=MsoNormalTable border=0 cellspacing=0 cellpadding=0 width="100%"
+ style='width:100.0%;border-collapse:collapse;mso-padding-alt:0in 0in 0in 0in'>
+ <tr style='mso-yfti-irow:0;mso-yfti-firstrow:yes;height:.3in'>
+  <td width=102 valign=bottom style='width:76.5pt;padding:0in 0in 0in 0in;
+  height:.3in'>
+  <p class=MsoNormal>Primary Phone:</p>
+  </td>
+  <td width=192 valign=bottom style='width:2.0in;border:none;border-bottom:
+  solid windowtext 1.0pt;mso-border-bottom-alt:solid windowtext .5pt;
+  padding:0in 0in 0in 0in;height:.3in'>
+  <p class=FieldText><o:p>newspace38</o:p></p>
+  </td>
+  <td width=102 valign=bottom style='width:76.5pt;padding:0in 0in 0in 0in;
+  height:.3in'>
+  <p class=MsoNormal>Alternate Phone:</p>
+  </td>
+  <td width=228 valign=bottom style='width:171.0pt;border:none;border-bottom:
+  solid windowtext 1.0pt;mso-border-bottom-alt:solid windowtext .5pt;
+  padding:0in 0in 0in 0in;height:.3in'>
+  <p class=FieldText><o:p>newspace39</o:p></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:1;mso-yfti-lastrow:yes;height:.3in'>
+  <td width=102 valign=bottom style='width:76.5pt;padding:0in 0in 0in 0in;
+  height:.3in'>
+  <p class=MsoNormal>Relationship:</p>
+  </td>
+  <td width=522 colspan=3 valign=bottom style='width:391.5pt;border:none;
+  border-bottom:solid windowtext 1.0pt;mso-border-bottom-alt:solid windowtext .5pt;
+  padding:0in 0in 0in 0in;height:.3in'>
+  <p class=FieldText><o:p>newspace40</o:p></p>
+  </td>
+ </tr>
+</table>
+
+<h2>Qualification</h2>
+
+<table class=MsoNormalTable border=0 cellspacing=0 cellpadding=0 width="100%"
+ style='width:100.0%;border-collapse:collapse;mso-padding-alt:0in 0in 0in 0in'>
+ <tr style='mso-yfti-irow:0;mso-yfti-firstrow:yes;height:.3in'>
+  <td width=102 valign=bottom style='width:76.5pt;padding:0in 0in 0in 0in;
+  height:.3in'>
+  <p class=MsoNormal>Full Name:</p>
+  </td>
+  <td width=290 valign=bottom style='width:217.35pt;border:none;border-bottom:
+  solid windowtext 1.0pt;mso-border-bottom-alt:solid windowtext .5pt;
+  padding:0in 0in 0in 0in;height:.3in'>
+  <p class=FieldText><o:p>qspace23</o:p></p>
+  </td>
+  <td width=132 valign=bottom style='width:98.7pt;border:none;border-bottom:
+  solid windowtext 1.0pt;mso-border-bottom-alt:solid windowtext .5pt;
+  padding:0in 0in 0in 0in;height:.3in'>
+  <p class=FieldText><o:p>qspace24</o:p></p>
+  </td>
+  <td width=101 valign=bottom style='width:75.45pt;border:none;border-bottom:
+  solid windowtext 1.0pt;mso-border-bottom-alt:solid windowtext .5pt;
+  padding:0in 0in 0in 0in;height:.3in'>
+  <p class=FieldText><o:p>qspace25</o:p></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:1;mso-yfti-lastrow:yes;height:.1in'>
+  <td width=102 valign=bottom style='width:76.5pt;padding:0in 0in 0in 0in;
+  height:.1in'>
+  <p class=MsoNormal><o:p>qspace26</o:p></p>
+  </td>
+  <td width=290 valign=bottom style='width:217.35pt;padding:0in 0in 0in 0in;
+  height:.1in'>
+  <h3>Last</h3>
+  </td>
+  <td width=132 valign=bottom style='width:98.7pt;padding:0in 0in 0in 0in;
+  height:.1in'>
+  <h3>First</h3>
+  </td>
+  <td width=101 valign=bottom style='width:75.45pt;padding:0in 0in 0in 0in;
+  height:.1in'>
+  <h3>M.I.</h3>
+  </td>
+ </tr>
+</table>
+
+<p class=MsoNormal><o:p>qspace27</o:p></p>
+
+<table class=MsoNormalTable border=0 cellspacing=0 cellpadding=0 width="100%"
+ style='width:100.0%;border-collapse:collapse;mso-padding-alt:0in 0in 0in 0in'>
+ <tr style='mso-yfti-irow:0;mso-yfti-firstrow:yes;height:.2in'>
+  <td width=102 valign=bottom style='width:76.5pt;padding:0in 0in 0in 0in;
+  height:.2in'>
+  <p class=MsoNormal>Address:</p>
+  </td>
+  <td width=421 valign=bottom style='width:316.05pt;border:none;border-bottom:
+  solid windowtext 1.0pt;mso-border-bottom-alt:solid windowtext .5pt;
+  padding:0in 0in 0in 0in;height:.2in'>
+  <p class=FieldText><o:p>qspace28</o:p></p>
+  </td>
+  <td width=101 valign=bottom style='width:75.45pt;border:none;border-bottom:
+  solid windowtext 1.0pt;mso-border-bottom-alt:solid windowtext .5pt;
+  padding:0in 0in 0in 0in;height:.2in'>
+  <p class=FieldText><o:p>qspace29</o:p></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:1;mso-yfti-lastrow:yes;height:.1in'>
+  <td width=102 valign=bottom style='width:76.5pt;padding:0in 0in 0in 0in;
+  height:.1in'>
+  <p class=MsoNormal><o:p>qspace30</o:p></p>
+  </td>
+  <td width=421 valign=bottom style='width:316.05pt;border:none;mso-border-top-alt:
+  solid windowtext .5pt;padding:0in 0in 0in 0in;height:.1in'>
+  <h3>Street Address</h3>
+  </td>
+  <td width=101 valign=bottom style='width:75.45pt;padding:0in 0in 0in 0in;
+  height:.1in'>
+  <h3>Apartment/Unit #</h3>
+  </td>
+ </tr>
+</table>
+
+<p class=MsoNormal><o:p>&qspace31</o:p></p>
+
+<table class=MsoNormalTable border=0 cellspacing=0 cellpadding=0 width="100%"
+ style='width:100.0%;border-collapse:collapse;mso-padding-alt:0in 0in 0in 0in'>
+ <tr style='mso-yfti-irow:0;mso-yfti-firstrow:yes;height:.2in'>
+  <td width=102 valign=bottom style='width:76.5pt;padding:0in 0in 0in 0in;
+  height:.2in'>
+  <p class=FieldText><o:p>qspace32</o:p></p>
+  </td>
+  <td width=343 valign=bottom style='width:257.3pt;border:none;border-bottom:
+  solid windowtext 1.0pt;mso-border-bottom-alt:solid windowtext .5pt;
+  padding:0in 0in 0in 0in;height:.2in'>
+  <p class=FieldText><o:p>qspace33</o:p></p>
+  </td>
+  <td width=78 valign=bottom style='width:58.75pt;border:none;border-bottom:
+  solid windowtext 1.0pt;mso-border-bottom-alt:solid windowtext .5pt;
+  padding:0in 0in 0in 0in;height:.2in'>
+  <p class=FieldText><o:p>qspace34</o:p></p>
+  </td>
+  <td width=101 valign=bottom style='width:75.45pt;border:none;border-bottom:
+  solid windowtext 1.0pt;mso-border-bottom-alt:solid windowtext .5pt;
+  padding:0in 0in 0in 0in;height:.2in'>
+  <p class=FieldText><o:p>&qspace35</o:p></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:1;mso-yfti-lastrow:yes;height:.1in'>
+  <td width=102 valign=bottom style='width:76.5pt;padding:0in 0in 0in 0in;
+  height:.1in'>
+  <p class=MsoNormal><o:p>qspace36</o:p></p>
+  </td>
+  <td width=343 valign=bottom style='width:257.3pt;border:none;mso-border-top-alt:
+  solid windowtext .5pt;padding:0in 0in 0in 0in;height:.1in'>
+  <h3>City</h3>
+  </td>
+  <td width=78 valign=bottom style='width:58.75pt;border:none;mso-border-top-alt:
+  solid windowtext .5pt;padding:0in 0in 0in 0in;height:.1in'>
+  <h3>State</h3>
+  </td>
+  <td width=101 valign=bottom style='width:75.45pt;border:none;mso-border-top-alt:
+  solid windowtext .5pt;padding:0in 0in 0in 0in;height:.1in'>
+  <h3>ZIP Code</h3>
+  </td>
+ </tr>
+</table>
+
+<p class=MsoNormal><o:p>qspace37</o:p></p>
+
+<table class=MsoNormalTable border=0 cellspacing=0 cellpadding=0 width="100%"
+ style='width:100.0%;border-collapse:collapse;mso-padding-alt:0in 0in 0in 0in'>
+ <tr style='mso-yfti-irow:0;mso-yfti-firstrow:yes;height:.3in'>
+  <td width=102 valign=bottom style='width:76.5pt;padding:0in 0in 0in 0in;
+  height:.3in'>
+  <p class=MsoNormal>Primary Phone:</p>
+  </td>
+  <td width=192 valign=bottom style='width:2.0in;border:none;border-bottom:
+  solid windowtext 1.0pt;mso-border-bottom-alt:solid windowtext .5pt;
+  padding:0in 0in 0in 0in;height:.3in'>
+  <p class=FieldText><o:p>qspace38</o:p></p>
+  </td>
+  <td width=102 valign=bottom style='width:76.5pt;padding:0in 0in 0in 0in;
+  height:.3in'>
+  <p class=MsoNormal>Alternate Phone:</p>
+  </td>
+  <td width=228 valign=bottom style='width:171.0pt;border:none;border-bottom:
+  solid windowtext 1.0pt;mso-border-bottom-alt:solid windowtext .5pt;
+  padding:0in 0in 0in 0in;height:.3in'>
+  <p class=FieldText><o:p>qspace39</o:p></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:1;mso-yfti-lastrow:yes;height:.3in'>
+  <td width=102 valign=bottom style='width:76.5pt;padding:0in 0in 0in 0in;
+  height:.3in'>
+  <p class=MsoNormal>Relationship:</p>
+  </td>
+  <td width=522 colspan=3 valign=bottom style='width:391.5pt;border:none;
+  border-bottom:solid windowtext 1.0pt;mso-border-bottom-alt:solid windowtext .5pt;
+  padding:0in 0in 0in 0in;height:.3in'>
+  <p class=FieldText><o:p>qspace40</o:p></p>
+  </td>
+ </tr>
+</table>
 
 </div>
 

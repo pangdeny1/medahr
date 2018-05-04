@@ -232,4 +232,11 @@ Route::group(['middleware'=> ['auth', 'activated', 'role:admin']], function () {
 
 
     Route::get('testreport','report\reportcontroller@test');
+
+    Route::get('testpdf','report\reportcontroller@testpdf');
+
+
+     Route::post('employeebio','report\reportscontroller@employeebio');
+     Route::get('reportform','report\reportscontroller@reportform');
+     
 });

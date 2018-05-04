@@ -45,21 +45,21 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Redirect;
 
-class reportcontroller extends Controller
+class reportscontroller extends Controller
 {
-    public function test2()
-    {
-      $employee = Employee::findOrFail(2);
-      $company = company::findOrFail(1);
-    	return view('reports.test',compact('employee','company'));
-    }
-
-    public function test()
+   
+    public function employeebio(Request $request)
 
     {
 
-    	 $pagetitle='Employees Master';
-         $company = company::findOrFail(1);
+         $this->validate($request, [
+            'employee'     => 'required'
+        ]);
+
+         $employeeid=$request->input('employee');
+
+    	 $pagetitle='Employee Bio';
+         $company = company::findOrFail(2);
         $employee=DB::table('prlemployeemaster')
         ->select('employeeid','firstname','lastname','middlename','city','state','email1','phone1','phone2','zip',
             'birthdate','hiredate','marital','employeecode','departmentname','regionname','districtname',
@@ -71,16 +71,19 @@ class reportcontroller extends Controller
         ->leftjoin('departments','prlemployeemaster.deptid','departments.id')
         ->leftjoin('regions','prlemployeemaster.city','regions.id')
         ->leftjoin('districts','prlemployeemaster.state','districts.id')
-        ->where('employeeid',2) 
+        ->where('employeeid',$employeeid) 
         ->first();
 
         //return view('employee.employeemaster',compact('employees','pagetitle'));
-        return view('reports.test',compact('employee','company'));
+        return view('reports.employeebio',compact('employee','company','pagetitle'));
     }
 
-    public function testpdf()
-    {
-        return view('reports.testpdf');
-    }
-    
+public function reportform()
+{   
+    $pagetitle="Employee Bio Report"; 
+    $employees=Employee::All();
+    return  view('reports.reportform',compact('pagetitle','employees'));
+}
+
+
 }
