@@ -11,7 +11,13 @@ use App\Models\country;
 use App\Models\Region;
 use App\Models\District;
 use App\Models\Employee;
+use App\Models\employeequalification;
+use App\Models\qualification;
+use App\Models\institute;
+use App\Models\qualificationlevel;
 use App\Models\job;
+use App\Models\Dependant;
+use App\Models\Dependanttype;
 use App\Models\Jobgroup;
 use App\Models\gender;
 use App\Models\Payperiod;
@@ -240,6 +246,14 @@ if ($validator->fails()) {
         $hdmf                  =HDMF::All();
         $company                =Company::All();
         $yesornos                =YesOrNo::All();
+        $employees              =Employee::All();
+        $dependants=Dependant::where('employeeid', $employeeid)->get();
+        $dependanttypes=Dependanttype::All();
+        $employeequalifications=employeequalification::where('employeeid', $employeeid)->get();
+        $employees=Employee::All();
+        $qualifications=qualification::All();
+        $institutions=institute::All();
+        $levels=qualificationlevel::All();
 
         //$selectedCountry=Country::first()->country;
 
@@ -268,7 +282,14 @@ if ($validator->fails()) {
             'maritalstatutes '     =>$maritalstatutes,
             'companies'            =>$company,
             'payperiods'           =>$payperiods,
-            'prlemployementstatuses'=>$prlemployementstatuses
+            'prlemployementstatuses'=>$prlemployementstatuses,
+            'employees'             =>$employees,
+            'dependants'            =>$dependants ,
+            'dependanttypes'        =>$dependanttypes,
+            'qualifications'        =>$qualifications,
+            'institutions'          =>$institutions,
+            'levels'                =>$levels,
+            'employeequalifications'=>$employeequalifications
 
         ];
 
@@ -287,8 +308,10 @@ if ($validator->fails()) {
                 'lastname'             => 'required',
                 'periodrate'           =>'required',
                 'jobid'                =>'required',
+                'deptid'                =>'required',
                 'paytype'              =>'required',
-                'email'                =>'email|required'
+                'email'                =>'email|required',
+                
 
 
 
@@ -312,7 +335,8 @@ if ($validator->fails()) {
             $employee->jobid =$request->input('jobid');
             $employee->costcenterid =$request->input('costcenterid');
             $employee->active =$request->input('active');
-            $employee->phone1comment =$request->input('aboutme');
+            
+            $employee->reportto =$request->input('reportto');
 
 
             //Salary
@@ -323,7 +347,9 @@ if ($validator->fails()) {
 
             //Contacts
             $employee->email1 =$request->input('email');
+            $employee->email2 =$request->input('email2');
             $employee->phone1 =$request->input('phone');
+            $employee->phone2 =$request->input('phone2');
             $employee->address1 =$request->input('address');
             $employee->country =$request->input('country');
             $employee->city =$request->input('region');

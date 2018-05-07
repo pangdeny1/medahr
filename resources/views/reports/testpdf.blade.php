@@ -8,7 +8,7 @@ If (isset($_POST['PrintPDF'])
 	include('includes/PDFStarter.php');
 	include('includes/ConnectDB.inc');
 	include('includes/DateFunctions.inc');
-	include('includes/prlFunctions.php');
+	include('includes/prlFunctions.php'); 
 
 
 	$pdf->selectFont('./fonts/Helvetica.afm');

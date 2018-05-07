@@ -60,12 +60,12 @@
                     </li>
                     <li class="xn-profile">
                         <a href="#" class="profile-mini">
-                            <img src="{{asset('assets/images/users/avatar.jpg')}}" alt="John Doe"/>
+                           <img src="{{asset('assets/images/users/no-image.jpg')}}" alt="J"/> 
                         </a>
                         <div class="profile">
                             <div class="profile-image">
 
-                                <img src="{{asset('assets/images/users/no-image.jpg')}}" alt="John Doe"/>
+                                <img src="{{asset('assets/images/users/no-image.jpg')}}" alt="J"/>
                             </div>
                             <div class="profile-data">
                                 <div class="profile-data-name">
@@ -100,6 +100,8 @@
                             <li><a href="{{url('viewdepartments')}}"><span class="fa fa-pencil-square-o"></span>Departments</a></li>
                             <li><a href="{{url('viewjobgroups')}}"><span class="fa fa-pencil-square-o"></span>Job Groups</a></li>
                             <li><a href="{{url('jobs')}}"><span class="fa fa-pencil-square-o"></span>Jobs</a></li>
+                            <li><a href="{{url('viewworkexpiriences')}}"><span class="fa fa-pencil-square-o"></span>Experience</a></li>
+                            <li><a href="{{url('viewdependants')}}"><span class="fa fa-pencil-square-o"></span>Dependants</a></li>
                             <li><a href="{{url('viewqualifications')}}"><span class="fa fa-pencil-square-o"></span>Qualifications</a></li>
                             <li><a href="{{url('viewqualificationlevels')}}"><span class="fa fa-pencil-square-o"></span>Qualifications  Levels</a></li>
                             <li><a href="{{url('viewinstitutions')}}"><span class="fa fa-pencil-square-o"></span>Institutions</a></li>
@@ -115,7 +117,7 @@
                         <a href="#"><span class="fa fa-dashboard"></span> <span class="xn-text">HR Reports</span></a>
                          <ul>
                             
-                            <li><a href="{{url('employeebio')}}"><span class="fa fa-pencil-square-o"></span>Employee Bio</a></li>                         
+                            <li><a href="{{url('reportform')}}"><span class="fa fa-pencil-square-o"></span>Employee Bio</a></li>                         
                             
                             
                           

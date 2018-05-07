@@ -31,7 +31,7 @@
                                         <li><a href="#tab-fourth" role="tab" data-toggle="tab">Education</a></li>
                                         <li><a href="#tab-fifth" role="tab" data-toggle="tab">Work experience</a></li>
                                         <li><a href="#tab-sixth" role="tab" data-toggle="tab">Dependants</a></li>
-                                        <li><a href="#tab-seventh" role="tab" data-toggle="tab">Attachements</a></li>
+                                        <!--<li><a href="#tab-seventh" role="tab" data-toggle="tab">Attachements</a></li> -->
                                         <li><a href="#tab-eight" role="tab" data-toggle="tab">Membership</a></li>
                                         <li><a href="#tab-ninth" role="tab" data-toggle="tab">Picture</a></li>
                                         
@@ -93,7 +93,7 @@
                                             <div class="form-group">                                        
                                                 <label class="col-md-3 col-xs-12 control-label">Branch</label>
                                                 <div class="col-md-5">
-                                                    <select class="form-control select" name="branch">
+                                                    <select class="form-control select" name="branchid">
                                                        
                                                           @foreach($branches as $branch)
 
@@ -112,13 +112,13 @@
                                             <div class="form-group">                                        
                                                 <label class="col-md-3 col-xs-12 control-label">Departments</label>
                                                 <div class="col-md-5">
-                                                    <select class="form-control select" name="jobid">
+                                                    <select class="form-control select" name="deptid">
                                                        
                                                           @foreach($departments as $department)
 
-                                                         @if($department->id==$employee->departmentid)
+                                                         @if($department->id==$employee->deptid)
                                                         
-                                                        <option  value='{{$employee->departmentid}}' selected="selected">{{$department->departmentname}}</option>
+                                                        <option  value='{{$employee->deptid}}' selected="selected">{{$department->departmentname}}</option>
                                                             @endif  
                                                          <option value="{{ $department->id }}">{{ $department->departmentname }}</option>
                                                           @endforeach
@@ -146,7 +146,20 @@
                                                 </div>                                          
                                             </div>
 
+
                                             <div class="form-group">                                        
+                                                <label class="col-md-3 col-xs-12 control-label">Supervisor</label>
+                                                <div class="col-md-5">
+                                                    <select id="category" type="text" class="form-control" name="reportto">
+                                    <option value="">Select Employee</option>
+                                   
+                               @foreach ($employees as $employee)
+                        <option value="{{ $employee->employeeid }}">{{ $employee->firstname }}  {{ $employee->lastname }}</option>
+                                    @endforeach
+                                </select>
+                                                </div>                                          
+                                            </div>
+            <div class="form-group">                                        
                                                 <label class="col-md-3 col-xs-12 control-label">Employee Status</label>
                                                 <div class="col-md-2">
                                                     <select class="form-control select" name="active">
@@ -168,10 +181,10 @@
 
                                            
                                             <div class="form-group">
-                                                <label class="col-md-3 col-xs-12 control-label">About Me</label>
+                                                <label class="col-md-3 col-xs-12 control-label">About employee</label>
                                                 <div class="col-md-6 col-xs-12">                                            
                                                     <textarea class="form-control" rows="5" name="aboutme">{{$employee->phone1comment}}</textarea>
-                                                    <span class="help-block">Somethink about your life</span>
+                                                    <span class="help-block">Any particular condition that the Administrator may require to know</span>
                                                 </div>
                                             </div>                                           
 
@@ -234,16 +247,29 @@
                                            <p>Fill all Mandatory Fields</p>
                                             
                                             <div class="form-group">
-                                                <label class="col-md-3 col-xs-12 control-label">E-mail</label>
+                                                <label class="col-md-3 col-xs-12 control-label">Work E-mail</label>
                                                 <div class="col-md-6 col-xs-12">                                                                                                                                                        
                                                     <input type="text" name="email" class="form-control" value="{{$employee->email1}}"/>
                                                 </div>
                                             </div>
                                             
                                             <div class="form-group">
+                                                <label class="col-md-3 col-xs-12 control-label">personal E-mail</label>
+                                                <div class="col-md-6 col-xs-12">                                                                                                                                                        
+                                                    <input type="text" name="email2" class="form-control" value="{{$employee->email2}}"/>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
                                                 <label class="col-md-3 col-xs-12 control-label">Phone</label>
                                                 <div class="col-md-6 col-xs-12">                                                                                                                                                        
                                                     <input type="text" name="phone" class="form-control" value="{{$employee->phone1}}"/>
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label class="col-md-3 col-xs-12 control-label">Cell Phone</label>
+                                                <div class="col-md-6 col-xs-12">                                                                                                                                                        
+                                                    <input type="text" name="phone2" class="form-control" value="{{$employee->phone2}}"/>
                                                 </div>
                                             </div>
                                             
@@ -323,7 +349,8 @@
                                         </div>
 
                                         <div class="tab-pane active" id="tab-fourth">
-                                         Fourth
+                                         
+                                         @include('employeequalifications.employeequalification');
 
 
 
@@ -336,7 +363,8 @@
                                         </div>
 
                                          <div class="tab-pane active" id="tab-sixth">
-                                        Sixth
+                                       
+                                        @include('dependants.employeedependant');
 
                                         </div>
 

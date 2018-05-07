@@ -61,9 +61,10 @@ class reportscontroller extends Controller
     	 $pagetitle='Employee Bio';
          $company = company::findOrFail(2);
         $employee=DB::table('prlemployeemaster')
-        ->select('employeeid','firstname','lastname','middlename','city','state','email1','phone1','phone2','zip',
-            'birthdate','hiredate','marital','employeecode','departmentname','regionname','districtname',
+        ->select('employeeid','firstname','lastname','middlename','city','terminatedate','state','email1','email2','phone1','phone2','zip',
+            'birthdate','hiredate','employeecode','departments.departmentname as departmentname','regionname','districtname',
         'jobs.jobname as jobid','employeestatutes.name as active','genders.name as gender','hiredate','hourlyrate','paytype',
+        'maritalstatus.name as marital',
         'periodrate')
         ->leftjoin('genders','prlemployeemaster.gender','genders.id')
         ->leftjoin('jobs','prlemployeemaster.jobid','jobs.id')
@@ -71,6 +72,7 @@ class reportscontroller extends Controller
         ->leftjoin('departments','prlemployeemaster.deptid','departments.id')
         ->leftjoin('regions','prlemployeemaster.city','regions.id')
         ->leftjoin('districts','prlemployeemaster.state','districts.id')
+        ->leftjoin('maritalstatus','prlemployeemaster.marital','maritalstatus.id')
         ->where('employeeid',$employeeid) 
         ->first();
 

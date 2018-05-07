@@ -228,10 +228,10 @@
 
                                            
                                             <div class="form-group">
-                                                <label class="col-md-3 col-xs-12 control-label">About Me</label>
+                                                <label class="col-md-3 col-xs-12 control-label">About employee</label>
                                                 <div class="col-md-6 col-xs-12">                                            
                                                     <textarea class="form-control" rows="5" name="aboutme">{{old('aboutme')}}</textarea>
-                                                    <span class="help-block">Somethink about your life</span>
+                                                    <span class="help-block">Any particular condition that the Administrator may require to know</span>
                                                 </div>
                                             </div>                                           
 

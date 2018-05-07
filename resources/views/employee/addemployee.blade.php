@@ -104,9 +104,9 @@
 
                                            
                                             <div class="form-group">
-                                                <label class="col-md-3 col-xs-12 control-label">About Me</label>
+                                                <label class="col-md-3 col-xs-12 control-label">Any particular condition that the Administrator may require to know</label>
                                                 <div class="col-md-6 col-xs-12">                                            
-                                                    <textarea class="form-control" rows="5" name="aboutme">Say Somethink about your life</textarea>
+                                                    <textarea class="form-control" rows="5" name="aboutme">Any particular condition that the Administrator may require to know</textarea>
                                                     <span class="help-block">Somethink about your life</span>
                                                 </div>
                                             </div>                                           

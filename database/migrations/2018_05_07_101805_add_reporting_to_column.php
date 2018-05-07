@@ -4,20 +4,19 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AddAmountChangedToSalaryTable extends Migration
+class AddReportingToColumn extends Migration
 {
     /**
      * Run the migrations.
      *
      * @return void
      */
-     public function up()
+    public function up()
     {
-            Schema::table('salaries', function($table) {
+       Schema::table('prlemployeemaster', function($table) {
           
-            $table->integer('changedamount')->after('changedby')->default(0);
-           
-            
+            $table->string('reportto')->after('companyid')->nullable();
+                 
     });
     }
 
@@ -28,9 +27,9 @@ class AddAmountChangedToSalaryTable extends Migration
      */
     public function down()
     {
-        Schema::table('salaries', function($table) {
-        $table->dropColumn('changedamount');
-       
-    });
+        
+        Schema::table('prlemployeemaster', function($table) {
+        $table->dropColumn('reportto');
+     });
     }
 }

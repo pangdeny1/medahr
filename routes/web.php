@@ -228,7 +228,23 @@ Route::group(['middleware'=> ['auth', 'activated', 'role:admin']], function () {
     Route::get('deleteinstitution/{id}','institution\institutescontroller@destroy');
     Route::get('createinstitution','institution\institutescontroller@create');
     Route::get('viewinstitutions','institution\institutescontroller@index');
+//dependants
+    Route::post('adddependant','dependant\dependantscontroller@store');
+    Route::get('showdependant/{id}','dependant\dependantscontroller@show');
+    Route::get('editdependant/{id}','dependant\dependantscontroller@edit');
+    Route::post('updatedependant/{id}','dependant\dependantscontroller@update');
+    Route::get('deletedependant/{id}','dependant\dependantscontroller@destroy');
+    Route::get('createdependant','dependant\dependantscontroller@create');
+    Route::get('viewdependants','dependant\dependantscontroller@index');
 
+    //work Experience
+    Route::post('addworkexperience','workexperience\workexperiencecontroller@store');
+    Route::get('showworkexperience/{id}','workexperience\workexperiencecontroller@show');
+    Route::get('editworkexperience/{id}','workexperience\workexperiencecontroller@edit');
+    Route::post('updateworkexperience/{id}','workexperience\workexperiencecontroller@update');
+    Route::get('deleteworkexperience/{id}','workexperience\workexperiencecontroller@destroy');
+    Route::get('createworkexperience','workexperience\workexperiencecontroller@create');
+    Route::get('viewworkexpiriences','workexperience\workexperiencecontroller@index');
 
 
     Route::get('testreport','report\reportcontroller@test');

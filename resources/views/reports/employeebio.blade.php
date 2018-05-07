@@ -2,8 +2,8 @@
 /*header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
 header('Content-Disposition: attachment;filename="' . $fileName . '"'); */
 $fileName="dennis.doc";
-header('Content-Type: application/vnd.openxmlformats-officedocument.wordprocessingml.document');
-header('Content-Disposition: attachment;filename="' . $fileName . '"');
+//header('Content-Type: application/vnd.openxmlformats-officedocument.wordprocessingml.document');
+//header('Content-Disposition: attachment;filename="' . $fileName . '"');
 
 ?><html xmlns:v="urn:schemas-microsoft-com:vml"
 xmlns:o="urn:schemas-microsoft-com:office:office"
@@ -464,7 +464,7 @@ ul
  </tr>
 </table>
 
-<p class=MsoNormal><o:p>space1</o:p></p>
+<p class=MsoNormal><o:p></o:p></p>
 
 <table class=MsoNormalTable border=0 cellspacing=0 cellpadding=0 width="100%"
  style='width:100.0%;border-collapse:collapse;mso-padding-alt:0in 0in 0in 0in'>
@@ -491,19 +491,19 @@ ul
  </tr>
 </table>
 
-<p class=MsoNormal><o:p>space4</o:p></p>
+<p class=MsoNormal><o:p></o:p></p>
 
 <table class=MsoNormalTable border=0 cellspacing=0 cellpadding=0 width="100%"
  style='width:100.0%;border-collapse:collapse;mso-padding-alt:0in 0in 0in 0in'>
  <tr style='mso-yfti-irow:0;mso-yfti-firstrow:yes;height:.3in'>
   <td width=102 valign=bottom style='width:76.5pt;padding:0in 0in 0in 0in;
   height:.3in'>
-  <p class=MsoNormal>Email</p>
+  <p class=MsoNormal>Personal Email</p>
   </td>
   <td width=522 valign=bottom style='width:391.5pt;border:none;border-bottom:
   solid windowtext 1.0pt;mso-border-bottom-alt:solid windowtext .5pt;
   padding:0in 0in 0in 0in;height:.3in'>
-  <p class=FieldText><o:p>{{$employee->email1}}</o:p></p>
+  <p class=FieldText><o:p>{{$employee->email2}}</o:p></p>
   </td>
  </tr>
  <tr style='mso-yfti-irow:1;mso-yfti-lastrow:yes;height:.35in'>
@@ -647,12 +647,12 @@ ul
   </td>
   <td width=86 valign=bottom style='width:64.5pt;padding:0in 0in 0in 0in;
   height:.3in'>
-  <p class=MsoNormal>Email:</p>
+  <p class=MsoNormal>Work Email:</p>
   </td>
   <td width=244 valign=bottom style='width:183.0pt;border:none;border-bottom:
   solid windowtext 1.0pt;mso-border-bottom-alt:solid windowtext .5pt;
   padding:0in 0in 0in 0in;height:.3in'>
-  <p class=FieldText><o:p>space19</o:p></p>
+  <p class=FieldText><o:p>{{$employee->email1}}</o:p></p>
   </td>
  </tr>
  <tr style='mso-yfti-irow:3;height:.3in'>
@@ -663,7 +663,7 @@ ul
   <td width=192 colspan=2 valign=bottom style='width:2.0in;border:none;
   border-bottom:solid windowtext 1.0pt;mso-border-bottom-alt:solid windowtext .5pt;
   padding:0in 0in 0in 0in;height:.3in'>
-  <p class=FieldText><o:p>space20</o:p></p>
+  <p class=FieldText><o:p>{{$employee->phone1}}</o:p></p>
   </td>
   <td width=86 valign=bottom style='width:64.5pt;padding:0in 0in 0in 0in;
   height:.3in'>
@@ -672,18 +672,18 @@ ul
   <td width=244 valign=bottom style='width:183.0pt;border:none;border-bottom:
   solid windowtext 1.0pt;mso-border-bottom-alt:solid windowtext .5pt;
   padding:0in 0in 0in 0in;height:.3in'>
-  <p class=FieldText><o:p>space21</o:p></p>
+  <p class=FieldText><o:p>{{$employee->phone2}}</o:p></p>
   </td>
  </tr>
  <tr style='mso-yfti-irow:4;mso-yfti-lastrow:yes;height:.3in'>
   <td width=102 valign=bottom style='width:76.5pt;padding:0in 0in 0in 0in;
   height:.3in'>
-  <p class=MsoNormal>Start Date:</p>
+  <p class=MsoNormal>Contract Date:</p>
   </td>
   <td width=192 colspan=2 valign=bottom style='width:2.0in;border:none;
   border-bottom:solid windowtext 1.0pt;mso-border-bottom-alt:solid windowtext .5pt;
   padding:0in 0in 0in 0in;height:.3in'>
-  <p class=FieldText><o:p>{{$employee->hiredate}}</o:p></p>
+  <p class=FieldText>Start Date:: <o:p>{{$employee->hiredate}}  End  Date :: {{$employee->terminatedate}}</o:p></p>
   </td>
   <td width=86 valign=bottom style='width:64.5pt;padding:0in 0in 0in 0in;
   height:.3in'>
