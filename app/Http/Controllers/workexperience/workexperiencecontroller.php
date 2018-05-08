@@ -42,7 +42,7 @@ class workexperiencecontroller extends Controller
 
         $WorkExperience= new WorkExperience([
             'employeeid'     => $request->input('employee'),
-            'companyname'     => $request->input('employee'),
+            'companyname'     => $request->input('CompanyName'),
             'startdate'     => $request->input('StartDate'),
             'enddate'     => $request->input('EndDate'),
             'email'     => $request->input('Email'),
@@ -81,13 +81,10 @@ class workexperiencecontroller extends Controller
      public function edit($WorkExperience_id)
     {   
     	$pagetitle="WorkExperience Edit";
-        $WorkExperience=WorkExperience::where('id', $WorkExperience_id)->firstOrFail();
+        $workexperience=WorkExperience::where('id', $WorkExperience_id)->firstOrFail();
         $employees=Employee::All();
-        $yesornos=YesOrNo::All();
-        $WorkExperiencetypes=WorkExperiencetype::All();
-        $genders=gender::All();
 
-        return view('workexperience.edit', compact('pagetitle','WorkExperience','employees','yesornos','WorkExperiencetypes','genders'));
+        return view('workexperience.edit', compact('pagetitle','workexperience','employees'));
    }
 
 
@@ -96,43 +93,41 @@ class workexperiencecontroller extends Controller
     {
         $this->validate($request, [
             'employee'     => 'required',
-            'FullName'     => 'required',
-            'DOB'     => 'required',
-            'Gender'     => 'required',
-            'WorkExperienceType'=>'required'
+            'CompanyName'     => 'required',
+            'StartDate'     => 'required',
+            'EndDate'     => 'required'
         ]);
        
 
             $WorkExperience = WorkExperience::where('id', $WorkExperience_id)->firstOrFail();
 
-             $WorkExperience->fullname    = $request->input('FullName');
             $WorkExperience->employeeid     = $request->input('employee');
-            $WorkExperience->deptypeid     = $request->input('WorkExperienceType');
-            $WorkExperience->sex            =$request->input('Gender');
-           $WorkExperience->email     = $request->input('Email');
-           $WorkExperience->phone     = $request->input('Phone');
-           $WorkExperience->dob    = $request->input('DOB');
-            $WorkExperience->phone     = $request->input('Phone');
-            $WorkExperience->nextofkeen=$request->input('NextOfKin');
-
+            $WorkExperience->companyname    = $request->input('CompanyName');
+            $WorkExperience->startdate      = $request->input('StartDate');
+            $WorkExperience->enddate        = $request->input('EndDate');
+            $WorkExperience->email          = $request->input('Email');
+            $WorkExperience->website        = $request->input('Website');
         
              $WorkExperience->save();
 
        // $mailer->sendTicketInformation(Auth::user(), $ticket);
-         $WorkExperiences=WorkExperience::All();
+         $workexperiences=WorkExperience::All();
          $pagetitle="WorkExperiences ";
          //return view('workexperience.index',compact('WorkExperiences','pagetitle'))->with("status", $request->input('WorkExperienceDesc')." WorkExperience  Added Successfully.");
-        return redirect()->back()->with("status", $request->input('WorkExperienceDesc')." WorkExperience  Updated Successfully.");
+         $pagetitle="WorkExperiences ";
+         $employees=Employee::All();
+        return view('workexperience.index',compact('pagetitle','workexperiences','employees'))->with("status", $request->input('WorkExperienceDesc')." WorkExperience  Updated Successfully.");
+        //return redirect()->back()->with("status", $request->input('WorkExperienceDesc')." WorkExperience  Updated Successfully.");
        // return redirect()->back()->with("status", "A WorkExperience Title has been Updated.");
     }
 
 
      public function destroy($WorkExperience_id)
         {
-    $WorkExperiences = WorkExperience::findOrFail($WorkExperience_id);
+    $workexperiences = WorkExperience::findOrFail($WorkExperience_id);
 
-    $WorkExperiences->delete();
-
+    $workexperiences->delete();
+    
       // return redirect()->route('tasks.index');
      return redirect()->back()->with("status", "WorkExperience successfully deleted!");
            }

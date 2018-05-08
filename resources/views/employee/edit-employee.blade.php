@@ -40,6 +40,7 @@
                                     </ul>
                                     <div class="panel-body tab-content">
                                         <div class="tab-pane active" id="tab-first">
+
                                               <p>Fill all Mandatory Fields</p>
 
                                             <div class="form-group">
@@ -358,7 +359,8 @@
                                         </div>
 
                                          <div class="tab-pane active" id="tab-fifth">
-                                         Fifth
+                                         
+                                         @include('workexperience.employeeexperience')
 
                                         </div>
 
@@ -524,7 +526,9 @@
 
                                          <div class="tab-pane active" id="tab-ninth">
                                         
-                                       Ninith
+                                       <img src="{{asset('assets/images/users/no-image.jpg')}}" alt="J"/> 
+                                   </br>
+                                       <a href="{{url('createimage')}}"> Add new Image </a>
                                         </div>
 
 

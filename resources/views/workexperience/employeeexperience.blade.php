@@ -1,17 +1,4 @@
- @extends('layouts.pagelayout')
-
-@section('template_title')
-  Create New User
-@endsection
-
-@section('template_fastload_css')
-@endsection
-
-@section('content')
-    <div class="row">
-        <div class="col-md-10 col-md-offset-1">
-            <div class="panel panel-default">
-                <div class="panel-heading">
+ <div class="panel-heading">
                     <i class="fa fa-workexperience"> <a href="{{url('createworkexperience')}}">Add New workexperience </a></i>
                 </div>
 
@@ -73,7 +60,3 @@
                        
                     @endif
                 </div>
-            </div>
-        </div>
-    </div>
-@endsection

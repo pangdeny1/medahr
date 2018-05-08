@@ -16,18 +16,18 @@
                 <div class="panel-body">
                     @include('includes.flash');
 
-                    <form class="form-horizontal" role="form" method="POST" action="{{ url('/updatedependant/'.$dependant->id) }}">
+                    <form class="form-horizontal" role="form" method="POST" action="{{ url('/updateworkexperience/'.$workexperience->id) }}">
                         {!! csrf_field() !!}
 
-                         <div class="form-group{{ $errors->has('FullName') ? ' has-error' : '' }}">
-                            <label for="title" class="col-md-4 control-label">Full Name</label>
+                         <div class="form-group{{ $errors->has('CompanyName') ? ' has-error' : '' }}">
+                            <label for="title" class="col-md-4 control-label">Company</label>
 
                             <div class="col-md-6">
-                                <input type="text" name="FullName" class="form-control" value="{{$dependant->fullname}}">
+                                <input type="text" name="CompanyName" class="form-control" value="{{$workexperience->companyname}}">
 
-                                @if ($errors->has('FullName'))
+                                @if ($errors->has('CompanyName'))
                                     <span class="help-block">
-                                        <strong>{{ $errors->first('FullName') }}</strong>
+                                        <strong>{{ $errors->first('CompanyName') }}</strong>
                                     </span>
                                 @endif
                             </div>
@@ -38,18 +38,18 @@
                                                 <div class="col-md-6">
                                                     <select class="form-control select" name="employee">
 
-                                                       <option value=""> Select employee </option>
+                                                       <option value=""> Select Employee </option>
+                                                          <option value=""> Select employee </option>
                                                           @foreach($employees as $employee)
 
-                                                           @if($employee->employeeid==$dependant->employeeid)
+                                                           @if($employee->employeeid==$workexperience->employeeid)
                                                         
-                                                         <option selected value="{{ $dependant->employeeid }}">{{ $employee->firstname }} {{ $employee->lastname }}</option>
+                                                         <option selected value="{{ $workexperience->employeeid }}">{{ $employee->firstname }} {{ $employee->lastname }}</option>
                                                         @else
                                                          <option value="{{ $employee->employeeid }}">{{ $employee->firstname }} {{ $employee->lastname }}</option>
                                                           @endif  
                                                        
-                                                          @endforeach
-                                                                                                             
+                                                          @endforeach                                           
                                                     </select>
                                                 </div> 
                                                 @if ($errors->has('employee'))
@@ -60,93 +60,41 @@
                             </div> 
 
 
-                             <div class="form-group{{ $errors->has('DependantType') ? ' has-error' : '' }}">                                      
-                                                <label for="title" class="col-md-4 control-label">dependanttype  </label>
-                                                <div class="col-md-6">
-                                                    <select class="form-control select" name="DependantType">
-
-                                                       <option value=""> Select  </option>
-                                                          @foreach($dependanttypes as $dependanttype)
-                                                            
-                                                            @if($dependanttype->id==$dependant->deptypeid)
-                                                        
-                                                         <option selected value="{{ $dependant->deptypeid }}">{{$dependanttype->dependanttype}}</option>
-                                                        @else
-                                                         <option value="{{ $dependanttype->id }}">{{ $dependanttype->dependanttype}}</option>
-                                                          @endif 
-                                                         
-                                                         
-                                                          @endforeach
-                                                                                                             
-                                                    </select>
-                                                </div> 
-                                                @if ($errors->has('DependantType'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('DependantType') }}</strong>
-                                    </span>
-                                @endif
-                            </div> 
-
-                            <div class="form-group{{ $errors->has('Gender') ? ' has-error' : '' }}">                                      
-                                                <label for="title" class="col-md-4 control-label">Gender</label>
-                                                <div class="col-md-6">
-                                                    <select class="form-control select" name="Gender">
-
-                                                       <option value=""> Select gender </option>
-                                                          @foreach($genders as $gender)
-
-                                                          @if($gender->id==$dependant->sex)
-                                                        
-                                                         <option selected value="{{ $dependant->sex }}">{{$gender->name}}</option>
-                                                        @else
-                                                        <option value="{{ $gender->id }}">{{ $gender->name }}</option>
-                                                          @endif 
-                                                          @endforeach
-                                                                                                             
-                                                    </select>
-                                                </div> 
-                                                @if ($errors->has('Gender'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('Gender') }}</strong>
-                                    </span>
-                                @endif
-                            </div> 
-                             
                             
                              
-                            <div class="form-group{{ $errors->has('DOB') ? ' has-error' : '' }}">
-                            <label for="title" class="col-md-4 control-label">Date of Birth</label>
+                            <div class="form-group{{ $errors->has('StartDate') ? ' has-error' : '' }}">
+                            <label for="title" class="col-md-4 control-label">Start Date</label>
 
                             <div class="col-md-6">
-                                <input type="text" name="DOB" class="form-control datepicker" value="{{$dependant->dob}}">
+                                <input type="text" name="StartDate" class="form-control datepicker" value="{{$workexperience->startdate}}">
 
-                                @if ($errors->has('DOB'))
+                                @if ($errors->has('StartDate'))
                                     <span class="help-block">
-                                        <strong>{{ $errors->first('DOB') }}</strong>
+                                        <strong>{{ $errors->first('StartDate') }}</strong>
                                     </span>
                                 @endif
                             </div>
                         </div>
 
-                         <div class="form-group{{ $errors->has('Phone') ? ' has-error' : '' }}">
-                            <label for="title" class="col-md-4 control-label">Phone</label>
+                        <div class="form-group{{ $errors->has('EndDate') ? ' has-error' : '' }}">
+                            <label for="title" class="col-md-4 control-label">End Date</label>
 
                             <div class="col-md-6">
-                                <input type="text" name="Phone" class="form-control" value="{{$dependant->phone}}">
+                                <input type="text" name="EndDate" class="form-control datepicker" value="{{$workexperience->enddate}}">
 
-                                @if ($errors->has('Phone'))
+                                @if ($errors->has('EndDate'))
                                     <span class="help-block">
-                                        <strong>{{ $errors->first('Phone') }}</strong>
+                                        <strong>{{ $errors->first('EndDate') }}</strong>
                                     </span>
                                 @endif
                             </div>
                         </div>
 
-                        <div class="form-group{{ $errors->has('Email') ? ' has-error' : '' }}">
+                         <div class="form-group{{ $errors->has('Email') ? ' has-error' : '' }}">
                             <label for="title" class="col-md-4 control-label">Email</label>
 
                             <div class="col-md-6">
-                                <input type="text" name="Email" class="form-control"  value="{{$dependant->phone}}">
+                                <input type="text" name="Email" class="form-control" value="{{$workexperience->email}}">
 
                                 @if ($errors->has('Email'))
                                     <span class="help-block">
@@ -156,19 +104,21 @@
                             </div>
                         </div>
 
-                         <div class="form-group{{ $errors->has('NextOfKin') ? ' has-error' : '' }}">
-                            <label for="title" class="col-md-4 control-label">Is Next of Kin ?</label>
+                        <div class="form-group{{ $errors->has('Website') ? ' has-error' : '' }}">
+                            <label for="title" class="col-md-4 control-label">Website</label>
 
                             <div class="col-md-6">
-                               
- <label class="check"><input type="checkbox" class="icheckbox" name="NextOfKin" value=1 @if($dependant->nextofkeen==1) {{"checked='checked'"}} @endif /> Tick if is Next of Kin</label>
-                                @if ($errors->has('NextOfKin'))
+                                <input type="text" name="Website" class="form-control" value="{{$workexperience->website}}">
+
+                                @if ($errors->has('Website'))
                                     <span class="help-block">
-                                        <strong>{{ $errors->first('NextOfKin') }}</strong>
+                                        <strong>{{ $errors->first('Website') }}</strong>
                                     </span>
                                 @endif
                             </div>
                         </div>
+
+                       
  
 
                         <div class="form-group">

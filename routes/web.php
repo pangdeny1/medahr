@@ -254,5 +254,12 @@ Route::group(['middleware'=> ['auth', 'activated', 'role:admin']], function () {
 
      Route::post('employeebio','report\reportscontroller@employeebio');
      Route::get('reportform','report\reportscontroller@reportform');
+
+     Route::get('form','form\FormController@create');
+     Route::post('form','form\FormController@store');
+     Route::get('formlist','form\FormController@index');
+     Route::get('createimage','form\FormController@createimage');
+     Route::post('updateimage','form\FormController@updateimage');
+     
      
 });

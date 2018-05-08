@@ -17,6 +17,7 @@ use App\Models\institute;
 use App\Models\qualificationlevel;
 use App\Models\job;
 use App\Models\Dependant;
+use App\Models\WorkExperience;
 use App\Models\Dependanttype;
 use App\Models\Jobgroup;
 use App\Models\gender;
@@ -254,6 +255,7 @@ if ($validator->fails()) {
         $qualifications=qualification::All();
         $institutions=institute::All();
         $levels=qualificationlevel::All();
+        $workexperiences=WorkExperience::where('employeeid', $employeeid)->get();
 
         //$selectedCountry=Country::first()->country;
 
@@ -289,7 +291,8 @@ if ($validator->fails()) {
             'qualifications'        =>$qualifications,
             'institutions'          =>$institutions,
             'levels'                =>$levels,
-            'employeequalifications'=>$employeequalifications
+            'employeequalifications'=>$employeequalifications,
+            'workexperiences'   =>$workexperiences
 
         ];
 
