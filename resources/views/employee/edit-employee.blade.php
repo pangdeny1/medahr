@@ -24,15 +24,18 @@
                                 <div class="panel panel-default tabs">                            
                                     <ul class="nav nav-tabs" role="tablist">
                                         <li class="active"><a href="#tab-first" role="tab" data-toggle="tab">Personal</a></li>
+                                        <li><a href="#tab-tenth" role="tab" data-toggle="tab">Dates</a></li>
                                         <li><a href="#tab-second" role="tab" data-toggle="tab">Salary</a></li>
                                         <li><a href="#tab-eleventh" role="tab" data-toggle="tab">Bank Info</a></li>
-                                        <li><a href="#tab-tenth" role="tab" data-toggle="tab">Dates</a></li>
+                                        <li><a href="#tab-eight" role="tab" data-toggle="tab">Membership</a></li>
+                                        
                                         <li><a href="#tab-third" role="tab" data-toggle="tab">Contacts</a></li>
+                                        <li><a href="#tab-seventh" role="tab" data-toggle="tab">Emergence Cont</a></li>
                                         <li><a href="#tab-fourth" role="tab" data-toggle="tab">Education</a></li>
                                         <li><a href="#tab-fifth" role="tab" data-toggle="tab">Work experience</a></li>
                                         <li><a href="#tab-sixth" role="tab" data-toggle="tab">Dependants</a></li>
-                                        <!--<li><a href="#tab-seventh" role="tab" data-toggle="tab">Attachements</a></li> -->
-                                        <li><a href="#tab-eight" role="tab" data-toggle="tab">Membership</a></li>
+                                        
+                                        
                                         <li><a href="#tab-ninth" role="tab" data-toggle="tab">Picture</a></li>
                                         
 
@@ -42,6 +45,32 @@
                                         <div class="tab-pane active" id="tab-first">
 
                                               <p>Fill all Mandatory Fields</p>
+
+                                              <div class="form-group">
+                                                <label class="col-md-3 col-xs-12 control-label">Employee Code</label>
+                                                <div class="col-md-6 col-xs-12">                                                                                                                                                        
+                                                    <input type="text" class="form-control" name="EmployeeCode" value="{{ $employee->employeecode}}"/>                                                    
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                           <label class="col-md-3 col-xs-12 control-label">Employee Title</label>
+                                                <div class="col-md-6 col-xs-12">                                                                                                                                                        
+                                                    <select class="form-control select" name="Title">
+                                                        @foreach($titles as $title)
+
+                                                         @if($title->id==$employee->tittle)
+                                                        
+                                                        <option  value='{{$employee->tittle}}' selected="selected">{{$title->titlename}}</option>
+                                                            @endif  
+                                                         <option value="{{ $title->id }}">{{ $title->titlename }}</option>
+                                                          @endforeach
+
+                                                        </option>
+                                                                                                             
+                                                    </select>                                                   
+                                                </div>
+                                            </div>
 
                                             <div class="form-group">
                                                 <label class="col-md-3 col-xs-12 control-label">First Name</label>
@@ -146,9 +175,7 @@
                                                     </select>
                                                 </div>                                          
                                             </div>
-
-
-                                            <div class="form-group">                                        
+                                             <div class="form-group">                                        
                                                 <label class="col-md-3 col-xs-12 control-label">Supervisor</label>
                                                 <div class="col-md-5">
                                                     <select id="category" type="text" class="form-control" name="reportto">
@@ -160,6 +187,9 @@
                                 </select>
                                                 </div>                                          
                                             </div>
+
+
+                                           
             <div class="form-group">                                        
                                                 <label class="col-md-3 col-xs-12 control-label">Employee Status</label>
                                                 <div class="col-md-2">
@@ -246,7 +276,14 @@
                                         </div>                                        
                                         <div class="tab-pane" id="tab-third">
                                            <p>Fill all Mandatory Fields</p>
-                                            
+
+                                           <div class="form-group">
+                                                <label class="col-md-3 col-xs-12 control-label">Government ID</label>
+                                                <div class="col-md-6 col-xs-12">                                                                                                                                                        
+                                                    <input type="text" class="form-control" name="GovernmentID" value="{{ $employee->governmentid}}"/>                                                    
+                                                </div>
+                                            </div>
+ 
                                             <div class="form-group">
                                                 <label class="col-md-3 col-xs-12 control-label">Work E-mail</label>
                                                 <div class="col-md-6 col-xs-12">                                                                                                                                                        
@@ -372,7 +409,60 @@
 
                                          <div class="tab-pane active" id="tab-seventh">
                                          
-                                         Seventh
+                                          <div class="form-group">
+                                                <label class="col-md-3 col-xs-12 control-label">Spouse Name</label>
+                                                <div class="col-md-6 col-xs-12">                                                                                                                                                        
+                                                    <input type="text" class="form-control" name="SpouseName" value="{{ $employee->spousename}}"/>                                                    
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-md-3 col-xs-12 control-label">Spouse Phone</label>
+                                                <div class="col-md-6 col-xs-12">                                                                                                                                                        
+                                                    <input type="text" class="form-control" name="SpousePhone" value="{{ $employee->spousephone}}"/>                                                    
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-md-3 col-xs-12 control-label">Spouse Email</label>
+                                                <div class="col-md-6 col-xs-12">                                                                                                                                                        
+                                                    <input type="text" class="form-control" name="SpouseEmail" value="{{ $employee->spouseemail}}"/>                                                    
+                                                </div>
+                                            </div>
+
+                                          <div class="form-group">
+                                                <label class="col-md-3 col-xs-12 control-label">Spouse Address</label>
+                                                <div class="col-md-6 col-xs-12">                                            
+                                                    <textarea class="form-control" rows="5" name="SpouseAddress">{{$employee->spouseaddress}}</textarea>
+                                                    
+                                                </div>
+                                            </div> 
+
+                                            <div class="form-group">
+                                                <label class="col-md-3 col-xs-12 control-label">Next of Kin Name</label>
+                                                <div class="col-md-6 col-xs-12">                                                                                                                                                        
+                                                    <input type="text" class="form-control" name="NextOfKinName" value="{{ $employee->nextofkinname}}"/>                                                    
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-md-3 col-xs-12 control-label">Next of Kin Phone</label>
+                                                <div class="col-md-6 col-xs-12">                                                                                                                                                        
+                                                    <input type="text" class="form-control" name="NextOfKinPhone" value="{{ $employee->nextofkinphone}}"/>                                                    
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-md-3 col-xs-12 control-label">Next of Kin Email</label>
+                                                <div class="col-md-6 col-xs-12">                                                                                                                                                        
+                                                    <input type="text" class="form-control" name="NextOfKinEmail" value="{{ $employee->nextofkinemail}}"/>                                                    
+                                                </div>
+                                            </div>
+
+                                          <div class="form-group">
+                                                <label class="col-md-3 col-xs-12 control-label">Next of Kin Address</label>
+                                                <div class="col-md-6 col-xs-12">                                            
+                                                    <textarea class="form-control" rows="5" name="NextOfKinAdress">{{$employee->nextofkinaddress}}</textarea>
+                                                    
+                                                </div>
+                                            </div>     
+
 
                                         </div>
 
@@ -526,9 +616,16 @@
 
                                          <div class="tab-pane active" id="tab-ninth">
                                         
-                                       <img src="{{asset('assets/images/users/no-image.jpg')}}" alt="J"/> 
+                                       <!--<img src="{{asset('assets/images/users/no-image.jpg')}}" alt="J"/>  -->
+                                       
+                                        <?php $data = json_decode($employee->employeepicture); ?>
+
+                                        
+                                       <img src="{{asset('assets/images/employees/'.$data[0])}}" alt="J"/>
+                                      
                                    </br>
-                                       <a href="{{url('createimage')}}"> Add new Image </a>
+                                       <a href="{{url('createimage/'.$employee->employeeid)}}"> Add new Image </a>
+                                       {{$employee->firstname." ".$employee->lastname}}
                                         </div>
 
 

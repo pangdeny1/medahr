@@ -36,6 +36,7 @@ class workexperiencecontroller extends Controller
            
             'employee'     => 'required',
             'CompanyName'     => 'required',
+            'JobTitle'     => 'required',
             'StartDate'     => 'required',
             'EndDate'     => 'required'
         ]);
@@ -45,6 +46,7 @@ class workexperiencecontroller extends Controller
             'companyname'     => $request->input('CompanyName'),
             'startdate'     => $request->input('StartDate'),
             'enddate'     => $request->input('EndDate'),
+            'jobtitle'     => $request->input('JobTitle'),
             'email'     => $request->input('Email'),
             'website'     => $request->input('Website')
            
@@ -94,6 +96,7 @@ class workexperiencecontroller extends Controller
         $this->validate($request, [
             'employee'     => 'required',
             'CompanyName'     => 'required',
+            'JobTitle'     => 'required',
             'StartDate'     => 'required',
             'EndDate'     => 'required'
         ]);
@@ -103,6 +106,7 @@ class workexperiencecontroller extends Controller
 
             $WorkExperience->employeeid     = $request->input('employee');
             $WorkExperience->companyname    = $request->input('CompanyName');
+            $WorkExperience->jobtitle       = $request->input('JobTitle');
             $WorkExperience->startdate      = $request->input('StartDate');
             $WorkExperience->enddate        = $request->input('EndDate');
             $WorkExperience->email          = $request->input('Email');

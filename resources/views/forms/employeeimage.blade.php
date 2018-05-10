@@ -35,6 +35,26 @@
 <form method="post" action="{{url('updateimage')}}" enctype="multipart/form-data">
   {{csrf_field()}}
 
+     
+           <div class="input-group control-group increment{{ $errors->has('employee') ? ' has-error' : '' }}">                                      
+                                                <label for="title" class="col-md-4 control-label">Employee</label>
+                                                <div class="col-md-6">
+                                                    <select class="form-control select" name="employee">
+
+                                                         <option value="{{ $employees->employeeid }}">{{ $employees->firstname }} {{ $employees->lastname }}</option>
+                                                         
+                                                                                                             
+                                                    </select>
+                                                </div> 
+                                                @if ($errors->has('employee'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('employee') }}</strong>
+                                    </span>
+                                @endif
+          <div class="input-group-btn"> 
+            
+          </div>
+        </div>
         <div class="input-group control-group increment" >
           <input type="file" name="filename[]" class="form-control">
           <div class="input-group-btn"> 

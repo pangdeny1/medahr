@@ -348,22 +348,22 @@ ul
  <tr style='mso-yfti-irow:0;mso-yfti-firstrow:yes;height:.3in'>
   <td width=102 valign=bottom style='width:76.5pt;padding:0in 0in 0in 0in;
   height:.3in'>
-  <p class=MsoNormal>Full Name:</p>
+  <p class=MsoNormal>Full Name: </p>
   </td>
   <td width=278 valign=bottom style='width:208.5pt;border:none;border-bottom:
   solid windowtext 1.0pt;mso-border-bottom-alt:solid windowtext .5pt;
   padding:0in 0in 0in 0in;height:.3in'>
-  <p class=FieldText>{{$employee->firstname}} </o:p></p>
+  <p class=FieldText>{{$employee->titlename}} : {{$employee->lastname}} </o:p></p>
   </td>
   <td width=144 valign=bottom style='width:108.25pt;border:none;border-bottom:
   solid windowtext 1.0pt;mso-border-bottom-alt:solid windowtext .5pt;
   padding:0in 0in 0in 0in;height:.3in'>
-  <p class=FieldText>{{$employee->middlename}} </o:p></p>
+  <p class=FieldText>{{$employee->firstname}} </o:p></p>
   </td>
   <td width=100 valign=bottom style='width:74.75pt;border:none;border-bottom:
   solid windowtext 1.0pt;mso-border-bottom-alt:solid windowtext .5pt;
   padding:0in 0in 0in 0in;height:.3in'>
-  <p class=FieldText><o:p>{{$employee ->lastname}} </o:p></p>
+  <p class=FieldText><o:p>{{$employee ->middlename}} </o:p></p>
   </td>
  </tr>
  <tr style='mso-yfti-irow:1;mso-yfti-lastrow:yes'>
@@ -509,17 +509,17 @@ ul
  <tr style='mso-yfti-irow:1;mso-yfti-lastrow:yes;height:.35in'>
   <td width=102 valign=bottom style='width:76.5pt;padding:0in 0in 0in 0in;
   height:.35in'>
-  <p class=MsoNormal>SSN or Gov’t ID:</p>
+  <p class=MsoNormal> Gov’t ID:</p>
   </td>
   <td width=522 valign=bottom style='width:391.5pt;border:none;border-bottom:
   solid windowtext 1.0pt;mso-border-bottom-alt:solid windowtext .5pt;
   padding:0in 0in 0in 0in;height:.35in'>
-  <p class=FieldText><o:p>space6</o:p></p>
+  <p class=FieldText><o:p>{{$employee->governmentid}}</o:p></p>
   </td>
  </tr>
 </table>
 
-<p class=MsoNormal><o:p>space7</o:p></p>
+<p class=MsoNormal><o:p></o:p></p>
 
 <table class=MsoNormalTable border=0 cellspacing=0 cellpadding=0 width="100%"
  style='width:100.0%;border-collapse:collapse;mso-padding-alt:0in 0in 0in 0in'>
@@ -546,7 +546,7 @@ ul
  </tr>
 </table>
 
-<p class=MsoNormal><o:p>space10</o:p></p>
+<p class=MsoNormal><o:p></o:p></p>
 
 <table class=MsoNormalTable border=0 cellspacing=0 cellpadding=0 width="100%"
  style='width:100.0%;border-collapse:collapse;mso-padding-alt:0in 0in 0in 0in'>
@@ -559,7 +559,7 @@ ul
   <td width=522 valign=bottom style='width:391.5pt;border:none;border-bottom:
   solid windowtext 1.0pt;mso-border-bottom-alt:solid windowtext .5pt;
   padding:0in 0in 0in 0in;height:.3in'>
-  <p class=FieldText><o:p>space10</o:p></p>
+  <p class=FieldText><o:p>{{$employee->spousename}}</o:p></p>
   </td>
  </tr>
 </table>
@@ -572,21 +572,21 @@ ul
   height:.3in'>
   <td width=102 valign=bottom style='width:76.5pt;padding:0in 0in 0in 0in;
   height:.3in'>
-  <p class=MsoNormal>Spouse’s Employer:</p>
+  <p class=MsoNormal>Spouse’s Address:</p>
   </td>
   <td width=208 valign=bottom style='width:155.65pt;border:none;border-bottom:
   solid windowtext 1.0pt;mso-border-bottom-alt:solid windowtext .5pt;
   padding:0in 0in 0in 0in;height:.3in'>
-  <p class=FieldText><o:p>space12</o:p></p>
+  <p class=FieldText><o:p>{{$employee->spouseaddress}}</o:p></p>
   </td>
   <td width=132 valign=bottom style='width:99.15pt;padding:0in 0in 0in 0in;
   height:.3in'>
-  <p class=MsoNormal>Spouse’s Work Phone:</p>
+  <p class=MsoNormal>Spouse’s Email and Phone:</p>
   </td>
   <td width=182 valign=bottom style='width:136.7pt;border:none;border-bottom:
   solid windowtext 1.0pt;mso-border-bottom-alt:solid windowtext .5pt;
   padding:0in 0in 0in 0in;height:.3in'>
-  <p class=FieldText><o:p>space13</o:p></p>
+  <p class=FieldText><o:p>{{$employee->spouseemail.' / '.$employee->spousephone}}</o:p></p>
   </td>
  </tr>
 </table>
@@ -706,7 +706,7 @@ ul
  <![endif]>
 </table>
 
-<h2>Emergency Contact Information</h2>
+<h2>Next of kin(Person to be Notified incase of Emergence)</h2>
 
 <table class=MsoNormalTable border=0 cellspacing=0 cellpadding=0 width="100%"
  style='width:100.0%;border-collapse:collapse;mso-padding-alt:0in 0in 0in 0in'>
@@ -718,40 +718,40 @@ ul
   <td width=290 valign=bottom style='width:217.35pt;border:none;border-bottom:
   solid windowtext 1.0pt;mso-border-bottom-alt:solid windowtext .5pt;
   padding:0in 0in 0in 0in;height:.3in'>
-  <p class=FieldText><o:p>space23</o:p></p>
+  <p class=FieldText><o:p>{{$employee->nextofkinname}}</o:p></p>
   </td>
   <td width=132 valign=bottom style='width:98.7pt;border:none;border-bottom:
   solid windowtext 1.0pt;mso-border-bottom-alt:solid windowtext .5pt;
   padding:0in 0in 0in 0in;height:.3in'>
-  <p class=FieldText><o:p>space24</o:p></p>
+  <p class=FieldText><o:p></o:p></p>
   </td>
   <td width=101 valign=bottom style='width:75.45pt;border:none;border-bottom:
   solid windowtext 1.0pt;mso-border-bottom-alt:solid windowtext .5pt;
   padding:0in 0in 0in 0in;height:.3in'>
-  <p class=FieldText><o:p>space25</o:p></p>
+  <p class=FieldText><o:p></o:p></p>
   </td>
  </tr>
  <tr style='mso-yfti-irow:1;mso-yfti-lastrow:yes;height:.1in'>
   <td width=102 valign=bottom style='width:76.5pt;padding:0in 0in 0in 0in;
   height:.1in'>
-  <p class=MsoNormal><o:p>space26</o:p></p>
+  <p class=MsoNormal><o:p></o:p></p>
   </td>
   <td width=290 valign=bottom style='width:217.35pt;padding:0in 0in 0in 0in;
   height:.1in'>
-  <h3>Last</h3>
+  <h3></h3>
   </td>
   <td width=132 valign=bottom style='width:98.7pt;padding:0in 0in 0in 0in;
   height:.1in'>
-  <h3>First</h3>
+  <h3></h3>
   </td>
   <td width=101 valign=bottom style='width:75.45pt;padding:0in 0in 0in 0in;
   height:.1in'>
-  <h3>M.I.</h3>
+  <h3></h3>
   </td>
  </tr>
 </table>
 
-<p class=MsoNormal><o:p>space27</o:p></p>
+<p class=MsoNormal><o:p></o:p></p>
 
 <table class=MsoNormalTable border=0 cellspacing=0 cellpadding=0 width="100%"
  style='width:100.0%;border-collapse:collapse;mso-padding-alt:0in 0in 0in 0in'>
@@ -763,59 +763,59 @@ ul
   <td width=421 valign=bottom style='width:316.05pt;border:none;border-bottom:
   solid windowtext 1.0pt;mso-border-bottom-alt:solid windowtext .5pt;
   padding:0in 0in 0in 0in;height:.2in'>
-  <p class=FieldText><o:p>space28</o:p></p>
+  <p class=FieldText><o:p>{{$employee->nextofkinaddress}}</o:p></p>
   </td>
   <td width=101 valign=bottom style='width:75.45pt;border:none;border-bottom:
   solid windowtext 1.0pt;mso-border-bottom-alt:solid windowtext .5pt;
   padding:0in 0in 0in 0in;height:.2in'>
-  <p class=FieldText><o:p>space29</o:p></p>
+  <p class=FieldText><o:p></o:p></p>
   </td>
  </tr>
  <tr style='mso-yfti-irow:1;mso-yfti-lastrow:yes;height:.1in'>
   <td width=102 valign=bottom style='width:76.5pt;padding:0in 0in 0in 0in;
   height:.1in'>
-  <p class=MsoNormal><o:p>space30</o:p></p>
+  <p class=MsoNormal><o:p></o:p></p>
   </td>
   <td width=421 valign=bottom style='width:316.05pt;border:none;mso-border-top-alt:
   solid windowtext .5pt;padding:0in 0in 0in 0in;height:.1in'>
-  <h3>Street Address</h3>
+  <h3> Address</h3>
   </td>
   <td width=101 valign=bottom style='width:75.45pt;padding:0in 0in 0in 0in;
   height:.1in'>
-  <h3>Apartment/Unit #</h3>
+  <h3></h3>
   </td>
  </tr>
 </table>
 
-<p class=MsoNormal><o:p>&space31</o:p></p>
+<p class=MsoNormal><o:p></o:p></p>
 
 <table class=MsoNormalTable border=0 cellspacing=0 cellpadding=0 width="100%"
  style='width:100.0%;border-collapse:collapse;mso-padding-alt:0in 0in 0in 0in'>
  <tr style='mso-yfti-irow:0;mso-yfti-firstrow:yes;height:.2in'>
   <td width=102 valign=bottom style='width:76.5pt;padding:0in 0in 0in 0in;
   height:.2in'>
-  <p class=FieldText><o:p>space32</o:p></p>
+  <p class=FieldText><o:p></o:p></p>
   </td>
   <td width=343 valign=bottom style='width:257.3pt;border:none;border-bottom:
   solid windowtext 1.0pt;mso-border-bottom-alt:solid windowtext .5pt;
   padding:0in 0in 0in 0in;height:.2in'>
-  <p class=FieldText><o:p>space33</o:p></p>
+  <p class=FieldText><o:p></o:p></p>
   </td>
   <td width=78 valign=bottom style='width:58.75pt;border:none;border-bottom:
   solid windowtext 1.0pt;mso-border-bottom-alt:solid windowtext .5pt;
   padding:0in 0in 0in 0in;height:.2in'>
-  <p class=FieldText><o:p>space34</o:p></p>
+  <p class=FieldText><o:p></o:p></p>
   </td>
   <td width=101 valign=bottom style='width:75.45pt;border:none;border-bottom:
   solid windowtext 1.0pt;mso-border-bottom-alt:solid windowtext .5pt;
   padding:0in 0in 0in 0in;height:.2in'>
-  <p class=FieldText><o:p>&space35</o:p></p>
+  <p class=FieldText><o:p></o:p></p>
   </td>
  </tr>
  <tr style='mso-yfti-irow:1;mso-yfti-lastrow:yes;height:.1in'>
   <td width=102 valign=bottom style='width:76.5pt;padding:0in 0in 0in 0in;
   height:.1in'>
-  <p class=MsoNormal><o:p>space36</o:p></p>
+  <p class=MsoNormal><o:p></o:p></p>
   </td>
   <td width=343 valign=bottom style='width:257.3pt;border:none;mso-border-top-alt:
   solid windowtext .5pt;padding:0in 0in 0in 0in;height:.1in'>
@@ -832,7 +832,7 @@ ul
  </tr>
 </table>
 
-<p class=MsoNormal><o:p>space37</o:p></p>
+<p class=MsoNormal><o:p></o:p></p>
 
 <table class=MsoNormalTable border=0 cellspacing=0 cellpadding=0 width="100%"
  style='width:100.0%;border-collapse:collapse;mso-padding-alt:0in 0in 0in 0in'>
@@ -844,7 +844,7 @@ ul
   <td width=192 valign=bottom style='width:2.0in;border:none;border-bottom:
   solid windowtext 1.0pt;mso-border-bottom-alt:solid windowtext .5pt;
   padding:0in 0in 0in 0in;height:.3in'>
-  <p class=FieldText><o:p>space38</o:p></p>
+  <p class=FieldText><o:p>{{$employee->nextofkinphone}}</o:p></p>
   </td>
   <td width=102 valign=bottom style='width:76.5pt;padding:0in 0in 0in 0in;
   height:.3in'>
@@ -853,7 +853,7 @@ ul
   <td width=228 valign=bottom style='width:171.0pt;border:none;border-bottom:
   solid windowtext 1.0pt;mso-border-bottom-alt:solid windowtext .5pt;
   padding:0in 0in 0in 0in;height:.3in'>
-  <p class=FieldText><o:p>space39</o:p></p>
+  <p class=FieldText><o:p></o:p></p>
   </td>
  </tr>
  <tr style='mso-yfti-irow:1;mso-yfti-lastrow:yes;height:.3in'>
@@ -864,7 +864,7 @@ ul
   <td width=522 colspan=3 valign=bottom style='width:391.5pt;border:none;
   border-bottom:solid windowtext 1.0pt;mso-border-bottom-alt:solid windowtext .5pt;
   padding:0in 0in 0in 0in;height:.3in'>
-  <p class=FieldText><o:p>space40</o:p></p>
+  <p class=FieldText><o:p>Next of Kin</o:p></p>
   </td>
  </tr>
 </table>
@@ -878,7 +878,7 @@ ul
  <tr style='mso-yfti-irow:0;mso-yfti-firstrow:yes;height:.3in'>
   <td width=102 valign=bottom style='width:76.5pt;padding:0in 0in 0in 0in;
   height:.3in'>
-  <p class=MsoNormal>Full Name:</p>
+  <p class=MsoNormal>Company </p>
   </td>
   <td width=290 valign=bottom style='width:217.35pt;border:none;border-bottom:
   solid windowtext 1.0pt;mso-border-bottom-alt:solid windowtext .5pt;

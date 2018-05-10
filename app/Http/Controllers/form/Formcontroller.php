@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Form;
 use App\Models\Employee;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Redirect;
 
 class Formcontroller extends Controller
 {
@@ -23,10 +24,13 @@ class Formcontroller extends Controller
         return view('forms.create',compact('pagetitle'));
     }
 
-     public function createimage()
+     public function createimage($employeeid)
     {
         $pagetitle="Create Image";
-        return view('forms.employeeimage',compact('pagetitle'));
+        $employees = Employee::where('employeeid', $employeeid)->firstOrFail();
+        //$employees=Employee::All();
+        //$employees=Employee::where('employeeid',1)->firstOrFail();
+        return view('forms.employeeimage',compact('pagetitle','employees'));
     }
 
     public function store(Request $request)
@@ -78,14 +82,15 @@ class Formcontroller extends Controller
             foreach($request->file('filename') as $image)
             {
                 $name=$image->getClientOriginalName();
-                $image->move(public_path().'/images/employees/', $name);  
+                $image->move(public_path().'/assets/images/employees/', $name);  
                 $data[] = $name;  
             }
          }
-         $employeeid=5;
+    $employeeid=$request->input('employee');
     $employee = Employee::where('employeeid', $employeeid)->firstOrFail();
 
-             $employee->employeepicture     =json_encode($data);
+    $employee->employeepicture     =json_encode($data);
+
         // $form= new Form();
         // $form->filename=json_encode($data);
          
@@ -93,6 +98,8 @@ class Formcontroller extends Controller
        // $form->save();
         $employee->save();
 
-        return back()->with('success', 'Your images has been successfully');
+       // return redirect()->action('employeemaster@edit', ['employeeid' => $employeeid]);
+return redirect()->route('editemployee', ['id' => $employeeid]);
+       // return back()->with('success', 'Your images has been successfully');
     }
 }

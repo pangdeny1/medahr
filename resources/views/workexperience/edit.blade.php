@@ -33,6 +33,21 @@
                             </div>
                         </div>
 
+                        <div class="form-group{{ $errors->has('JobTitle') ? ' has-error' : '' }}">
+                            <label for="title" class="col-md-4 control-label">Job Title</label>
+
+                            <div class="col-md-6">
+                                <input type="text" name="JobTitle" class="form-control" value="{{$workexperience->jobtitle}}">
+
+                                @if ($errors->has('JobTitle'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('JobTitle') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+
+
                         <div class="form-group{{ $errors->has('employee') ? ' has-error' : '' }}">                                      
                                                 <label for="title" class="col-md-4 control-label">employees</label>
                                                 <div class="col-md-6">

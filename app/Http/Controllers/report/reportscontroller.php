@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests;
 use App\Models\Profile;
+use App\Models\title;
 use App\Models\User;
 use App\Models\country;
 use App\Models\Region;
@@ -61,9 +62,10 @@ class reportscontroller extends Controller
     	 $pagetitle='Employee Bio';
          $company = company::findOrFail(2);
         $employee=DB::table('prlemployeemaster')
-        ->select('employeeid','firstname','lastname','middlename','city','terminatedate','state','email1','email2','phone1','phone2','zip',
+        ->select('employeeid','firstname','lastname','governmentid','middlename','city','terminatedate','state','email1','email2','phone1','phone2','zip',
+            'spousename','spouseemail','spouseaddress','spousephone','nextofkinname','nextofkinemail','nextofkinphone','nextofkinaddress',
             'birthdate','hiredate','employeecode','departments.departmentname as departmentname','regionname','districtname',
-        'jobs.jobname as jobid','employeestatutes.name as active','genders.name as gender','hiredate','hourlyrate','paytype',
+        'jobs.jobname as jobid','titles.titlename as titlename','employeestatutes.name as active','genders.name as gender','hiredate','hourlyrate','paytype',
         'maritalstatus.name as marital',
         'periodrate')
         ->leftjoin('genders','prlemployeemaster.gender','genders.id')
@@ -73,6 +75,7 @@ class reportscontroller extends Controller
         ->leftjoin('regions','prlemployeemaster.city','regions.id')
         ->leftjoin('districts','prlemployeemaster.state','districts.id')
         ->leftjoin('maritalstatus','prlemployeemaster.marital','maritalstatus.id')
+        ->leftjoin('titles','prlemployeemaster.tittle','titles.id')
         ->where('employeeid',$employeeid) 
         ->first();
 

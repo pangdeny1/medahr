@@ -8,6 +8,7 @@ use App\Http\Requests;
 use App\Models\Profile;
 use App\Models\User;
 use App\Models\country;
+use App\Models\title;
 use App\Models\Region;
 use App\Models\District;
 use App\Models\Employee;
@@ -214,11 +215,20 @@ if ($validator->fails()) {
         }
     }
 
+    public function editemployeedetail($id)
+    {   
+        $pagetitle="Employee Edit";
+        //$employee = Employee::findOrFail($id)->first();
+        $employee = Employee::where('employeeid', $id)->firstOrFail();
+        return view('employee.editemployeedetail',compact('employee','pagetitle'));
+    }
+
      public function edit($employeeid)
     {
 
 
-   $employee = Employee::findOrFail($employeeid);
+  // $employee = Employee::findOrFail($employeeid)->first();
+   $employee = Employee::where('employeeid', $employeeid)->firstOrFail();
           /*   $roles = Role::all();
 
         foreach ($user->roles as $user_role) {
@@ -255,6 +265,7 @@ if ($validator->fails()) {
         $qualifications=qualification::All();
         $institutions=institute::All();
         $levels=qualificationlevel::All();
+        $titles=title::All();
         $workexperiences=WorkExperience::where('employeeid', $employeeid)->get();
 
         //$selectedCountry=Country::first()->country;
@@ -264,6 +275,7 @@ if ($validator->fails()) {
             'employeeid'           =>$employeeid,
             'pagetitle'            =>'Edit Employee',
             'countries'            => $countries,
+            'titles'               => $titles,
             'regions'              =>$regions,
             'districts'            =>$districts,
             'jobs'                 =>$jobs,
@@ -309,6 +321,7 @@ if ($validator->fails()) {
                 
                 'firstname'            => 'required',
                 'lastname'             => 'required',
+                'EmployeeCode'         => 'required',
                 'periodrate'           =>'required',
                 'jobid'                =>'required',
                 'deptid'                =>'required',
@@ -329,6 +342,8 @@ if ($validator->fails()) {
             //personal
             $employee->firstname      = $request->input('firstname');
             $employee->lastname     = $request->input('lastname');
+            $employee->employeecode    = $request->input('EmployeeCode');
+            $employee->tittle    = $request->input('Title');
             $employee->middlename =$request->input('othername');
             $employee->gender =$request->input('gender');
             $employee->jobid =$request->input('jobid');
@@ -338,12 +353,23 @@ if ($validator->fails()) {
             $employee->jobid =$request->input('jobid');
             $employee->costcenterid =$request->input('costcenterid');
             $employee->active =$request->input('active');
-            
+            $employee->governmentid=$request->input('GovernmentID');
             $employee->reportto =$request->input('reportto');
+
+            //emergence contact
+
+            $employee->spousename =$request->input('SpouseName');
+            $employee->spouseemail =$request->input('SpouseEmail');
+            $employee->spousephone =$request->input('SpousePhone');
+            $employee->spouseaddress =$request->input('SpouseAddress');
+
+            $employee->nextofkinname =$request->input('NextOfKinName');
+            $employee->nextofkinemail =$request->input('NextOfKinEmail');
+            $employee->nextofkinphone =$request->input('NextOfKinPhone');
+            $employee->nextofkinaddress =$request->input('NextOfKinAdress');
 
 
             //Salary
-
             $employee->hourlyrate =$request->input('hourlyrate');
             $employee->periodrate =$request->input('periodrate');
             $employee->paytype =$request->input('paytype');

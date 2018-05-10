@@ -26,7 +26,8 @@
                                     <th>id</th>
                                     <th>Company</th>
                                     <th>Employee</th>
-                                    <th>Start Date</th>
+                                     <th>Job Title</th>
+                                     <th>Start Date</th>
                                     <th>End Date</th>
                                     
                                     <th style="text-align:center" colspan="2">Actions</th>
@@ -51,6 +52,9 @@
                                     @endforeach</td>
                                    
                                     <td>
+                                       {{$workexperience->jobtitle}} 
+                                    </td>
+                                     <td>
                                        {{$workexperience->startdate}} 
                                     </td>
                                     <td>

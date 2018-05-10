@@ -13,6 +13,7 @@
                                     <th>id</th>
                                     <th>Company</th>
                                     <th>Employee</th>
+                                    <th>Job Title </th>
                                     <th>Start Date</th>
                                     <th>End Date</th>
                                     
@@ -36,6 +37,10 @@
                                             {{ $employee->firstname }} {{$employee->lastname}}
                                         @endif
                                     @endforeach</td>
+
+                                     <td>
+                                       {{$workexperience->jobtitle}} 
+                                    </td>
                                    
                                     <td>
                                        {{$workexperience->startdate}} 

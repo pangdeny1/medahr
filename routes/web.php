@@ -136,10 +136,12 @@ Route::group(['middleware'=> ['auth', 'activated', 'role:admin']], function () {
     Route::get('employeemaster','employee\employeemaster@index');
     Route::get('addemployee','employee\employeemaster@addemployee');
     Route::post('employeestore','employee\employeemaster@store');
-    Route::get('editemployee/{employeeid}/edit','employee\employeemaster@edit');
+    //Route::get('editemployee/{employeeid}/edit','employee\employeemaster@edit');
+    Route::get('editemployee/{id}','employee\employeemaster@edit');
     Route::post('employeeupdate/{id}','employee\employeemaster@update');
     Route::get('employeedelete/{id}','employee\employeemaster@destroy');
     Route::get('prlpayroll','employee\employeemaster@prlpayroll');
+    Route::get('editemployeedetail/{id}','employee\employeemaster@editemployeedetail');
 
     Route::get('jobs','job\JobsController@index');
     Route::get('addjob','job\JobsController@create');
@@ -258,7 +260,7 @@ Route::group(['middleware'=> ['auth', 'activated', 'role:admin']], function () {
      Route::get('form','form\FormController@create');
      Route::post('form','form\FormController@store');
      Route::get('formlist','form\FormController@index');
-     Route::get('createimage','form\FormController@createimage');
+     Route::get('createimage/{id}','form\FormController@createimage');
      Route::post('updateimage','form\FormController@updateimage');
      
      

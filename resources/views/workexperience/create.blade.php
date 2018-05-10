@@ -19,19 +19,6 @@
                     <form class="form-horizontal" role="form" method="POST" action="{{ url('/addworkexperience') }}">
                         {!! csrf_field() !!}
 
-                         <div class="form-group{{ $errors->has('CompanyName') ? ' has-error' : '' }}">
-                            <label for="title" class="col-md-4 control-label">Company</label>
-
-                            <div class="col-md-6">
-                                <input type="text" name="CompanyName" class="form-control" value="{{old('CompanyName')}}">
-
-                                @if ($errors->has('CompanyName'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('CompanyName') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
 
                         <div class="form-group{{ $errors->has('employee') ? ' has-error' : '' }}">                                      
                                                 <label for="title" class="col-md-4 control-label">employees</label>
@@ -55,6 +42,36 @@
                             </div> 
 
 
+
+                         <div class="form-group{{ $errors->has('CompanyName') ? ' has-error' : '' }}">
+                            <label for="title" class="col-md-4 control-label">Company</label>
+
+                            <div class="col-md-6">
+                                <input type="text" name="CompanyName" class="form-control" value="{{old('CompanyName')}}">
+
+                                @if ($errors->has('CompanyName'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('CompanyName') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+
+                         <div class="form-group{{ $errors->has('JobTitle') ? ' has-error' : '' }}">
+                            <label for="title" class="col-md-4 control-label">Job Title</label>
+
+                            <div class="col-md-6">
+                                <input type="text" name="JobTitle" class="form-control" value="{{old('JobTitle')}}">
+
+                                @if ($errors->has('JobTitle'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('JobTitle') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+
+                        
                             
                              
                             <div class="form-group{{ $errors->has('StartDate') ? ' has-error' : '' }}">

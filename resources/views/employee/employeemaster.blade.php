@@ -65,7 +65,7 @@
                                                     @endif
                                                 </td>
                                                     <th ><a href="#"  data-toggle="modal" data-backdrop="static" data-keyboard="false" data-target="#modal_change_password">View </a></th>
-                                                    <th ><a href="{{ URL::to('editemployee/' . $employee->employeeid . '/edit') }}">Edit</a></th>
+                                                    <th ><a href="{{ URL::to('editemployee/'.$employee->employeeid) }}">Edit</a></th>
                                                     <!-- <th><a href="{{ URL::to('employeedelete/' . $employee->employeeid) }} " onclick="return confirm('Are you sure you want to delete this Employee?')"; >Delete</a></th>
                                                     <th><a class="btn btn-sm btn-info btn-block" href="{{ URL::to('editemployee/' . $employee->employeeid . '/edit') }}"
                                                       data-toggle="tooltip" title="Edit">Edit</a> </th> -->
