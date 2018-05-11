@@ -43,8 +43,12 @@
 
                         <div class="form-group">
                             <div class="col-md-6 col-md-offset-4">
-                                <button type="submit" class="btn btn-primary">
-                                    <i class="fa fa-btn fa-ticket"></i> Print Report
+                                <button type="submit" name="preview" class="btn btn-primary">
+                                    <i class="fa fa-btn fa-ticket"></i> Preview
+                                </button>
+
+                                 <button type="submit" name="printword" class="btn btn-primary">
+                                    <i class="fa fa-btn fa-ticket"></i> Print Word Report
                                 </button>
                             </div>
                         </div>

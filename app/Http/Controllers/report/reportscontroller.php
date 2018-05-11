@@ -6,13 +6,19 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests;
 use App\Models\Profile;
-use App\Models\title;
-use App\Models\User;
 use App\Models\country;
+use App\Models\title;
 use App\Models\Region;
 use App\Models\District;
 use App\Models\Employee;
+use App\Models\employeequalification;
+use App\Models\qualification;
+use App\Models\institute;
+use App\Models\qualificationlevel;
 use App\Models\job;
+use App\Models\Dependant;
+use App\Models\WorkExperience;
+use App\Models\Dependanttype;
 use App\Models\Jobgroup;
 use App\Models\gender;
 use App\Models\Payperiod;
@@ -60,9 +66,18 @@ class reportscontroller extends Controller
          $employeeid=$request->input('employee');
 
     	 $pagetitle='Employee Bio';
-         $company = company::findOrFail(2);
+        $company = company::findOrFail(2);
+        $workexperience= WorkExperience::where('employeeid', $employeeid)->get();
+        $dependants= Dependant::where('employeeid', $employeeid)->get();
+         $dependanttypes=Dependanttype::All();
+         $genders      =gender::All();
+        $qualifications=qualification::All();
+        $institutions=institute::All();
+        $levels=qualificationlevel::All();
+        $banks               =Bank::All();
+        $employeequalifications= employeequalification::where('employeeid', $employeeid)->get();
         $employee=DB::table('prlemployeemaster')
-        ->select('employeeid','firstname','lastname','governmentid','middlename','city','terminatedate','state','email1','email2','phone1','phone2','zip',
+        ->select('employeeid','firstname','lastname','governmentid','middlename','city','bankname','accountname','penname','ssnumber','branchname','atmnumber','bankid','terminatedate','state','email1','email2','phone1','phone2','zip',
             'spousename','spouseemail','spouseaddress','spousephone','nextofkinname','nextofkinemail','nextofkinphone','nextofkinaddress',
             'birthdate','hiredate','employeecode','departments.departmentname as departmentname','regionname','districtname',
         'jobs.jobname as jobid','titles.titlename as titlename','employeestatutes.name as active','genders.name as gender','hiredate','hourlyrate','paytype',
@@ -72,15 +87,18 @@ class reportscontroller extends Controller
         ->leftjoin('jobs','prlemployeemaster.jobid','jobs.id')
         ->leftjoin('employeestatutes','prlemployeemaster.active','employeestatutes.id')
         ->leftjoin('departments','prlemployeemaster.deptid','departments.id')
+        ->leftjoin('branches','prlemployeemaster.branchid','branches.id')
         ->leftjoin('regions','prlemployeemaster.city','regions.id')
         ->leftjoin('districts','prlemployeemaster.state','districts.id')
         ->leftjoin('maritalstatus','prlemployeemaster.marital','maritalstatus.id')
         ->leftjoin('titles','prlemployeemaster.tittle','titles.id')
+        ->leftjoin('banks','prlemployeemaster.bankid','banks.id')
+        ->leftjoin('prlsstable','prlemployeemaster.pencode','prlsstable.id')
         ->where('employeeid',$employeeid) 
         ->first();
 
         //return view('employee.employeemaster',compact('employees','pagetitle'));
-        return view('reports.employeebio',compact('employee','company','pagetitle'));
+        return view('reports.employeebio',compact('employee','company','pagetitle','workexperience','dependants','employeequalifications','dependanttypes','genders','institutions','qualifications','levels'));
     }
 
 public function reportform()

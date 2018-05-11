@@ -175,18 +175,7 @@
                                                     </select>
                                                 </div>                                          
                                             </div>
-                                             <div class="form-group">                                        
-                                                <label class="col-md-3 col-xs-12 control-label">Supervisor</label>
-                                                <div class="col-md-5">
-                                                    <select id="category" type="text" class="form-control" name="reportto">
-                                    <option value="">Select Employee</option>
-                                   
-                               @foreach ($employees as $employee)
-                        <option value="{{ $employee->employeeid }}">{{ $employee->firstname }}  {{ $employee->lastname }}</option>
-                                    @endforeach
-                                </select>
-                                                </div>                                          
-                                            </div>
+                                             
 
 
                                            
@@ -604,7 +593,14 @@
                                             </div>
 
                                             <div class="form-group">
-                                                <label class="col-md-3 col-xs-12 control-label">Bank Account Number</label>
+                                                <label class="col-md-3 col-xs-12 control-label">Account Name</label>
+                                                <div class="col-md-6 col-xs-12">                                                                                                                                                        
+                                                    <input type="text" name="AccountName" class="form-control" value="{{$employee->accountname}}"/>
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label class="col-md-3 col-xs-12 control-label"> Account Number</label>
                                                 <div class="col-md-6 col-xs-12">                                                                                                                                                        
                                                     <input type="text" name="accountnumber" class="form-control" value="{{$employee->atmnumber}}"/>
                                                 </div>
@@ -625,7 +621,7 @@
                                       
                                    </br>
                                        <a href="{{url('createimage/'.$employee->employeeid)}}"> Add new Image </a>
-                                       {{$employee->firstname." ".$employee->lastname}}
+                                       
                                         </div>
 
 

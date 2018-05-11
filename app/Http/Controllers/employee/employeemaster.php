@@ -249,8 +249,8 @@ if ($validator->fails()) {
         $employeestatuses    =employeestatus::All();
         $employementstatuses =employementstatus::All();
         $paytypes            =paytype::All();
-        $banks               =Bank::All();
         $sss                  =SocialSecurityScheme::All();
+        $banks                =Bank::All();
         $branch               =Branch::All();
         $department           =Department::All();
         $health                =HealthInsuarance::All();
@@ -261,7 +261,6 @@ if ($validator->fails()) {
         $dependants=Dependant::where('employeeid', $employeeid)->get();
         $dependanttypes=Dependanttype::All();
         $employeequalifications=employeequalification::where('employeeid', $employeeid)->get();
-        $employees=Employee::All();
         $qualifications=qualification::All();
         $institutions=institute::All();
         $levels=qualificationlevel::All();
@@ -390,6 +389,7 @@ if ($validator->fails()) {
             //$employee->bankid =$request->input('bank');
             $employee->bankid =$request->input('bank');
             $employee->atmnumber =$request->input('accountnumber');
+            $employee->accountname =$request->input('AccountName');
 
 
              //membership

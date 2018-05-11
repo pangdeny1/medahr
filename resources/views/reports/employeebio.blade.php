@@ -1,7 +1,8 @@
 <?php
 /*header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
 header('Content-Disposition: attachment;filename="' . $fileName . '"'); */
-$fileName="dennis.doc";
+$fileName=$employee->firstname." ".$employee->lastname." Detail.doc";
+
 //header('Content-Type: application/vnd.openxmlformats-officedocument.wordprocessingml.document');
 //header('Content-Disposition: attachment;filename="' . $fileName . '"');
 
@@ -618,12 +619,12 @@ ul
  <tr style='mso-yfti-irow:1;height:.3in'>
   <td width=102 valign=bottom style='width:76.5pt;padding:0in 0in 0in 0in;
   height:.3in'>
-  <p class=MsoNormal>Supervisor:</p>
+  <p class=MsoNormal>Branch:</p>
   </td>
   <td width=192 colspan=2 valign=bottom style='width:2.0in;border:none;
   border-bottom:solid windowtext 1.0pt;mso-border-bottom-alt:solid windowtext .5pt;
   padding:0in 0in 0in 0in;height:.3in'>
-  <p class=FieldText><o:p>space16</o:p></p>
+  <p class=FieldText><o:p>{{$employee->branchname}}</o:p></p>
   </td>
   <td width=86 valign=bottom style='width:64.5pt;padding:0in 0in 0in 0in;
   height:.3in'>
@@ -638,12 +639,12 @@ ul
  <tr style='mso-yfti-irow:2;height:.3in'>
   <td width=102 valign=bottom style='width:76.5pt;padding:0in 0in 0in 0in;
   height:.3in'>
-  <p class=MsoNormal>Work Location:</p>
+  <p class=MsoNormal>Social Security Scheme:</p>
   </td>
   <td width=192 colspan=2 valign=bottom style='width:2.0in;border:none;
   border-bottom:solid windowtext 1.0pt;mso-border-bottom-alt:solid windowtext .5pt;
   padding:0in 0in 0in 0in;height:.3in'>
-  <p class=FieldText><o:p>space18</o:p></p>
+  <p class=FieldText><o:p>{{$employee->penname.'->'.$employee->ssnumber}}</o:p></p>
   </td>
   <td width=86 valign=bottom style='width:64.5pt;padding:0in 0in 0in 0in;
   height:.3in'>
@@ -871,330 +872,292 @@ ul
 
 <p class=MsoNormal><span style='font-size:4.0pt'><o:p>space41</o:p></span></p>
 
-<h2>Experience</h2>
+<h2>Employee Experience</h2>
 
 <table class=MsoNormalTable border=0 cellspacing=0 cellpadding=0 width="100%"
  style='width:100.0%;border-collapse:collapse;mso-padding-alt:0in 0in 0in 0in'>
+ @if ($workexperience->isEmpty())
+                        <p>There are currently no employee employee experience.</p>
+                    @endif
+ <?php $i=0; ?>
+  <tr>
+ 	<td>Company Name</td>
+ 	<td>Job title</td>
+ 	<td>Start date</td>
+ 	<td>End Date</td>
+ </tr>
+ @foreach ($workexperience as $experience)
  <tr style='mso-yfti-irow:0;mso-yfti-firstrow:yes;height:.3in'>
-  <td width=102 valign=bottom style='width:76.5pt;padding:0in 0in 0in 0in;
-  height:.3in'>
-  <p class=MsoNormal>Company </p>
-  </td>
+ 
   <td width=290 valign=bottom style='width:217.35pt;border:none;border-bottom:
   solid windowtext 1.0pt;mso-border-bottom-alt:solid windowtext .5pt;
   padding:0in 0in 0in 0in;height:.3in'>
-  <p class=FieldText><o:p>newspace23</o:p></p>
+  <p class=FieldText><o:p>{{$i+=1}}. {{ $experience->companyname }}</o:p></p>
   </td>
   <td width=132 valign=bottom style='width:98.7pt;border:none;border-bottom:
   solid windowtext 1.0pt;mso-border-bottom-alt:solid windowtext .5pt;
   padding:0in 0in 0in 0in;height:.3in'>
-  <p class=FieldText><o:p>newspace24</o:p></p>
+  <p class=FieldText><o:p>{{ $experience->jobtitle }}</o:p></p>
   </td>
   <td width=101 valign=bottom style='width:75.45pt;border:none;border-bottom:
   solid windowtext 1.0pt;mso-border-bottom-alt:solid windowtext .5pt;
   padding:0in 0in 0in 0in;height:.3in'>
-  <p class=FieldText><o:p>newspace25</o:p></p>
+  <p class=FieldText><o:p>{{ $experience->startdate }}</o:p></p>
+  </td>
+
+   <td width=101 valign=bottom style='width:75.45pt;border:none;border-bottom:
+  solid windowtext 1.0pt;mso-border-bottom-alt:solid windowtext .5pt;
+  padding:0in 0in 0in 0in;height:.3in'>
+  <p class=FieldText><o:p>{{ $experience->enddate }}</o:p></p>
   </td>
  </tr>
  <tr style='mso-yfti-irow:1;mso-yfti-lastrow:yes;height:.1in'>
   <td width=102 valign=bottom style='width:76.5pt;padding:0in 0in 0in 0in;
   height:.1in'>
-  <p class=MsoNormal><o:p>newspace26</o:p></p>
+  <p class=MsoNormal><o:p></o:p></p>
   </td>
   <td width=290 valign=bottom style='width:217.35pt;padding:0in 0in 0in 0in;
   height:.1in'>
-  <h3>Last</h3>
+ 
   </td>
   <td width=132 valign=bottom style='width:98.7pt;padding:0in 0in 0in 0in;
   height:.1in'>
-  <h3>First</h3>
+  
   </td>
   <td width=101 valign=bottom style='width:75.45pt;padding:0in 0in 0in 0in;
   height:.1in'>
-  <h3>M.I.</h3>
+  
+  </td>
+
+   <td width=101 valign=bottom style='width:75.45pt;padding:0in 0in 0in 0in;
+  height:.1in'>
+  
   </td>
  </tr>
+  @endforeach
 </table>
 
-<p class=MsoNormal><o:p>newspace27</o:p></p>
+<h2>Employee Qualifications</h2>
+
 
 <table class=MsoNormalTable border=0 cellspacing=0 cellpadding=0 width="100%"
  style='width:100.0%;border-collapse:collapse;mso-padding-alt:0in 0in 0in 0in'>
- <tr style='mso-yfti-irow:0;mso-yfti-firstrow:yes;height:.2in'>
-  <td width=102 valign=bottom style='width:76.5pt;padding:0in 0in 0in 0in;
-  height:.2in'>
-  <p class=MsoNormal>Address:</p>
-  </td>
-  <td width=421 valign=bottom style='width:316.05pt;border:none;border-bottom:
-  solid windowtext 1.0pt;mso-border-bottom-alt:solid windowtext .5pt;
-  padding:0in 0in 0in 0in;height:.2in'>
-  <p class=FieldText><o:p>newspace28</o:p></p>
-  </td>
-  <td width=101 valign=bottom style='width:75.45pt;border:none;border-bottom:
-  solid windowtext 1.0pt;mso-border-bottom-alt:solid windowtext .5pt;
-  padding:0in 0in 0in 0in;height:.2in'>
-  <p class=FieldText><o:p>newspace29</o:p></p>
-  </td>
+  @if ($employeequalifications->isEmpty())
+                        <p>There are currently no employee qualifications.</p>
+                    @endif
+ <tr>
+ 	<td>Qualification</td>
+ 	<td>Institute</td>
+ 	<td>Level</td>
+ 	<td>Start date</td>
+ 	<td>End Date</td>
  </tr>
- <tr style='mso-yfti-irow:1;mso-yfti-lastrow:yes;height:.1in'>
-  <td width=102 valign=bottom style='width:76.5pt;padding:0in 0in 0in 0in;
-  height:.1in'>
-  <p class=MsoNormal><o:p>newspace30</o:p></p>
-  </td>
-  <td width=421 valign=bottom style='width:316.05pt;border:none;mso-border-top-alt:
-  solid windowtext .5pt;padding:0in 0in 0in 0in;height:.1in'>
-  <h3>Street Address</h3>
-  </td>
-  <td width=101 valign=bottom style='width:75.45pt;padding:0in 0in 0in 0in;
-  height:.1in'>
-  <h3>Apartment/Unit #</h3>
-  </td>
- </tr>
-</table>
-
-<p class=MsoNormal><o:p>&newspace31</o:p></p>
-
-<table class=MsoNormalTable border=0 cellspacing=0 cellpadding=0 width="100%"
- style='width:100.0%;border-collapse:collapse;mso-padding-alt:0in 0in 0in 0in'>
- <tr style='mso-yfti-irow:0;mso-yfti-firstrow:yes;height:.2in'>
-  <td width=102 valign=bottom style='width:76.5pt;padding:0in 0in 0in 0in;
-  height:.2in'>
-  <p class=FieldText><o:p>newspace32</o:p></p>
-  </td>
-  <td width=343 valign=bottom style='width:257.3pt;border:none;border-bottom:
-  solid windowtext 1.0pt;mso-border-bottom-alt:solid windowtext .5pt;
-  padding:0in 0in 0in 0in;height:.2in'>
-  <p class=FieldText><o:p>newspace33</o:p></p>
-  </td>
-  <td width=78 valign=bottom style='width:58.75pt;border:none;border-bottom:
-  solid windowtext 1.0pt;mso-border-bottom-alt:solid windowtext .5pt;
-  padding:0in 0in 0in 0in;height:.2in'>
-  <p class=FieldText><o:p>newspace34</o:p></p>
-  </td>
-  <td width=101 valign=bottom style='width:75.45pt;border:none;border-bottom:
-  solid windowtext 1.0pt;mso-border-bottom-alt:solid windowtext .5pt;
-  padding:0in 0in 0in 0in;height:.2in'>
-  <p class=FieldText><o:p>&newspace35</o:p></p>
-  </td>
- </tr>
- <tr style='mso-yfti-irow:1;mso-yfti-lastrow:yes;height:.1in'>
-  <td width=102 valign=bottom style='width:76.5pt;padding:0in 0in 0in 0in;
-  height:.1in'>
-  <p class=MsoNormal><o:p>newspace36</o:p></p>
-  </td>
-  <td width=343 valign=bottom style='width:257.3pt;border:none;mso-border-top-alt:
-  solid windowtext .5pt;padding:0in 0in 0in 0in;height:.1in'>
-  <h3>City</h3>
-  </td>
-  <td width=78 valign=bottom style='width:58.75pt;border:none;mso-border-top-alt:
-  solid windowtext .5pt;padding:0in 0in 0in 0in;height:.1in'>
-  <h3>State</h3>
-  </td>
-  <td width=101 valign=bottom style='width:75.45pt;border:none;mso-border-top-alt:
-  solid windowtext .5pt;padding:0in 0in 0in 0in;height:.1in'>
-  <h3>ZIP Code</h3>
-  </td>
- </tr>
-</table>
-
-<p class=MsoNormal><o:p>newspace37</o:p></p>
-
-<table class=MsoNormalTable border=0 cellspacing=0 cellpadding=0 width="100%"
- style='width:100.0%;border-collapse:collapse;mso-padding-alt:0in 0in 0in 0in'>
+ 
+ <?php $i=0; ?>
+ @foreach ($employeequalifications as $employeequalification)
  <tr style='mso-yfti-irow:0;mso-yfti-firstrow:yes;height:.3in'>
-  <td width=102 valign=bottom style='width:76.5pt;padding:0in 0in 0in 0in;
-  height:.3in'>
-  <p class=MsoNormal>Primary Phone:</p>
-  </td>
-  <td width=192 valign=bottom style='width:2.0in;border:none;border-bottom:
-  solid windowtext 1.0pt;mso-border-bottom-alt:solid windowtext .5pt;
-  padding:0in 0in 0in 0in;height:.3in'>
-  <p class=FieldText><o:p>newspace38</o:p></p>
-  </td>
-  <td width=102 valign=bottom style='width:76.5pt;padding:0in 0in 0in 0in;
-  height:.3in'>
-  <p class=MsoNormal>Alternate Phone:</p>
-  </td>
-  <td width=228 valign=bottom style='width:171.0pt;border:none;border-bottom:
-  solid windowtext 1.0pt;mso-border-bottom-alt:solid windowtext .5pt;
-  padding:0in 0in 0in 0in;height:.3in'>
-  <p class=FieldText><o:p>newspace39</o:p></p>
-  </td>
- </tr>
- <tr style='mso-yfti-irow:1;mso-yfti-lastrow:yes;height:.3in'>
-  <td width=102 valign=bottom style='width:76.5pt;padding:0in 0in 0in 0in;
-  height:.3in'>
-  <p class=MsoNormal>Relationship:</p>
-  </td>
-  <td width=522 colspan=3 valign=bottom style='width:391.5pt;border:none;
-  border-bottom:solid windowtext 1.0pt;mso-border-bottom-alt:solid windowtext .5pt;
-  padding:0in 0in 0in 0in;height:.3in'>
-  <p class=FieldText><o:p>newspace40</o:p></p>
-  </td>
- </tr>
-</table>
-
-<h2>Qualification</h2>
-
-<table class=MsoNormalTable border=0 cellspacing=0 cellpadding=0 width="100%"
- style='width:100.0%;border-collapse:collapse;mso-padding-alt:0in 0in 0in 0in'>
- <tr style='mso-yfti-irow:0;mso-yfti-firstrow:yes;height:.3in'>
-  <td width=102 valign=bottom style='width:76.5pt;padding:0in 0in 0in 0in;
-  height:.3in'>
-  <p class=MsoNormal>Full Name:</p>
-  </td>
+ 
   <td width=290 valign=bottom style='width:217.35pt;border:none;border-bottom:
   solid windowtext 1.0pt;mso-border-bottom-alt:solid windowtext .5pt;
   padding:0in 0in 0in 0in;height:.3in'>
-  <p class=FieldText><o:p>qspace23</o:p></p>
+  <p class=FieldText><o:p>{{$i+=1}}.  @foreach ($qualifications as $qualification)
+                                        @if ($qualification->id == $employeequalification->qualificationid)
+                                            {{ $qualification->qualificationname }}
+                                        @endif
+                                    @endforeach</o:p></p>
   </td>
   <td width=132 valign=bottom style='width:98.7pt;border:none;border-bottom:
   solid windowtext 1.0pt;mso-border-bottom-alt:solid windowtext .5pt;
   padding:0in 0in 0in 0in;height:.3in'>
-  <p class=FieldText><o:p>qspace24</o:p></p>
+  <p class=FieldText><o:p>@foreach ($institutions as $institution)
+                                        @if ($institution->id == $employeequalification->institutionid)
+                                            {{ $institution->institutename }}
+                                        @endif
+                                    @endforeach</o:p></p>
   </td>
   <td width=101 valign=bottom style='width:75.45pt;border:none;border-bottom:
   solid windowtext 1.0pt;mso-border-bottom-alt:solid windowtext .5pt;
   padding:0in 0in 0in 0in;height:.3in'>
-  <p class=FieldText><o:p>qspace25</o:p></p>
+  <p class=FieldText><o:p>@foreach ($levels as $level)
+                                        @if ($level->id == $employeequalification->levelid)
+                                            {{ $level->qlevelname }}
+                                        @endif
+                                    @endforeach</o:p></p>
+  </td>
+  <td width=101 valign=bottom style='width:75.45pt;border:none;border-bottom:
+  solid windowtext 1.0pt;mso-border-bottom-alt:solid windowtext .5pt;
+  padding:0in 0in 0in 0in;height:.3in'>
+  <p class=FieldText><o:p>{{ $employeequalification->datefrom }}</o:p></p>
+  </td>
+
+
+   <td width=101 valign=bottom style='width:75.45pt;border:none;border-bottom:
+  solid windowtext 1.0pt;mso-border-bottom-alt:solid windowtext .5pt;
+  padding:0in 0in 0in 0in;height:.3in'>
+  <p class=FieldText><o:p>{{ $employeequalification->dateto }}</o:p></p>
   </td>
  </tr>
  <tr style='mso-yfti-irow:1;mso-yfti-lastrow:yes;height:.1in'>
   <td width=102 valign=bottom style='width:76.5pt;padding:0in 0in 0in 0in;
   height:.1in'>
-  <p class=MsoNormal><o:p>qspace26</o:p></p>
+  <p class=MsoNormal><o:p></o:p></p>
   </td>
   <td width=290 valign=bottom style='width:217.35pt;padding:0in 0in 0in 0in;
   height:.1in'>
-  <h3>Last</h3>
+ 
   </td>
   <td width=132 valign=bottom style='width:98.7pt;padding:0in 0in 0in 0in;
   height:.1in'>
-  <h3>First</h3>
+  
   </td>
   <td width=101 valign=bottom style='width:75.45pt;padding:0in 0in 0in 0in;
   height:.1in'>
-  <h3>M.I.</h3>
+  
+  </td>
+
+   <td width=101 valign=bottom style='width:75.45pt;padding:0in 0in 0in 0in;
+  height:.1in'>
+  
   </td>
  </tr>
+  @endforeach
 </table>
 
-<p class=MsoNormal><o:p>qspace27</o:p></p>
+
+<h2>Employee Dependants</h2>
 
 <table class=MsoNormalTable border=0 cellspacing=0 cellpadding=0 width="100%"
  style='width:100.0%;border-collapse:collapse;mso-padding-alt:0in 0in 0in 0in'>
- <tr style='mso-yfti-irow:0;mso-yfti-firstrow:yes;height:.2in'>
-  <td width=102 valign=bottom style='width:76.5pt;padding:0in 0in 0in 0in;
-  height:.2in'>
-  <p class=MsoNormal>Address:</p>
-  </td>
-  <td width=421 valign=bottom style='width:316.05pt;border:none;border-bottom:
-  solid windowtext 1.0pt;mso-border-bottom-alt:solid windowtext .5pt;
-  padding:0in 0in 0in 0in;height:.2in'>
-  <p class=FieldText><o:p>qspace28</o:p></p>
-  </td>
-  <td width=101 valign=bottom style='width:75.45pt;border:none;border-bottom:
-  solid windowtext 1.0pt;mso-border-bottom-alt:solid windowtext .5pt;
-  padding:0in 0in 0in 0in;height:.2in'>
-  <p class=FieldText><o:p>qspace29</o:p></p>
-  </td>
+  @if ($dependants->isEmpty())
+                        <p>There are currently no dependants.</p>
+                    @endif
+ <tr>
+ 	<td>Full Name</td>
+ 	<td>Type</td>
+ 	<td>Sex</td>
+ 	<td>Birthdate</td>
  </tr>
- <tr style='mso-yfti-irow:1;mso-yfti-lastrow:yes;height:.1in'>
-  <td width=102 valign=bottom style='width:76.5pt;padding:0in 0in 0in 0in;
-  height:.1in'>
-  <p class=MsoNormal><o:p>qspace30</o:p></p>
-  </td>
-  <td width=421 valign=bottom style='width:316.05pt;border:none;mso-border-top-alt:
-  solid windowtext .5pt;padding:0in 0in 0in 0in;height:.1in'>
-  <h3>Street Address</h3>
-  </td>
-  <td width=101 valign=bottom style='width:75.45pt;padding:0in 0in 0in 0in;
-  height:.1in'>
-  <h3>Apartment/Unit #</h3>
-  </td>
- </tr>
-</table>
 
-<p class=MsoNormal><o:p>&qspace31</o:p></p>
-
-<table class=MsoNormalTable border=0 cellspacing=0 cellpadding=0 width="100%"
- style='width:100.0%;border-collapse:collapse;mso-padding-alt:0in 0in 0in 0in'>
- <tr style='mso-yfti-irow:0;mso-yfti-firstrow:yes;height:.2in'>
-  <td width=102 valign=bottom style='width:76.5pt;padding:0in 0in 0in 0in;
-  height:.2in'>
-  <p class=FieldText><o:p>qspace32</o:p></p>
-  </td>
-  <td width=343 valign=bottom style='width:257.3pt;border:none;border-bottom:
-  solid windowtext 1.0pt;mso-border-bottom-alt:solid windowtext .5pt;
-  padding:0in 0in 0in 0in;height:.2in'>
-  <p class=FieldText><o:p>qspace33</o:p></p>
-  </td>
-  <td width=78 valign=bottom style='width:58.75pt;border:none;border-bottom:
-  solid windowtext 1.0pt;mso-border-bottom-alt:solid windowtext .5pt;
-  padding:0in 0in 0in 0in;height:.2in'>
-  <p class=FieldText><o:p>qspace34</o:p></p>
-  </td>
-  <td width=101 valign=bottom style='width:75.45pt;border:none;border-bottom:
-  solid windowtext 1.0pt;mso-border-bottom-alt:solid windowtext .5pt;
-  padding:0in 0in 0in 0in;height:.2in'>
-  <p class=FieldText><o:p>&qspace35</o:p></p>
-  </td>
- </tr>
- <tr style='mso-yfti-irow:1;mso-yfti-lastrow:yes;height:.1in'>
-  <td width=102 valign=bottom style='width:76.5pt;padding:0in 0in 0in 0in;
-  height:.1in'>
-  <p class=MsoNormal><o:p>qspace36</o:p></p>
-  </td>
-  <td width=343 valign=bottom style='width:257.3pt;border:none;mso-border-top-alt:
-  solid windowtext .5pt;padding:0in 0in 0in 0in;height:.1in'>
-  <h3>City</h3>
-  </td>
-  <td width=78 valign=bottom style='width:58.75pt;border:none;mso-border-top-alt:
-  solid windowtext .5pt;padding:0in 0in 0in 0in;height:.1in'>
-  <h3>State</h3>
-  </td>
-  <td width=101 valign=bottom style='width:75.45pt;border:none;mso-border-top-alt:
-  solid windowtext .5pt;padding:0in 0in 0in 0in;height:.1in'>
-  <h3>ZIP Code</h3>
-  </td>
- </tr>
-</table>
-
-<p class=MsoNormal><o:p>qspace37</o:p></p>
-
-<table class=MsoNormalTable border=0 cellspacing=0 cellpadding=0 width="100%"
- style='width:100.0%;border-collapse:collapse;mso-padding-alt:0in 0in 0in 0in'>
+ <?php $i=0; ?>
+ @foreach ($dependants as $dependant)
  <tr style='mso-yfti-irow:0;mso-yfti-firstrow:yes;height:.3in'>
-  <td width=102 valign=bottom style='width:76.5pt;padding:0in 0in 0in 0in;
-  height:.3in'>
-  <p class=MsoNormal>Primary Phone:</p>
-  </td>
-  <td width=192 valign=bottom style='width:2.0in;border:none;border-bottom:
+ 
+  <td width=290 valign=bottom style='width:217.35pt;border:none;border-bottom:
   solid windowtext 1.0pt;mso-border-bottom-alt:solid windowtext .5pt;
   padding:0in 0in 0in 0in;height:.3in'>
-  <p class=FieldText><o:p>qspace38</o:p></p>
+  <p class=FieldText><o:p>{{$i+=1}}. {{ $dependant->fullname}}</o:p></p>
   </td>
-  <td width=102 valign=bottom style='width:76.5pt;padding:0in 0in 0in 0in;
-  height:.3in'>
-  <p class=MsoNormal>Alternate Phone:</p>
-  </td>
-  <td width=228 valign=bottom style='width:171.0pt;border:none;border-bottom:
+  <td width=132 valign=bottom style='width:98.7pt;border:none;border-bottom:
   solid windowtext 1.0pt;mso-border-bottom-alt:solid windowtext .5pt;
   padding:0in 0in 0in 0in;height:.3in'>
-  <p class=FieldText><o:p>qspace39</o:p></p>
+  <p class=FieldText><o:p>@foreach ($dependanttypes as $dependanttype)
+                                        @if ($dependanttype->id == $dependant->deptypeid )
+                                            {{ $dependanttype->dependanttype }} 
+                                        @endif
+                                    @endforeach</o:p></p>
   </td>
- </tr>
- <tr style='mso-yfti-irow:1;mso-yfti-lastrow:yes;height:.3in'>
-  <td width=102 valign=bottom style='width:76.5pt;padding:0in 0in 0in 0in;
-  height:.3in'>
-  <p class=MsoNormal>Relationship:</p>
-  </td>
-  <td width=522 colspan=3 valign=bottom style='width:391.5pt;border:none;
-  border-bottom:solid windowtext 1.0pt;mso-border-bottom-alt:solid windowtext .5pt;
+  <td width=101 valign=bottom style='width:75.45pt;border:none;border-bottom:
+  solid windowtext 1.0pt;mso-border-bottom-alt:solid windowtext .5pt;
   padding:0in 0in 0in 0in;height:.3in'>
-  <p class=FieldText><o:p>qspace40</o:p></p>
+  <p class=FieldText><o:p>@foreach ($genders as $gender)
+                                        @if ($gender->id == $dependant->sex )
+                                            {{ $gender->name }} 
+                                        @endif
+                                    @endforeach</o:p></p>
+  </td>
+  <td width=101 valign=bottom style='width:75.45pt;border:none;border-bottom:
+  solid windowtext 1.0pt;mso-border-bottom-alt:solid windowtext .5pt;
+  padding:0in 0in 0in 0in;height:.3in'>
+  <p class=FieldText><o:p>{{ $dependant->dob }}</o:p></p>
+  </td>
+
+   
+ </tr>
+ <tr style='mso-yfti-irow:1;mso-yfti-lastrow:yes;height:.1in'>
+  <td width=102 valign=bottom style='width:76.5pt;padding:0in 0in 0in 0in;
+  height:.1in'>
+  <p class=MsoNormal><o:p></o:p></p>
+  </td>
+  <td width=290 valign=bottom style='width:217.35pt;padding:0in 0in 0in 0in;
+  height:.1in'>
+  
+  </td>
+  <td width=132 valign=bottom style='width:98.7pt;padding:0in 0in 0in 0in;
+  height:.1in'>
+  
+  </td>
+  <td width=101 valign=bottom style='width:75.45pt;padding:0in 0in 0in 0in;
+  height:.1in'>
+  
+  </td>
+
+   <td width=101 valign=bottom style='width:75.45pt;padding:0in 0in 0in 0in;
+  height:.1in'>
+ 
   </td>
  </tr>
+  @endforeach
+</table>
+
+<h2>Banks Details</h2>
+
+<table class=MsoNormalTable border=0 cellspacing=0 cellpadding=0 width="100%"
+ style='width:100.0%;border-collapse:collapse;mso-padding-alt:0in 0in 0in 0in'>
+  
+ <tr>
+ 	<td>Bank</td>
+ 	<td>Account Name</td>
+ 	<td>Account Number</td>
+ 	
+ </tr>
+
+ <?php $i=0; ?>
+ 
+ <tr style='mso-yfti-irow:0;mso-yfti-firstrow:yes;height:.3in'>
+ 
+  <td width=290 valign=bottom style='width:217.35pt;border:none;border-bottom:
+  solid windowtext 1.0pt;mso-border-bottom-alt:solid windowtext .5pt;
+  padding:0in 0in 0in 0in;height:.3in'>
+  <p class=FieldText><o:p>{{$i+=1}}. {{ $employee->bankname}}</o:p></p>
+  </td>
+  <td width=132 valign=bottom style='width:98.7pt;border:none;border-bottom:
+  solid windowtext 1.0pt;mso-border-bottom-alt:solid windowtext .5pt;
+  padding:0in 0in 0in 0in;height:.3in'>
+  <p class=FieldText><o:p> {{$employee->accountname}} </o:p></p>
+  </td>
+  <td width=101 valign=bottom style='width:75.45pt;border:none;border-bottom:
+  solid windowtext 1.0pt;mso-border-bottom-alt:solid windowtext .5pt;
+  padding:0in 0in 0in 0in;height:.3in'>
+  <p class=FieldText><o:p>{{$employee->atmnumber}} </o:p></p>
+  </td>
+  
+
+   
+ </tr>
+ <tr style='mso-yfti-irow:1;mso-yfti-lastrow:yes;height:.1in'>
+  <td width=102 valign=bottom style='width:76.5pt;padding:0in 0in 0in 0in;
+  height:.1in'>
+  <p class=MsoNormal><o:p></o:p></p>
+  </td>
+  <td width=290 valign=bottom style='width:217.35pt;padding:0in 0in 0in 0in;
+  height:.1in'>
+  
+  </td>
+  <td width=132 valign=bottom style='width:98.7pt;padding:0in 0in 0in 0in;
+  height:.1in'>
+  
+  </td>
+  <td width=101 valign=bottom style='width:75.45pt;padding:0in 0in 0in 0in;
+  height:.1in'>
+  
+  </td>
+
+   <td width=101 valign=bottom style='width:75.45pt;padding:0in 0in 0in 0in;
+  height:.1in'>
+ 
+  </td>
+ </tr>
+ 
 </table>
 
 </div>
