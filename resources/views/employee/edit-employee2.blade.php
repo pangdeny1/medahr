@@ -1,12 +1,14 @@
-@extends('layouts.pagelayout2')
-@section('content') <!-- END X-NAVIGATION VERTICAL -->                   
-           
-                 <!-- PAGE CONTENT WRAPPER -->
+ @extends('layouts.pagelayout')
+@section('content')<!-- START BREADCRUMB -->
+             
+                <!-- END BREADCRUMB -->
+                
+                <!-- PAGE CONTENT WRAPPER -->
                 <div class="page-content-wrap">
                 
                     <div class="row">
                         <div class="col-md-12">
-                            @if (count($errors) > 0)
+@if (count($errors) > 0)
     <div class="alert alert-danger">
         <ul>
             @foreach ($errors->all() as $error)
@@ -15,8 +17,10 @@
         </ul>
     </div>
 @endif
-                             <form class="form-horizontal" action="{{url('employeeupdate/'.$employee->employeeid) }}" method='post' role='form'>
-                               {!! csrf_field() !!}                             
+                   <form class="form-horizontal" action="{{url('employeeupdate/'.$employee->employeeid) }}" method='post' role='form'>
+ 
+{!! csrf_field() !!}
+
                                 <div class="panel panel-default tabs">                            
                                     <ul class="nav nav-tabs" role="tablist">
                                         <li class="active"><a href="#tab-first" role="tab" data-toggle="tab">Personal</a></li>
@@ -24,16 +28,21 @@
                                         <li><a href="#tab-second" role="tab" data-toggle="tab">Salary</a></li>
                                         <li><a href="#tab-eleventh" role="tab" data-toggle="tab">Bank Info</a></li>
                                         <li><a href="#tab-eight" role="tab" data-toggle="tab">Membership</a></li>
+                                        
                                         <li><a href="#tab-third" role="tab" data-toggle="tab">Contacts</a></li>
                                         <li><a href="#tab-seventh" role="tab" data-toggle="tab">Emergence Cont</a></li>
                                         <li><a href="#tab-fourth" role="tab" data-toggle="tab">Education</a></li>
                                         <li><a href="#tab-fifth" role="tab" data-toggle="tab">Work experience</a></li>
                                         <li><a href="#tab-sixth" role="tab" data-toggle="tab">Dependants</a></li>
-                                        <li><a href="#tab-ninth" role="tab" data-toggle="tab">Picture</a></li>
-                                        </ul>
+                                        
+                                          <li><a href="#tab-ninth" role="tab" data-toggle="tab">Picture</a></li>
+                                        
+
+                                    
+                                    </ul>
                                     <div class="panel-body tab-content">
                                         <div class="tab-pane active" id="tab-first">
-                                           
+
                                               <p>Fill all Mandatory Fields</p>
 
                                               <div class="form-group">
@@ -208,7 +217,7 @@
                                             
                                         </div>
                                         <div class="tab-pane" id="tab-second">
-                                           <p>Fill all Mandatory Fields</p>
+                                          <p>Fill all Mandatory Fields</p>
                                             
                                             <div class="form-group">                                        
                                                 <label class="col-md-3 col-xs-12 control-label">Pay type</label>
@@ -362,26 +371,31 @@
                                                     <input type="text" name="zip" class="form-control" value="{{$employee->zip}}"/>
                                                 </div>
                                             </div>
+                                            
                                         </div>
 
-                                            <div class="tab-pane" id="tab-fourth">
-                                            <p>fouth</p> 
-                                            @include('employeequalifications.employeequalification');
+                                        <div class="tab-pane active" id="tab-fourth">
+                                         
+                                         @include('employeequalifications.employeequalification');
+
+
+
+
                                         </div>
 
-                                        <div class="tab-pane"  id="tab-fifth">
+                                         <div class="tab-pane active" id="tab-fifth">
                                          
                                          @include('workexperience.employeeexperience')
 
                                         </div>
 
-                                         <div class="tab-pane"  id="tab-sixth">
+                                         <div class="tab-pane active" id="tab-sixth">
                                        
                                         @include('dependants.employeedependant');
 
                                         </div>
 
-                                        <div class="tab-pane"  id="tab-seventh">
+                                         <div class="tab-pane active" id="tab-seventh">
                                          
                                           <div class="form-group">
                                                 <label class="col-md-3 col-xs-12 control-label">Spouse Name</label>
@@ -439,9 +453,8 @@
 
 
                                         </div>
-                                       
 
-                                         <div class="tab-pane" id="tab-eight">
+                                         <div class="tab-pane active" id="tab-eight">
                                         
                                        Membership
 
@@ -460,6 +473,9 @@
                                                     </select>
                                                 </div>                                            
                                             </div>
+
+                                       
+
 
                                             <div class="form-group">
                                                 <label class="col-md-3 col-xs-12 control-label">Social Security Number</label>
@@ -484,6 +500,9 @@
                                                 </div>                                            
                                             </div>
 
+                                      
+
+
                                               <div class="form-group">
                                                 <label class="col-md-3 col-xs-12 control-label">Health Insuarance Number</label>
                                                 <div class="col-md-6 col-xs-12">                                                                                                                                                        
@@ -498,6 +517,8 @@
                                                     <input type="text" name="hdmfnumber" class="form-control" value="{{$employee->hdmfnumber}}"/>
                                                 </div>
                                             </div>
+
+
 
                                             <div class="form-group">                                        
                                                 <label class="col-md-3 col-xs-12 control-label">Deduct Social Security Scheme?</label>
@@ -550,7 +571,7 @@
                                         </div>
 
 
-                                         <div class="tab-pane" id="tab-eleventh">
+                                         <div class="tab-pane active" id="tab-eleventh">
                                         
                                         Bank Info 
 
@@ -583,10 +604,12 @@
                                                     <input type="text" name="accountnumber" class="form-control" value="{{$employee->atmnumber}}"/>
                                                 </div>
                                             </div>
-                                        </diV>
 
 
-                                         <div class="tab-pane" id="tab-ninth">
+
+                                        </div>
+
+                                         <div class="tab-pane active" id="tab-ninth">
                                         
                                        <!--<img src="{{asset('assets/images/users/no-image.jpg')}}" alt="J"/>  -->
                                        
@@ -601,7 +624,7 @@
                                         </div>
 
 
-                                            <div class="tab-pane" id="tab-tenth">
+                                            <div class="tab-pane active" id="tab-tenth">
                                    
                                                       
                                          <div class="form-group">
@@ -665,9 +688,10 @@
                                             </div> 
                                    
                                         </div>
-
-                                        
+                                      
                                         </div>
+
+
                                     <div class="panel-footer">                                                                        
                                         <button class="btn btn-primary pull-right">Save Changes <span class="fa fa-floppy-o fa-right"></span></button>
                                     </div>
@@ -679,9 +703,5 @@
                     </div>                    
                     
                 </div>
-                <!-- END PAGE CONTENT WRAPPER -->
-                </div>            
-            <!-- END PAGE CONTENT -->
-        </div>
-        <!-- END PAGE CONTAINER -->
+                <!-- END PAGE CONTENT WRAPPER -->   
                 @endsection

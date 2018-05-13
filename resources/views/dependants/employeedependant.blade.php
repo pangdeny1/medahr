@@ -1,5 +1,5 @@
 <div class="panel-heading">
-                    <i class="fa fa-dependant"> <a href="{{url('createdependant')}}">Add New dependant </a></i>
+                    <i class="fa fa-dependant"> <a href="{{url('createdependant/'.$employee->employeeid)}}">Add New dependant </a></i>
                 </div>
                 <div class="panel-body">
                      @include('includes.flash');

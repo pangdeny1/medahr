@@ -232,11 +232,14 @@ Route::group(['middleware'=> ['auth', 'activated', 'role:admin']], function () {
     Route::get('viewinstitutions','institution\institutescontroller@index');
 //dependants
     Route::post('adddependant','dependant\dependantscontroller@store');
+     Route::post('addemployeedependant','dependant\dependantscontroller@storeemployeedependant');
     Route::get('showdependant/{id}','dependant\dependantscontroller@show');
     Route::get('editdependant/{id}','dependant\dependantscontroller@edit');
     Route::post('updatedependant/{id}','dependant\dependantscontroller@update');
     Route::get('deletedependant/{id}','dependant\dependantscontroller@destroy');
     Route::get('createdependant','dependant\dependantscontroller@create');
+    
+    Route::get('createdependant/{id}','dependant\dependantscontroller@createemployeedependant');
     Route::get('viewdependants','dependant\dependantscontroller@index');
 
     //work Experience

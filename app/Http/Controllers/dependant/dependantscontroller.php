@@ -37,6 +37,19 @@ class dependantscontroller extends Controller
         return view('dependants.create', compact('pagetitle','dependants','employees','yesornos','dependanttypes','genders'));
     }
 
+    public function createemployeedependant($employeeid)
+    {
+        $dependants=Dependant::All();
+        $employees = Employee::where('employeeid', $employeeid)->get();
+        $yesornos=YesOrNo::All();
+        $dependanttypes=Dependanttype::All();
+        $genders=gender::All();
+        $pagetitle="Add New dependant";
+        
+
+        return view('dependants.createemployeedependant', compact('pagetitle','dependants','employees','yesornos','dependanttypes','genders'));
+    }
+
     public function store(Request $request, AppMailer $mailer)
     {
         //store addes files
@@ -70,6 +83,41 @@ class dependantscontroller extends Controller
          $pagetitle="Dependants ";
          //return view('dependants.index',compact('dependants','pagetitle'))->with("status", $request->input('dependantDesc')." dependant  Added Successfully.");
         return redirect()->back()->with("status", $request->input('dependantDesc')." dependant  Added Successfully.");
+    }
+
+     public function storeemployeedependant(Request $request, AppMailer $mailer)
+    {
+        //store addes files
+        
+        $this->validate($request, [
+           
+            'employee'     => 'required',
+            'FullName'     => 'required',
+            'DOB'     => 'required',
+            'Gender'     => 'required',
+            'DependantType'=>'required'
+        ]);
+
+        $dependant= new dependant([
+            'fullname'     => $request->input('FullName'),
+            'employeeid'     => $request->input('employee'),
+            'deptypeid'     => $request->input('DependantType'),
+            'sex'     => $request->input('Gender'),
+            'email'     => $request->input('Email'),
+            'phone'     => $request->input('Phone'),
+            'dob'     => $request->input('DOB'),
+            'phone'     => $request->input('Phone'),
+            'nextofkeen'=>$request->input('NextOfKin'),
+            
+        ]);
+
+        $dependant->save();
+
+       // $mailer->sendTicketInformation(Auth::user(), $ticket);
+         $dependants=Dependant::All();
+         $pagetitle="Dependants ";
+         //return view('dependants.index',compact('dependants','pagetitle'))->with("status", $request->input('dependantDesc')." dependant  Added Successfully.");
+        return redirect()->to('editemployee/'.$request->input('employee').'#tab-sixth')->with("status", $request->input('dependantDesc')." dependant  Added Successfully.");
     }
 
 
@@ -132,7 +180,7 @@ class dependantscontroller extends Controller
          $pagetitle="Dependants ";
          //return view('dependants.index',compact('dependants','pagetitle'))->with("status", $request->input('dependantDesc')." dependant  Added Successfully.");
         return redirect()->back()->with("status", $request->input('dependantDesc')." Dependant  Updated Successfully.");
-       // return redirect()->back()->with("status", "A dependant Title has been Updated.");
+       //return redirect()->to("/editemployee/1#tab-sixth")->with("status", "A dependant Title has been Updated.");
     }
 
 

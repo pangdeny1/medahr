@@ -2,49 +2,27 @@
 <html lang="en">
     <head>        
         <!-- META SECTION -->
-        <title>MEDA</title>            
+        <title>Ardoa-HR-Payroll</title>            
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         
         <link rel="icon" href="favicon.ico" type="image/x-icon" />
         <!-- END META SECTION -->
-        
+                        
         <!-- CSS INCLUDE -->        
-        <link rel="stylesheet" type="text/css" id="theme" href="{{asset('css/theme-default.css') }}"/>
-   {{-- Fonts --}}
-        @yield('template_linked_fonts')
+        <link rel="stylesheet" type="text/css" id="theme" href="css/theme-default.css"/>
+         <link rel="stylesheet" type="text/css" id="theme" href="{{asset('css/theme-default.css') }}"/>
+        <!-- EOF CSS INCLUDE --> 
+        <!-- CSRF Token -->
+<meta name="csrf-token" content="{{ csrf_token() }}">
 
-        {{-- Styles --}}
-        <link href="{{ mix('/css/app.css') }}" rel="stylesheet">
-        <link href="{{ asset('/css/app.css') }}" rel="stylesheet">
-
-        @yield('template_linked_css')
-
-        <style type="text/css">
-            @yield('template_fastload_css')
-
-            @if (Auth::User() && (Auth::User()->profile) && (Auth::User()->profile->avatar_status == 0))
-                .user-avatar-nav {
-                    background: url({{ Gravatar::get(Auth::user()->email) }}) 50% 50% no-repeat;
-                    background-size: auto 100%;
-                }
-            @endif
-
-        </style>
-
-        {{-- Scripts --}}
-        <script>
-            window.Laravel = {!! json_encode([
-                'csrfToken' => csrf_token(),
-            ]) !!};
-        </script>
-
-        @if (Auth::User() && (Auth::User()->profile) && $theme->link != null && $theme->link != 'null')
-            <link rel="stylesheet" type="text/css" href="{{ $theme->link }}">
-        @endif
-
-        @yield('head')
+<!-- Scripts -->
+<script>
+    window.Laravel = <?php echo json_encode([
+        'csrfToken' => csrf_token(),
+    ]); ?>
+</script>      
     </head>
     <body>
         <!-- START PAGE CONTAINER -->
@@ -55,31 +33,28 @@
                 <!-- START X-NAVIGATION -->
                 <ul class="x-navigation">
                     <li class="xn-logo">
-                        <a href="">Ardoa</a>
-                        
+                        <a href="#">ARDOA</a>
+                        <a href="#" class="x-navigation-control"></a>
                     </li>
                     <li class="xn-profile">
                         <a href="#" class="profile-mini">
-                           <img src="{{asset('assets/images/users/no-image.jpg')}}" alt="J"/> 
+                            <img src="{{asset('assets/images/users/no-image.jpg')}}" alt="J"/> 
                         </a>
                         <div class="profile">
                             <div class="profile-image">
-
-                                <img src="{{asset('assets/images/users/no-image.jpg')}}" alt="J"/>
+                                <img src="{{asset('assets/images/users/no-image.jpg')}}" alt="J"/> 
                             </div>
                             <div class="profile-data">
-                                <div class="profile-data-name">
-    {{ Auth::user()->name }}
-</div>
-                                <div class="profile-data-title">Officer</div>
+                                <div class="profile-data-name">{{ Auth::user()->name }}</div>
+                                <div class="profile-data-title">{{ Auth::user()->first_name}} {{ Auth::user()->last_name}}</div>
                             </div>
                             <div class="profile-controls">
-                                <a href="" class="profile-control-left"><span class="fa fa-info"></span></a>
-                                <a href="" class="profile-control-right"><span class="fa fa-envelope"></span></a>
+                                <a href="pages-profile.html" class="profile-control-left"><span class="fa fa-info"></span></a>
+                                <a href="pages-messages.html" class="profile-control-right"><span class="fa fa-envelope"></span></a>
                             </div>
                         </div>                                                                        
                     </li>
-                    <li class="xn-title">Navigation</li>                    
+                     <li class="xn-title">Navigation</li>                    
                   <li class="xn-openable active">
                         <a href="#"><span class="fa fa-dashboard"></span> <span class="xn-text">Dashboards</span></a>
                         <ul>
@@ -156,10 +131,10 @@
                     <!-- POWER OFF -->
                     <li class="xn-icon-button pull-right last">
                         <a href="#"><span class="fa fa-power-off"></span></a>
-                        <ul class="xn-drop-left animated zoomIn">
+                         <ul class="xn-drop-left animated zoomIn">
                           <!--  <li><a href="pages-lock-screen.html"><span class="fa fa-lock"></span> Lock Screen</a></li> -->
                             <li><a href="{{ route('logout') }}" class="mb-control" data-box="#mb-signout"><span class="fa fa-sign-out"></span> Sign Out</a></li>
-                        </ul>                        
+                        </ul>                       
                     </li> 
                     <!-- END POWER OFF -->
                     <!-- MESSAGES -->
@@ -176,25 +151,25 @@
                             <div class="panel-body list-group list-group-contacts scroll" style="height: 200px;">
                                 <a href="#" class="list-group-item">
                                     <div class="list-group-status status-online"></div>
-                                    <img src="{{asset('assets/images/users/user2.jpg')}}" class="pull-left" alt="John Doe"/>
+                                    <img src="assets/images/users/user2.jpg" class="pull-left" alt="John Doe"/>
                                     <span class="contacts-title">John Doe</span>
                                     <p>Praesent placerat tellus id augue condimentum</p>
                                 </a>
                                 <a href="#" class="list-group-item">
                                     <div class="list-group-status status-away"></div>
-                                    <img src="{{asset('assets/images/users/user.jpg')}}" class="pull-left" alt="Dmitry Ivaniuk"/>
+                                    <img src="assets/images/users/user.jpg" class="pull-left" alt="Dmitry Ivaniuk"/>
                                     <span class="contacts-title">Dmitry Ivaniuk</span>
                                     <p>Donec risus sapien, sagittis et magna quis</p>
                                 </a>
                                 <a href="#" class="list-group-item">
                                     <div class="list-group-status status-away"></div>
-                                    <img src="{{asset('assets/images/users/user3.jpg')}}" class="pull-left" alt="Nadia Ali"/>
+                                    <img src="assets/images/users/user3.jpg" class="pull-left" alt="Nadia Ali"/>
                                     <span class="contacts-title">Nadia Ali</span>
                                     <p>Mauris vel eros ut nunc rhoncus cursus sed</p>
                                 </a>
                                 <a href="#" class="list-group-item">
                                     <div class="list-group-status status-offline"></div>
-                                    <img src="{{asset('assets/images/users/user6.jpg')}}" class="pull-left" alt="Darth Vader"/>
+                                    <img src="assets/images/users/user6.jpg" class="pull-left" alt="Darth Vader"/>
                                     <span class="contacts-title">Darth Vader</span>
                                     <p>I want my money back!</p>
                                 </a>
@@ -247,7 +222,7 @@
                                 </a>                                
                             </div>     
                             <div class="panel-footer text-center">
-                                <a href="paymentrequest">Show all Payment Request</a>
+                                <a href="pages-tasks.html">Show all tasks</a>
                             </div>                            
                         </div>                        
                     </li>
@@ -263,39 +238,23 @@
                     </li> 
                     <!-- END LANG BAR -->
                 </ul>
-                <!-- END X-NAVIGATION VERTICAL --> 
-                  <ul class="breadcrumb">
+
+                <!-- END X-NAVIGATION VERTICAL -->                   
+                
+                <!-- START BREADCRUMB -->
+                 <ul class="breadcrumb">
                     <li><a href="{{'../home'}}">Home</a></li>
                     <li>{{$pagetitle}}</li>
                     
                 </ul> 
-                                 
-               @yield('content')
+                <!-- END BREADCRUMB -->
+
+                 @yield('content')
 
 
-        <!-- END PAGE CONTAINER -->    
-
-        <!-- MESSAGE BOX-->
-        <div class="message-box animated fadeIn" data-sound="alert" id="mb-remove-row">
-            <div class="mb-container">
-                <div class="mb-middle">
-                    <div class="mb-title"><span class="fa fa-times"></span> Remove <strong>Data</strong> ?</div>
-                    <div class="mb-content">
-                        <p>Are you sure you want to remove this row?</p>                    
-                        <p>Press Yes if you sure.</p>
-                    </div>
-                    <div class="mb-footer">
-                        <div class="pull-right">
-                            <button class="btn btn-success btn-lg mb-control-yes">Yes</button>
-                            <button class="btn btn-default btn-lg mb-control-close">No</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- END MESSAGE BOX-->        
+            
         
-        <!-- MESSAGE BOX-->
+         <!-- MESSAGE BOX-->
         <div class="message-box animated fadeIn" data-sound="alert" id="mb-signout">
             <div class="mb-container">
                 <div class="mb-middle">
@@ -315,6 +274,7 @@
         </div>
         <!-- END MESSAGE BOX-->
 
+       
         <!-- START PRELOADS -->
         <audio id="audio-alert" src="{{asset('audio/alert.mp3')}}" preload="auto"></audio>
         <audio id="audio-fail" src="{{asset('audio/fail.mp3')}}" preload="auto"></audio>
@@ -436,9 +396,3 @@
            
     </body>
 </html>
-
-
-
-
-
-

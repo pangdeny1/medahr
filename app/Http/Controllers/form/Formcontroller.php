@@ -99,7 +99,8 @@ class Formcontroller extends Controller
         $employee->save();
 
        // return redirect()->action('employeemaster@edit', ['employeeid' => $employeeid]);
-return redirect()->route('editemployee', ['id' => $employeeid]);
+//return redirect()->route('editemployee', ['id' => $employeeid]);
+return redirect()->to("/editemployee/".$employeeid."#tab-ninth")->with("status", "A Employee Picture has been Updated.");
        // return back()->with('success', 'Your images has been successfully');
     }
 }

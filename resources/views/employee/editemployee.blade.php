@@ -6,17 +6,8 @@
                 
                     <div class="row">
                         <div class="col-md-12">
-                            @if (count($errors) > 0)
-    <div class="alert alert-danger">
-        <ul>
-            @foreach ($errors->all() as $error)
-                <li>{{ $error }}</li>
-            @endforeach
-        </ul>
-    </div>
-@endif
                              <form class="form-horizontal" action="{{url('employeeupdate/'.$employee->employeeid) }}" method='post' role='form'>
-                               {!! csrf_field() !!}                             
+                                                            
                                 <div class="panel panel-default tabs">                            
                                     <ul class="nav nav-tabs" role="tablist">
                                         <li class="active"><a href="#tab-first" role="tab" data-toggle="tab">Personal</a></li>
