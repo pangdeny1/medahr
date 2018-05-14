@@ -1,4 +1,4 @@
-@extends('layouts.pagelayout2')
+@extends('layouts.pagelayout')
 @section('content') <!-- END X-NAVIGATION VERTICAL -->                   
            
                  <!-- PAGE CONTENT WRAPPER -->
@@ -37,14 +37,14 @@
                                               <p>Fill all Mandatory Fields</p>
 
                                               <div class="form-group">
-                                                <label class="col-md-3 col-xs-12 control-label">Employee Code</label>
+                                                <label class="col-md-3 col-xs-12 control-label">Code</label>
                                                 <div class="col-md-6 col-xs-12">                                                                                                                                                        
                                                     <input type="text" class="form-control" name="EmployeeCode" value="{{ $employee->employeecode}}"/>                                                    
                                                 </div>
                                             </div>
 
                                             <div class="form-group">
-                                           <label class="col-md-3 col-xs-12 control-label">Employee Title</label>
+                                           <label class="col-md-3 col-xs-12 control-label">Title</label>
                                                 <div class="col-md-6 col-xs-12">                                                                                                                                                        
                                                     <select class="form-control select" name="Title">
                                                         @foreach($titles as $title)
@@ -290,12 +290,15 @@
                                                 </div>
                                             </div>
                                             
+                                    
                                             <div class="form-group">
                                                 <label class="col-md-3 col-xs-12 control-label">Address</label>
-                                                <div class="col-md-6 col-xs-12">                                                                                                                                                        
-                                                    <input type="text" class="form-control" name="address" value="{{$employee->address1}}"/>
+                                                <div class="col-md-6 col-xs-12">                                            
+                                                    <textarea class="form-control" rows="5" name="address">{{$employee->address1}}</textarea>
+                                                    
                                                 </div>
-                                            </div>
+                                            </div> 
+                                            
                                             
                                             <div class="form-group">                                        
                                                 <label class="col-md-3 col-xs-12 control-label">Country</label>
@@ -573,7 +576,7 @@
                                             <div class="form-group">
                                                 <label class="col-md-3 col-xs-12 control-label">Account Name</label>
                                                 <div class="col-md-6 col-xs-12">                                                                                                                                                        
-                                                    <input type="text" name="AccountNumber" class="form-control" value="{{$employee->accountname}}"/>
+                                                    <input type="text" name="AccountName" class="form-control" value="{{$employee->accountname}}"/>
                                                 </div>
                                             </div>
 
@@ -649,7 +652,7 @@
                                                 <label class="col-md-3 col-xs-12 control-label">End Of Contract Reason</label>
                                                 <div class="col-md-5">
                                                     <select class="form-control select" name="terminatereason">
-                                                                                                            
+                                                           <option value=''>Select</option>                                                 
 
                                                        @foreach($endofcontractreasons as $ereason)
 

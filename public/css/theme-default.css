@@ -3251,14 +3251,17 @@ body.page-container-boxed.wall_10 {
 .x-navigation > li.xn-logo > a:first-child {
   font-size: 0px;
   text-indent: -9999px;
-  background: url("../img/logo.png") top center no-repeat #e34724;
+  background: url("../img/logo.png") top center no-repeat green;
   padding: 0px;
   border-bottom: 0px;
   color: #FFF;
   height: 50px;
 }
+/* 
+Change logo info here     
+*/
 .x-navigation > li.xn-logo > a:first-child:hover {
-  background-color: #e0401d;
+  background-color: white;
 }
 .x-navigation > li.xn-profile {
   padding: 0px;

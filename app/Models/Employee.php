@@ -91,10 +91,21 @@ class Employee extends Model
             'deptid',
             'jobgroupid',
             'jobid',
-
             'costcenterid',
             'position',
-            'employeepicture'
+            'employeepicture',
+            'spouseemail',
+            'spouseaddress',
+            'spousephone',
+            'nextofkinname',
+            'nextofkinemail',
+            'nextofkinphone',
+            'nextofkinphone',
+            'nextofkinaddress',
+            'reportto',
+            'governmentid',
+            'accountname',
+            'spousename'
        
     ];
 

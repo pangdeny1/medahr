@@ -23,24 +23,48 @@
 
                                 <div class="panel panel-default tabs">                            
                                     <ul class="nav nav-tabs" role="tablist">
-                                        <li class="active"><a href="#tab-first" role="tab" data-toggle="tab">Personal</a></li>
+                                       <li class="active"><a href="#tab-first" role="tab" data-toggle="tab">Personal</a></li>
+                                        <li><a href="#tab-tenth" role="tab" data-toggle="tab">Dates</a></li>
                                         <li><a href="#tab-second" role="tab" data-toggle="tab">Salary</a></li>
                                         <li><a href="#tab-eleventh" role="tab" data-toggle="tab">Bank Info</a></li>
-                                        <li><a href="#tab-tenth" role="tab" data-toggle="tab">Dates</a></li>
+                                        <li><a href="#tab-eight" role="tab" data-toggle="tab">Membership</a></li>
+                                        
                                         <li><a href="#tab-third" role="tab" data-toggle="tab">Contacts</a></li>
-                                        <li><a href="#tab-fourth" role="tab" data-toggle="tab">Education</a></li>
+                                        <li><a href="#tab-seventh" role="tab" data-toggle="tab">Emergence Cont</a></li>
+                                       <!-- <li><a href="#tab-fourth" role="tab" data-toggle="tab">Education</a></li>
                                         <li><a href="#tab-fifth" role="tab" data-toggle="tab">Work experience</a></li>
                                         <li><a href="#tab-sixth" role="tab" data-toggle="tab">Dependants</a></li>
-                                        <li><a href="#tab-seventh" role="tab" data-toggle="tab">Attachements</a></li>
-                                        <li><a href="#tab-eight" role="tab" data-toggle="tab">Membership</a></li>
-                                        <li><a href="#tab-ninth" role="tab" data-toggle="tab">Picture</a></li>
                                         
-
+                                          <li><a href="#tab-ninth" role="tab" data-toggle="tab">Picture</a></li> -->
                                     
                                     </ul>
                                     <div class="panel-body tab-content">
                                         <div class="tab-pane active" id="tab-first">
                                               <p>Fill all Mandatory Fields</p>
+                                              <div class="form-group">
+                                                <label class="col-md-3 col-xs-12 control-label">Code</label>
+                                                <div class="col-md-6 col-xs-12">                                                                                                                                                        
+                                                    <input type="text" class="form-control" name="EmployeeCode" value="{{old('EmployeeCode')}}"/>                                                    
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                           <label class="col-md-3 col-xs-12 control-label">Title</label>
+                                                <div class="col-md-6 col-xs-12">                                                                                                                                                        
+                                                    <select class="form-control select" name="Title">
+                                                       <option  value='' selected="selected">Select --</option>
+                                                        @foreach($titles as $title)
+
+                                                        
+                                                           
+                                                         <option value="{{ $title->id }}">{{ $title->titlename }}</option>
+                                                          @endforeach
+
+                                                        </option>
+                                                                                                             
+                                                    </select>                                                   
+                                                </div>
+                                            </div>
 
                                             <div class="form-group">
                                                 <label class="col-md-3 col-xs-12 control-label">First Name</label>
@@ -288,28 +312,48 @@
                                             
                                         </div>                                        
                                         <div class="tab-pane" id="tab-third">
-                                           <p>Fill all Mandatory Fields</p>
-                                            
+                                           <div class="form-group">
+                                                <label class="col-md-3 col-xs-12 control-label">Government ID</label>
+                                                <div class="col-md-6 col-xs-12">                                                                                                                                                        
+                                                    <input type="text" class="form-control" name="GovernmentID" value="{{ old('GovernmentID')}}"/>                                                    
+                                                </div>
+                                            </div>
+ 
                                             <div class="form-group">
-                                                <label class="col-md-3 col-xs-12 control-label">E-mail</label>
+                                                <label class="col-md-3 col-xs-12 control-label">Work E-mail</label>
                                                 <div class="col-md-6 col-xs-12">                                                                                                                                                        
                                                     <input type="text" name="email" class="form-control" value="{{old('email')}}"/>
                                                 </div>
                                             </div>
                                             
                                             <div class="form-group">
+                                                <label class="col-md-3 col-xs-12 control-label">personal E-mail</label>
+                                                <div class="col-md-6 col-xs-12">                                                                                                                                                        
+                                                    <input type="text" name="email2" class="form-control" value="{{old('email2')}}"/>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
                                                 <label class="col-md-3 col-xs-12 control-label">Phone</label>
                                                 <div class="col-md-6 col-xs-12">                                                                                                                                                        
                                                     <input type="text" name="phone" class="form-control" value="{{old('phone')}}"/>
                                                 </div>
                                             </div>
-                                            
+
                                             <div class="form-group">
-                                                <label class="col-md-3 col-xs-12 control-label">Address</label>
+                                                <label class="col-md-3 col-xs-12 control-label">Cell Phone</label>
                                                 <div class="col-md-6 col-xs-12">                                                                                                                                                        
-                                                    <input type="text" class="form-control" name="address" value="{{old('address')}}"/>
+                                                    <input type="text" name="phone2" class="form-control" value="{{old('phone2')}}"/>
                                                 </div>
                                             </div>
+                                            
+
+                                            <div class="form-group">
+                                                <label class="col-md-3 col-xs-12 control-label">Address</label>
+                                                <div class="col-md-6 col-xs-12">                                            
+                                                    <textarea class="form-control" rows="5" name="address">{{old('address')}}</textarea>
+                                                    
+                                                </div>
+                                            </div> 
                                             
                                             <div class="form-group">                                        
                                                 <label class="col-md-3 col-xs-12 control-label">Country</label>
@@ -369,30 +413,83 @@
                                             
                                         </div>
 
-                                        <div class="tab-pane active" id="tab-fourth">
+                                        <div class="tab-pane" id="tab-fourth">
                                          Fourth
 
 
 
                                         </div>
 
-                                         <div class="tab-pane active" id="tab-fifth">
+                                         <div class="tab-pane" id="tab-fifth">
                                          Fifth
 
                                         </div>
 
-                                         <div class="tab-pane active" id="tab-sixth">
+                                         <div class="tab-pane" id="tab-sixth">
                                         Sixth
 
                                         </div>
 
-                                         <div class="tab-pane active" id="tab-seventh">
+                                         <div class="tab-pane" id="tab-seventh">
                                          
-                                         Seventh
+                                          <div class="form-group">
+                                                <label class="col-md-3 col-xs-12 control-label">Spouse Name</label>
+                                                <div class="col-md-6 col-xs-12">                                                                                                                                                        
+                                                    <input type="text" class="form-control" name="SpouseName" value="{{ old('SpouseName')}}"/>                                                    
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-md-3 col-xs-12 control-label">Spouse Phone</label>
+                                                <div class="col-md-6 col-xs-12">                                                                                                                                                        
+                                                    <input type="text" class="form-control" name="SpousePhone" value="{{ old('SpousePhone')}}"/>                                                    
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-md-3 col-xs-12 control-label">Spouse Email</label>
+                                                <div class="col-md-6 col-xs-12">                                                                                                                                                        
+                                                    <input type="text" class="form-control" name="SpouseEmail" value="{{ old('SpouseEmail')}}"/>                                                    
+                                                </div>
+                                            </div>
+
+                                          <div class="form-group">
+                                                <label class="col-md-3 col-xs-12 control-label">Spouse Address</label>
+                                                <div class="col-md-6 col-xs-12">                                            
+                                                    <textarea class="form-control" rows="5" name="SpouseAddress">{{ old('SpouseAddress')}}</textarea>
+                                                    
+                                                </div>
+                                            </div> 
+
+                                            <div class="form-group">
+                                                <label class="col-md-3 col-xs-12 control-label">Next of Kin Name</label>
+                                                <div class="col-md-6 col-xs-12">                                                                                                                                                        
+                                                    <input type="text" class="form-control" name="NextOfKinName" value="{{ old('NextOfKinName')}}"/>                                                    
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-md-3 col-xs-12 control-label">Next of Kin Phone</label>
+                                                <div class="col-md-6 col-xs-12">                                                                                                                                                        
+                                                    <input type="text" class="form-control" name="NextOfKinPhone" value="{{ old('NextOfKinPhone')}}"/>                                                    
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-md-3 col-xs-12 control-label">Next of Kin Email</label>
+                                                <div class="col-md-6 col-xs-12">                                                                                                                                                        
+                                                    <input type="text" class="form-control" name="NextOfKinEmail" value="{{ old('NextOfKinEmail')}}"/>                                                    
+                                                </div>
+                                            </div>
+
+                                          <div class="form-group">
+                                                <label class="col-md-3 col-xs-12 control-label">Next of Kin Address</label>
+                                                <div class="col-md-6 col-xs-12">                                            
+                                                    <textarea class="form-control" rows="5" name="NextOfKinAdress">{{ old('NextOfKinAdress')}}</textarea>
+                                                    
+                                                </div>
+                                            </div>     
+
 
                                         </div>
 
-                                         <div class="tab-pane active" id="tab-eight">
+                                         <div class="tab-pane" id="tab-eight">
                                         
                                        Membership
 
@@ -499,7 +596,7 @@
                                         </div>
 
 
-                                         <div class="tab-pane active" id="tab-eleventh">
+                                         <div class="tab-pane" id="tab-eleventh">
                                         
                                         Bank Info 
 
@@ -518,6 +615,13 @@
                                             </div>
 
                                             <div class="form-group">
+                                                <label class="col-md-3 col-xs-12 control-label">Account Name</label>
+                                                <div class="col-md-6 col-xs-12">                                                                                                                                                        
+                                                    <input type="text" name="AccountName" class="form-control" value="{{old('AccountName')}}"/>
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
                                                 <label class="col-md-3 col-xs-12 control-label">Bank Account Number</label>
                                                 <div class="col-md-6 col-xs-12">                                                                                                                                                        
                                                     <input type="text" name="atmnumber" class="form-control" value="{{old('atmnumber')}}"/>
@@ -528,7 +632,7 @@
 
                                         </div>
 
-                                         <div class="tab-pane active" id="tab-ninth">
+                                         <div class="tab-pane" id="tab-ninth">
                                         
                                        <div class="form-group">
                                                 <label class="col-md-3 col-xs-12 control-label">Picture</label>
@@ -539,7 +643,7 @@
                                         </div>
 
 
-                                            <div class="tab-pane active" id="tab-tenth">
+                                            <div class="tab-pane" id="tab-tenth">
                                    
                                                       
                                          <div class="form-group">
@@ -588,7 +692,7 @@
                                                 <label class="col-md-3 col-xs-12 control-label">End Of Contract Reason</label>
                                                 <div class="col-md-5">
                                                     <select class="form-control select" name="terminatereason">
-                                                                                                            
+                                                              <option selected  value=''>Select</option>                                                
 
                                                        @foreach($endofcontractreasons as $ereason)
 

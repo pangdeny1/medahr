@@ -14,7 +14,7 @@
                             <!-- START DATATABLE EXPORT -->
                             <div class="panel panel-default">
                                 <div class="panel-heading">
-                                    <h3 class="panel-title"><a href="addemployee"> Add new employee </a></h3>
+                                    <h3 class="panel-title"><i class="fa fa-branch"> <a href="addemployee"> Add new employee </a></i></h3>
                                     <div class="btn-group pull-right">
                                         <button class="btn btn-danger dropdown-toggle" data-toggle="dropdown"><i class="fa fa-bars"></i> Export Data</button>
                                         <ul class="dropdown-menu">
@@ -64,8 +64,9 @@
                                                     
                                                     @endif
                                                 </td>
-                                                    <th ><a href="#"  data-toggle="modal" data-backdrop="static" data-keyboard="false" data-target="#modal_change_password">View </a></th>
-                                                    <th ><a href="{{ URL::to('editemployee/'.$employee->employeeid) }}">Edit</a></th>
+                                                    <th ><a href="#"  data-toggle="modal" data-backdrop="static" data-keyboard="false" data-target="#modal_change_password" class="btn btn-primary">View</a></th>
+                                                    <th >
+                                                    <a href="{{ URL::to('editemployee/'.$employee->employeeid) }}" class="btn btn-primary">Edit</a></th>
                                                     <!-- <th><a href="{{ URL::to('employeedelete/' . $employee->employeeid) }} " onclick="return confirm('Are you sure you want to delete this Employee?')"; >Delete</a></th>
                                                     <th><a class="btn btn-sm btn-info btn-block" href="{{ URL::to('editemployee/' . $employee->employeeid . '/edit') }}"
                                                       data-toggle="tooltip" title="Edit">Edit</a> </th> -->
@@ -87,7 +88,8 @@
                     <div class="row">
         <div class="col-md-10 col-md-offset-1">
             <div class="panel panel-default">
-                @include('employee.viewemployee');
+                Employee Detail Goes here
+               <!-- include('employee.viewemployee'); -->
                 </div>                                  
                                     </div>
                                 </div>

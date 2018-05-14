@@ -102,8 +102,9 @@ class employeemaster extends Controller
         $hdmf                  =HDMF::All();
         $companies                =Company::All();
         $yesornos                =YesOrNo::All();
+        $titles=title::All();
     	return view('employee.addemployee2',compact('pagetitle','jobs','jobgroups','paytypes','maritalstatutes','genders','countries','branches','departments','endofcontractreasons'
-            ,'prlemployeestatuses','employeestatuses','banks','healths','hdmf','companies','yesornos','regions','districts','sss','prlemployementstatuses','payperiods'));
+            ,'prlemployeestatuses','employeestatuses','titles','banks','healths','hdmf','companies','yesornos','regions','districts','sss','prlemployementstatuses','payperiods'));
     }
 
 
@@ -114,7 +115,7 @@ class employeemaster extends Controller
             [
                 'lastname'            => 'required',
                 'firstname'            => 'required',
-                'birthdate'             => 'required',
+                'birthdate'            => 'required',
                 'jobid'             => 'required',
                 'hiredate'             => 'required',
                 'gender'               =>'required',
@@ -123,8 +124,11 @@ class employeemaster extends Controller
                 'gender'                =>'required',
                 'active'               =>'required',
                 'email'                =>'email|required',
-                'employementstatus'    =>'required',
-                'company'              =>'required'
+                'EmployeeCode'         =>'required',
+                'periodrate'           =>'required'
+                //'employementstatus'    =>'required',
+                //'company'              =>'required',
+
             ]);
 
       /*  if ($validator->fails()) {
@@ -143,13 +147,14 @@ if ($validator->fails()) {
 
             $employee = new Employee([
             'employeeid'       =>null,
-            'tittle'           =>'MR',
-            'employeecode'     =>"w",
+            'tittle'           =>$request->input('Title'),
+            'employeecode'     =>$request->input('EmployeeCode'),
             'firstname'        => $request->input('firstname'),
             'lastname'         => $request->input('lastname'),
             'middlename'        => $request->input('othername'),
             'address1'=>$request->input('address'),
             'address2'=>'',
+            'governmentid'=>$request->input('GovernmentID'),
             'city'=>$request->input('city'),
             'state'=>$request->input('state'),
             'zip'=>$request->input('zip'),
@@ -157,14 +162,15 @@ if ($validator->fails()) {
             'gender'=>$request->input('gender'),
             'phone1'=>$request->input('phone'),
             'phone1comment'=>$request->input('aboutme'),
-            'phone2'=>'',
+            'phone2'=>$request->input('phone2'),
             'phone2comment'=>'',
             'email1'=>$request->input('email'),
             'email1comment'=>'',
-            'email2'=>'',
+            'email2'=>$request->input('email2'),
             'email2comment'=>'',
             'atmnumber'=>$request->input('atmnumber'),
             'bankid'=>$request->input('bank'),
+            'accountname' =>$request->input('AccountName'),
             'ssnumber'=>$request->input('aboutme'),
             'hdmfnumber'=>$request->input('hdmfnumber'),
             'isPension'=>$request->input('isPension'),
@@ -201,6 +207,17 @@ if ($validator->fails()) {
             'costcenterid'=>$request->input('CostCenter'),
             'position'=>'',
             'employeepicture'=>$request->input('temployeepicture'),
+
+            'spousename' =>$request->input('SpouseName'),
+            'spouseemail' =>$request->input('SpouseEmail'),
+            'spousephone' =>$request->input('SpousePhone'),
+            'spouseaddress' =>$request->input('SpouseAddress'),
+
+            'nextofkinname' =>$request->input('NextOfKinName'),
+            'nextofkinemail' =>$request->input('NextOfKinEmail'),
+            'nextofkinphone' =>$request->input('NextOfKinPhone'),
+            'nextofkinaddress' =>$request->input('NextOfKinAdress'),
+
 
                 
             ]);
@@ -317,16 +334,20 @@ if ($validator->fails()) {
          $employee       = Employee::find($id);
         $validator = Validator::make($request->all(),
             [
-                
+               'lastname'            => 'required',
                 'firstname'            => 'required',
-                'lastname'             => 'required',
-                'EmployeeCode'         => 'required',
-                'periodrate'           =>'required',
+                'birthdate'            => 'required',
+                'jobid'             => 'required',
+                'hiredate'             => 'required',
+                'gender'               =>'required',
                 'jobid'                =>'required',
-                'deptid'                =>'required',
                 'paytype'              =>'required',
+                'gender'                =>'required',
+                'active'               =>'required',
                 'email'                =>'email|required',
-                
+                'EmployeeCode'         =>'required',
+                'periodrate'           =>'required'
+
 
 
 
@@ -354,6 +375,7 @@ if ($validator->fails()) {
             $employee->active =$request->input('active');
             $employee->governmentid=$request->input('GovernmentID');
             $employee->reportto =$request->input('reportto');
+            $employee->phone1comment=$request->input('aboutme');
 
             //emergence contact
 
@@ -374,6 +396,7 @@ if ($validator->fails()) {
             $employee->paytype =$request->input('paytype');
 
             //Contacts
+
             $employee->email1 =$request->input('email');
             $employee->email2 =$request->input('email2');
             $employee->phone1 =$request->input('phone');
