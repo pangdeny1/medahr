@@ -8,33 +8,109 @@
 @endsection
 
 @section('content')
-    <div class="row">
-        <div class="col-md-10 col-md-offset-1">
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    #{{ $payroll->id }} - {{ $payroll->payrollname }}
-                </div>
+    <table width="100%" border="0" cellspacing="0" cellpadding="0">
+  <tr> 
+ 
+    <td height="180" valign="top"> 
+    
+      <table width="90%" border="1" cellspacing="0" cellpadding="0" align="center" bordercolordark="#CCCCCC" bordercolorlight="#CCCCCC" bgcolor="#F2F2F2">
+        
 
-                <div class="panel-body">
-                    @include('includes.flash')
+        <tr bgcolor="#F4F4F4"> 
+          <td height="30" > 
+            <div align="left"><font face="Verdana, Arial, Helvetica, sans-serif" size="-1"><b> Payroll : {{$payroll->payrolldesc}}</b>
+              :</font></div>
+          </td>
+          </tr>
+       
+         <tr bgcolor="#F4F4F4"> 
+          <td height="300" colspan="6" valign=top> 
+           <!-- START PROJECTS BLOCK -->
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <div class="panel-title-box">
+                                        <form class="form-horizontal" role="form" method="POST" action="{{ url('/generate/'.$payroll->id) }}">
+                        {!! csrf_field() !!}
 
-                    <div class="payroll-info">
-                        <p><b>payroll Description :: </b>{{ $payroll->payrolldesc }}</p>
-                      
-                        <p>
-                        @if ($payroll->status === 'Open')
-                            Status: <span class="label label-success">{{ $payroll->status }}</span>
-                        @else
-                            Status: <span class="label label-danger">{{ $payroll->status }}</span>
-                        @endif
-                        </p>
-                        <p>Created on: {{ $payroll->created_at->diffForHumans() }}</p>
-                    </div>
+                        <div class="form-group{{ $errors->has('PayrollID') ? ' has-error' : '' }}">
+                            <label for="title" class="col-md-4 control-label">Payroll id</label>
 
-                    <hr>
+                            <div class="col-md-6">
+                                <input id="title" type="text" class="form-control" name="PayrollID" value="{{ old('PayrollID') }}">
+
+                                @if ($errors->has('PayrollID'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('PayrollID') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+                         <div class="form-group">
+                            <div class="col-md-6 col-md-offset-4">
+                                <button type="submit" class="btn btn-primary">
+                                    <i class="fa fa-btn fa-ticket"></i> Generate Payroll Data
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                                        
+                                     <center></center> <?php echo '<FONT SIZE=1>' . _('') . "</FONT><INPUT TYPE=SUBMIT NAME='Close' VALUE='" . _('Close Payroll Period') . "'> <INPUT TYPE=SUBMIT NAME='Purge' VALUE='" . _('Void Payroll Period') . "'>";
+    echo '<FONT SIZE=1>' . _('') . "</FONT>  <INPUT TYPE=SUBMIT id='generate' NAME='Generate' VALUE='" . _('Generate Payroll Data') . "'> <INPUT TYPE=SUBMIT NAME='Reopen' VALUE='" . _('Re-open Payroll Period') . "'>"; ?>
+        
+
+                                        
+                                    </div>                                    
+                                    <ul class="panel-controls" style="margin-top: 2px;">
+                                        <li><a href="#" class="panel-fullscreen"><span class="fa fa-expand"></span></a></li>
+                                        <li><a href="#" class="panel-refresh"><span class="fa fa-refresh"></span></a></li>
+                                        <li class="dropdown">
+                                            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="fa fa-cog"></span></a>  
 
 
-            </div>
-        </div>
-    </div>
+                                            <ul class="dropdown-menu">
+                                                <li><a href="#" class="panel-collapse"><span class="fa fa-angle-down"></span> Collapse</a></li>
+                                                <li><a href="#" class="panel-remove"><span class="fa fa-times"></span> Remove</a></li>
+                                            </ul>                                        
+                                        </li>                                        
+                                    </ul>
+                                </div>
+                                <div class="panel-body panel-body-table">
+                                    
+                                    <div class="table-responsive">
+                                        <table id="customers2" class="table datatable">
+                                            <thead>
+                                                <tr>
+                                                    <th width="50%">Eligible Employee</th>
+                                                    <th width="20%">Period Rate</th>
+                                                    <th width="20%">Status</th>
+                                                   
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                       @foreach($employees as $employee)
+                                                <tr>
+                                                    <td><strong>{{$employee->firstname." ".$employee->lastname}}</strong></td>
+                                                    <td><strong>{{$employee->periodrate}}</strong></td>
+                                                    <td><span class="label label-danger">Eligible</span></td>
+                                                    
+                                                </tr>
+                                           @endforeach
+                                               
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    
+                                </div>
+                            </div>
+                            <!-- END PROJECTS BLOCK -->   
+          </td>
+          
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+
+</table>
+
 @endsection

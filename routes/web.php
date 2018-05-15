@@ -191,6 +191,7 @@ Route::group(['middleware'=> ['auth', 'activated', 'role:admin']], function () {
     Route::get('deletepayroll/{id}','payroll\payrollsController@destroy');
     Route::get('createpayrollperiod','payroll\PayrollsController@create');
     Route::get('viewpayrollperiods','payroll\PayrollsController@index');
+    Route::post('generate/{id}','payroll\payrollsController@generate');
 
     //qualifications
 

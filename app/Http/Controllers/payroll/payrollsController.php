@@ -10,6 +10,7 @@ use App\Mailers\AppMailer;
 use App\Models\YesOrNo;
 use App\Models\Year;
 use App\Models\Month;
+use App\Models\Payperiod;
 use App\Http\Controllers\Controller;
 
 class payrollsController extends Controller
@@ -29,8 +30,9 @@ class payrollsController extends Controller
         $employees=Employee::All();
         $years=Year::All();
         $months=Month::All();
+        $payperiods     =Payperiod::All();
 
-        return view('payrolls.create', compact('pagetitle','employees','years','yesornos','months'));
+        return view('payrolls.create', compact('pagetitle','payperiods','employees','years','yesornos','months'));
     }
 
     public function store(Request $request, AppMailer $mailer)
@@ -46,7 +48,8 @@ class payrollsController extends Controller
             'FSYear'     => 'required',
             'DeductSSS'     => 'required',
             'DeductHdmf'     => 'required',
-            'DeductHealth'     => 'required'
+            'DeductHealth'     => 'required',
+            'payperiod'       =>'required'
         ]);
 
         $payroll= new Payroll([
@@ -59,7 +62,7 @@ class payrollsController extends Controller
             'deductsss'     => $request->input('DeductSSS'),
             'deducthdmf'     => $request->input('DeductHdmf'),
             'deductphilhealth'     => $request->input('DeductHealth'),
-            'payperiodid'     => 22
+            'payperiodid'     => $request->input('payperiod')
         ]);
 
         $payroll->save();
@@ -72,14 +75,21 @@ class payrollsController extends Controller
 
      public function show($payroll_id)
     {   
-    	$pagetitle="payroll View";
+    	$pagetitle="Payroll Records Maintenance";
         $payroll= payroll::where('id', $payroll_id)->firstOrFail();
+        $employees= Employee::where('active', 1)->where('payperiodid',$payroll->payperiodid)->get();
+        $payperiods     =Payperiod::All();
+         //$employees= Employee::All();
 
-        //$comments = $ticket->comments;
+        return view('payrolls.show', compact('payroll','pagetitle','employees','payperiods'));
+    }
 
-        //$category = $ticket->category;
-
-        return view('payrolls.show', compact('payroll','pagetitle'));
+    public function generate($payroll_id)
+    {
+        $payroll= payroll::where('id', $payroll_id)->firstOrFail();
+        $pagetitle="Generating payroll Data";
+        $payperiods     =Payperiod::All();
+        return view('payrolls.generate',compact('pagetitle','payroll','payperiods'));
     }
 
 
@@ -92,6 +102,7 @@ class payrollsController extends Controller
         $employees=Employee::All();
         $years=Year::All();
         $months=Month::All();
+        $payperiods     =Payperiod::All();
 
         
 
@@ -99,7 +110,7 @@ class payrollsController extends Controller
 
         //$category = $ticket->category;
 
-        return view('payrolls.edit', compact('payroll','pagetitle','years','employees','yesornos','months'));
+        return view('payrolls.edit', compact('payroll','payperiods','pagetitle','years','employees','yesornos','months'));
     }
 
 
@@ -115,7 +126,8 @@ class payrollsController extends Controller
             'FSYear'     => 'required',
             'DeductSSS'     => 'required',
             'DeductHdmf'     => 'required',
-            'DeductHealth'     => 'required'
+            'DeductHealth'     => 'required',
+            'payperiod'        =>'required'
         ]);
        
 
@@ -130,7 +142,7 @@ class payrollsController extends Controller
              $payroll->deductsss    = $request->input('DeductSSS');
              $payroll->deducthdmf    = $request->input('DeductHdmf');
              $payroll->deductphilhealth     = $request->input('DeductHealth');
-             $payroll->payperiodid    =22;
+             $payroll->payperiodid    =$request->input('payperiod');
 
          $payroll->save();
 

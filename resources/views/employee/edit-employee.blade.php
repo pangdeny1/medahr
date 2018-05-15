@@ -229,6 +229,25 @@
                                                     </select>
                                                 </div>                                          
                                             </div>
+                                            <div class="form-group">                                        
+                                                <label class="col-md-3 col-xs-12 control-label">Pay pariods</label>
+                                                <div class="col-md-5">
+                                                    <select class="form-control select" name="payperiod">
+                                                        <option  value='' selected="selected">Select </option>
+
+                                                        @foreach($payperiods as $payperiod)
+
+                                                         @if($payperiod->payperiodid ==$employee->payperiodid)
+                                                        <option  value='{{$employee->payperiodid}}' selected="selected">{{$payperiod->payperioddesc }}</option>
+                                                            @else
+                                                          <option value="{{ $payperiod->payperiodid }}">{{ $payperiod->payperioddesc }}</option>
+                                                           @endif 
+                                                        @endforeach
+                                                                                                             
+                                                    </select>
+                                                </div>                                          
+                                            </div>
+
 
                                                                                         
                                             <div class="form-group">

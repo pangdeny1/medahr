@@ -45,7 +45,7 @@
                                     </td>
                                     <td>{{ $payroll->updated_at }}</td>
                                      <td>
-                                        <a href="{{ url('showpayroll/'.$payroll->id) }}" class="btn btn-primary">View</a>
+                                        <a href="{{ url('showpayroll/'.$payroll->id) }}" class="btn btn-primary">Select</a>
                                     </td>
                                     <td>
                                         <a href="{{ url('editpayroll/'.$payroll->id) }}" class="btn btn-primary">Edit</a>

@@ -139,6 +139,22 @@
                                                 </div>                                          
                                             </div>
 
+                                            <div class="form-group">                                        
+                                                <label class="col-md-3 col-xs-12 control-label">Pay pariods</label>
+                                                <div class="col-md-5">
+                                                    <select class="form-control select" name="payperiod">
+                                                        <option  value='' selected="selected">Select </option>
+
+                                                        @foreach($payperiods as $payperiod)
+
+                                                        
+                                                         <option value="{{ $payperiod->id }}">{{ $payperiod->name }}</option>
+                                                          @endforeach
+                                                                                                             
+                                                    </select>
+                                                </div>                                          
+                                            </div>
+
                                                                                         
                                             <div class="form-group">
                                                 <label class="col-md-3 col-xs-12 control-label">Basic Salary</label>

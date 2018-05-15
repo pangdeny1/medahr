@@ -125,7 +125,8 @@ class employeemaster extends Controller
                 'active'               =>'required',
                 'email'                =>'email|required',
                 'EmployeeCode'         =>'required',
-                'periodrate'           =>'required'
+                'periodrate'           =>'required',
+                'payperiod'            =>'required'
                 //'employementstatus'    =>'required',
                 //'company'              =>'required',
 
@@ -187,7 +188,7 @@ if ($validator->fails()) {
             'probdate'=>$request->input('probdate'),
             'retireddate'=>$request->input('retireddate'),
             'paytype'=>$request->input('paytype'),
-            'payperiodid'=>'10',
+            'payperiodid'=>$request->input('payperiod'),
             'periodrate'=>$request->input('periodrate'),
             'hourlyrate'=>$request->input('hourlyrate'),
             'glactcode'=>'0',
@@ -346,7 +347,8 @@ if ($validator->fails()) {
                 'active'               =>'required',
                 'email'                =>'email|required',
                 'EmployeeCode'         =>'required',
-                'periodrate'           =>'required'
+                'periodrate'           =>'required',
+                'payperiod'            =>'required'
 
 
 
@@ -394,6 +396,7 @@ if ($validator->fails()) {
             $employee->hourlyrate =$request->input('hourlyrate');
             $employee->periodrate =$request->input('periodrate');
             $employee->paytype =$request->input('paytype');
+            $employee->payperiodid =$request->input('payperiod');
 
             //Contacts
 

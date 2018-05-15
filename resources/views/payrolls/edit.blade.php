@@ -75,6 +75,31 @@
                                 @endif
                             </div>
                         </div>
+
+                        <div class="form-group{{ $errors->has('payperiod') ? ' has-error' : '' }}">
+                            <label for="title" class="col-md-4 control-label">Pay Periods</label>
+
+                            <div class="col-md-6">
+                                                    <select class="form-control select" name="payperiod">
+                                                        <option  value='' selected="selected">Select </option>
+
+                                                        @foreach($payperiods as $payperiod)
+
+                                                         @if($payperiod->payperiodid ==$payroll->payperiodid)
+                                                        <option  value='{{$payroll->payperiodid}}' selected="selected">{{$payperiod->payperioddesc }}</option>
+                                                            @else
+                                                          <option value="{{ $payperiod->payperiodid }}">{{ $payperiod->payperioddesc }}</option>
+                                                           @endif 
+                                                        @endforeach
+                                                                                                             
+                                                    </select>
+                                             @if ($errors->has('payperiod'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('payperiod') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
                          
                            <div class="form-group{{ $errors->has('FSMonth') ? ' has-error' : '' }}">
                             <label for="title" class="col-md-4 control-label">Month</label>

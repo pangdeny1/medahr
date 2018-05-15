@@ -1,0 +1,27 @@
+<?
+
+
+function approveArlet(&$db,$approverid)
+{
+ 
+	$sql = "SELECT count(counterindex) as ,sum(reghrs) as hrs ,payrollid result FROM prldailytrans
+	             WHERE  approver=$approverid limit 5";	
+				 $result = DB_query($sql, $db);
+			//$row = DB_fetch_array($result);
+            //return $myrow[result];
+			
+$response='';
+while($row=DB_fetch_array(($result)) {
+	$response = $response . "<div class='notification-item'>" .
+	"<div class='notification-subject'>". $row["hrs"] . "</div>" . 
+	"<div class='notification-comment'>" . $row["payrollid"]  . "</div>" .
+	"</div>";
+}
+if(!empty($response)) {
+	print $response;
+}
+
+}
+
+
+?>

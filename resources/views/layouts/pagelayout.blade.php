@@ -67,9 +67,9 @@
                     <li class="xn-openable">
 
                      
-                        <a href="#"><span class="fa fa-dashboard"></span> <span class="xn-text">HR</span></a>
+                        <a href="#"><span class="fa fa-dashboard"></span> <span class="xn-text">Employeees</span></a>
                          <ul>
-                            <li class="active"><a href="{{url('employeemaster')}}"><span class="xn-text">Employee Master</span></a></li>
+                            <li><a href="{{url('employeemaster')}}"><span class="xn-text">View Employees</span></a></li>
                             <li><a href="{{url('addemployee')}}"><span class="fa fa-pencil-square-o"></span>Add New Employee</a></li>                         
                             <li><a href="{{url('viewbranches')}}"><span class="fa fa-pencil-square-o"></span>Branches</a></li> 
                             <li><a href="{{url('viewdepartments')}}"><span class="fa fa-pencil-square-o"></span>Departments</a></li>
@@ -81,6 +81,20 @@
                             <li><a href="{{url('viewqualificationlevels')}}"><span class="fa fa-pencil-square-o"></span>Qualifications  Levels</a></li>
                             <li><a href="{{url('viewinstitutions')}}"><span class="fa fa-pencil-square-o"></span>Institutions</a></li>
                             <li><a href="{{url('viewemployeequalifications')}}"><span class="fa fa-pencil-square-o"></span>Employee Qualifications</a></li>
+                            
+                          
+                        </ul>
+                    </li>
+
+
+                    <li class="xn-openable">
+
+                     
+                        <a href="#"><span class="fa fa-dashboard"></span> <span class="xn-text">Payroll</span></a>
+                         <ul>
+                            
+                            <li><a href="{{url('viewpayrollperiods')}}"><span class="fa fa-pencil-square-o"></span>Payroll periods</a></li>                         
+                            
                             
                           
                         </ul>
