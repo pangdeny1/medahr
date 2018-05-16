@@ -1,11 +1,14 @@
 <?php
+/*
 if (isset($_GET['PayrollID'])){
 	$PayrollID = $_GET['PayrollID'];
 } elseif (isset($_POST['PayrollID'])){
 	$PayrollID = $_POST['PayrollID'];
 } else {
 	unset($PayrollID);
-}
+} */
+
+$PayrollID=$payroll->id;
 
 if (isset($_POST['submit'])) {
    exit("Contact Administrator...");

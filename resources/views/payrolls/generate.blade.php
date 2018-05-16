@@ -12,14 +12,16 @@
 
     <?php
     $db="medahr";
+    $PayrollID=$payroll->id;
     require_once ('includes/MiscFunctions.php');
     include('includes/ConnectDB.inc');
     include('includes/ConnectDB_mysql.inc');
     include('includes/prlFunctions.php'); 
     include('includes/prlGenerateData.php');
-       /* include('includes/prlComputeBasic.php');
-        include('includes/prlComputeGratuity.php');
-        include('includes/prlComputeHoursWorked.php');
+
+      include('includes/prlComputeBasic.php');
+        //include('includes/prlComputeGratuity.php');
+        /* include('includes/prlComputeHoursWorked.php');
         include('includes/prlComputeAreas.php');
         include('includes/prlComputeAbsent.php');
         //include('includes/prlComputeOthIncome.php');

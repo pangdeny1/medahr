@@ -29,22 +29,16 @@
                             <div class="panel panel-default">
                                 <div class="panel-heading">
                                     <div class="panel-title-box">
-                                        <form class="form-horizontal" role="form" method="POST" action="{{ url('/generate/'.$payroll->id) }}">
+                             
+                   
+                   
+
+                          <table>
+                                 <tr>
+                                  <td>
+                         <form class="form-horizontal" role="form" method="POST" action="{{ url('/generate/'.$payroll->id) }}">
                         {!! csrf_field() !!}
 
-                        <div class="form-group{{ $errors->has('PayrollID') ? ' has-error' : '' }}">
-                            <label for="title" class="col-md-4 control-label">Payroll id</label>
-
-                            <div class="col-md-6">
-                                <input id="title" type="text" class="form-control" name="PayrollID" value="{{ old('PayrollID') }}">
-
-                                @if ($errors->has('PayrollID'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('PayrollID') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
                          <div class="form-group">
                             <div class="col-md-6 col-md-offset-4">
                                 <button type="submit" class="btn btn-primary">
@@ -53,12 +47,48 @@
                             </div>
                         </div>
                     </form>
-                                        
-                                     <center></center> <?php echo '<FONT SIZE=1>' . _('') . "</FONT><INPUT TYPE=SUBMIT NAME='Close' VALUE='" . _('Close Payroll Period') . "'> <INPUT TYPE=SUBMIT NAME='Purge' VALUE='" . _('Void Payroll Period') . "'>";
-    echo '<FONT SIZE=1>' . _('') . "</FONT>  <INPUT TYPE=SUBMIT id='generate' NAME='Generate' VALUE='" . _('Generate Payroll Data') . "'> <INPUT TYPE=SUBMIT NAME='Reopen' VALUE='" . _('Re-open Payroll Period') . "'>"; ?>
-        
+                          </td>
+                     <td>  
+                      <form class="form-horizontal" role="form" method="POST" action="{{ url('/void/'.$payroll->id) }}">
+                        {!! csrf_field() !!}
 
-                                        
+                         <div class="form-group">
+                            <div class="col-md-6 col-md-offset-4">
+                                <button type="submit" class="btn btn-primary">
+                                    <i class="fa fa-btn fa-ticket"></i> Void payroll Period
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                   </td>
+                    <td> <form class="form-horizontal" role="form" method="POST" action="{{ url('/close/'.$payroll->id) }}">
+                        {!! csrf_field() !!}
+
+                         <div class="form-group">
+                            <div class="col-md-6 col-md-offset-4">
+                                <button type="submit" class="btn btn-primary">
+                                    <i class="fa fa-btn fa-ticket"></i> Close payroll Period
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                     </td>
+                       <td>
+                        <form class="form-horizontal" role="form" method="POST" action="{{ url('/open/'.$payroll->id) }}">
+                        {!! csrf_field() !!}
+
+                         <div class="form-group">
+                            <div class="col-md-6 col-md-offset-4">
+                                <button type="submit" class="btn btn-primary">
+                                    <i class="fa fa-btn fa-ticket"></i> Open payroll Period
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                            </td>
+                                 </tr>
+                                 </table>       
+                       
                                     </div>                                    
                                     <ul class="panel-controls" style="margin-top: 2px;">
                                         <li><a href="#" class="panel-fullscreen"><span class="fa fa-expand"></span></a></li>

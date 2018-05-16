@@ -219,9 +219,9 @@ if (($date3 == "saturday") || ($date3 == "sunday")) {
 
 function GetPayTypeDesc($PT)
 {
-		If ($PT==0) {
+		If ($PT==1) {
 			$PTStr='Salary';
-		} elseif ($PT==1) {
+		} elseif ($PT==2) {
 			$PTStr='Hourly';
 		} else {
 			$PTStr='Unknown';
