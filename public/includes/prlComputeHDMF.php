@@ -1,4 +1,5 @@
 <?php
+/*
 if (isset($_GET['PayrollID'])){
 	$PayrollID = $_GET['PayrollID'];
 } elseif (isset($_POST['PayrollID'])){
@@ -6,11 +7,23 @@ if (isset($_GET['PayrollID'])){
 } else {
 	unset($PayrollID);
 }
+*/
+/*
+$PayrollID=$payroll->id;
 $FSMonthRow=GetPayrollRow($PayrollID, $db,5);
 $FSYearRow=GetPayrollRow($PayrollID, $db,6);
-$isHdmfValue=0;
+
 $DeductHDMF = GetYesNoStr(GetPayrollRow($PayrollID, $db,8));
 $Status = GetOpenCloseStr(GetPayrollRow($PayrollID, $db,11));
+*/
+
+$PayrollID=$payroll->id;
+$PayPeriodID = $payroll->payperiodid;
+$FSMonthRow = $payroll->fsmonth;
+$FSYearRow = $payroll->fsyear;
+$isHdmfValue=1;
+$DeductHDMF = GetYesNoStr($payroll->deducthdmf);
+$Status = GetOpenCloseStr($payroll->payclosed);
 if ($Status=='Closed') {
    exit("Payroll is Closed. Re-open first...");
 }
@@ -31,7 +44,7 @@ if (isset($_POST['submit'])) {
 				
 				$sql="SELECT counterindex,payrollid,employeeid,basicpay,absent,late,otpay,fsmonth,fsyear,isHdmf
 				FROM prlpayrolltrans
-				WHERE prlpayrolltrans.payrollid='".$PayrollID."'  AND prlpayrolltrans.isHdmf=0";
+				WHERE prlpayrolltrans.payrollid='".$PayrollID."'  AND prlpayrolltrans.isHdmf='".$isHdmfValue."'";
 				
 		$PayDetails = DB_query($sql,$db);
 		if(DB_num_rows($PayDetails)>0)
@@ -81,10 +94,9 @@ if (isset($_POST['submit'])) {
 	
 	//posting to payroll trans for hdmf
 	if ($DeductHDMF=='Yes') {
-		$sql = "SELECT counterindex, payrollid, employeeid, basicpay, absent, late, otpay, fsmonth, fsyear, isHdmf
-                FROM prlpayrolltrans
-                 WHERE prlpayrolltrans.payrollid='".$PayrollID."'  AND prlpayrolltrans.isHdmf=0";		
-				 
+		$sql = "SELECT counterindex,payrollid,employeeid,basicpay,absent,late,otpay,fsmonth,fsyear
+				FROM prlpayrolltrans
+				WHERE prlpayrolltrans.payrollid='" . $PayrollID . "'";
 		$PayDetails = DB_query($sql,$db);
 		if(DB_num_rows($PayDetails)>0)
 		{
@@ -94,14 +106,14 @@ if (isset($_POST['submit'])) {
 					FROM prlemphdmffile
 			        WHERE prlemphdmffile.employeeid='" . $myrow['employeeid'] . "'
 					AND prlemphdmffile.payrollid='" . $PayrollID . "'";		
-					$HDMFDetails = DB_query($sql,$db);
-					if(DB_num_rows($HDMFDetails)>0)
+					$PHDetails = DB_query($sql,$db);
+					if(DB_num_rows($PHDetails)>0)
 					{
-					    $hdmfrow=DB_fetch_array($HDMFDetails);
-						$HDMFPayment=$hdmfrow['employeehdmf'];
-						$sql = 'UPDATE prlpayrolltrans SET hdmf='.$HDMFPayment.'
+					    $phrow=DB_fetch_array($PHDetails);
+						$PHPayment=$phrow['employeehdmf'];
+						$sql = 'UPDATE prlpayrolltrans SET hdmf='.$PHPayment.'
 					     WHERE counterindex = ' . $myrow['counterindex'];
-					    $PostHDMFPay = DB_query($sql,$db);
+					    $PostPHPay = DB_query($sql,$db);
 					}
 			}
 		}

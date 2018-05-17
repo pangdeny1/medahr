@@ -15,7 +15,7 @@ class UpdateTableHealth extends Migration
     {
          Schema::table('prlphilhealth', function($table) {
           
-            $table->string('name')->after('id')->nullable;
+            $table->string('bracket')->after('id')->nullable;
             
     });
 }
@@ -24,7 +24,7 @@ class UpdateTableHealth extends Migration
     public function down()
     {
         Schema::table('prlphilhealth', function($table) {
-        $table->dropColumn('name');
+        $table->dropColumn('bracket');
    });
     }
     }

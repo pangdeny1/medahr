@@ -88,7 +88,7 @@ class payrollsController extends Controller
     {
         $payroll= payroll::where('id', $payroll_id)->firstOrFail();
         $pagetitle="Generating payroll Data";
-        $payperiods     =Payperiod::All();
+        $payperiods     =Payperiod::where('payperiodid',$payroll->payperiodid)->firstOrFail();
         return view('payrolls.generate',compact('pagetitle','payroll','payperiods'));
     }
 

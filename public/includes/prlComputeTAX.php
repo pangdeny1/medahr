@@ -1,4 +1,5 @@
 <?php
+/*
 if (isset($_GET['PayrollID'])){
 	$PayrollID = $_GET['PayrollID'];
 } elseif (isset($_POST['PayrollID'])){
@@ -6,6 +7,9 @@ if (isset($_GET['PayrollID'])){
 } else {
 	unset($PayrollID);
 }
+*/
+
+$PayrollID=$payroll->id;
 $sql="DELETE FROM prlemptaxfile WHERE payrollid ='" . $PayrollID . "'";
 $Postdeltax= DB_query($sql,$db);
 
@@ -13,10 +17,17 @@ $sql = "UPDATE prlpayrolltrans SET	tax=0
 		WHERE payrollid ='" . $PayrollID . "'";
 $RePostTAX= DB_query($sql,$db);	
 
-$FSMonthRow=GetPayrollRow($PayrollID, $db,5);
-$FSYearRow=GetPayrollRow($PayrollID, $db,6);
-$FSPPID=GetPayrollRow($PayrollID, $db,2);
-$NumberofPayday=GetPayPeriodRow(GetPayrollRow($PayrollID, $db,2),$db,2);
+//$FSMonthRow=GetPayrollRow($PayrollID, $db,5);
+//$FSYearRow=GetPayrollRow($PayrollID, $db,6);
+//$NumberofPayday=GetPayPeriodRow(GetPayrollRow($PayrollID, $db,2),$db,2);
+//$FSPPID=GetPayrollRow($PayrollID, $db,2);
+$NumberofPayday=$payperiods->numberofpayday;
+$FSPPID=$payroll->payperiodid;
+$PayPeriodID = $payroll->payperiodid;
+$FSMonthRow = $payroll->fsmonth;
+$FSYearRow = $payroll->fsyear;
+//$NumberofPayday=GetPayPeriodRow(GetPayrollRow($PayrollID, $db,2),$db,2);
+
 
 if (isset($_POST['submit'])) {
    exit("Contact Administrator...");
@@ -38,7 +49,7 @@ if (isset($_POST['submit'])) {
 		//list of employesse
    		$sql = "SELECT counterindex,payrollid,employeeid,othincome,grosspay,sss,hdmf,philhealth,fsmonth,fsyear,isTaxed
 				FROM prlpayrolltrans
-				WHERE prlpayrolltrans.payrollid='".$PayrollID."'  AND prlpayrolltrans.isTaxed=0";
+				WHERE prlpayrolltrans.payrollid='".$PayrollID."'  AND prlpayrolltrans.isTaxed=1";
 		$PayDetails = DB_query($sql,$db);
 		if(DB_num_rows($PayDetails)>0)
 		{

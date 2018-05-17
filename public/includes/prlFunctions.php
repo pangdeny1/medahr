@@ -108,7 +108,7 @@ $first_date = date("Y-m-d",$first_date_find);
 
 function GetYesNoStr($YesNo)
 {
-		If ($YesNo ==0) {
+		If ($YesNo ==1) {
 				$YesNoStr='Yes';
 		} else {
 				$YesNoStr='No';
@@ -190,10 +190,10 @@ function GetEmployeePayType($YesNo)
 
 function GetOpenCloseStr($OC)
 {
-		If ($OC ==0) {
+		If ($OC ==1) {
 				$OCStr='Open';
 		}
-  else if	($OC ==1)	{
+  else if	($OC ==2)	{
 				$OCStr='Closed';
 		} 
 else 
@@ -1138,7 +1138,7 @@ Function GetTaxStatusRow($TaxID, $db,$PayRow){
             return $myrow[$PayRow];
 }
 
-
+        
 Function GetPayrollRow($PayrollID, $db,$PayRow){
 //payrollid - 0, and so on
 /*Gets the GL Codes relevant to the stock item account from the stock category record */
@@ -1233,7 +1233,7 @@ Function PayrollTransRow($PayrollID,$EmpID ,$db,$tran){
 
 Function OpenPeriod($db){
 
-		$sql = 'SELECT payrollid, payrolldesc FROM prlpayrollperiod where payclosed=0';
+		$sql = 'SELECT payrollid, payrolldesc FROM prlpayrollperiod where payclosed=1';
 			
 			$result = DB_query($sql, $db);
 			$myrow = DB_fetch_array($result);
@@ -1728,7 +1728,7 @@ Function GetSSSRow($ssscode, $db){
 		$sql = "SELECT rangefrom,rangeto,salarycredit,employerss,employerec,employeess,total,penname,pencode
 			FROM prlsstable
 			WHERE
-			pencode='$ssscode'";			
+			id='$ssscode'";			
 			$result = DB_query($sql, $db);
 			$myrow = DB_fetch_array($result);
 		    return $myrow;

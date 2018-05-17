@@ -20,8 +20,8 @@
     include('includes/prlGenerateData.php');
 
       include('includes/prlComputeBasic.php');
-        //include('includes/prlComputeGratuity.php');
-        /* include('includes/prlComputeHoursWorked.php');
+    include('includes/prlComputeGratuity.php');
+        include('includes/prlComputeHoursWorked.php');
         include('includes/prlComputeAreas.php');
         include('includes/prlComputeAbsent.php');
         //include('includes/prlComputeOthIncome.php');
@@ -35,21 +35,21 @@
         include('includes/prlComputeSSS.php');
         include('includes/prlComputeHDMF.php');
         include('includes/prlComputePH.php');
-        //include('includes/prlComputeTaxableIncome.php');
+        include('includes/prlComputeTaxableIncome.php');
         include('includes/prlComputeOtherDeductions.php');
         
-        include('includes/prlComputeTAX.php');
+      include('includes/prlComputeTAX.php');
         
-        include('includes/prlComputeSdl.php');
+       include('includes/prlComputeSdl.php');
         include('includes/prlComputeWcf.php');
         
         include('includes/prlComputeTotalDeduction.php');
         //include('includes/prlComputeHESLB.php');
         include('includes/prlComputeNet.php');
 
-        include('includes/prlComputeEmployeeBudget.php'); 
+        include('includes/prlComputeEmployeeBudget.php');
 
-        */
+        
 
     ?>
 

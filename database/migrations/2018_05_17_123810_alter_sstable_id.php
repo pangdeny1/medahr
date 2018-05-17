@@ -4,32 +4,32 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class UpdateTableHdmf extends Migration
+class AlterSstableId extends Migration
 {
     /**
      * Run the migrations.
      *
      * @return void
      */
-     public function up()
+   public function up()
     {
-         Schema::table('prlhdmftable', function($table) {
+              Schema::table('prlsstable', function($table) {
           
-            $table->string('bracket')->after('id')->nullable;
+            //$table->string('salarycredit')->after('rangeto')->nullable();
+            $table->renameColumn('id', 'counterindex');
             
     });
-           
     }
 
     /**
      * Reverse the migrations.
      *
      * @return void
-       */
+     */
     public function down()
     {
-        Schema::table('prlhdmftable', function($table) {
-        $table->dropColumn('bracket');
+          Schema::table('prlsstable', function($table) {
+        $table->dropColumn('counterindex');
      });
     }
 }

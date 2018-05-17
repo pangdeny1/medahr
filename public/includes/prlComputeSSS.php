@@ -1,4 +1,5 @@
 <?php
+/*
 if (isset($_GET['PayrollID'])){
 	$PayrollID = $_GET['PayrollID'];
 } elseif (isset($_POST['PayrollID'])){
@@ -6,11 +7,15 @@ if (isset($_GET['PayrollID'])){
 } else {
 	unset($PayrollID);
 }
-$FSMonthRow=GetPayrollRow($PayrollID, $db,5);
-$FSYearRow=GetPayrollRow($PayrollID, $db,6);
-$isPensionValue=0;
-$DeductSSS = GetYesNoStr(GetPayrollRow($PayrollID, $db,7));
-$Status = GetOpenCloseStr(GetPayrollRow($PayrollID, $db,11));
+*/
+
+$PayrollID=$payroll->id;
+$PayPeriodID = $payroll->payperiodid;
+$FSMonthRow = $payroll->fsmonth;
+$FSYearRow = $payroll->fsyear;
+$isPensionValue=1;
+$DeductSSS = GetYesNoStr($payroll->deductsss);
+$Status = GetOpenCloseStr($payroll->payclosed);
 if ($Status=='Closed') {
    exit("Payroll is Closed. Re-open first...");
 }

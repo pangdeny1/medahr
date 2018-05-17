@@ -1,4 +1,5 @@
 <?php
+/*
 if (isset($_GET['PayrollID'])){
 	$PayrollID = $_GET['PayrollID'];
 } elseif (isset($_POST['PayrollID'])){
@@ -6,6 +7,9 @@ if (isset($_GET['PayrollID'])){
 } else {
 	unset($PayrollID);
 }
+*/
+
+$PayrollID=$payroll->id;
 
 $Status = GetOpenCloseStr(GetPayrollRow($PayrollID, $db,11));
 if ($Status=='Closed') {
