@@ -103,6 +103,19 @@
                      <li class="xn-openable">
 
                      
+                        <a href="#"><span class="fa fa-dashboard"></span> <span class="xn-text">Payroll Reports</span></a>
+                         <ul>
+                            
+                            <li><a href="{{url('payslipform')}}"><span class="fa fa-pencil-square-o"></span>Payslip</a></li>                         
+                            
+                            
+                          
+                        </ul>
+                    </li>
+
+                     <li class="xn-openable">
+
+                     
                         <a href="#"><span class="fa fa-dashboard"></span> <span class="xn-text">HR Reports</span></a>
                          <ul>
                             

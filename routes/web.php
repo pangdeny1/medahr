@@ -260,6 +260,8 @@ Route::group(['middleware'=> ['auth', 'activated', 'role:admin']], function () {
 
      Route::post('employeebio','report\reportscontroller@employeebio');
      Route::get('reportform','report\reportscontroller@reportform');
+     Route::get('payslipform','report\reportscontroller@payslipform');
+     Route::post('payslip','report\reportscontroller@payslip');
 
      Route::get('form','form\FormController@create');
      Route::post('form','form\FormController@store');

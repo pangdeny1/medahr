@@ -22,6 +22,7 @@ use App\Models\Dependanttype;
 use App\Models\Jobgroup;
 use App\Models\gender;
 use App\Models\Payperiod;
+use App\Models\Payroll;
 use App\Models\prlemployementstatuses;
 use App\Models\bank;
 use App\Models\Branch;
@@ -108,5 +109,19 @@ public function reportform()
     return  view('reports.reportform',compact('pagetitle','employees'));
 }
 
+
+public function payslipform()
+{   
+    $pagetitle="Employee Bio Report"; 
+    $employees=Employee::All();
+    $periods=Payroll::All();
+    return  view('reports.payslipform',compact('pagetitle','employees','periods'));
+}
+
+public function payslip(Request $request)
+{
+    $pagetitle="Payslip";
+    return view('reports.payslip',compact('pagetitle'));
+}
 
 }
