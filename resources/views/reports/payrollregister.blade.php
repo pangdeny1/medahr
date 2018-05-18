@@ -41,7 +41,7 @@ table.collapse td {
 
 <?php
  $db="medahr";
- //$periodid=$payrollperiod->payrolldesc;
+ $payrollDe=$payrollperiod->payrolldesc;
  $PayrollID=$payrollperiod->id;
     //$PayrollID=3;
     require_once ('includes/MiscFunctions.php');
@@ -60,12 +60,18 @@ $sql = "SELECT firstname,lastname,middlename,employeecode,prlpayrolltrans.payrol
             WHERE prlpayrolltrans.payrollid='" .$PayrollID. "'";
 
             $result=mysql_query($sql);
+            if(mysql_num_rows($result) < 1)
+            {
+                echo "Payroll for ".$payrollDe." is yet to be processed";
+            }
 
+else
+{
             ?>
 
 <table class="collapse" width='90%' align="center" border="1">
   <thead>
-    <tr> <td colspan="20"><center><?php echo  "SESSION['CompanyRecord']['coyname']"; ?></center></td>
+    <tr> <td colspan="20"><center><?php echo  $company->coyname; ?></center></td>
     </tr>
     <tr>
 
@@ -197,7 +203,7 @@ $sql = "SELECT firstname,lastname,middlename,employeecode,prlpayrolltrans.payrol
 
    <tr>
         <td><?php echo $sn ?></td>
-        <td><?php echo $payrollDesc  ?></td>
+        <td><?php echo $payrollDe; ?></td>
         <td><?php echo $empCode ?></td>
         <td><?php echo $FullName ?></td>
         <td align='right'><?php echo number_format(($regHrs/8),2) ?></td>
@@ -280,6 +286,9 @@ $sql = "SELECT firstname,lastname,middlename,employeecode,prlpayrolltrans.payrol
 
      </tbody>
   </table>
+  <?php
+}
+  ?>
 
  
  

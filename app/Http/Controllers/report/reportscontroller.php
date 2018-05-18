@@ -143,9 +143,10 @@ public function payrollregister(Request $request)
         ]);
      $headertype=$request->input('Report');
      $period=$request->input('period');
+     $company=Company::where('id',1)->firstOrFail();
     $pagetitle="Payroll Register";
     $payrollperiod= payroll::where('id', $period)->firstOrFail();
-    return view('reports.payrollregister',compact('pagetitle','headertype','payrollperiod'));
+    return view('reports.payrollregister',compact('pagetitle','headertype','payrollperiod','company'));
 }
 
 }

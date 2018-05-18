@@ -949,8 +949,8 @@ Function DisplaySSSAmount($PeriodID,$employeeid,$db){
 Function DisplayTotalSSSAmount($PeriodID,$db){
 
 /*Gets column of Payroll register report*/
-     $sql = "SELECT payrollid,counterindex,employeeid,penname,prlsstable.pencode as pencode FROM prlempsssfile
-                 LEFT JOIN prlsstable ON (prlempsssfile.pencode=prlsstable.pencode)
+     $sql = "SELECT payrollid,counterindex,employeeid,penname,prlsstable.id as pencode FROM prlempsssfile
+                 LEFT JOIN prlsstable ON (prlempsssfile.pencode=prlsstable.id)
 	             WHERE prlempsssfile.payrollid = '$PeriodID'
 
 	             GROUP BY prlempsssfile.pencode 
@@ -1145,7 +1145,7 @@ Function GetPayrollRow($PayrollID, $db,$PayRow){
 		//$sql = "SELECT payrollidyrolldesc,payperiodid,startdate,enddate,fsmonth,fsyear,payclosed
 		$sql = "SELECT payrollid,payrolldesc,payperiodid,startdate,enddate,fsmonth,fsyear,deductsss,deducthdmf,deductphilhealth,payclosed,financial_id
 			FROM prlpayrollperiod
-			WHERE payrollid = '$PayrollID'";
+			WHERE id = '$PayrollID'";
 			$result = DB_query($sql, $db);
 			$myrow = DB_fetch_array($result);
 			if ($PayRow==11) 
