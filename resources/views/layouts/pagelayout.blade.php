@@ -94,9 +94,7 @@
                          <ul>
                             
                             <li><a href="{{url('viewpayrollperiods')}}"><span class="fa fa-pencil-square-o"></span>Payroll periods</a></li>                         
-                            
-                            
-                          
+                        
                         </ul>
                     </li>
 
@@ -106,7 +104,8 @@
                         <a href="#"><span class="fa fa-dashboard"></span> <span class="xn-text">Payroll Reports</span></a>
                          <ul>
                             
-                            <li><a href="{{url('payslipform')}}"><span class="fa fa-pencil-square-o"></span>Payslip</a></li>                         
+                            <li><a href="{{url('payrollregisterform')}}"><span class="fa fa-pencil-square-o"></span>Payroll Register</a></li>  
+                            <li><a href="{{url('payslipform')}}"><span class="fa fa-pencil-square-o"></span>Payslip</a></li>                       
                             
                             
                           

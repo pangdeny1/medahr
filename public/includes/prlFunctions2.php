@@ -874,7 +874,7 @@ Function GetSSSReportsColums($PeriodID, $db)
 
 /*Gets column of Payroll register report*/
     $sql = "SELECT payrollid,counterindex,employeeid,penname FROM prlempsssfile
-                 LEFT JOIN prlsstable ON (prlempsssfile.pencode=prlsstable.id)
+                 LEFT JOIN prlsstable ON (prlempsssfile.pencode=prlsstable.pencode)
 	             WHERE prlempsssfile.payrollid = '$PeriodID'
 
 	             GROUP BY prlempsssfile.pencode 
@@ -929,8 +929,8 @@ Function GetEmployeeTotalSSSAmount($period,$db,$pentype)
 Function DisplaySSSAmount($PeriodID,$employeeid,$db){
 
 /*Gets column of Payroll register report*/
-     $sql = "SELECT payrollid,counterindex,employeeid,penname,prlsstable.id as pencode FROM prlempsssfile
-                 LEFT JOIN prlsstable ON (prlempsssfile.pencode=prlsstable.id)
+     $sql = "SELECT payrollid,counterindex,employeeid,penname,prlsstable.pencode as pencode FROM prlempsssfile
+                 LEFT JOIN prlsstable ON (prlempsssfile.pencode=prlsstable.pencode)
 	             WHERE prlempsssfile.payrollid = '$PeriodID'
 
 	             GROUP BY prlempsssfile.pencode 

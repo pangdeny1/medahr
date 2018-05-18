@@ -120,8 +120,32 @@ public function payslipform()
 
 public function payslip(Request $request)
 {
+     $this->validate($request, [
+            'employee'     => 'required',
+            'period'     => 'required'
+        ]);
     $pagetitle="Payslip";
     return view('reports.payslip',compact('pagetitle'));
+}
+
+public function payrollregisterform()
+{   
+    $pagetitle="Payroll Register"; 
+    $employees=Employee::All();
+    $periods=Payroll::All();
+    return  view('reports.payrollregisterform',compact('pagetitle','employees','periods'));
+}
+
+public function payrollregister(Request $request)
+{
+     $this->validate($request, [
+            'period'     => 'required'
+        ]);
+     $headertype=$request->input('Report');
+     $period=$request->input('period');
+    $pagetitle="Payroll Register";
+    $payrollperiod= payroll::where('id', $period)->firstOrFail();
+    return view('reports.payrollregister',compact('pagetitle','headertype','payrollperiod'));
 }
 
 }

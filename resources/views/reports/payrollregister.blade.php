@@ -1,3 +1,14 @@
+@if($headertype=="Excell")
+
+    @include('reports.excellheader');
+
+
+@elseif ($headertype=="Preview")
+
+@else
+
+@endif
+
 <head>
     <title>Payroll register  </title>
     </head>
@@ -30,8 +41,9 @@ table.collapse td {
 
 <?php
  $db="medahr";
-   // $PayrollID=$payroll->id;
-    $_POST['PayrollID']=3;
+ //$periodid=$payrollperiod->payrolldesc;
+ $PayrollID=$payrollperiod->id;
+    //$PayrollID=3;
     require_once ('includes/MiscFunctions.php');
     include('includes/ConnectDB.inc');
     include('includes/ConnectDB_mysql.inc');
@@ -45,7 +57,7 @@ $sql = "SELECT firstname,lastname,middlename,employeecode,prlpayrolltrans.payrol
             FROM prlpayrolltrans
             LEFT JOIN prlemployeemaster ON (prlemployeemaster.employeeid=prlpayrolltrans.employeeid)
             LEFT JOIN prlpayrollperiod ON (prlpayrollperiod.payrollid=prlpayrolltrans.payrollid)
-            WHERE prlpayrolltrans.payrollid='" .$_POST['PayrollID']. "'";
+            WHERE prlpayrolltrans.payrollid='" .$PayrollID. "'";
 
             $result=mysql_query($sql);
 
@@ -57,7 +69,7 @@ $sql = "SELECT firstname,lastname,middlename,employeecode,prlpayrolltrans.payrol
     </tr>
     <tr>
 
-      <td colspan="20"><center>Payroll Report :: <?php  echo GetPayrollRow($_POST['PayrollID'], $db,1) ;?></center></td>
+      <td colspan="20"><center>Payroll Report :: <?php  echo GetPayrollRow($PayrollID, $db,1) ;?></center></td>
     </tr>
 
 
@@ -72,33 +84,28 @@ $sql = "SELECT firstname,lastname,middlename,employeecode,prlpayrolltrans.payrol
     <th align='right'><font color='white'>Basic</font></th>
     <th align='right'><font color='white'>Basic Areas</font></th>
     <?php
-    GetReportColums($_POST['PayrollID'], $db);
+    GetReportColums($PayrollID, $db);
     ?>
     <th align='right'><font color='white'>Gross</font></th>
     
 
     <?php
-    GetSSSReportsColums($_POST['PayrollID'], $db);
+    GetSSSReportsColums($PayrollID, $db);
 
 
     ?>
-    <th align='right'><font color='white'>NHIF Employee</font></th>
     <th align='right'><font color='white'>Taxable Earning</font></th> 
     
     
     <th align='right'><font color='white'>PAYE</font></th>
     <?php
-        GetLoanReportsColums($_POST['PayrollID'] ,$db);
+        GetLoanReportsColums($PayrollID ,$db);
 
-        GetOtherDedColums($_POST['PayrollID'], $db)
+        GetOtherDedColums($PayrollID, $db)
         ?>
         <th align='right'><font color='white'>Net Pay</font></th>
     
-    <th align='right'><font color='white'>Social Security Employer Contr</th>
-    <th align='right'><font color='white'>SDL</th>
-    <th align='right'><font color='white'>WCF</th>
-    <th align='right'><font color='white'>NHIF Employer</th></tr></thead><tbody>
-
+    <th align='right'><font color='white'>Social Security Employer Contr</th><th align='right'><font color='white'>SDL</th><th align='right'><font color='white'>WCF</th></tr></thead><tbody>
         
      
      
@@ -108,7 +115,7 @@ $sql = "SELECT firstname,lastname,middlename,employeecode,prlpayrolltrans.payrol
 
 
    <?php
-        $sn=0;
+    $sn=0;
         $tBasicPay=0;
         $tGrossPay=0;
         $tAreasPay=0;
@@ -132,6 +139,7 @@ $sql = "SELECT firstname,lastname,middlename,employeecode,prlpayrolltrans.payrol
         $salary=0;
         $pension_amnt=0;
         $total=0;
+
    while($rows=mysql_fetch_array($result)){
     extract($rows);
    $sn=$sn+1;
@@ -199,7 +207,7 @@ $sql = "SELECT firstname,lastname,middlename,employeecode,prlpayrolltrans.payrol
         <td align='right'><?php echo number_format($areasPay,2) ?></td>
         <?php
 
-        GetReportColumsData($_POST['PayrollID'],$empno, $db);
+        GetReportColumsData($PayrollID,$empno, $db);
 
         ?>
         <td align='right'><?php echo number_format($grossPay,2) ?></td>
@@ -207,10 +215,10 @@ $sql = "SELECT firstname,lastname,middlename,employeecode,prlpayrolltrans.payrol
 
 
          <?php
-        DisplaySSSAmount($_POST['PayrollID'],$empno,$db);
+        DisplaySSSAmount($PayrollID,$empno,$db);
          ?>
      
-       <td align='right'><?php echo number_format($philHealth,2)?></td> 
+
 
 
         
@@ -219,16 +227,14 @@ $sql = "SELECT firstname,lastname,middlename,employeecode,prlpayrolltrans.payrol
         <td align='right'><?php echo number_format($tax,2) ?></td>
         <?php
         
-        DisplayLoanAmount($_POST['PayrollID'],$empno,$db);
+        DisplayLoanAmount($PayrollID,$empno,$db);
 
-        GetOtherDedColumsData($_POST['PayrollID'],$empno,$db)
+        GetOtherDedColumsData($PayrollID,$empno,$db)
         ?>
         <td align='right'><?php echo number_format($net,2) ?></td> 
         <td align='right'><?php echo number_format($sssEmployer,2)?></td> 
         <td align='right'><?php echo number_format($sdl,2)?></td>
-         <td align='right'><?php echo number_format($wcf,2) ?></td>
-         <td align='right'><?php echo number_format($philHealth,2)?></td> </tr>
-
+         <td align='right'><?php echo number_format($wcf,2) ?></td></tr>
 
    <?php
 }
@@ -248,34 +254,32 @@ $sql = "SELECT firstname,lastname,middlename,employeecode,prlpayrolltrans.payrol
         <th align='right'><font color='white'><?php echo number_format($tAreasPay,2)?></th>
             <?php
 
-       GetReportColumsDataSum($_POST['PayrollID'],$empno, $db);
+       GetReportColumsDataSum($PayrollID,$empno, $db);
 
         ?>
         <th align='right'><font color='white'><?php echo number_format($tGrossPay,2)?></th>
         
         <?php 
-        DisplayTotalSSSAmount($_POST['PayrollID'],$db);
+        DisplayTotalSSSAmount($PayrollID,$db);
 
         ?>
-        <th align='right'><font color='white'><?php echo number_format($tPhilHealth,2)?></th>
         <th align='right'><font color='white'><?php echo number_format($tTaxableIncome,2)?></th>
         
         
         <th align='right'><font color='white'><?php echo number_format($tTax,2)?></th>
         <?php
         
-        DisplayLoanAmountSum($_POST['PayrollID'],$db);
-        GetOtherDedColumsDataSum($_POST['PayrollID'],$empno,$db)
+        DisplayLoanAmountSum($PayrollID,$db);
+        GetOtherDedColumsDataSum($PayrollID,$empno,$db)
         ?>
         <th align='right'><font color='white'><?php echo number_format($tNet,2)?></th>
         <th align='right'><font color='white'><?php echo number_format($tsssEmployer,2)?></th>
         <th align='right'><font color='white'><?php echo number_format($tSdl,2)?></th><th align='right'>
-        <font color='white'><?php echo number_format($tWcf,2)?></th>
-        <th align='right'><font color='white'><?php echo number_format($tPhilHealth,2)?></th></tr>
-        
+        <font color='white'><?php echo number_format($tWcf,2)?></th></tr>
 
 
      </tbody>
   </table>
 
+ 
  
