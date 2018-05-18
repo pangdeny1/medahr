@@ -1,281 +1,262 @@
-<head>
-    <title>Payroll register  </title>
-    </head>
-    <style type="text/css">
-table {
-  margin-top: 0.5em;
-}
-
-thead {
-  background-color: #eeeeee;
-}
-
-tbody {
-  background-color: #ffffee;
-}
-
-th,td {
-  padding: 3pt;
-}
-
-table.collapse {
-  border-collapse: collapse;
-
-}
-
-table.collapse td {
-
-}
-</style>
-
 <?php
  $db="medahr";
-   // $PayrollID=$payroll->id;
-    $_POST['PayrollID']=3;
+
+    $PayrollID=$payrollperiod->id;
     require_once ('includes/MiscFunctions.php');
     include('includes/ConnectDB.inc');
     include('includes/ConnectDB_mysql.inc');
     include('includes/prlFunctions.php'); 
-
-$sql = "SELECT firstname,lastname,middlename,employeecode,prlpayrolltrans.payrollid as payrollid,payrolldesc,
-             prlpayrolltrans.employeeid as employeeid,basicpay,othincome,absent,philhealth,
-             prlemployeemaster.hourlyrate as hourlyrate,areaspay,late,taxableincome,reghrs,
-             fee,otpay,grosspay,loandeduction,sss,hdmf,gratuity,tax,totaldeduction,netpay,
-             sdl,wcf,sssEmployer,prlpayrolltrans.fsmonth as fsmonth
-            FROM prlpayrolltrans
-            LEFT JOIN prlemployeemaster ON (prlemployeemaster.employeeid=prlpayrolltrans.employeeid)
-            LEFT JOIN prlpayrollperiod ON (prlpayrollperiod.payrollid=prlpayrolltrans.payrollid)
-            WHERE prlpayrolltrans.payrollid='" .$_POST['PayrollID']. "'";
-
-            $result=mysql_query($sql);
-
-            ?>
-
-<table class="collapse" width='90%' align="center" border="1">
-  <thead>
-    <tr> <td colspan="20"><center><?php echo  "SESSION['CompanyRecord']['coyname']"; ?></center></td>
-    </tr>
-    <tr>
-
-      <td colspan="20"><center>Payroll Report :: <?php  echo GetPayrollRow($_POST['PayrollID'], $db,1) ;?></center></td>
-    </tr>
-
-
-
-    <tr bgcolor='#4F81BD'>
-
-    <th align='left'><font color='white'>No.</font></th>
-    <th align='left'><font color='white'>Period</font></th>
-    <th align='left'><font color='white'>Code</font></th><th align='left'><font color='white'>Employee</font></th>
-    <th align='right'><font color='white'>Reg Days</font></th>
-    <th align='right'><font color='white'>Rate Per Day</font></th>
-    <th align='right'><font color='white'>Basic</font></th>
-    <th align='right'><font color='white'>Basic Areas</font></th>
-    <?php
-    GetReportColums($_POST['PayrollID'], $db);
-    ?>
-    <th align='right'><font color='white'>Gross</font></th>
+     require('includes/fpdf/fpdf.php');
     
+    // le mettre au debut car plante si on declare $mysqli avant !
+    $pdf = new FPDF( 'P', 'mm', 'A4' );
 
-    <?php
-    GetSSSReportsColums($_POST['PayrollID'], $db);
+    // on declare $mysqli apres !
+    //$mysqli = new mysqli("localhost", "root","", $db);
+    // cnx a la base
+   // mysqli_select_db($mysqli, $db) or die('Erreur de connection à la BDD : ' .mysqli_connect_error());
+
+    $myConnection= mysqli_connect("localhost","root","") or die ("could not connect to mysql"); 
+
+     mysqli_select_db($myConnection, $db) or die ("no database");  
+    // FORCE UTF-8
+//    mysqli_query($mysqli, "SET NAMES UTF8");
 
 
-    ?>
-    <th align='right'><font color='white'>NHIF Employee</font></th>
-    <th align='right'><font color='white'>Taxable Earning</font></th> 
-    
-    
-    <th align='right'><font color='white'>PAYE</font></th>
-    <?php
-        GetLoanReportsColums($_POST['PayrollID'] ,$db);
+    $var_id_facture = 1;
+    $period=$PayrollID;
 
-        GetOtherDedColums($_POST['PayrollID'], $db)
-        ?>
-        <th align='right'><font color='white'>Net Pay</font></th>
-    
-    <th align='right'><font color='white'>Social Security Employer Contr</th>
-    <th align='right'><font color='white'>SDL</th>
-    <th align='right'><font color='white'>WCF</th>
-    <th align='right'><font color='white'>NHIF Employer</th></tr></thead><tbody>
+    // on sup les 2 cm en bas
+    $pdf->SetAutoPagebreak(False);
+    $pdf->SetMargins(0,0,0);
+
+    // nb de page pour le multi-page : 18 lignes
+   // $sql = 'select count(*) FROM  prlpayrolltrans where  employeeid=' .$var_id_facture;
+     $sql = "select employeeid,basicpay,grosspay FROM  prlpayrolltrans where  employeeid='" .$var_id_facture."' AND payrollid='".$period."'";
+    $result = mysqli_query($mysqli, $sql)  or die ('Erreur SQL : ' .$sql .mysqli_connect_error() );
+    $row_client = mysqli_fetch_row($result);
+    mysqli_free_result($result);
+    $nb_page = 1;
+    $sql = 'select abs(FLOOR(-' . $nb_page . '/18))';
+    $result = mysqli_query($mysqli, $sql)  or die ('Erreur SQL : ' .$sql .mysqli_connect_error() );
+    $row_client_1 = mysqli_fetch_row($result);
+    mysqli_free_result($result);
+    $nb_page = 1;
+
+    $num_page = 1; $limit_inf = 0; $limit_sup = 18;
+    While ($num_page <= $nb_page)
+    {
+        $pdf->AddPage();
+        
+        // logo : 80 de largeur et 55 de hauteur
+        $pdf->Image("companies/".$_SESSION['DatabaseName']."/".logo($db)."", 10, 10, 80, 55);
+
+        // n° page en haute à droite
+        $pdf->SetXY( 120, 5 ); $pdf->SetFont( "Arial", "B", 12 ); $pdf->Cell( 160, 8, $num_page . '/' . $nb_page, 0, 0, 'C');
+        
+        // n° facture, date echeance et reglement et obs
+        $select = "select employeeid,pencode,payrollid,basicpay,grosspay,madeat from prlpayrolltrans where employeeid='" .$var_id_facture."' AND payrollid='".$period."'";
+        $result = mysqli_query($mysqli, $select)  or die ('Erreur SQL : ' .$select .mysqli_connect_error() );
+        $row = mysqli_fetch_array($result);
+        mysqli_free_result($result);
+        
+        $champ_date = date_create($row['madeat']); $annee = date_format($champ_date, 'Y');
+        $num_fact = "Payslip for " . str_pad($period, 4, '0', STR_PAD_LEFT);
+        $pdf->SetLineWidth(0.1); $pdf->SetFillColor(192); $pdf->Rect(120, 15, 85, 8, "DF");
+        $pdf->SetXY( 120, 15 ); $pdf->SetFont( "Arial", "B", 12 ); $pdf->Cell( 85, 8, $num_fact, 0, 0, 'C');
+        
+        // nom du fichier final
+        $nom_file = "fact_" . $annee .'-' . str_pad($row[1], 4, '0', STR_PAD_LEFT) . ".pdf";
+        
+        // date facture
+        $champ_date = date_create($row['madeat']); $date_fact = date_format($champ_date, 'd/m/Y');
+        $pdf->SetFont('Arial','',11); $pdf->SetXY( 122, 30 ); 
+       // $pdf->Cell( 60, 8, "Name" . $date_fact, 0, 0, '');
 
         
+      
+        // observations
+       // $pdf->SetFont( "Arial", "BU", 10 ); $pdf->SetXY( 5, 75 ) ; $pdf->Cell($pdf->GetStringWidth("Observations"), 0, "Observations", 0, "L");
+        $pdf->SetFont( "Arial", "", 10 ); $pdf->SetXY( 5, 78 ) ; $pdf->MultiCell(190, 4, $row[5], 0, "L");
+
+        // adr fact du client
+        $select = "select employeeid,firstname,lastname,middlename,position,pencode,ssnumber,periodrate,atmnumber,bankid  from prlemployeemaster where employeeid='" .$var_id_facture."'";
+        $result = mysqli_query($mysqli, $select)  or die ('Erreur SQL : ' .$select .mysqli_connect_error() );
+        $row_client = mysqli_fetch_array($result);
+        mysqli_free_result($result);
+        $comp=companyName($db);
+        $pdf->SetFont('Arial','B',11); $x = 100; $y = 50;
+        $pdf->SetXY( $x, $y ); $pdf->Cell( 100, 8,"Company Detail: ". $comp, 0, 0, ''); $y += 4;
+        if ($row_client[1]) { $pdf->SetXY( $x, $y ); $pdf->Cell( 100, 8,"Emp Name :". $row_client["firstname"]." ".$row_client["middlename"]." ".$row_client["lastname"], 0, 0, ''); $y += 4;}
+        if ($row_client[2]) { $pdf->SetXY( $x, $y ); $pdf->Cell( 100, 8,"Allocation : ".$row_client['position'], 0, 0, ''); $y += 4;}
+        if ($row_client[3]) { $pdf->SetXY( $x, $y ); $pdf->Cell( 100, 8, "Membership :".$row_client['pencode']."->".$row_client['ssnumber'], 0, 0, ''); $y += 4;}
+         if ($row_client[3]) { $pdf->SetXY( $x, $y ); $pdf->Cell( 100, 8, "Bank Detail :".$row_client['bankid']."->".$row_client['atmnumber'], 0, 0, ''); $y += 4;}
+        //if ($row_client[4] || $row_client[5]) { $pdf->SetXY( $x, $y ); $pdf->Cell( 100, 8, $row_client[4] . ' ' .$row_client[5] , 0, 0, ''); $y += 4;}
+       // if ($row_client[3]) { $pdf->SetXY( $x, $y ); $pdf->Cell( 100, 8, 'N° TVA Intra : ' . $row_client[2], 0, 0, '');}
+        
+        // ***********************
+        // le cadre des articles
+        // ***********************
+        // cadre avec 18 lignes max ! et 118 de hauteur --> 95 + 118 = 213 pour les traits verticaux
+        $pdf->SetLineWidth(0.1); $pdf->Rect(5, 95, 200, 118, "D");
+        // cadre titre des colonnes
+       // $pdf->Line(5, 105, 205, 105);
+        // les traits verticaux colonnes
+       // $pdf->Line(145, 95, 145, 213); 
+       // $pdf->Line(158, 95, 158, 213); 
+        //$pdf->Line(176, 95, 176, 213); $pdf->Line(187, 95, 187, 213);
+        // titre colonne
+         $y = 97;
+        $pdf->SetXY( 1, 96 ); $pdf->SetFont('Arial','B',12); $pdf->Cell( 140, 8, "Income", 0, 0, 'C');
+        $pdf->SetXY( 145, 96 ); $pdf->SetFont('Arial','B',8); $pdf->Cell( 10, 8, "", 0, 0, 'C');
      
+         $pdf->Line(5, $y+8, 205, $y+8);
+        // les articles
+        $pdf->SetFont('Arial','',8);
+       
+        // 1ere page = LIMIT 0,18 ;  2eme page = LIMIT 18,36 etc...
+
+         $sql = "SELECT payrollid,counterindex,employeeid,othincid,sum(amount) as amount,othincdesc FROM prlothericometrans
+                 LEFT JOIN prlothinctable ON (prlothericometrans.otherincid=prlothinctable.othincid)
+                 WHERE employeeid='" .$var_id_facture." ' and payrollid='". $period."'
+
+                 GROUP BY othincid 
+                 ORDER BY  othincid";
+       // $sql = "select employeeid,payrollid,otherincid,amount from prlothericometrans where employeeid='" .$var_id_facture." ' and payrollid='". $period."' order by employeeid";
+        $sql .= ' LIMIT ' . $limit_inf . ',' . $limit_sup;
+        $res = mysqli_query($mysqli, $sql)  or die ('Erreur SQL : ' .$sql .mysqli_connect_error() );
+
+           $pdf->SetXY( 7, $y+9 ); $pdf->Cell( 140, 5, "Basic Pay", 0, 0, 'L');
+            // qte
+            $pdf->SetXY( 145, $y+9 ); $pdf->Cell( 13, 5, strrev(wordwrap(strrev(GetPayrollTransRow($period,$row_client['employeeid'] ,$db)), 3, ' ', true)), 0, 0, 'R');
+
+             $pdf->Line(5, $y+14, 205, $y+14);
+            // PU
+        $y = 103;
+        while ($data =  mysqli_fetch_assoc($res))
+        {
+            // libelle
+            $pdf->SetXY( 7, $y+9 ); $pdf->Cell( 140, 5, $data['othincdesc'], 0, 0, 'L');
+            // qte
+            $pdf->SetXY( 145, $y+9 ); $pdf->Cell( 13, 5, strrev(wordwrap(strrev($data['amount']), 3, ' ', true)), 0, 0, 'R');
+            // PU
+        
+            
+            $pdf->Line(5, $y+14, 205, $y+14);
+            
+            $y += 6;
+        }
+        mysqli_free_result($res);
+            $pdf->SetXY( 7, $y+9 ); $pdf->Cell( 140, 5, "Gross Pay", 0, 0, 'L');
+            // qte
+            $pdf->SetXY( 145, $y+9 ); $pdf->Cell( 13, 5, strrev(wordwrap(strrev(BasicPay($period,$row_client['employeeid'] ,$db)), 3, ' ', true)), 0, 0, 'R');
+
+             $pdf->Line(5, $y+14, 205, $y+14);
+
+              $pdf->SetXY( 7, $y+15 ); $pdf->SetFont('Arial','B',12);  $pdf->Cell( 140, 5, "Deductions", 0, 0, 'C');
+            // qte
+             $pdf->SetFont('Arial','',8); 
+
+             $pdf->Line(5, $y+20, 205, $y+20);
+
+        //dedu
+             $y+=12;
+
+
+              $sql_d = "SELECT payrollid,counterindex,employeeid,othincid,sum(amount) as amount,othincdesc FROM prlotherdeductrans
+                 LEFT JOIN prlothdedtable ON (prlotherdeductrans.otherincid=prlothdedtable.othincid)
+                 WHERE employeeid='" .$var_id_facture." ' and payrollid='". $period."' 
+
+                 GROUP BY othincid 
+                 ORDER BY  othincid";
+
+             // $sql_d = "select employeeid,payrollid,otherincid,amount from prlotherdeductrans where employeeid='" .$var_id_facture." ' and payrollid='". $period."' order by employeeid";
+        $sql_d .= ' LIMIT ' . $limit_inf . ',' . $limit_sup;
+        $res_d = mysqli_query($mysqli, $sql_d)  or die ('Erreur SQL : ' .$sql .mysqli_connect_error() );
+
+          $pdf->SetXY( 7, $y+9 ); $pdf->Cell( 140, 5, "P.A.Y.E", 0, 0, 'L');
+            // qte
+            $pdf->SetXY( 145, $y+9 ); $pdf->Cell( 13, 5, strrev(wordwrap(strrev((PayrollTransRow($period,$row_client['employeeid'] ,$db,"TAX"))), 3, ' ', true)), 0, 0, 'R');
+            // PU
+       
+            
+            $pdf->Line(5, $y+14, 205, $y+14);
+
+
+
+             $pdf->SetXY( 7, $y+14 ); $pdf->Cell( 140, 5, PayrollTransRow($period,$row_client['employeeid'] ,$db,"PENCODE")."->Employee Contribution", 0, 0, 'L');
+            // qte
+            $pdf->SetXY( 145, $y+14 ); $pdf->Cell( 13, 5, strrev(wordwrap(strrev((PayrollTransRow($period,$row_client['employeeid'] ,$db,"SSS"))), 3, ' ', true)), 0, 0, 'R');
+            // PU
+            $pdf->Line(5, $y+20, 205, $y+20);
+           $pdf->SetXY( 7, $y+20 ); $pdf->Cell( 140, 5, "NHIF", 0, 0, 'L');
+            // qte
+            $pdf->SetXY( 145, $y+20 ); $pdf->Cell( 13, 5, strrev(wordwrap(strrev((PayrollTransRow($period,$row_client['employeeid'] ,$db,"NHIF"))), 3, ' ', true)), 0, 0, 'R');
+            
+            $pdf->Line(5, $y+26, 205, $y+26);
+            $y+=6;
+         while ($data_d =  mysqli_fetch_assoc($res_d))
+        {
+            // libelle
+            $pdf->SetXY( 7, $y+21 ); $pdf->Cell( 140, 5, $data_d['othincdesc'], 0, 0, 'L');
+            // qte
+            $pdf->SetXY( 145, $y+21 ); $pdf->Cell( 13, 5, strrev(wordwrap(strrev($data_d['amount']), 3, ' ', true)), 0, 0, 'R');
+            // PU
+        
+            
+            $pdf->Line(5, $y+25, 205, $y+25);
+            
+            $y += 6;
+        }
+        mysqli_free_result($res_d);
+
+        
+       $sql_l= "SELECT payrollid,counterindex,employeeid,prlloandeduction.loantableid as loantableid,sum(amount) as amount,loantabledesc FROM prlloandeduction
+                 LEFT JOIN prlloantable ON (prlloandeduction.loantableid=prlloantable.loantableid)
+                 WHERE employeeid='" .$var_id_facture." ' and  payrollid='". $period."'
+
+                 GROUP BY loantableid  
+                 ORDER BY  loantableid ";
+
+         //$sql_l = "select employeeid,payrollid,loantableid,amount from prlloandeduction where employeeid='" .$var_id_facture." ' and  payrollid='". $period."' order by employeeid";
+        $sql_l .= ' LIMIT ' . $limit_inf . ',' . $limit_sup;
+        $res_l = mysqli_query($mysqli, $sql_l)  or die ('Erreur SQL : ' .$sql .mysqli_connect_error() );
+  
+
+         while ($data_l =  mysqli_fetch_assoc($res_l))
+        {
+            // libelle
+            $pdf->SetXY( 7, $y+21 ); $pdf->Cell( 140, 5, $data_l['loantabledesc'], 0, 0, 'L');
+            // qte
+            $pdf->SetXY( 145, $y+21 ); $pdf->Cell( 13, 5, strrev(wordwrap(strrev($data_l['amount']), 3, ' ', true)), 0, 0, 'R');
+            // PU
+        
+            
+            $pdf->Line(5, $y+25, 205, $y+25);
+            
+            $y += 6;
+        }
+        mysqli_free_result($res_l);
+
+            $pdf->SetXY( 7, $y+21 ); $pdf->Cell( 140, 5, "Total Deduction", 0, 0, 'L');
+            // qte
+            $pdf->SetXY( 145, $y+21 ); $pdf->Cell( 13, 5, strrev(wordwrap(strrev((PayrollTransRow($period,$row_client['employeeid'] ,$db,"TOTALDEDUCTION"))), 3, ' ', true)), 0, 0, 'R');
+
+            $pdf->Line(5, $y+26, 205, $y+26);
+
+            
+             $pdf->SetFont('Arial','B',12); 
+
+            $pdf->SetXY( 7, $y+30 ); $pdf->Cell( 140, 5, "NET PAY", 0, 0, 'C');
+            // qte
+            $pdf->SetXY( 145, $y+30 ); $pdf->Cell( 13, 5, strrev(wordwrap(strrev((PayrollTransRow($period,$row_client['employeeid'] ,$db,"NETPAY"))), 3, ' ', true)), 0, 0, 'C');
+
+            $pdf->Line(5, $y+36, 205, $y+36);
      
-    </tr>
-    </thread>
-    <tbody>
-
-
-   <?php
-        $sn=0;
-        $tBasicPay=0;
-        $tGrossPay=0;
-        $tAreasPay=0;
-        $tSSS=0;
-        $tHdmf=0;
-        $tPhilHealth=0;
-        $tTax=0;
-        $tTotalDeduction=0;
-        $tTaxableIncome=0;
-        $tNet=0;
-        $tGratuity=0;
-        $salartTotal=0;
-        $tLoan=0;
-        $tMngtfee=0;
-        $tSdl=0;
-        $tWcf=0;
-        $tRegHrs=0;
-        $tHourRate=0;
-        $tsssEmployer=0;
-        $fpension=0;
-        $salary=0;
-        $pension_amnt=0;
-        $total=0;
-   while($rows=mysql_fetch_array($result)){
-    extract($rows);
-   $sn=$sn+1;
-        $empno=$rows['employeeid'];
-        
-        $FullName=$rows['firstname']." ".$rows['middlename']." ".$rows['lastname'];
-        $payrollid=$rows['payrollid'];
-        $payrollDesc=$rows['payrolldesc'];
-        $empCode=$rows['employeecode'];
-        $areasPay=$rows['areaspay'];
-        $basicPay=$rows['basicpay'];
-        $absent=$rows['absent'];
-        $grossPay=$rows['grosspay'];
-        $taxableIncome=$rows['taxableincome'];
-        $sss=$rows['sss'];
-        $mngtfee=$rows['fee'];
-        $gratuity=$rows['gratuity'];
-        $hdmf=$rows['hdmf'];
-        $philHealth=$rows['philhealth'];
-        $tax=$rows['tax'];
-        $totalDeduction=$rows['totaldeduction'];
-        $net=$rows['netpay'];
-        $loan=$rows['loandeduction'];
-        $regHrs=$rows['reghrs'];
-        $hourRate=$rows['hourlyrate'];
-        $sdl=$rows['sdl'];
-        $wcf=$rows['wcf'];
-        $sssEmployer=$rows['sssEmployer'];
-        
-        
-        // Here goes Sum of All Transaction 
-        $tBasicPay+=$basicPay;
-        $tGrossPay+=$grossPay;
-        $tAreasPay+=$areasPay;
-        $tSSS+=$sss;
-        $tHdmf+=$hdmf;
-        $tPhilHealth+=$philHealth;
-        $tTax+=$tax;
-        $tTotalDeduction+=$totalDeduction;
-        $tTaxableIncome+=$taxableIncome;
-        $tNet+=$net;
-        $tGratuity+=$gratuity;
-        $salartTotal+=$salary;
-        $tLoan+=$loan;
-        $tMngtfee+=$mngtfee;
-        $tSdl+=$sdl;
-        $tWcf+=$wcf;
-        $tRegHrs+=$regHrs;
-        $tHourRate+=$hourRate;
-        $tsssEmployer+=$sssEmployer;
-        $fpension=number_format($pension_amnt,2);
+        $num_page++; $limit_inf += 18; $limit_sup += 18; 
+    }
     
-
-   ?>
-
-   <tr>
-        <td><?php echo $sn ?></td>
-        <td><?php echo $payrollDesc  ?></td>
-        <td><?php echo $empCode ?></td>
-        <td><?php echo $FullName ?></td>
-        <td align='right'><?php echo number_format(($regHrs/8),2) ?></td>
-        <td align='right'><?php echo number_format(($hourRate *8),2) ?></td>
-        
-        <td align='right'><?php echo number_format($basicPay,2) ?></td>
-        <td align='right'><?php echo number_format($areasPay,2) ?></td>
-        <?php
-
-        GetReportColumsData($_POST['PayrollID'],$empno, $db);
-
-        ?>
-        <td align='right'><?php echo number_format($grossPay,2) ?></td>
-        
-
-
-         <?php
-        DisplaySSSAmount($_POST['PayrollID'],$empno,$db);
-         ?>
-     
-       <td align='right'><?php echo number_format($philHealth,2)?></td> 
-
-
-        
-        <td align='right'><?php echo number_format($taxableIncome,2)?></td> 
-        
-        <td align='right'><?php echo number_format($tax,2) ?></td>
-        <?php
-        
-        DisplayLoanAmount($_POST['PayrollID'],$empno,$db);
-
-        GetOtherDedColumsData($_POST['PayrollID'],$empno,$db)
-        ?>
-        <td align='right'><?php echo number_format($net,2) ?></td> 
-        <td align='right'><?php echo number_format($sssEmployer,2)?></td> 
-        <td align='right'><?php echo number_format($sdl,2)?></td>
-         <td align='right'><?php echo number_format($wcf,2) ?></td>
-         <td align='right'><?php echo number_format($philHealth,2)?></td> </tr>
-
-
-   <?php
-}
-
-        $ftotal=number_format($total,2);
-        $salartTotal=number_format($salartTotal,2);
-
+    $pdf->Output("I", $nom_file);
 ?>
-
-        <tr bgcolor='#4F81BD'><th colspan='3' ><font color='white'>TOTAL</th>
-
-        <th align='right'><font color='white'><?php $sn ?></th>
-        <th align='right'><font color='white'><?php echo number_format(($tRegHrs/8),2)?></th>
-        <th align='right'><font color='white'><?php echo number_format(($tHourRate*8),2)?></th>
-        
-        <th align='right'><font color='white'><?php echo number_format($tBasicPay,2)?></th>
-        <th align='right'><font color='white'><?php echo number_format($tAreasPay,2)?></th>
-            <?php
-
-       GetReportColumsDataSum($_POST['PayrollID'],$empno, $db);
-
-        ?>
-        <th align='right'><font color='white'><?php echo number_format($tGrossPay,2)?></th>
-        
-        <?php 
-        DisplayTotalSSSAmount($_POST['PayrollID'],$db);
-
-        ?>
-        <th align='right'><font color='white'><?php echo number_format($tPhilHealth,2)?></th>
-        <th align='right'><font color='white'><?php echo number_format($tTaxableIncome,2)?></th>
-        
-        
-        <th align='right'><font color='white'><?php echo number_format($tTax,2)?></th>
-        <?php
-        
-        DisplayLoanAmountSum($_POST['PayrollID'],$db);
-        GetOtherDedColumsDataSum($_POST['PayrollID'],$empno,$db)
-        ?>
-        <th align='right'><font color='white'><?php echo number_format($tNet,2)?></th>
-        <th align='right'><font color='white'><?php echo number_format($tsssEmployer,2)?></th>
-        <th align='right'><font color='white'><?php echo number_format($tSdl,2)?></th><th align='right'>
-        <font color='white'><?php echo number_format($tWcf,2)?></th>
-        <th align='right'><font color='white'><?php echo number_format($tPhilHealth,2)?></th></tr>
-        
-
-
-     </tbody>
-  </table>
 
  

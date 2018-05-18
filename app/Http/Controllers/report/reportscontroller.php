@@ -125,7 +125,12 @@ public function payslip(Request $request)
             'period'     => 'required'
         ]);
     $pagetitle="Payslip";
-    return view('reports.payslip',compact('pagetitle'));
+     $headertype=$request->input('Report');
+     $period=$request->input('period');
+     $company=Company::where('id',1)->firstOrFail();
+    $payrollperiod= payroll::where('id', $period)->firstOrFail();
+
+    return view('reports.payslip',compact('pagetitle','headertype','payrollperiod','company'));
 }
 
 public function payrollregisterform()
