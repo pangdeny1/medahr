@@ -1,7 +1,8 @@
 <?php
 // Systems can temporarily force a reload by setting the variable
 // $ForceConfigReload to true
-
+include('includes/ConnectDB.inc');
+    include('includes/ConnectDB_mysql.inc');
 if(isset($ForceConfigReload) OR !isset($_SESSION['CompanyDefaultsLoaded'])) {
 	$sql = 'SELECT confname, confvalue FROM config'; // dont care about the order by
 	$ConfigResult = DB_query($sql,$db);

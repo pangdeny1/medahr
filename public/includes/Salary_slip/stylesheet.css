@@ -1,0 +1,126 @@
+tr {
+	mso-height-source: auto;
+}
+col {
+	mso-width-source: auto;
+}
+br {
+	mso-data-placement: same-cell;
+}
+.style16 {
+	mso-number-format: "_(* #,##0.00_);_(* \(#,##0.00\);_(* "-"??_);_(@_)"; mso-style-name: Comma; mso-style-id: 3;
+}
+.style17 {
+	color: blue; font-family: Calibri, sans-serif; font-size: 11pt; font-style: normal; font-weight: 400; text-decoration: underline; mso-style-name: Hyperlink; mso-style-id: 8; text-underline-style: single; mso-font-charset: 0;
+}
+a:link {
+	color: blue; font-family: Calibri, sans-serif; font-size: 11pt; font-style: normal; font-weight: 400; text-decoration: underline; text-underline-style: single; mso-font-charset: 0;
+}
+a:visited {
+	color: purple; font-family: Calibri, sans-serif; font-size: 11pt; font-style: normal; font-weight: 400; text-decoration: underline; text-underline-style: single; mso-font-charset: 0;
+}
+.style0 {
+	border: currentColor; border-image: none; color: black; font-family: Calibri, sans-serif; font-size: 11pt; font-style: normal; font-weight: 400; text-decoration: none; vertical-align: bottom; white-space: nowrap; mso-number-format: General; mso-style-name: Normal; mso-style-id: 0; mso-font-charset: 0; mso-rotate: 0; mso-background-source: auto; mso-pattern: auto; mso-protection: locked visible;
+}
+td {
+	padding: 0px; border: currentColor; border-image: none; color: black; font-family: Calibri, sans-serif; font-size: 11pt; font-style: normal; font-weight: 400; text-decoration: none; vertical-align: bottom; white-space: nowrap; mso-number-format: General; mso-font-charset: 0; mso-rotate: 0; mso-background-source: auto; mso-pattern: auto; mso-protection: locked visible; mso-style-parent: style0; mso-ignore: padding;
+}
+.xl65 {
+	text-decoration: underline; vertical-align: middle; white-space: normal; text-underline-style: single; mso-style-parent: style0;
+}
+.xl66 {
+	vertical-align: middle; white-space: normal; mso-style-parent: style0;
+}
+.xl67 {
+	font-size: 12pt; vertical-align: middle; white-space: normal; mso-style-parent: style0;
+}
+.xl68 {
+	text-align: right; font-size: 12pt; vertical-align: middle; white-space: normal; mso-number-format: Standard; mso-style-parent: style0;
+}
+.xl69 {
+	text-align: right; font-size: 12pt; vertical-align: middle; white-space: normal; mso-style-parent: style0;
+}
+.xl70 {
+	font-size: 12pt; font-weight: 700; vertical-align: middle; white-space: normal; mso-style-parent: style0;
+}
+.xl71 {
+	text-align: right; font-size: 12pt; font-weight: 700; vertical-align: middle; white-space: normal; mso-number-format: Standard; mso-style-parent: style0;
+}
+.xl72 {
+	text-align: right; font-size: 12pt; font-weight: 700; vertical-align: middle; white-space: normal; mso-number-format: "_(* #,##0.00_);_(* \(#,##0.00\);_(* "-"??_);_(@_)"; mso-style-parent: style16;
+}
+.xl73 {
+	text-align: right; font-size: 12pt; text-decoration: underline; vertical-align: middle; white-space: normal; text-underline-style: single; mso-style-parent: style0;
+}
+.xl74 {
+	text-align: right; font-size: 12pt; vertical-align: middle; white-space: normal; mso-number-format: "#,##0.00_);\(#,##0.00\)"; mso-style-parent: style16;
+}
+.xl75 {
+	font-size: 12pt; vertical-align: middle; white-space: normal; mso-number-format: Standard; mso-style-parent: style0;
+}
+.xl76 {
+	text-align: right; font-size: 12pt; vertical-align: middle; white-space: normal; mso-number-format: Standard; mso-style-parent: style16;
+}
+.xl77 {
+	font-weight: 700; vertical-align: middle; white-space: normal; mso-style-parent: style0;
+}
+.xl78 {
+	background: rgb(235, 241, 222); font-size: 12pt; font-weight: 700; vertical-align: middle; white-space: normal; mso-pattern: black none; mso-style-parent: style0;
+}
+.xl79 {
+	background: rgb(235, 241, 222); text-align: right; font-size: 12pt; font-weight: 700; vertical-align: middle; white-space: normal; mso-number-format: Standard; mso-pattern: black none; mso-style-parent: style0;
+}
+.xl80 {
+	background: rgb(235, 241, 222); text-align: right; font-size: 12pt; font-weight: 700; vertical-align: middle; white-space: normal; mso-number-format: Standard; mso-pattern: black none; mso-style-parent: style16;
+}
+.xl81 {
+	text-align: left; color: rgb(184, 204, 228); font-size: 32pt; vertical-align: middle; white-space: normal; mso-style-parent: style0;
+}
+.xl82 {
+	color: rgb(54, 96, 146); vertical-align: middle; white-space: normal; mso-style-parent: style0;
+}
+.xl83 {
+	text-align: left; font-size: 12pt; font-weight: 700; vertical-align: middle; white-space: normal; mso-style-parent: style0;
+}
+.xl84 {
+	text-align: right; color: rgb(36, 64, 98); font-size: 12pt; font-weight: 700; vertical-align: middle; white-space: normal; mso-style-parent: style0;
+}
+.xl85 {
+	text-align: left; font-size: 12pt; vertical-align: middle; white-space: normal; mso-style-parent: style0;
+}
+.xl86 {
+	vertical-align: middle; mso-style-parent: style0;
+}
+.xl87 {
+	font-weight: 700; vertical-align: middle; mso-style-parent: style0;
+}
+.xl88 {
+	border-width: medium medium 0.5pt; border-style: none none solid; border-color: currentColor currentColor rgb(196, 215, 155); text-align: right; font-size: 12pt; text-decoration: underline; vertical-align: middle; white-space: normal; text-underline-style: single; mso-style-parent: style0;
+}
+.xl89 {
+	text-align: right; color: rgb(0, 112, 192); font-size: 8pt; vertical-align: middle; white-space: normal; mso-style-parent: style17;
+}
+.xl90 {
+	background: rgb(22, 54, 92); text-align: left; color: white; font-size: 12pt; font-weight: 700; vertical-align: middle; white-space: normal; mso-pattern: black none; mso-style-parent: style0;
+}
+.xl91 {
+	background: rgb(22, 54, 92); color: white; font-size: 12pt; font-weight: 700; vertical-align: middle; white-space: normal; mso-pattern: black none; mso-style-parent: style0;
+}
+.xl92 {
+	background: rgb(22, 54, 92); color: white; vertical-align: middle; white-space: normal; mso-pattern: black none; mso-style-parent: style0;
+}
+.xl93 {
+	text-align: left; color: rgb(184, 204, 228); font-size: 29pt; vertical-align: middle; white-space: normal; mso-style-parent: style0;
+}
+.xl94 {
+	text-align: center; font-size: 12pt; vertical-align: middle; white-space: normal; mso-style-parent: style0;
+}
+.xl95 {
+	text-align: right; color: rgb(54, 96, 146); font-size: 12pt; vertical-align: middle; mso-style-parent: style0;
+}
+.xl96 {
+	text-align: left; color: rgb(54, 96, 146); vertical-align: middle; white-space: normal; mso-style-parent: style0;
+}
+.xl97 {
+	text-align: center; vertical-align: middle; mso-style-parent: style0;
+}

@@ -11,6 +11,7 @@ use App\Models\title;
 use App\Models\Region;
 use App\Models\District;
 use App\Models\Employee;
+use App\Models\PayrollTrans;
 use App\Models\employeequalification;
 use App\Models\qualification;
 use App\Models\institute;
@@ -124,13 +125,18 @@ public function payslip(Request $request)
             'employee'     => 'required',
             'period'     => 'required'
         ]);
-    $pagetitle="Payslip";
+     $pagetitle="Payslip";
+     $employeeid=$request->input('employee');
      $headertype=$request->input('Report');
      $period=$request->input('period');
+     $payrollperiod= payroll::where('id', $period)->firstOrFail();
      $company=Company::where('id',1)->firstOrFail();
-    $payrollperiod= payroll::where('id', $period)->firstOrFail();
+     $payrolltrans=PayrollTrans::where('employeeid',$employeeid)->where('payrollid',$payrollperiod->id)->firstOrFail();
+     $employee=Employee::where('employeeid',$employeeid)->firstOrFail();
+     $sss=SocialSecurityScheme::where('id',$employee->pencode)->firstOrFail();
+    
 
-    return view('reports.payslip',compact('pagetitle','headertype','payrollperiod','company'));
+    return view('reports.payslip3',compact('pagetitle','headertype','payrollperiod','company','employee','payrolltrans','sss'));
 }
 
 public function payrollregisterform()

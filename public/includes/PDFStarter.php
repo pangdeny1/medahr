@@ -4,10 +4,10 @@
 /*this class is an extension to the fpdf class using a syntax that the original reports were written in
 (the R &OS pdf.php class) - due to limitation of this class for foreign character support this wrapper class
 was written to allow the same code base to use the more functional fpdf.class by Olivier Plathey */
-if (isset($SessionSavePath)){
-	session_save_path($SessionSavePath);
-}
-session_start();
+//if (isset($SessionSavePath)){
+	//session_save_path($SessionSavePath);
+//}
+//session_start();
 include('includes/GetConfig.php');
 
 include ('includes/class.pdf.php');
@@ -36,14 +36,14 @@ include('includes/LanguageSetup.php');
 /* Standard PDF file creation header stuff */
 
 /*check security - $PageSecurity set in files where this script is included from */
-if (! in_array($PageSecurity,$_SESSION['AllowedPageSecurityTokens']) OR !isset($PageSecurity)){
+/*if (! in_array($PageSecurity,$_SESSION['AllowedPageSecurityTokens']) OR !isset($PageSecurity)){
 	$title = _('Permission Denied Report');
 	include('includes/header.inc');
 	echo '<BR><BR><BR><BR><BR><BR><BR><CENTER><FONT COLOR=RED SIZE=4><B>' . _('The security settings on your account do not permit you to access this function') . '</B></FONT>';
 	include('includes/footer.inc');
 	exit;
 }
-
+*/
 
 if (!isset($PaperSize)){
 	$PaperSize = $_SESSION['DefaultPageSize'];
