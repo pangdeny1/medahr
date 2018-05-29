@@ -1,7 +1,7 @@
 <?php
 //$period=$payrollperiod->payrolldesc;
 //header('Content-Type: application/vnd.ms-excel');
-//header("Content-Disposition: attachment; filename=\"Payroll -".$period.".xls\"");
+//header("Content-Disposition: attachment; filename=\"Pyslip for  -".$period.".xls\"");
 
         ?><!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
 <HTML xmlns="http://www.w3.org/TR/REC-html40" xmlns:x="urn:schemas-microsoft-com:office:excel" 
@@ -551,7 +551,7 @@ style="width: 152pt;">{{$employee->atmnumber}}</TD></TR>
        Signature:</TD>
     <TD width="176" class="xl88" style="width: 132pt;"><U style="visibility: hidden; mso-ignore: visibility;">&nbsp;</U></TD>
     <TD width="31" class="xl73" style="width: 23pt;"></TD>
-    <TD width="190" class="xl83" style="width: 143pt;">Director<SPAN style="mso-spacerun: yes;">&nbsp; 
+    <TD width="190" class="xl83" style="width: 143pt;">FM<SPAN style="mso-spacerun: yes;">&nbsp; 
       </SPAN>Signature:</TD>
     <TD width="202" class="xl88" style="width: 152pt;"><U style="visibility: hidden; mso-ignore: visibility;">&nbsp;</U></TD></TR>
   <TR height="0" style="display: none;">

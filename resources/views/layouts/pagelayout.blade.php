@@ -93,7 +93,8 @@
                         <a href="#"><span class="fa fa-dashboard"></span> <span class="xn-text">Payroll</span></a>
                          <ul>
                             
-                            <li><a href="{{url('viewpayrollperiods')}}"><span class="fa fa-pencil-square-o"></span>Payroll periods</a></li>                         
+                            <li><a href="{{url('viewpayrollperiods')}}"><span class="fa fa-pencil-square-o"></span>Payroll periods</a></li>  
+                            <li><a href="{{url('viewotherdeductions')}}"><span class="fa fa-pencil-square-o"></span>Other Deductions</a></li>                       
                         
                         </ul>
                     </li>
@@ -119,6 +120,20 @@
                          <ul>
                             
                             <li><a href="{{url('reportform')}}"><span class="fa fa-pencil-square-o"></span>Employee Bio</a></li>                         
+                            
+                            
+                          
+                        </ul>
+                    </li>
+
+                    <li class="xn-openable">
+
+                     
+                        <a href="#"><span class="fa fa-dashboard"></span> <span class="xn-text">Settings</span></a>
+                         <ul>
+                            
+                            <li><a href="{{url('companypreference')}}"><span class="fa fa-pencil-square-o"></span>Company Preference</a></li>
+                            <li><a href="{{url('users')}}"><span class="fa fa-pencil-square-o"></span>Users</a></li>                           
                             
                             
                           

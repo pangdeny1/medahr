@@ -271,6 +271,17 @@ Route::group(['middleware'=> ['auth', 'activated', 'role:admin']], function () {
      Route::get('formlist','form\FormController@index');
      Route::get('createimage/{id}','form\FormController@createimage');
      Route::post('updateimage','form\FormController@updateimage');
+
+
+     //payrolls
+
+    Route::post('addotherdeduction','otherdeduction\otherdeductionscontroller@store');
+    Route::get('showotherdeduction/{id}','otherdeduction\otherdeductionscontroller@show');
+    Route::get('editotherdeduction/{id}','otherdeduction\otherdeductionscontroller@edit');
+    Route::post('updateotherdeduction/{id}','otherdeduction\otherdeductionscontroller@update');
+    Route::get('deleteotherdeduction/{id}','otherdeduction\otherdeductionscontroller@destroy');
+    Route::get('createotherdeduction','otherdeduction\otherdeductionscontroller@create');
+    Route::get('viewotherdeductions','otherdeduction\otherdeductionscontroller@index');
      
      
 });
