@@ -13,6 +13,6 @@ class otherdeduction extends Model
    protected $fillable = ['othfileref','othfiledesc','employeeid','othdate','stopdate',
    'othincid','othincamount','subamount','quantity','amount_term','percent','verified',
     'accountcode', 'attachement', 'approver','verified','accountcode','attachement',
-    'approver','payrollid','verifyer','recurrent','status','madeat'];
+    'approver','payrollid','verifyer','recurrent','status','madeat','transaction_type'];
 
 }

@@ -84,13 +84,35 @@
 
                             <div class="col-md-6">
                                 <input type="text" name="Amount" class="form-control" value="{{old('Amount')}}">
-
+             
                                 @if ($errors->has('Amount'))
                                     <span class="help-block">
                                         <strong>{{ $errors->first('Amount') }}</strong>
                                     </span>
                                 @endif
                                 
+                            </div>
+                        </div>
+
+                        <div class="form-group{{ $errors->has('Transaction') ? ' has-error' : '' }}">
+                            <label for="title" class="col-md-4 control-label">Transaction</label>
+
+                            <div class="col-md-6">
+                                
+                                <select class="form-control select" name="Transaction">
+                                                      
+                  <option value=''> Select Transaction </option>
+
+                  <option value='Basic'> Basic</option>
+
+                  <option value='Gross'> Gross </option>
+                                                                                        
+             </select> 
+                                             @if ($errors->has('Transaction'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('Transaction') }}</strong>
+                                    </span>
+                                @endif
                             </div>
                         </div>
 
