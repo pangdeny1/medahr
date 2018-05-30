@@ -38,9 +38,9 @@
         include('includes/prlComputeTaxableIncome.php');
         include('includes/prlComputeOtherDeductions.php');
         
-      include('includes/prlComputeTAX.php');
+        include('includes/prlComputeTAX.php');
         
-       include('includes/prlComputeSdl.php');
+        include('includes/prlComputeSdl.php');
         include('includes/prlComputeWcf.php');
         
         include('includes/prlComputeTotalDeduction.php');

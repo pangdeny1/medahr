@@ -48,29 +48,26 @@ class otherdeductionscontroller extends Controller
             'Term'     => 'required',
             'deductiontype'     => 'required',
             'Percentage'     => 'required',
-            'Amount'     => 'required'
+            'Amount'     => 'required',
+            'Period'     =>'required' 
         ]);
 
         $otherdeduction= new otherdeduction([
-            'qualificationid'     => $request->input('qualification'),
+            
             'employeeid'     => $request->input('employee'),
+            'payrollid'     => $request->input('Period'),
             'othdate'     => $request->input('DateFrom'),
             'stopdate'     => $request->input('DateTo'),
-            'othincamount'     => $request->input('level'),
-            'institutionid'     => $request->input('institution')
+            'othincamount'     => $request->input('Amount'),
+            'subamount'     => $request->input('SubAmount'),
+            'othincid'     => $request->input('deductiontype'),
+            'quantity'     => $request->input('quantity'),
+            'amount_term'     => $request->input('Term'),
+            'percent'     => $request->input('Percentage'),
+            'recurrent'     => $request->input('Recurent'),
+            'status'        => $request->input('Status')
             
-
-othdate
-
-
-othincid
-
-subamount
-quantity
-amount_term
-percent
-payrollid
-        ]);
+              ]);
 
         $otherdeduction->save();
 

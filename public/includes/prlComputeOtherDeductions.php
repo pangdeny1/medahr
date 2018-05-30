@@ -37,7 +37,7 @@ if (isset($_POST['submit'])) {
 					FROM prlothdedfile
 
 					LEFT JOIN prlpayrolltrans ON(prlpayrolltrans.employeeid=prlothdedfile.employeeid)
-			      WHERE stopdate>='".$FromPeriod."' AND prlpayrolltrans.payrollid='" . $PayrollID . "' AND status=0";
+			      WHERE stopdate>='".$FromPeriod."' AND prlpayrolltrans.payrollid='" . $PayrollID . "' AND status=1";
 					
 		$PayDetails = DB_query($sql,$db);
 		if(DB_num_rows($PayDetails)>0)

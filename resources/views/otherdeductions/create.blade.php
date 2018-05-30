@@ -16,7 +16,7 @@
                 <div class="panel-body">
                     @include('includes.flash');
 
-                    <form class="form-horizontal" role="form" method="POST" action="{{ url('/addemployeequalification') }}">
+                    <form class="form-horizontal" role="form" method="POST" action="{{ url('/addotherdeduction') }}">
                         {!! csrf_field() !!}
 
 
@@ -90,11 +90,7 @@
                                         <strong>{{ $errors->first('Amount') }}</strong>
                                     </span>
                                 @endif
-                                 @if ($errors->has('Amount'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('Amount') }}</strong>
-                                    </span>
-                                @endif
+                                
                             </div>
                         </div>
 
@@ -112,19 +108,20 @@
                             </div>
                         </div>
 
-                            <div class="form-group{{ $errors->has('period') ? ' has-error' : '' }}">                                      
-                                                <label for="title" class="col-md-4 control-label">period  </label>
-                                                <div class="col-md-6">
-                                                    <select class="form-control select" name="period">
 
-                                                         <option value="{{ $period->id }}">{{ $period->payrolldesc}}</option>
+                            <div class="form-group{{ $errors->has('Period') ? ' has-error' : '' }}">                                      
+                                                <label for="title" class="col-md-4 control-label">Period  </label>
+                                                <div class="col-md-6">
+                                                    <select class="form-control select" name="Period">
+                                                       
+                                                         <option value="{{$period->id}}">{{$period->payrolldesc}}</option>
                                                          
                                                                                                              
                                                     </select>
                                                 </div> 
-                                                @if ($errors->has('period'))
+                                                @if ($errors->has('Period'))
                                     <span class="help-block">
-                                        <strong>{{ $errors->first('period') }}</strong>
+                                        <strong>{{ $errors->first('Period') }}</strong>
                                     </span>
                                 @endif
                             </div>
@@ -157,11 +154,11 @@
                             </div>
                         </div>
 
-                        <div class="form-group{{ $errors->has('Recurrent') ? ' has-error' : '' }}">
-                            <label for="title" class="col-md-4 control-label">Recurrent?</label>
+                        <div class="form-group{{ $errors->has('Recurent') ? ' has-error' : '' }}">
+                            <label for="title" class="col-md-4 control-label">Recurent?</label>
 
                             <div class="col-md-6">
-                                                    <select class="form-control select" name="Recurrent">
+                                                    <select class="form-control select" name="Recurent">
                                                         @foreach($yesornos  as $ss)
                                                        
                                                         <option value="{{$ss->id}}">{{$ss->name}}</option>
@@ -169,9 +166,29 @@
                                                         @endforeach
                                                                                                                                                                    
                                                     </select>
-                                             @if ($errors->has('Recurrent'))
+                                             @if ($errors->has('Recurent'))
                                     <span class="help-block">
-                                        <strong>{{ $errors->first('Recurrent') }}</strong>
+                                        <strong>{{ $errors->first('Recurent') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+
+                        <div class="form-group{{ $errors->has('Active') ? ' has-error' : '' }}">
+                            <label for="title" class="col-md-4 control-label">Active?</label>
+
+                            <div class="col-md-6">
+                                                    <select class="form-control select" name="Status">
+                                                        @foreach($yesornos  as $ss)
+                                                       
+                                                        <option value="{{$ss->id}}">{{$ss->name}}</option>
+                                                        
+                                                        @endforeach
+                                                                                                                                                                   
+                                                    </select>
+                                             @if ($errors->has('Active'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('Active') }}</strong>
                                     </span>
                                 @endif
                             </div>
