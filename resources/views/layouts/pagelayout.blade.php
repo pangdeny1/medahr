@@ -93,8 +93,11 @@
                         <a href="#"><span class="fa fa-dashboard"></span> <span class="xn-text">Payroll</span></a>
                          <ul>
                             
-                            <li><a href="{{url('viewpayrollperiods')}}"><span class="fa fa-pencil-square-o"></span>Payroll periods</a></li>  
-                            <li><a href="{{url('viewotherdeductions')}}"><span class="fa fa-pencil-square-o"></span>Other Deductions</a></li>                       
+                            <li><a href="{{url('viewpayrollperiods')}}"><span class="fa fa-pencil-square-o"></span>Payroll periods</a></li> 
+                            <li><a href="{{url('viewotherincomes')}}"><span class="fa fa-pencil-square-o"></span>Incomes</a></li>  
+                            <li><a href="{{url('viewotherdeductions')}}"><span class="fa fa-pencil-square-o"></span>Deductions</a></li> 
+                            <li><a href="{{url('viewloans')}}"><span class="fa fa-pencil-square-o"></span>Loans</a></li>
+
                         
                         </ul>
                     </li>

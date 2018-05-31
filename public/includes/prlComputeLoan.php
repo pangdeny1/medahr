@@ -10,6 +10,7 @@ if (isset($_GET['PayrollID'])){
 */
 
 $PayrollID=$payroll->id;
+
 $Status = GetOpenCloseStr(GetPayrollRow($PayrollID, $db,11));
 if ($Status=='Closed') {
    exit("Payroll is Closed. Re-open first...");

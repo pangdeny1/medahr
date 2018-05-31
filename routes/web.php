@@ -282,6 +282,23 @@ Route::group(['middleware'=> ['auth', 'activated', 'role:admin']], function () {
     Route::get('deleteotherdeduction/{id}','otherdeduction\otherdeductionscontroller@destroy');
     Route::get('createotherdeduction','otherdeduction\otherdeductionscontroller@create');
     Route::get('viewotherdeductions','otherdeduction\otherdeductionscontroller@index');
+
+    Route::post('addotherincome','otherincome\otherincomescontroller@store');
+    Route::get('showotherincome/{id}','otherincome\otherincomescontroller@show');
+    Route::get('editotherincome/{id}','otherincome\otherincomescontroller@edit');
+    Route::post('updateotherincome/{id}','otherincome\otherincomescontroller@update');
+    Route::get('deleteotherincome/{id}','otherincome\otherincomescontroller@destroy');
+    Route::get('createotherincome','otherincome\otherincomescontroller@create');
+    Route::get('viewotherincomes','otherincome\otherincomescontroller@index');
+
+
+     Route::post('addloan','loan\loanscontroller@store');
+    Route::get('showloan/{id}','loan\loanscontroller@show');
+    Route::get('editloan/{id}','loan\loanscontroller@edit');
+    Route::post('updateloan/{id}','loan\loanscontroller@update');
+    Route::get('deleteloan/{id}','loan\loanscontroller@destroy');
+    Route::get('createloan','loan\loanscontroller@create');
+    Route::get('viewloans','loan\loanscontroller@index');
      
      
 });
