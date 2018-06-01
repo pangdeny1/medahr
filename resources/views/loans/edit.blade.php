@@ -14,11 +14,25 @@
                 <div class="panel-heading">{{$pagetitle}}</div>
 
                 <div class="panel-body">
-                    @include('includes.flash');
+                    @include('includes.flash')
 
-                    <form class="form-horizontal" role="form" method="POST" action="{{ url('/updateotherdeduction/'.$otherdeduction->counterindex) }}">
+                    <form class="form-horizontal" role="form" method="POST" action="{{ url('/updateloan/'.$loan->loanfileid) }}">
                         {!! csrf_field() !!}
 
+<div class="form-group{{ $errors->has('LoanDesc') ? ' has-error' : '' }}">
+                            <label for="title" class="col-md-4 control-label">Loan Description</label>
+
+                            <div class="col-md-6">
+                                <input type="text" name="LoanDesc" class="form-control" value="{{$loan->loanfiledesc}}">
+             
+                                @if ($errors->has('LoanDesc'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('LoanDesc') }}</strong>
+                                    </span>
+                                @endif
+                                
+                            </div>
+                        </div>
 
                         <div class="form-group{{ $errors->has('employee') ? ' has-error' : '' }}">                                      
                                                 <label for="title" class="col-md-4 control-label">employees</label>
@@ -27,9 +41,9 @@
 
                                                        <option value=""> Select Employee </option>
                                                           @foreach($employees as $employee)
-                                                          @if($employee->employeeid==$otherdeduction->employeeid)
+                                                          @if($employee->employeeid==$loan->employeeid)
                                                         
-                                                         <option selected value="{{ $otherdeduction->employeeid }}">{{ $employee->firstname }} {{ $employee->lastname }}</option>
+                                                         <option selected value="{{ $loan->employeeid }}">{{ $employee->firstname }} {{ $employee->lastname }}</option>
                                                         @else
                                                          <option value="{{ $employee->employeeid }}">{{ $employee->firstname }} {{ $employee->lastname }}</option>
                                                           @endif  
@@ -45,26 +59,28 @@
                                 @endif
                             </div>  
                            
-                           <div class="form-group{{ $errors->has('deductiontype') ? ' has-error' : '' }}">                                      
-                                                <label for="title" class="col-md-4 control-label">deductiontype  </label>
+                           <div class="form-group{{ $errors->has('loantype') ? ' has-error' : '' }}">                                      
+                                                <label for="title" class="col-md-4 control-label">loantype  </label>
                                                 <div class="col-md-6">
-                                                    <select class="form-control select" name="deductiontype">
+                                                    <select class="form-control select" name="loantype">
 
-                                                       <option value=""> Select deductiontype </option>
-                                                          @foreach($deductiontypes as $deductiontype)
-                                                           @if($otherdeduction->othincid==$deductiontype->othincid)
-                                                           <option selected value="{{ $otherdeduction->othincid}}">{{ $deductiontype->othincdesc}}</option>
+                                                       <option value=""> Select loantype </option>
+                                                          @foreach($loantypes as $loantype)
+
+                                                         @if($loan->loantableid==$loantype->loantableid)
+                                                           <option selected value="{{ $loan->loantableid}}">{{ $loantype->loantabledesc}}</option>
                                                            @else
                                                          
-                                                         <option value="{{ $deductiontype->othincid }}">{{ $deductiontype->othincdesc}}</option>
+                                                         <option value="{{ $loantype->loantableid }}">{{ $loantype->loantabledesc}}</option>
                                                          @endif
+                                                         
                                                           @endforeach
                                                                                                              
                                                     </select>
                                                 </div> 
-                                                @if ($errors->has('deductiontype'))
+                                                @if ($errors->has('loantype'))
                                     <span class="help-block">
-                                        <strong>{{ $errors->first('deductiontype') }}</strong>
+                                        <strong>{{ $errors->first('loantype') }}</strong>
                                     </span>
                                 @endif
                             </div>
@@ -75,7 +91,7 @@
                             <div class="col-md-6">
                                                     <select class="form-control select" name="Term">
                                                       
-                                                       @if($otherdeduction->amount_term=="Amount")
+                                                       @if($loan->amount_term=="Amount")
 
                                                        <option selected value="Amount">Amount</option>
                                                        <option value="Percent">Percent</option>
@@ -93,14 +109,44 @@
                         </div>
 
                         <div class="form-group{{ $errors->has('Amount') ? ' has-error' : '' }}">
-                            <label for="title" class="col-md-4 control-label">Amount</label>
+                            <label for="title" class="col-md-4 control-label">Loan Amount</label>
 
                             <div class="col-md-6">
-                                <input type="text" name="Amount" class="form-control" value="{{$otherdeduction->othincamount}}">
+                                <input type="text" name="Amount" class="form-control" value="{{$loan->loanamount}}">
              
                                 @if ($errors->has('Amount'))
                                     <span class="help-block">
                                         <strong>{{ $errors->first('Amount') }}</strong>
+                                    </span>
+                                @endif
+                                
+                            </div>
+                        </div>
+
+                        <div class="form-group{{ $errors->has('LoanBalance') ? ' has-error' : '' }}">
+                            <label for="title" class="col-md-4 control-label">Loan Balance</label>
+
+                            <div class="col-md-6">
+                                <input type="text" name="LoanBalance" class="form-control" value="{{$loan->loanbalance}}">
+             
+                                @if ($errors->has('LoanBalance'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('LoanBalance') }}</strong>
+                                    </span>
+                                @endif
+                                
+                            </div>
+                        </div>
+
+                        <div class="form-group{{ $errors->has('Amortization') ? ' has-error' : '' }}">
+                            <label for="title" class="col-md-4 control-label">Amortization(deduction Amount)</label>
+
+                            <div class="col-md-6">
+                                <input type="text" name="Amortization" class="form-control" value="{{$loan->amortization}}">
+             
+                                @if ($errors->has('Amortization'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('Amortization') }}</strong>
                                     </span>
                                 @endif
                                 
@@ -112,21 +158,16 @@
 
                             <div class="col-md-6">
                                 
-                                <select class="form-control select" name="Transaction">
-                                                      
-                 
-
-                                                       @if($otherdeduction->transaction_type=="Basic")
+                                 <select class="form-control select" name="Transaction">
+                                      @if($loan->transaction_type=="Basic")
 
                                                        <option selected value="Basic">Basic</option>
                                                        <option value="Gross">Gross</option>
                                                        @else
                                                       <option selected value="Gross">Gross</option>
                                                       <option  value="Basic">Basic</option>
-                                                      @endif
-
-                                                                                        
-             </select> 
+                                                      @endif                              
+                                                        </select> 
                                              @if ($errors->has('Transaction'))
                                     <span class="help-block">
                                         <strong>{{ $errors->first('Transaction') }}</strong>
@@ -135,11 +176,11 @@
                             </div>
                         </div>
 
-                        <div class="form-group{{ $errors->has('Percentage') ? ' has-error' : '' }}">
+                         <div class="form-group{{ $errors->has('Percentage') ? ' has-error' : '' }}">
                             <label for="title" class="col-md-4 control-label">Percentage</label>
 
                             <div class="col-md-6">
-                                <input type="text" name="Percentage" class="form-control" value="{{$otherdeduction->percent}}">
+                                <input type="text" name="Percentage" class="form-control" value="{{$loan->percent}}">
 
                                 @if ($errors->has('Percentage'))
                                     <span class="help-block">
@@ -148,12 +189,14 @@
                                 @endif
                             </div>
                         </div>
-                       <div class="form-group{{ $errors->has('Period') ? ' has-error' : '' }}">                                      
+
+
+                             <div class="form-group{{ $errors->has('Period') ? ' has-error' : '' }}">                                      
                                                 <label for="title" class="col-md-4 control-label">Period  </label>
                                                 <div class="col-md-6">
                                                     <select class="form-control select" name="Period">
                                                        
-                                                         <option value="{{$otherdeduction->payrollid}}">{{$period->payrolldesc}}</option>
+                                                         <option value="{{$loan->payrollid}}">{{$period->payrolldesc}}</option>
                                                          
                                                                                                              
                                                     </select>
@@ -164,60 +207,35 @@
                                     </span>
                                 @endif
                             </div>
-
-                            
                            
-                            <div class="form-group{{ $errors->has('DateFrom') ? ' has-error' : '' }}">
-                            <label for="title" class="col-md-4 control-label">From Date</label>
+                            <div class="form-group{{ $errors->has('LoanDate') ? ' has-error' : '' }}">
+                            <label for="title" class="col-md-4 control-label">Loan Date</label>
 
                             <div class="col-md-6">
-                                <input type="text" name="DateFrom" class="form-control datepicker" value="{{$otherdeduction->othdate}}">
+                                <input type="text" name="LoanDate" class="form-control datepicker" value="{{$loan->loandate}}">
 
-                                @if ($errors->has('DateFrom'))
+                                @if ($errors->has('LoanDate'))
                                     <span class="help-block">
-                                        <strong>{{ $errors->first('DateFrom') }}</strong>
+                                        <strong>{{ $errors->first('LoanDate') }}</strong>
                                     </span>
                                 @endif
                             </div>
                         </div>
  
-                            <div class="form-group{{ $errors->has('DateTo') ? ' has-error' : '' }}">
-                            <label for="title" class="col-md-4 control-label">To Date</label>
+                            <div class="form-group{{ $errors->has('StartDeduction') ? ' has-error' : '' }}">
+                            <label for="title" class="col-md-4 control-label">Start Deduction</label>
 
                             <div class="col-md-6">
-                                <input type="text" name="DateTo" class="form-control datepicker" value="{{$otherdeduction->stopdate}}">
+                                <input type="text" name="StartDeduction" class="form-control datepicker" value="{{$loan->startdeduction}}">
 
-                                @if ($errors->has('DateTo'))
+                                @if ($errors->has('StartDeduction'))
                                     <span class="help-block">
-                                        <strong>{{ $errors->first('DateTo') }}</strong>
+                                        <strong>{{ $errors->first('StartDeduction') }}</strong>
                                     </span>
                                 @endif
                             </div>
                         </div>
 
-                        <div class="form-group{{ $errors->has('Recurent') ? ' has-error' : '' }}">
-                            <label for="title" class="col-md-4 control-label">Recurent?</label>
-
-                            <div class="col-md-6">
-                                                    <select class="form-control select" name="Recurent">
-                                                        @foreach($yesornos  as $ss)
-                                                        @if($ss->id==$otherdeduction->recurrent)
-                                                        <option  value="{{$otherdeduction->recurrent}}" selected="selected">{{$ss->name}}</option>
-                                                        @else
-                                                        <option value="{{$ss->id}}">{{$ss->name}}</option>
-                                                          @endif  
-                                                        
-                                                        
-                                                        @endforeach
-                                                                                                                                                                   
-                                                    </select>
-                                             @if ($errors->has('Recurent'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('Recurent') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
 
                         <div class="form-group{{ $errors->has('Active') ? ' has-error' : '' }}">
                             <label for="title" class="col-md-4 control-label">Active?</label>
@@ -226,8 +244,8 @@
                                                     <select class="form-control select" name="Status">
                                                         @foreach($yesornos  as $ss)
                                                        
-                                                         @if($ss->id==$otherdeduction->status)
-                                                        <option  value="{{$otherdeduction->status}}" selected="selected">{{$ss->name}}</option>
+                                                         @if($ss->id==$loan->status)
+                                                        <option  value="{{$loan->status}}" selected="selected">{{$ss->name}}</option>
                                                         @else
                                                         <option value="{{$ss->id}}">{{$ss->name}}</option>
                                                           @endif  
@@ -246,7 +264,7 @@
                         <div class="form-group">
                             <div class="col-md-6 col-md-offset-4">
                                 <button type="submit" class="btn btn-primary">
-                                    <i class="fa fa-btn fa-ticket"></i> Save
+                                    <i class="fa fa-btn fa-ticket"></i> Update Loan
                                 </button>
                             </div>
                         </div>

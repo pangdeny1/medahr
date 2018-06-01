@@ -14,7 +14,7 @@
                 <div class="panel-heading">{{$pagetitle}}</div>
 
                 <div class="panel-body">
-                    @include('includes.flash');
+                    @include('includes.flash')
 
                     <form class="form-horizontal" role="form" method="POST" action="{{ url('/updateotherdeduction/'.$otherdeduction->counterindex) }}">
                         {!! csrf_field() !!}
@@ -113,20 +113,15 @@
                             <div class="col-md-6">
                                 
                                 <select class="form-control select" name="Transaction">
-                                                      
-                 
-
-                                                       @if($otherdeduction->transaction_type=="Basic")
+                                      @if($otherdeduction->transaction_type=="Basic")
 
                                                        <option selected value="Basic">Basic</option>
                                                        <option value="Gross">Gross</option>
                                                        @else
                                                       <option selected value="Gross">Gross</option>
                                                       <option  value="Basic">Basic</option>
-                                                      @endif
-
-                                                                                        
-             </select> 
+                                                      @endif                              
+                                                        </select> 
                                              @if ($errors->has('Transaction'))
                                     <span class="help-block">
                                         <strong>{{ $errors->first('Transaction') }}</strong>

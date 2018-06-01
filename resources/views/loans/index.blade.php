@@ -41,12 +41,12 @@
                             <thead>
                                <tr>
                                     <th>Employee</th>
-                                    <th>Deduction Type</th>
-                                    <th>Term</th>
-                                    <th>Amount</th>
-                                    <th>Percent</th>
-                                    <th>Start Date</th>
-                                    <th>End Date</th>
+                                    <th>Loan </th>
+                                    <th>Loan Amount</th>
+                                    <th>Loan Balance</th>
+                                    <th>Deduction type</th>
+                                    <th>Loan Date</th>
+                                    <th>Start deduction Date</th>
                                     
                                     <th>View </th>
                                     <th >Edit</th>
@@ -66,26 +66,33 @@
                                     </td>
                                     <td>
                                        {{ $loan->othincid }}
+                                         @foreach ($loantypes as $loantype)
+                                        @if ($loantype->loantableid == $loan->loantableid)
+                                            {{ $loantype->loantabledesc }} 
+                                        @endif
+                                    @endforeach
                                     </td>
                                     <td>
-                                  {{ $loan->amount_term}}
+                                     {{ $loan->loanamount }}
                                     </td>
                                     <td>
-                                        {{ $loan->othincamount }}
+                                        {{ $loan->loanbalance }}
                                     </td>
                                     <td>
-                                        {{ $loan->percent }}
+                                        
+                                        {{ $loan->amount_term}}
                                     </td>
-                                    <td>{{ $loan->othdate }}</td>
-                                    <td>{{ $loan->stopdate }}</td>
+                                    
+                                    <td>{{ $loan->loandate }}</td>
+                                    <td>{{ $loan->startdeduction }}</td>
                                      <td>
-                                        <a href="{{ url('showloan/'.$loan->counterindex) }}" class="btn btn-primary">View</a>
+                                        <a href="{{ url('showloan/'.$loan->loanfileid) }}" class="btn btn-primary">View</a>
                                     </td>
                                     <td>
-                                        <a href="{{ url('editloan/'.$loan->counterindex) }}" class="btn btn-primary">Edit</a>
+                                        <a href="{{ url('editloan/'.$loan->loanfileid) }}" class="btn btn-primary">Edit</a>
                                     </td>
                                     <td>
-                                        <a href="{{ url('deleteloan/'.$loan->counterindex) }}" class="btn btn-danger" onclick="return confirm('Are you sure you want to Delete this record')" >Delete</a>
+                                        <a href="{{ url('deleteloan/'.$loan->loanfileid) }}" class="btn btn-danger" onclick="return confirm('Are you sure you want to Delete this record')" >Delete</a>
                                     </td>
                                 </tr>
                             @endforeach

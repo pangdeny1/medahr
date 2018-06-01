@@ -21,7 +21,8 @@ class loanscontroller extends Controller
         $pagetitle="loans ";
         $loans=loan::All();
         $employees=Employee::All();
-        return view('loans.index',compact('pagetitle','loans','employees'));
+        $loantypes=loantable::All();
+        return view('loans.index',compact('pagetitle','loans','employees','loantypes'));
 
 	}
  public function create()
@@ -50,7 +51,8 @@ class loanscontroller extends Controller
             'loantype'     => 'required',
             'LoanDesc'     => 'required',
             'Amount'       =>'required',
-            'Amortization' =>'required'
+            'Amortization' =>'required',
+            'LoanBalance'  =>'required'
             
         ]);
 
@@ -67,6 +69,7 @@ class loanscontroller extends Controller
             'quantity'     => $request->input('quantity'),
             'amount_term'     => $request->input('Term'),
             'percent'     => $request->input('Percentage'),
+            'loanbalance'  =>$request->input('LoanBalance'),
             'status'        => $request->input('Status'),
             'transaction_type'=>$request->input('Transaction')
             
@@ -85,7 +88,7 @@ class loanscontroller extends Controller
      public function show($loan_id)
     {   
     	$pagetitle="loan View";
-        $loan= loan::where('counterindex', $loan_id)->firstOrFail();
+        $loan= loan::where('loanfileid', $loan_id)->firstOrFail();
 
         //$comments = $ticket->comments;
 
@@ -102,7 +105,7 @@ class loanscontroller extends Controller
         $employees=Employee::All();
         
         $loantypes=loantable::All();
-        $loan=loan::where('counterindex',$loan_id)->firstOrFail();
+        $loan=loan::where('loanfileid',$loan_id)->firstOrFail();
         $yesornos=YesOrNo::All();
         $period=Payroll::where('id',$loan->payrollid)->firstOrFail();
         return view('loans.edit', compact('pagetitle','yesornos','employees','loantypes','period','loan'));
@@ -118,28 +121,32 @@ class loanscontroller extends Controller
             'StartDeduction'     => 'required',
             'Term'     => 'required',
             'loantype'     => 'required',
+            'LoanDesc'     => 'required',
+            'Amount'       =>'required',
+            'Amortization' =>'required',
+            'LoanBalance'  =>'required'
             
         ]);
        
 
-            $loan = loan::where('counterindex', $loan_id)->firstOrFail();
+            $loan = loan::where('loanfileid', $loan_id)->firstOrFail();
             
 
             $loan->employeeid    = $request->input('employee');
+            $loan->loanfiledesc     = $request->input('LoanDesc');
             $loan->payrollid    = $request->input('Period');
-            $loan->othdate   = $request->input('LoanDate');
-            $loan->stopdate   = $request->input('StartDeduction');
+            $loan->loandate   = $request->input('LoanDate');
+            $loan->startdeduction   = $request->input('StartDeduction');
             $loan->loanamount   =$request->input('Amount');
-            $loan->Amortization    = $request->input('Amortization');
-            $loan->othincid   = $request->input('loantype');
-            $loan->quantity    = $request->input('quantity');
+            $loan->amortization    = $request->input('Amortization');
+            $loan->loantableid  = $request->input('loantype');
             $loan->amount_term   = $request->input('Term');
             $loan->percent       =  $request->input('Percentage');
-            $loan->recurrent     = $request->input('Recurent');
             $loan->status        = $request->input('Status');
             $loan->transaction_type=$request->input('Transaction');
+            $loan->loanbalance  =$request->input('LoanBalance');
         
-             $loan->save();
+            $loan->save();
 
        // $mailer->sendTicketInformation(Auth::user(), $ticket);
 

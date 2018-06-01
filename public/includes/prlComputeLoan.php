@@ -10,8 +10,19 @@ if (isset($_GET['PayrollID'])){
 */
 
 $PayrollID=$payroll->id;
-
+$FSMonthRow=GetPayrollRow($PayrollID, $db,5);
+$FSYearRow=GetPayrollRow($PayrollID, $db,6);
+$isPensionValue=0;
+$DeductSSS = GetYesNoStr(GetPayrollRow($PayrollID, $db,7));
 $Status = GetOpenCloseStr(GetPayrollRow($PayrollID, $db,11));
+$FromPeriod = GetPayrollRow($PayrollID, $db,3);
+$ToPeriod = GetPayrollRow($PayrollID, $db,4);
+
+$openperiod=OpenPeriod($db);
+$mindate=GetPayrollRow($openperiod, $db,3);
+$maxdate=GetPayrollRow($openperiod, $db,4);
+$PeriodStartDate=GetPayrollRow($openperiod, $db,3);
+
 if ($Status=='Closed') {
    exit("Payroll is Closed. Re-open first...");
 }
@@ -30,7 +41,7 @@ if (isset($_POST['submit'])) {
 				WHERE payrollid ='" . $PayrollID . "'";
 	$Postrloan= DB_query($sql,$db);
 
-	$sql = "SELECT counterindex,payrollid,employeeid,loandeduction,basicpay
+	$sql = "SELECT counterindex,payrollid,employeeid,loandeduction,basicpay,grosspay
 			FROM prlpayrolltrans
 			WHERE prlpayrolltrans.payrollid='" . $PayrollID . "'";
 	$PayDetails = DB_query($sql,$db);
@@ -38,11 +49,11 @@ if (isset($_POST['submit'])) {
 	{
 		while ($myrow = DB_fetch_array($PayDetails))
 		{	
-			$sql = "SELECT loanfileid,loantableid,employeeid,amortization,startdeduction,loanbalance,amount_term,percent,transaction_type
+			$sql = "SELECT loanfileid,loantableid,employeeid,loanamount,amortization,startdeduction,loanbalance,amount_term,percent,transaction_type
 					FROM prlloanfile
 			        WHERE prlloanfile.employeeid='" . $myrow['employeeid'] . "'
 					AND startdeduction<='$ToPeriod'
-					ORDER BY LoanDate";
+					ORDER BY loandate";
 					$LoanDetails = DB_query($sql,$db);
                     
 
@@ -54,7 +65,7 @@ if (isset($_POST['submit'])) {
 						if($loanrow['amount_term']=="Percent")
 						{
 
-						updateamortization($loanrow['employeeid'],$loanrow['loanfileid'],$loanrow['percent'], $myrow['basicpay'],OpenPeriod($db),$db);	
+						updateamortization($loanrow['employeeid'],$loanrow['loanfileid'],$loanrow['percent'], $myrow['basicpay'],$PayrollID,$db);	
 						}	
 							if ($loanrow['loanbalance']>0) {
 								if ($loanrow['loanbalance']<=$loanrow['amortization']) {

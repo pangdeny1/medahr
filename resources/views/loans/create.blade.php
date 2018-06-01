@@ -14,7 +14,7 @@
                 <div class="panel-heading">{{$pagetitle}}</div>
 
                 <div class="panel-body">
-                    @include('includes.flash');
+                    @include('includes.flash')
 
                     <form class="form-horizontal" role="form" method="POST" action="{{ url('/addloan') }}">
                         {!! csrf_field() !!}
@@ -80,7 +80,7 @@
                             <label for="title" class="col-md-4 control-label">Term</label>
 
                             <div class="col-md-6">
-                                                    <select class="form-control select" name="Term">
+                                                    <select onchange='showDiv(this)' class="form-control select" name="Term">
                                                        <option value="">Select</option>
                                                        <option value="Amount">Amount</option>
                                                       <option value="Percent">Percent</option>
@@ -108,7 +108,22 @@
                             </div>
                         </div>
 
-                        <div class="form-group{{ $errors->has('Amortization') ? ' has-error' : '' }}">
+                        <div class="form-group{{ $errors->has('LoanBalance') ? ' has-error' : '' }}">
+                            <label for="title" class="col-md-4 control-label">Loan Balance</label>
+
+                            <div class="col-md-6">
+                                <input type="text" name="LoanBalance" class="form-control" value="{{old('LoanBalance')}}">
+             
+                                @if ($errors->has('LoanBalance'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('LoanBalance') }}</strong>
+                                    </span>
+                                @endif
+                                
+                            </div>
+                        </div>
+
+                        <div id='hidden_div3' style='display:none;' class="form-group{{ $errors->has('Amortization') ? ' has-error' : '' }}">
                             <label for="title" class="col-md-4 control-label">Amortization(deduction Amount)</label>
 
                             <div class="col-md-6">
@@ -123,7 +138,7 @@
                             </div>
                         </div>
 
-                        <div class="form-group{{ $errors->has('Transaction') ? ' has-error' : '' }}">
+                        <div  id='hidden_div2' style='display:none;'class="form-group{{ $errors->has('Transaction') ? ' has-error' : '' }}">
                             <label for="title" class="col-md-4 control-label">Transaction</label>
 
                             <div class="col-md-6">
@@ -145,7 +160,7 @@
                             </div>
                         </div>
 
-                        <div class="form-group{{ $errors->has('Percentage') ? ' has-error' : '' }}">
+                        <div id='hidden_div' style='display:none;' class="form-group{{ $errors->has('Percentage') ? ' has-error' : '' }}">
                             <label for="title" class="col-md-4 control-label">Percentage</label>
 
                             <div class="col-md-6">
@@ -238,3 +253,24 @@
             </div>
 
             @endsection
+
+             <script type="text/javascript">
+function showDiv(select){
+   if(select.value=="Percent"){
+    document.getElementById('hidden_div').style.display = "block";
+     document.getElementById('hidden_div2').style.display = "block";
+     document.getElementById('hidden_div3').style.display = "none";
+     document.getElementById('hidden_div4').style.display = "none";
+   } 
+
+   else {
+    document.getElementById('hidden_div2').style.display = "none";
+     document.getElementById('hidden_div').style.display = "none";
+
+     document.getElementById('hidden_div3').style.display = "block";
+     document.getElementById('hidden_div4').style.display = "block";
+   } 
+
+  
+} 
+</script>

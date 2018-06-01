@@ -12,23 +12,23 @@
         <div class="col-md-10 col-md-offset-1">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    #{{ $payroll->id }} - {{ $payroll->payrollname }}
+                    #{{ $loan->id }} - {{ $loan->loanname }}
                 </div>
 
                 <div class="panel-body">
                     @include('includes.flash')
 
-                    <div class="payroll-info">
-                        <p><b>payroll Description :: </b>{{ $payroll->payrolldesc }}</p>
+                    <div class="loan-info">
+                        <p><b>loan Description :: </b>{{ $loan->loandesc }}</p>
                       
                         <p>
-                        @if ($payroll->status === 'Open')
-                            Status: <span class="label label-success">{{ $payroll->status }}</span>
+                        @if ($loan->status === 'Open')
+                            Status: <span class="label label-success">{{ $loan->status }}</span>
                         @else
-                            Status: <span class="label label-danger">{{ $payroll->status }}</span>
+                            Status: <span class="label label-danger">{{ $loan->status }}</span>
                         @endif
                         </p>
-                        <p>Created on: {{ $payroll->created_at->diffForHumans() }}</p>
+                        <p>Created on: {{ $loan->created_at->diffForHumans() }}</p>
                     </div>
 
                     <hr>
