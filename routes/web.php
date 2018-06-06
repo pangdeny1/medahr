@@ -264,6 +264,9 @@ Route::group(['middleware'=> ['auth', 'activated', 'role:admin']], function () {
      Route::post('payslip','report\reportscontroller@payslip');
      Route::get('payrollregisterform','report\reportscontroller@payrollregisterform');
      Route::post('payrollregister','report\reportscontroller@payrollregister');
+
+     Route::get('payrollregisterformpdf','report\reportscontroller@payrollregisterformpdf');
+     Route::post('payrollregisterpdf','report\reportscontroller@payrollregisterpdf');
      
 
      Route::get('form','form\FormController@create');

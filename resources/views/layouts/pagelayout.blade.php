@@ -109,7 +109,8 @@
                          <ul>
                             
                             <li><a href="{{url('payrollregisterform')}}"><span class="fa fa-pencil-square-o"></span>Payroll Register</a></li>  
-                            <li><a href="{{url('payslipform')}}"><span class="fa fa-pencil-square-o"></span>Payslip</a></li>                       
+                            <li><a href="{{url('payslipform')}}"><span class="fa fa-pencil-square-o"></span>Payslip</a></li> 
+                            <li><a href="{{url('payrollregisterformpdf')}}"><span class="fa fa-pencil-square-o"></span>Payroll Register PDF</a></li>                         
                             
                             
                           

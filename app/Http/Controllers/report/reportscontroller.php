@@ -40,6 +40,9 @@ use App\Models\employementstatus;
 use App\Models\employeestatus;
 use App\Models\endofcontractreason;
 use App\Models\paytype;
+use App\Models\loantrans;
+use App\Models\loan;
+use App\Models\loantable;
 use App\Models;
 use App\Models\Retailer;
 use App\Traits\ActivationTrait;
@@ -136,7 +139,7 @@ public function payslip(Request $request)
      $sss=SocialSecurityScheme::where('id',$employee->pencode)->firstOrFail();
     
 
-    return view('reports.payslip3',compact('pagetitle','headertype','payrollperiod','company','employee','payrolltrans','sss'));
+    return view('reports.payslip',compact('pagetitle','headertype','payrollperiod','company','employee','payrolltrans','sss'));
 }
 
 public function payrollregisterform()
@@ -158,6 +161,28 @@ public function payrollregister(Request $request)
     $pagetitle="Payroll Register";
     $payrollperiod= payroll::where('id', $period)->firstOrFail();
     return view('reports.payrollregister',compact('pagetitle','headertype','payrollperiod','company'));
+}
+
+
+public function payrollregisterformpdf()
+{   
+    $pagetitle="Payroll Register"; 
+    $employees=Employee::All();
+    $periods=Payroll::All();
+    return  view('reports.payrollregisterformpdf',compact('pagetitle','employees','periods'));
+}
+
+public function payrollregisterpdf(Request $request)
+{
+     $this->validate($request, [
+            'period'     => 'required'
+        ]);
+     $headertype=$request->input('Report');
+     $period=$request->input('period');
+     $company=Company::where('id',1)->firstOrFail();
+    $pagetitle="Payroll Register";
+    $payrollperiod= payroll::where('id', $period)->firstOrFail();
+    return view('reports.payrollregisterpdf',compact('pagetitle','headertype','payrollperiod','company'));
 }
 
 }

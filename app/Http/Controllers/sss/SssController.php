@@ -19,7 +19,7 @@ class SssController extends Controller
         
         $pagetitle="Salary Change";
 
-        return view('salaries.create', compact('pagetitle'));
+        return view('sss.create', compact('pagetitle'));
     }
 
     public function store(Request $request, AppMailer $mailer)

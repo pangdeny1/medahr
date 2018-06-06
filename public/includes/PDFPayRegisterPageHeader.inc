@@ -10,7 +10,7 @@
 	$YPos = $Page_Height - $Top_Margin;
 	$YPos -= (4 * $line_height);
 	$pdf->addText($Left_Margin,$YPos,$FontSize,$_SESSION['CompanyRecord']['coyname']);
-	$pdf->Image("images/logo.jpg", 300, 20, 100);
+	//$pdf->Image("images/logo.jpg", 300, 20, 100);
 
 	$YPos -= $line_height;
 	$FontSize =10;
