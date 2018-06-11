@@ -39,8 +39,8 @@ if ($Status=='Open') {
                 }   
  
         $sql = "UPDATE prlpayrollperiod SET
-                    payclosed=2
-                     WHERE payrollid = '$PayrollID'";
+                    payclosed=1
+                     WHERE id = '$PayrollID'";
                     $ErrMsg = _('The payroll record could not be updated because');
                     $DbgMsg = _('The SQL that was used to update the payroll failed was');
                     $result = DB_query($sql, $db, $ErrMsg, $DbgMsg);

@@ -17,40 +17,33 @@
         include('includes/ConnectDB.inc');
         include('includes/ConnectDB_mysql.inc');
         include('includes/prlFunctions.php'); 
-        include('includes/prlGenerateData.php');
+        $Status = GetOpenCloseStr(GetPayrollRow($PayrollID, $db,11));
+if ($Status=='Closed') {
+   exit("You Cannot Void ,Payroll is already closed. Re-open first...");
+} else { 
+$sql="DELETE FROM prlpayrolltrans WHERE payrollid ='" . $PayrollID . "'";
+DB_query($sql,$db);
+$sql_sss="DELETE FROM prlempsssfile WHERE payrollid ='" . $PayrollID . "'";
+DB_query($sql_sss,$db);
 
-        include('includes/prlComputeBasic.php');
-        include('includes/prlComputeGratuity.php');
-        include('includes/prlComputeHoursWorked.php');
-        include('includes/prlComputeAreas.php');
-        include('includes/prlComputeAbsent.php');
-        //include('includes/prlComputeOthIncome.php');
-        include('includes/prlComputeOtherIncome2.php');
-        include('includes/prlComputeInvoiceIncome.php');
-        include('includes/prlComputeOT.php');
-        
-        include('includes/prlComputeGross.php');
-        include('includes/prlComputeLoan.php');
-        //include('includes/prlComputeHESLB.php');
-        include('includes/prlComputeSSS.php');
-        include('includes/prlComputeHDMF.php');
-        include('includes/prlComputePH.php');
-        include('includes/prlComputeTaxableIncome.php');
-        include('includes/prlComputeOtherDeductions.php');
-        
-        include('includes/prlComputeTAX.php');
-        
-        include('includes/prlComputeSdl.php');
-        include('includes/prlComputeWcf.php');
-        
-        include('includes/prlComputeTotalDeduction.php');
-        //include('includes/prlComputeHESLB.php');
-        include('includes/prlComputeNet.php');
+$sql_bb="DELETE FROM prlemployeebudgettrans WHERE payrollid ='" . $PayrollID . "'";
+DB_query($sql_bb,$db);
 
-        include('includes/prlComputeEmployeeBudget.php');
+$sql_ph="DELETE FROM prlempphfile WHERE payrollid ='" . $PayrollID . "'";
+    DB_query($sql_ph,$db);
+    $sql_hd="DELETE FROM prlemphdmffile WHERE payrollid ='" . $PayrollID . "'";
+    DB_query($sql_hd,$db);
+$sql_tax="DELETE FROM prlemptaxfile WHERE payrollid ='" . $PayrollID . "'";
+DB_query($sql_tax,$db);
 
-        
 
+ $sql_OtheTrans="DELETE FROM prlothericometrans WHERE payrollid ='" . $PayrollID . "'";
+DB_query($sql_OtheTrans,$db);
+  //exit("Not implemented at this moment...");
+  
+ 
+  echo ("<center><h3><font color=green >Payroll Voided Successfully.</font></h3></center>");
+  }
     ?>
 
 

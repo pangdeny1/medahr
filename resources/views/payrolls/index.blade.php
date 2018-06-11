@@ -43,7 +43,7 @@
                                  {{ $payroll->payrolldesc }}
                                   
                                     </td>
-                                    <td>{{ $payroll->updated_at }}</td>
+                                    <td>@if($payroll->payclosed==1){{"Open"}} @else {{"Closed"}} @endif</td>
                                      <td>
                                         <a href="{{ url('showpayroll/'.$payroll->id) }}" class="btn btn-primary">Select</a>
                                     </td>
