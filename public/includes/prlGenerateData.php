@@ -13,6 +13,7 @@ $PayrollID=$payroll->id;
 $Status = GetOpenCloseStr(GetPayrollRow($PayrollID, $db,11));
 if ($Status=='Closed') {
    exit("Payroll is Closed. Re-open first...");
+   
 }
 if (isset($_POST['submit'])) {
    exit("Contact Administrator...");

@@ -1,339 +1,264 @@
-@if($headertype=="PDF")
-
-   <?php
+<?php
 $db="medahr";
+$dbuser="root";
+$dbpassword="";
     $PayrollID=$payrollperiod->id;
+    $comp="Demmo Company";
+    $servername="localhost";
     include('includes/config.php');
-    include('includes/PDFStarter.php');
+    //include('includes/PDFStarter.php');
     include('includes/ConnectDB.inc');
-    include('includes/DateFunctions.inc');
+    include('includes/ConnectDB_mysql.inc');
     include('includes/prlFunctions.php');
+
+     include('includes/fpdf/fpdf.php');
     
-   
+    // le mettre au debut car plante si on declare $mysql avant !
+    $pdf = new FPDF( 'P', 'mm', 'A4' );
+
+    // on declare $mysql apres !
+    //$mysql = new mysql("localhost", $dbuser, $dbpassword,"medahr");
+   //$mysql =  mysql_connect($servername, $dbuser, $password,$db);
+    // cnx a la base
+   // mysql_select_db($db,$mysql) or die('Error Conecting database : ' .mysql_connect_error());
+    // FORCE UTF-8
+//    mysql_query($mysql, "SET NAMES UTF8");
 
 
-    $pdf->selectFont('includes/fonts/Helvetica.afm');
+    $var_id_facture = 1;
+    //$PayrollID=$_POST['PayrollID'];
 
-/* Standard PDF file creation header stuff */
-   
-    $pdf->addinfo('Title', _('Payslip Report') );
-    $pdf->addinfo('Subject', _('Payslip Report') );
+    // on sup les 2 cm en bas
+    $pdf->SetAutoPagebreak(False);
+    $pdf->SetMargins(0,0,0);
 
-    //(612,792);
-   
-    $line_height=12;
-    
+    // nb de page pour le multi-page : 18 lignes
+   // $sql = 'select count(*) FROM  prlpayrolltrans where  employeeid=' .$var_id_facture;
+     $sql = "select employeeid,basicpay,grosspay FROM  prlpayrolltrans where  employeeid='" .$var_id_facture."' AND payrollid='".$PayrollID."'";
+    $result = mysql_query($sql)  or die ('Error SQL : ' .$sql .mysql_connect_error() );
+    $row_client = mysql_fetch_row($result);
+    mysql_free_result($result);
+    $nb_page = 1;
+    $sql = 'select abs(FLOOR(-' . $nb_page . '/18))';
+    $result = mysql_query($sql)  or die ('Error SQL : ' .$sql .mysql_connect_error() );
+    $row_client_1 = mysql_fetch_row($result);
+    mysql_free_result($result);
+    $nb_page = 1;
 
-    
-    $PayDesc = GetPayrollRow($PayrollID, $db,1);
-    $FromPeriod = GetPayrollRow($PayrollID, $db,3);
-    $ToPeriod = GetPayrollRow($PayrollID, $db,4);
-    $FontSize = 10;
-    $pdf->addinfo('Title', _('Payroll Register') );
-    $pdf->addinfo('Subject', _('Payroll Register') );
-    $line_height = 12;
-            $EmpID ='';
-            $Basic = 0;
-            $OthInc = 0;
-            $Lates = 0;
-            $Absent = 0;
-            $Areas=0;
-            $OT = 0;
-            $Gross = 0;
-            $SSS = 0;
-            $HDMF ='';
-            $PhilHealt = 0;
-            $Loan = 0;
-            $Tax = 0;
-            $Net = 0;
-            
-
-    $YPos = $Page_Height - $Top_Margin;
-    $YPos -= (2 * $line_height);
-
-    $PaySlip=1;
-    $empid=$_POST['EmployeeID'];
-    $sql = "SELECT employeeid,basicpay,othincome,fee,absent,areaspay,late,otpay,grosspay,loandeduction,sss,hdmf,philhealth,tax,netpay
-            FROM prlpayrolltrans
-            WHERE employeeid='".$empid."' AND prlpayrolltrans.payrollid='" .$PayrollID. "'";
-            
-            if(empty($empid))
-            $sql = "SELECT employeeid,basicpay,othincome,fee,absent,areaspay,late,otpay,grosspay,loandeduction,sss,hdmf,philhealth,tax,netpay
-            FROM prlpayrolltrans
-            WHERE prlpayrolltrans.payrollid='" .$PayrollID. "'";   $PayResult = DB_query($sql,$db);
-    if(DB_num_rows($PayResult)>0)
+    $num_page = 1; $limit_inf = 0; $limit_sup = 18;
+    While ($num_page <= $nb_page)
     {
-        while ($myrow=DB_fetch_array($PayResult)) {
+        $pdf->AddPage();
         
-                $EmpID =$myrow['employeeid'];
-                $FullName=GetName($EmpID, $db);
-                
-                $Basic =$myrow['basicpay'];
-                $OthInc = $myrow['othincome'];
-                $Areas = $myrow['areaspay'];
-                $Absent = $myrow['absent'];
-                $OT =$myrow['otpay'];
-                $Gross =$myrow['grosspay'];
-                $SSS =$myrow['sss'];
-                $HDMF =$myrow['hdmf'];
-                $PhilHealth = $myrow['philhealth'];
-                $Loan =$myrow['loandeduction'];
-                $Tax = $myrow['tax'];
-                $Fee = $myrow['fee'];
-                $Net =$myrow['netpay'];
-                $Deduction=$SSS+$HDMF+$PhilHealth+$Loan+$Tax +$Fee;
-                
-                
-                
-            if ($PaySlip==1) {
-                $FontSize =10;
-                $pdf->selectFont('includes/fonts/Helvetica-Bold.afm');
-                $HeadPos1= $YPos;               
-                $LeftOvers =$pdf->addText($Left_Margin,$YPos,$FontSize,$_SESSION['CompanyRecord']['coyname']);
-                $YPos -= (1 * $line_height);
-                $FontSize =10;
-                $pdf->selectFont('includes/fonts/Helvetica-Bold.afm');
-                $FullName = _('Name : ') . $FullName;
-                //$pdf->Image("companies/".$_SESSION['DatabaseName']."/".logo($db)."",$Left_Margin+177,$YPos-205,50);
-               // $pdf->Image("companies/".$_SESSION['DatabaseName']."/".logo($db)."",216,42,50);
-                $LeftOvers =$pdf->addText($Left_Margin, $YPos, $FontSize, $FullName);
-                $FontSize = 8;
-                $YPos -= (1 * $line_height);    
-                $LeftOvers =$pdf->addText($Left_Margin, $YPos, $FontSize, $PayDesc);
-                $YPos -= (1 * $line_height);    
-                $Heading2 = _('Period from ') . $FromPeriod .' to ' .$ToPeriod;
-                $LeftOvers =$pdf->addText($Left_Margin,$YPos,$FontSize,$Heading2);
-                $YPos -=25;
-                /*Draw a rectangle to put the headings in     */
-                $BoxHeight =20;
-                //$pdf->line($Left_Margin, $YPos+$BoxHeight,$Page_Width-$Right_Margin, $YPos+$BoxHeight); //top vertical
-                $pdf->line($Left_Margin, $YPos+$BoxHeight,262, $YPos+$BoxHeight); //top vertical
-                $pdf->line($Left_Margin, $YPos+$BoxHeight,$Left_Margin, $YPos);
-                $pdf->line($Left_Margin, $YPos,262, $YPos); //bottom vertical
-                $pdf->line(262, $YPos+$BoxHeight,262, $YPos);  //right horizontal
-                $YPos +=5;
-                /*set up the headings */
-                $FontSize = 10;
-                $LeftOvers = $pdf->addTextWrap($Left_Margin,$YPos,65,$FontSize,'Income','right');
-                $LeftOvers = $pdf->addTextWrap(155,$YPos,65,$FontSize,'Deduction','right');
-                $YPos -= (2 * $line_height);
-                //$YPos -= (2 * $line_height);  //double spacing
-                $OldYPos1= $YPos;
-                $FontSize = 8;
-                $pdf->selectFont('includes/fonts/Helvetica.afm');
-                $LeftOvers = $pdf->addTextWrap($Left_Margin,$YPos,55,$FontSize,'Basic : ','right');
-                $LeftOvers = $pdf->addTextWrap(110,$YPos,40,$FontSize,number_format($Basic,2),'right');
-                $YPos -= $line_height;
-                $LeftOvers = $pdf->addTextWrap($Left_Margin,$YPos,55,$FontSize,'Other Income : ','right');
-                $LeftOvers = $pdf->addTextWrap(110,$YPos,40,$FontSize,number_format($OthInc,2),'right');
-                $YPos -= $line_height;
-                $LeftOvers = $pdf->addTextWrap($Left_Margin,$YPos,55,$FontSize,'Areas : ','right');
-                $LeftOvers = $pdf->addTextWrap(110,$YPos,40,$FontSize,number_format($Areas,2),'right');
-                $YPos -= $line_height;
-                $LeftOvers = $pdf->addTextWrap($Left_Margin,$YPos,55,$FontSize,' ','right');
-                $LeftOvers = $pdf->addTextWrap(110,$YPos,40,$FontSize,number_format($Absent,2),'right');            
-                $YPos -= $line_height;
-                $LeftOvers = $pdf->addTextWrap($Left_Margin,$YPos,55,$FontSize,' ','right');
-                $LeftOvers = $pdf->addTextWrap(110,$YPos,40,$FontSize,number_format($OT,2),'right');
-                $YPos -= $line_height;
-            
-                //2nd column
-                $OldYPos2=$OldYPos1;
-                $YPos=$OldYPos1;
-                $FontSize = 8;
-                $pdf->selectFont('includes/fonts/Helvetica.afm');
-                $LeftOvers = $pdf->addTextWrap(155,$YPos,65,$FontSize,'NSSF : ','right');
-                $LeftOvers = $pdf->addTextWrap(221,$YPos,40,$FontSize,number_format($SSS,2),'right');
-                $YPos -= $line_height;
-                $LeftOvers = $pdf->addTextWrap(155,$YPos,65,$FontSize,'Mgt Fee: ','right');
-                $LeftOvers = $pdf->addTextWrap(221,$YPos,40,$FontSize,number_format($Fee,2),'right');
-                $YPos -= $line_height;
-                $LeftOvers = $pdf->addTextWrap(155,$YPos,65,$FontSize,'AAR: ','right');
-                $LeftOvers = $pdf->addTextWrap(221,$YPos,40,$FontSize,number_format($PhilHealth,2),'right');
-                $YPos -= $line_height;
-                $LeftOvers = $pdf->addTextWrap(155,$YPos,65,$FontSize,'P.A.Y.E: ','right');
-                $LeftOvers = $pdf->addTextWrap(221,$YPos,40,$FontSize,number_format($Tax,2),'right');           
-                $YPos -= $line_height;
-                $LeftOvers = $pdf->addTextWrap(155,$YPos,65,$FontSize,'Advance: ','right');
-                $LeftOvers = $pdf->addTextWrap(221,$YPos,40,$FontSize,number_format($Loan,2),'right');
-                $YPos -=25;
-                /*Draw a rectangle to put the headings in     */
-                $BoxHeight =20;
-                //$pdf->line($Left_Margin, $YPos+$BoxHeight,$Page_Width-$Right_Margin, $YPos+$BoxHeight); //top vertical
-                $pdf->line($Left_Margin, $YPos+$BoxHeight,262, $YPos+$BoxHeight); //top vertical
-                $pdf->line($Left_Margin, $YPos+$BoxHeight,$Left_Margin, $YPos);
-                $pdf->line($Left_Margin, $YPos,262, $YPos); //bottom vertical
-                $pdf->line(262, $YPos+$BoxHeight,262, $YPos);  //right horizontal
-                $YPos +=5;
-                /*set up the headings */
-                $Xpos = $Left_Margin+1;
-                $LeftOvers = $pdf->addTextWrap($Xpos,$YPos,65,$FontSize,'Gross Income : ','right');
-                $LeftOvers = $pdf->addTextWrap(110,$YPos,40,$FontSize,number_format($Gross,2),'right');
-                $LeftOvers = $pdf->addTextWrap(155,$YPos,65,$FontSize,'Total Deduction : ','right');
-                $LeftOvers = $pdf->addTextWrap(221,$YPos,40,$FontSize,number_format($Deduction,2),'right');     
+        // logo : 80 de largeur et 55 de hauteur
+        //$pdf->Image("companies/".$db."/".logo($db)."", 10, 10, 80, 55);
+        $pdf->Image("includes/logo/logo.JPG", 10, 10, 80, 55);
 
-                $YPos -=50;
-                /*Draw a rectangle to put the headings in     */
-                $BoxHeight =45;
-                //$pdf->line($Left_Margin, $YPos+$BoxHeight,262, $YPos+$BoxHeight); //top vertical
-                $pdf->line($Left_Margin, $YPos+$BoxHeight,$Left_Margin, $YPos);
-                $pdf->line($Left_Margin, $YPos,262, $YPos); //bottom vertical
-                $pdf->line(262, $YPos+$BoxHeight,262, $YPos);  //right horizontal
-                $YPos +=5;
-                /*set up the headings */
-                $Xpos = $Left_Margin+1;
-                $LeftOvers = $pdf->addTextWrap($Xpos,$YPos,100,$FontSize,'','right');
-                $LeftOvers = $pdf->addTextWrap(150,$YPos,65,$FontSize,'Net Pay : ','right');
-                $LeftOvers = $pdf->addTextWrap(216,$YPos,40,$FontSize,number_format($Net,2),'right');       
-                $YPos -= $line_height;
 
-                $PaySlip=2;
-            } elseif ($PaySlip==2) {
-                //header        
-                $FontSize =10;
-                $pdf->selectFont('includes/fonts/Helvetica-Bold.afm');
-                $YPos = $HeadPos1;  
-               // $LeftOvers =$pdf->addText(322,$YPos,$FontSize,$_SESSION['CompanyRecord']['coyname']);
-                $YPos -= (1 * $line_height);    
-                $FontSize =10;
-                $pdf->selectFont('includes/fonts/Helvetica-Bold.afm');
-                $FullName = _('Name : ') . $FullName;
-                //$pdf->Image("companies/".$_SESSION['DatabaseName']."/".logo($db)."",500,42,50);
-               // $pdf->Image("companies/".$_SESSION['DatabaseName']."/".logo($db)."",$Left_Margin+460,$YPos-205,50);
-                $LeftOvers =$pdf->addText(322, $YPos, $FontSize, $FullName);
-                $FontSize = 10;
-                $YPos -= (1 * $line_height);    
-                $LeftOvers =$pdf->addText(322, $YPos, $FontSize, $PayDesc);
-                $YPos -= (1 * $line_height);    
-                $Heading2 = _('Period from ') . $FromPeriod .' to ' .$ToPeriod;
-                $LeftOvers =$pdf->addText(322,$YPos,$FontSize,$Heading2);
-                $YPos -=25;
-                /*Draw a rectangle to put the headings in     */
-                $BoxHeight =20;
-                $pdf->line(321, $YPos+$BoxHeight,539, $YPos+$BoxHeight); //top vertical
-                $pdf->line(321, $YPos+$BoxHeight,321, $YPos); //left horizontal
-                $pdf->line(321, $YPos,539, $YPos); //bottom vertical
-                $pdf->line(539, $YPos+$BoxHeight,539, $YPos);  //right horizontal
-                $YPos +=5;  
-                /*set up the headings */
-                $FontSize = 10;
-                $LeftOvers = $pdf->addTextWrap(322,$YPos,65,$FontSize,'Income','right');
-                $LeftOvers = $pdf->addTextWrap(423,$YPos,65,$FontSize,'Deduction','right');
-                $YPos -= (2 * $line_height);
-                
-                //$YPos -= (2 * $line_height);  //double spacing
-                $YPos=$OldYPos1;
-                $FontSize = 8;
-                $pdf->selectFont('includes/fonts/Helvetica.afm');
-                $LeftOvers = $pdf->addTextWrap(322,$YPos,65,$FontSize,'LOE : ','right');
-                $LeftOvers = $pdf->addTextWrap(387,$YPos,40,$FontSize,number_format($Basic,2),'right');
-                $YPos -= $line_height;
-                $LeftOvers = $pdf->addTextWrap(322,$YPos,65,$FontSize,' ','right');
-                $LeftOvers = $pdf->addTextWrap(387,$YPos,40,$FontSize,number_format($OthInc,2),'right');
-                $YPos -= $line_height;
-                $LeftOvers = $pdf->addTextWrap(322,$YPos,65,$FontSize,' Areas','right');
-                $LeftOvers = $pdf->addTextWrap(387,$YPos,40,$FontSize,number_format($Areas,2),'right');
-                $YPos -= $line_height;
-                $LeftOvers = $pdf->addTextWrap(322,$YPos,65,$FontSize,' ','right');
-                $LeftOvers = $pdf->addTextWrap(387,$YPos,40,$FontSize,number_format($Absent,2),'right');            
-                $YPos -= $line_height;
-                $LeftOvers = $pdf->addTextWrap(322,$YPos,65,$FontSize,' ','right');
-                $LeftOvers = $pdf->addTextWrap(387,$YPos,40,$FontSize,number_format($OT,2),'right');
-                $YPos -= $line_height;
+        // n° page en haute à droite
+        $pdf->SetXY( 120, 5 ); $pdf->SetFont( "Arial", "B", 12 ); $pdf->Cell( 160, 8, $num_page . '/' . $nb_page, 0, 0, 'C');
+        
+        // n° facture, date echeance et reglement et obs
+        $select = "select employeeid,pencode,payrollid,basicpay,grosspay,madeat from prlpayrolltrans where employeeid='" .$var_id_facture."' AND payrollid='".$PayrollID."'";
+        $result = mysql_query($select)  or die ('Erreur SQL : ' .$select .mysql_connect_error() );
+        $row = mysql_fetch_array($result);
+        mysql_free_result($result);
+        
+        $champ_date = date_create($row['madeat']); $annee = date_format($champ_date, 'Y');
+        $num_fact = "Payslip for " . str_pad($PayrollID, 4, '0', STR_PAD_LEFT);
+        $pdf->SetLineWidth(0.1); $pdf->SetFillColor(192); $pdf->Rect(120, 15, 85, 8, "DF");
+        $pdf->SetXY( 120, 15 ); $pdf->SetFont( "Arial", "B", 12 ); $pdf->Cell( 85, 8, $num_fact, 0, 0, 'C');
+        
+        // nom du fichier final
+        $nom_file = "fact_" . $annee .'-' . str_pad($row[1], 4, '0', STR_PAD_LEFT) . ".pdf";
+        
+        // date facture
+        $champ_date = date_create($row['madeat']); $date_fact = date_format($champ_date, 'd/m/Y');
+        $pdf->SetFont('Arial','',11); $pdf->SetXY( 122, 30 ); 
+       // $pdf->Cell( 60, 8, "Name" . $date_fact, 0, 0, '');
+
+        
+      
+        // observations
+       // $pdf->SetFont( "Arial", "BU", 10 ); $pdf->SetXY( 5, 75 ) ; $pdf->Cell($pdf->GetStringWidth("Observations"), 0, "Observations", 0, "L");
+        $pdf->SetFont( "Arial", "", 10 ); $pdf->SetXY( 5, 78 ) ; $pdf->MultiCell(190, 4, $row[5], 0, "L");
+
+        // adr fact du client
+        $select = "select employeeid,firstname,lastname,middlename,position,pencode,ssnumber,periodrate,atmnumber,bankid  from prlemployeemaster where employeeid='" .$var_id_facture."'";
+        $result = mysql_query($select)  or die ('Erreur SQL : ' .$select .mysql_connect_error() );
+        $row_client = mysql_fetch_array($result);
+        mysql_free_result($result);
+        
+        $pdf->SetFont('Arial','B',11); $x = 100; $y = 50;
+        $pdf->SetXY( $x, $y ); $pdf->Cell( 100, 8,"Company Detail: ". $comp, 0, 0, ''); $y += 4;
+        if ($row_client[1]) { $pdf->SetXY( $x, $y ); $pdf->Cell( 100, 8,"Emp Name :". $row_client["firstname"]." ".$row_client["middlename"]." ".$row_client["lastname"], 0, 0, ''); $y += 4;}
+        if ($row_client[2]) { $pdf->SetXY( $x, $y ); $pdf->Cell( 100, 8,"Allocation : ".$row_client['position'], 0, 0, ''); $y += 4;}
+        if ($row_client[3]) { $pdf->SetXY( $x, $y ); $pdf->Cell( 100, 8, "Membership :".$row_client['pencode']."->".$row_client['ssnumber'], 0, 0, ''); $y += 4;}
+         if ($row_client[3]) { $pdf->SetXY( $x, $y ); $pdf->Cell( 100, 8, "Bank Detail :".$row_client['bankid']."->".$row_client['atmnumber'], 0, 0, ''); $y += 4;}
+        //if ($row_client[4] || $row_client[5]) { $pdf->SetXY( $x, $y ); $pdf->Cell( 100, 8, $row_client[4] . ' ' .$row_client[5] , 0, 0, ''); $y += 4;}
+       // if ($row_client[3]) { $pdf->SetXY( $x, $y ); $pdf->Cell( 100, 8, 'N° TVA Intra : ' . $row_client[2], 0, 0, '');}
+        
+        // ***********************
+        // le cadre des articles
+        // ***********************
+        // cadre avec 18 lignes max ! et 118 de hauteur --> 95 + 118 = 213 pour les traits verticaux
+        $pdf->SetLineWidth(0.1); $pdf->Rect(5, 95, 200, 118, "D");
+        // cadre titre des colonnes
+       // $pdf->Line(5, 105, 205, 105);
+        // les traits verticaux colonnes
+       // $pdf->Line(145, 95, 145, 213); 
+       // $pdf->Line(158, 95, 158, 213); 
+        //$pdf->Line(176, 95, 176, 213); $pdf->Line(187, 95, 187, 213);
+        // titre colonne
+         $y = 97;
+        $pdf->SetXY( 1, 96 ); $pdf->SetFont('Arial','B',12); $pdf->Cell( 140, 8, "Income", 0, 0, 'C');
+        $pdf->SetXY( 145, 96 ); $pdf->SetFont('Arial','B',8); $pdf->Cell( 10, 8, "", 0, 0, 'C');
+     
+         $pdf->Line(5, $y+8, 205, $y+8);
+        // les articles
+        $pdf->SetFont('Arial','',8);
+       
+        // 1ere page = LIMIT 0,18 ;  2eme page = LIMIT 18,36 etc...
+
+         $sql = "SELECT payrollid,counterindex,employeeid,othincid,sum(amount) as amount,othincdesc FROM prlothericometrans
+                 LEFT JOIN prlothinctable ON (prlothericometrans.otherincid=prlothinctable.othincid)
+                 WHERE employeeid='" .$var_id_facture." ' and payrollid='". $PayrollID."'
+
+                 GROUP BY othincid 
+                 ORDER BY  othincid";
+       // $sql = "select employeeid,payrollid,otherincid,amount from prlothericometrans where employeeid='" .$var_id_facture." ' and payrollid='". $PayrollID."' order by employeeid";
+        $sql .= ' LIMIT ' . $limit_inf . ',' . $limit_sup;
+        $res = mysql_query($sql)  or die ('Erreur SQL : ' .$sql .mysql_connect_error() );
+
+           $pdf->SetXY( 7, $y+9 ); $pdf->Cell( 140, 5, "Basic Pay", 0, 0, 'L');
+            // qte
+            $pdf->SetXY( 145, $y+9 ); $pdf->Cell( 13, 5, strrev(wordwrap(strrev(GetPayrollTransRow($PayrollID,$row_client['employeeid'] ,$db)), 3, ' ', true)), 0, 0, 'R');
+
+             $pdf->Line(5, $y+14, 205, $y+14);
+            // PU
+        $y = 103;
+        while ($data =  mysql_fetch_assoc($res))
+        {
+            // libelle
+            $pdf->SetXY( 7, $y+9 ); $pdf->Cell( 140, 5, $data['othincdesc'], 0, 0, 'L');
+            // qte
+            $pdf->SetXY( 145, $y+9 ); $pdf->Cell( 13, 5, strrev(wordwrap(strrev($data['amount']), 3, ' ', true)), 0, 0, 'R');
+            // PU
+        
             
-                //2nd column
-                $YPos=$OldYPos2;
-                $FontSize = 8;
-                $pdf->selectFont('includes/fonts/Helvetica.afm');
-                $LeftOvers = $pdf->addTextWrap(432,$YPos,65,$FontSize,'NSSF : ','right');
-                $LeftOvers = $pdf->addTextWrap(498,$YPos,40,$FontSize,number_format($SSS,2),'right');
-                $YPos -= $line_height;
-                $LeftOvers = $pdf->addTextWrap(432,$YPos,65,$FontSize,'Other Deduction : ','right');
-                $LeftOvers = $pdf->addTextWrap(498,$YPos,40,$FontSize,number_format($HDMF,2),'right');
-                $YPos -= $line_height;
-                $LeftOvers = $pdf->addTextWrap(432,$YPos,65,$FontSize,'AAR : ','right');
-                $LeftOvers = $pdf->addTextWrap(498,$YPos,40,$FontSize,number_format($PhilHealth,2),'right');
-                $YPos -= $line_height;
-                $LeftOvers = $pdf->addTextWrap(432,$YPos,65,$FontSize,'P.A.Y.E : ','right');
-                $LeftOvers = $pdf->addTextWrap(498,$YPos,40,$FontSize,number_format($Tax,2),'right');           
-                $YPos -= $line_height;
-                $LeftOvers = $pdf->addTextWrap(432,$YPos,65,$FontSize,'Advance : ','right');
-                $LeftOvers = $pdf->addTextWrap(498,$YPos,40,$FontSize,number_format($Loan,2),'right');
-                $YPos -=25;
-                /*Draw a rectangle to put the headings in     */
-                $BoxHeight =20;
-                $pdf->line(321, $YPos+$BoxHeight,539, $YPos+$BoxHeight); //top vertical
-                $pdf->line(321, $YPos+$BoxHeight,321, $YPos); //left horizontal
-                $pdf->line(321, $YPos,539, $YPos); //bottom vertical
-                $pdf->line(539, $YPos+$BoxHeight,539, $YPos);  //right horizontal
-                $YPos +=5;
-                /*set up the headings */
-                $LeftOvers = $pdf->addTextWrap(322,$YPos,65,$FontSize,'Gross Income : ','right');
-                $LeftOvers = $pdf->addTextWrap(387,$YPos,40,$FontSize,number_format($Gross,2),'right');
-                $LeftOvers = $pdf->addTextWrap(432,$YPos,65,$FontSize,'Total Deduction : ','right');
-                $LeftOvers = $pdf->addTextWrap(498,$YPos,40,$FontSize,number_format($Deduction,2),'right');     
-                $YPos -=50;
-                /*Draw a rectangle to put the headings in     */
-                $BoxHeight =45;
-                $pdf->line(321, $YPos+$BoxHeight,321, $YPos);
-                $pdf->line(321, $YPos,539, $YPos); //bottom vertical
-                $pdf->line(539, $YPos+$BoxHeight,539, $YPos);  //right horizontal
-                $YPos +=5;
-                /*set up the headings */
-                $LeftOvers = $pdf->addTextWrap(322,$YPos,100,$FontSize,'','right');
-                $LeftOvers = $pdf->addTextWrap(432,$YPos,65,$FontSize,'Net Pay : ','right');
-                $LeftOvers = $pdf->addTextWrap(498,$YPos,40,$FontSize,number_format($Net,2),'right');       
-                $YPos -= $line_height;
-                $YPos -= (5 * $line_height);
-                
-                $PaySlip=1;
-            }
+            $pdf->Line(5, $y+14, 205, $y+14);
             
-            
-                
-            
-            
-            if ($YPos < ($Bottom_Margin)){      
-                $PageNumber++;
-                if ($PageNumber>1){
-                    $pdf->newPage();
-                    $YPos = $Page_Height - $Top_Margin;
-                    $YPos -= (2 * $line_height);
-                }
-            }
+            $y += 6;
         }
+        mysql_free_result($res);
+            $pdf->SetXY( 7, $y+9 ); $pdf->Cell( 140, 5, "Gross Pay", 0, 0, 'L');
+            // qte
+            $pdf->SetXY( 145, $y+9 ); $pdf->Cell( 13, 5, strrev(wordwrap(strrev(BasicPay($PayrollID,$row_client['employeeid'] ,$db)), 3, ' ', true)), 0, 0, 'R');
+
+             $pdf->Line(5, $y+14, 205, $y+14);
+
+              $pdf->SetXY( 7, $y+15 ); $pdf->SetFont('Arial','B',12);  $pdf->Cell( 140, 5, "Deductions", 0, 0, 'C');
+            // qte
+             $pdf->SetFont('Arial','',8); 
+
+             $pdf->Line(5, $y+20, 205, $y+20);
+
+        //dedu
+             $y+=12;
+
+
+              $sql_d = "SELECT payrollid,counterindex,employeeid,othincid,sum(amount) as amount,othincdesc FROM prlotherdeductrans
+                 LEFT JOIN prlothdedtable ON (prlotherdeductrans.otherincid=prlothdedtable.othincid)
+                 WHERE employeeid='" .$var_id_facture." ' and payrollid='". $PayrollID."' 
+
+                 GROUP BY othincid 
+                 ORDER BY  othincid";
+
+             // $sql_d = "select employeeid,payrollid,otherincid,amount from prlotherdeductrans where employeeid='" .$var_id_facture." ' and payrollid='". $PayrollID."' order by employeeid";
+        $sql_d .= ' LIMIT ' . $limit_inf . ',' . $limit_sup;
+        $res_d = mysql_query($sql_d)  or die ('Erreur SQL : ' .$sql .mysql_connect_error() );
+
+          $pdf->SetXY( 7, $y+9 ); $pdf->Cell( 140, 5, "P.A.Y.E", 0, 0, 'L');
+            // qte
+            $pdf->SetXY( 145, $y+9 ); $pdf->Cell( 13, 5, strrev(wordwrap(strrev((PayrollTransRow($PayrollID,$row_client['employeeid'] ,$db,"TAX"))), 3, ' ', true)), 0, 0, 'R');
+            // PU
+       
+            
+            $pdf->Line(5, $y+14, 205, $y+14);
+
+
+
+             $pdf->SetXY( 7, $y+14 ); $pdf->Cell( 140, 5, PayrollTransRow($PayrollID,$row_client['employeeid'] ,$db,"PENCODE")."->Employee Contribution", 0, 0, 'L');
+            // qte
+            $pdf->SetXY( 145, $y+14 ); $pdf->Cell( 13, 5, strrev(wordwrap(strrev((PayrollTransRow($PayrollID,$row_client['employeeid'] ,$db,"SSS"))), 3, ' ', true)), 0, 0, 'R');
+            // PU
+            $pdf->Line(5, $y+20, 205, $y+20);
+           $pdf->SetXY( 7, $y+20 ); $pdf->Cell( 140, 5, "NHIF", 0, 0, 'L');
+            // qte
+            $pdf->SetXY( 145, $y+20 ); $pdf->Cell( 13, 5, strrev(wordwrap(strrev((PayrollTransRow($PayrollID,$row_client['employeeid'] ,$db,"NHIF"))), 3, ' ', true)), 0, 0, 'R');
+            
+            $pdf->Line(5, $y+26, 205, $y+26);
+            $y+=6;
+         while ($data_d =  mysql_fetch_assoc($res_d))
+        {
+            // libelle
+            $pdf->SetXY( 7, $y+21 ); $pdf->Cell( 140, 5, $data_d['othincdesc'], 0, 0, 'L');
+            // qte
+            $pdf->SetXY( 145, $y+21 ); $pdf->Cell( 13, 5, strrev(wordwrap(strrev($data_d['amount']), 3, ' ', true)), 0, 0, 'R');
+            // PU
         
-    }//end of loop
+            
+            $pdf->Line(5, $y+25, 205, $y+25);
+            
+            $y += 6;
+        }
+        mysql_free_result($res_d);
 
-    
-    $pdfcode = $pdf->output();
-    $len = strlen($pdfcode);
-    if ($len<=20){
-        $title = _('Payroll Register Error');
-        include('includes/header.inc');
-        echo '<p>';
-        prnMsg( _('There were no entries to print out for the selections specified') );
-        echo '<BR><A HREF="'. $rootpath.'/index.php?' . SID . '">'. _('Back to the menu'). '</A>';
-        include('includes/footer.inc');
-        exit;
-    } else {
-        header('Content-type: application/pdf');
-        header('Content-Length: ' . $len);
-        header('Content-Disposition: inline; filename=PayrollRegister.pdf');
-        header('Expires: 0');
-        header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
-        header('Pragma: public');
+        
+       $sql_l= "SELECT payrollid,counterindex,employeeid,prlloandeduction.loantableid as loantableid,sum(amount) as amount,loantabledesc FROM prlloandeduction
+                 LEFT JOIN prlloantable ON (prlloandeduction.loantableid=prlloantable.loantableid)
+                 WHERE employeeid='" .$var_id_facture." ' and  payrollid='". $PayrollID."'
 
-        $pdf->Stream();
+                 GROUP BY loantableid  
+                 ORDER BY  loantableid ";
 
+         //$sql_l = "select employeeid,payrollid,loantableid,amount from prlloandeduction where employeeid='" .$var_id_facture." ' and  payrollid='". $PayrollID."' order by employeeid";
+        $sql_l .= ' LIMIT ' . $limit_inf . ',' . $limit_sup;
+        $res_l = mysql_query($sql_l)  or die ('Erreur SQL : ' .$sql .mysql_connect_error() );
+  
+
+         while ($data_l =  mysql_fetch_assoc($res_l))
+        {
+            // libelle
+            $pdf->SetXY( 7, $y+21 ); $pdf->Cell( 140, 5, $data_l['loantabledesc'], 0, 0, 'L');
+            // qte
+            $pdf->SetXY( 145, $y+21 ); $pdf->Cell( 13, 5, strrev(wordwrap(strrev($data_l['amount']), 3, ' ', true)), 0, 0, 'R');
+            // PU
+        
+            
+            $pdf->Line(5, $y+25, 205, $y+25);
+            
+            $y += 6;
+        }
+        mysql_free_result($res_l);
+
+            $pdf->SetXY( 7, $y+21 ); $pdf->Cell( 140, 5, "Total Deduction", 0, 0, 'L');
+            // qte
+            $pdf->SetXY( 145, $y+21 ); $pdf->Cell( 13, 5, strrev(wordwrap(strrev((PayrollTransRow($PayrollID,$row_client['employeeid'] ,$db,"TOTALDEDUCTION"))), 3, ' ', true)), 0, 0, 'R');
+
+            $pdf->Line(5, $y+26, 205, $y+26);
+
+            
+             $pdf->SetFont('Arial','B',12); 
+
+            $pdf->SetXY( 7, $y+30 ); $pdf->Cell( 140, 5, "NET PAY", 0, 0, 'C');
+            // qte
+            $pdf->SetXY( 145, $y+30 ); $pdf->Cell( 13, 5, strrev(wordwrap(strrev((PayrollTransRow($PayrollID,$row_client['employeeid'] ,$db,"NETPAY"))), 3, ' ', true)), 0, 0, 'C');
+
+            $pdf->Line(5, $y+36, 205, $y+36);
+     
+        $num_page++; $limit_inf += 18; $limit_sup += 18; 
     }
-    exit;
-
-   ?>
-
-
-@elseif ($headertype=="Preview")
-
-@else
-
-@endif
+    
+    $pdf->Output("I", $nom_file);
+?>

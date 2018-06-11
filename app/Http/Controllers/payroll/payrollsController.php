@@ -92,6 +92,30 @@ class payrollsController extends Controller
         return view('payrolls.generate',compact('pagetitle','payroll','payperiods'));
     }
 
+     public function void($payroll_id)
+    {
+        $payroll= payroll::where('id', $payroll_id)->firstOrFail();
+        $pagetitle="Generating payroll Data";
+        $payperiods     =Payperiod::where('payperiodid',$payroll->payperiodid)->firstOrFail();
+        return view('payrolls.void',compact('pagetitle','payroll','payperiods'));
+    }
+
+     public function close($payroll_id)
+    {
+        $payroll= payroll::where('id', $payroll_id)->firstOrFail();
+        $pagetitle="Generating payroll Data";
+        $payperiods     =Payperiod::where('payperiodid',$payroll->payperiodid)->firstOrFail();
+        return view('payrolls.close',compact('pagetitle','payroll','payperiods'));
+    }
+
+     public function open($payroll_id)
+    {
+        $payroll= payroll::where('id', $payroll_id)->firstOrFail();
+        $pagetitle="Generating payroll Data";
+        $payperiods     =Payperiod::where('payperiodid',$payroll->payperiodid)->firstOrFail();
+        return view('payrolls.open',compact('pagetitle','payroll','payperiods'));
+    }
+
 
 
      public function edit($payroll_id)

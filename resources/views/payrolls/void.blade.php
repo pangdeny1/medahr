@@ -13,14 +13,10 @@
     <?php
     //$db="medahr";
     $PayrollID=$payroll->id;
-
-
         require_once ('includes/MiscFunctions.php');
         include('includes/ConnectDB.inc');
         include('includes/ConnectDB_mysql.inc');
         include('includes/prlFunctions.php'); 
-
-        
         include('includes/prlGenerateData.php');
 
         include('includes/prlComputeBasic.php');

@@ -23,7 +23,7 @@ $PageSecurity = 2;
 
     $PageNumber = 0;
 
-    $pdf->selectFont('includes/Helvetica.afm');
+    $pdf->selectFont('./fonts/Helvetica.afm');
 
 /* Standard PDF file creation header stuff */
     $pdf->addinfo('Title', _('Payroll Register Report') );
@@ -114,7 +114,7 @@ $PageSecurity = 2;
             
             //$YPos -= (2 * $line_height);  //double spacing
             $FontSize = 8;
-            $pdf->selectFont('includes/Helvetica.afm');
+            $pdf->selectFont('./fonts/Helvetica.afm');
             $LeftOvers = $pdf->addTextWrap($Left_Margin,$YPos,50,$FontSize,$EmpID);
             $LeftOvers = $pdf->addTextWrap(100,$YPos,120,$FontSize,$FullName,'left');
             $LeftOvers = $pdf->addTextWrap(223,$YPos,52,$FontSize,number_format($Basic,2),'right');
@@ -131,7 +131,7 @@ $PageSecurity = 2;
             $LeftOvers = $pdf->addTextWrap(780,$YPos,52,$FontSize,number_format($Net,2),'right'); */
             $YPos -= $line_height;
             if ($YPos < ($Bottom_Margin)){      
-                include('includes/PDFPayRegisterPageHeader.inc');
+                include('./fonts/PDFPayRegisterPageHeader.inc');
             }
         }
         
@@ -161,11 +161,11 @@ $PageSecurity = 2;
     $len = strlen($pdfcode);
     if ($len<=20){
         $title = _('Payroll Register Error');
-        include('includes/header.inc');
+        include('./fonts/header.inc');
         echo '<p>';
         prnMsg( _('There were no entries to print out for the selections specified') );
         echo '<BR><A HREF="'. $rootpath.'/index.php?' . SID . '">'. _('Back to the menu'). '</A>';
-        include('includes/footer.inc');
+        include('./fonts/footer.inc');
         exit;
     } else {
         header('Content-type: application/pdf');

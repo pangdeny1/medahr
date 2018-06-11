@@ -125,7 +125,7 @@ public function payslipform()
 public function payslip(Request $request)
 {
      $this->validate($request, [
-            'employee'     => 'required',
+            
             'period'     => 'required'
         ]);
      $pagetitle="Payslip";
@@ -139,7 +139,7 @@ public function payslip(Request $request)
      $sss=SocialSecurityScheme::where('id',$employee->pencode)->firstOrFail();
     
 
-    return view('reports.payslip',compact('pagetitle','headertype','payrollperiod','company','employee','payrolltrans','sss'));
+    return view('reports.payslip1',compact('pagetitle','headertype','payrollperiod','company','employee','payrolltrans','sss'));
 }
 
 public function payrollregisterform()

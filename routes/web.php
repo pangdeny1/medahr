@@ -192,6 +192,9 @@ Route::group(['middleware'=> ['auth', 'activated', 'role:admin']], function () {
     Route::get('createpayrollperiod','payroll\PayrollsController@create');
     Route::get('viewpayrollperiods','payroll\PayrollsController@index');
     Route::post('generate/{id}','payroll\payrollsController@generate');
+    Route::post('void/{id}','payroll\payrollsController@void');
+    Route::post('close/{id}','payroll\payrollsController@close');
+    Route::post('open/{id}','payroll\payrollsController@open');
 
     //qualifications
 
